@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<link rel="stylesheet" href="/static/css/study/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/js/layer/theme/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/homework.css"/>
+		<!--公式显示css-->
+		<link rel="stylesheet" type="text/css" href="/static/plugins/katex/katex.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/formula.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/js/swiper.min.js"></script>
+		<script src="/static/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 公式显示js -->
+		<script src="/static/plugins/katex/katex.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			/*滑动处理*/
+			div[class*="swiper-container"]{
+				width: 100%;
+				height: 5.5rem;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.swiper-container-horizontal>.swiper-pagination-bullets,
+			.swiper-pagination-custom,
+			.swiper-pagination-fraction {
+				right: 0.3rem;
+			    top: 0.5rem;
+			    height: 0.3rem;
+			    position: absolute;
+			    z-index: 1000;
+			}
+			div[class*="swiper-pagination"] {
+				text-align: right;
+				padding-right: 0.2rem;
+			}
+			/*end*/
+			.quick {
+				width: 100%;
+				/*height: 4rem;*/
+				background-color: #ffffff;
+				margin-top: 0.25rem;
+				padding: 0.3rem;
+				padding-bottom: 0;
+			}
+			
+			.quick .quick_title {
+				font-size: 0.36rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.quick .quick_sub {
+				color: #0493f0;
+				padding-top: 0.3rem;
+				font-size: 0.24rem;
+			}
+			
+			.question_content {
+				width: 100%;
+				height: auto;
+				background-color: #ffffff;
+				padding: .3rem;
+				padding-top: 0.59rem;
+				padding-bottom: 0.4rem;
+				min-height: 7.1rem;
+			}
+			
+			.question_content_title {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.btn-customer {
+				background-color: #0493F0;
+				color: #FFFFFF;
+			}
+			
+			.btn-hollow {
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer {
+				/*background-color: #FFF;*/
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer:after {
+				content: '';
+				width: 200%;
+				height: 143%;
+				position: absolute;
+				top: 0.1rem;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border-right: 2px solid #CCCCCC;
+				/*border-radius: 6px;*/
+			}
+			
+			.btn {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				height: 0.88rem;
+				line-height: 1rem;
+				display: inline-block;
+				padding: 0 .2rem;
+				border-radius: 10px 0 0 10px;
+				width: 0.88rem;
+				margin-top: .5rem;
+				font-size: 0.3rem;
+			}
+			
+			.btn-hollow:after {
+				content: '';
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border: 1px solid #cccccc;
+				border-radius: 10px;
+			}
+			
+			.quick_bottom {
+				width: 100%;
+				height: 1.43rem;
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				padding: 0.3rem;
+				position: fixed;
+				bottom: 1.1rem;
+				z-index: 99;
+			}
+			
+			.quick_bottom2 {
+				width: 100%;
+				/*height: 1.43rem;*/
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				/*padding: 0.3rem;*/
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.btn-block {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 6.9rem;
+				display: block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				margin-top: 0;
+				border-radius: 10px;
+			}
+			
+			.btn-block-customer {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 3.3rem;
+				display: inline-block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				border-radius: 10px;
+			}
+			
+			.float_button {
+				position: fixed;
+				width: 2rem;
+				height: 0.7rem;
+				background-color: #4FB3F4;
+				right: -0.15rem;
+				bottom: 2.7rem;
+				border-radius: 10px;
+				color: #ffffff;
+				padding: 0.15rem;
+				font-size: 0.26rem;
+				z-index: 1000;
+			}
+			
+			.decided {
+				width: 3rem;
+				height: 0.88rem;
+				display: inline-block;
+				border: 1px solid #0493F0;
+				border-radius: 10px;
+				margin-top: .5rem;
+				border-left: none;
+			}
+			
+			.decide {
+				width: 3rem;
+				display: inline-block;
+				border: 1px solid #CCCCCC;
+				border-radius: 10px;
+				margin-top: .5rem;
+			}
+			
+			.input_frame {
+				width: 6.5rem;
+				border: 1px solid #0493F0;
+				height: 0.88rem;
+				border-radius: 4px;
+				background-color: #F2FAFF;
+				margin-top: .3rem;
+			}
+			
+			.short_question {
+				width: 100%;
+				height: 3rem;
+				border-radius: 10px;
+				border: 1px solid #cccccc;
+				margin-top: 0.2rem;
+				padding: 0.31rem;
+				color: #b2b2b2;
+				font-size: 0.3rem;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				background-color: #fff;
+				height: .8rem;
+			}
+			
+			.option_btn .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 10%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 8px 0 0 8px;
+			}
+			
+			.option_btn .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 90%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+				padding-right: .2rem;
+				overflow-y: auto;
+			}
+			/*选项选中状态*/
+			
+			.option_btn.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn.active .option_text {
+				border-left: 0;
+				color: #0493F0;
+			}
+			
+			.min_option_btn.option_btn {
+				width: 40%;
+				float: left;
+			}
+			
+			.min_option_btn.option_btn .btn-group-addon {
+				width: 20%;
+			}
+			
+			.min_option_btn.option_btn .option_text {
+				width: 80%;
+				text-align: center;
+			}
+			/*错误选项*/
+			
+			.option_btn.active.danger {
+				border-color: #EF4F4F;
+			}
+			
+			.option_btn.active.danger .btn-group-addon {
+				background: #EF4F4F;
+				position: relative;
+			}
+			
+			.option_btn.active.danger i {
+				width: .3rem;
+				height: .3rem;
+				display: inline-block;
+				background: url(/static/images/study_img/msg_error.png);
+				background-size: 100%;
+				position: absolute;
+				bottom: -.1rem;
+				right: 0;
+				border-radius: 5px 0 5px 0;
+			}
+			/*正确选项*/
+			
+			.option_btn.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn.active.primary .btn-group-addon {
+				background: #04BE02;
+				position: relative;
+			}
+			
+			.option_btn.active.primary i {
+				width: .3rem;
+				height: .3rem;
+				display: inline-block;
+				background: url(/static/images/study_img/msg_Correct.png);
+				background-size: 100%;
+				position: absolute;
+				bottom: -.1rem;
+				right: 0;
+				border-radius: 5px 0 5px 0;
+			}
+			
+			.option_btn.active.danger .option_text,
+			.option_btn.active.primary .option_text {
+				color: #333;
+			}
+			
+			.question_stem {
+				margin-top: 0.29rem;
+				color: #333333;
+				font-size: 0.32rem;
+				margin-bottom: 0.4rem;
+				font-weight: bold;
+				word-wrap: break-word;
+			}
+			
+			/*综合题*/
+			.child {
+				min-height: 13rem;
+				background-color: #FFFFFF;
+			}
+			
+			.multiple_img {
+				width: 100%;
+				height: 0.4rem;
+				background: url(/static/images/homework/multiple_2.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			
+			.multiple_content {
+				padding: 0.3rem;
+				background-color: #FFFFFF;
+				/*display: none;*/
+				/*height: 5.5rem;
+    			overflow-y: auto;*/
+			}
+			
+			.multiple_btn {
+				width: 100%;
+				padding: 0.3rem;
+			}
+			#jiayou_bg{
+				width: 100%;
+				height: 6.23rem;
+				background:url(/static/images/study_img/jiayou_gif3.gif) no-repeat center;
+				display: none;
+				position: fixed;
+			    bottom: 1rem;
+			    left: 3rem;
+			    background-size: 40%;
+			    z-index: 9999999;
+			}
+			.option_text img{
+				height: 100%;
+				display: inline-block;
+			}
+			.question_stem img{
+				width:6.9rem;
+    			display: inline-block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="container_content">
+				</div>
+				<div class="float_button">
+					<a href="/html/homework/hw_list.html?f_flag=0">返回作业列表</a>
+				</div>
+				<div class="jiayou_bg" id="jiayou_bg"></div>
+				<div class="dingdi" style="width: 100%; float: left; height: 1.2rem;"></div>
+			<section/>
+		</section>
+			<script src="/static/plugins/ydui/js/ydui.js"></script>
+			<script src="/static/js/yswxcommon.js"></script>
+			<script type="text/javascript">
+			var text = '';
+			var m_flag = 0;
+			$(document).ready(function() {
+					var flip = getUrlParam("flip");
+					if(flip == '1'){
+						addMainPageHeader("/html/homework/hw_micro.html?homework_id="+getUrlParam("homework_id")
+						+"&homework_type="+getUrlParam("homework_type")
+						+"&section_id="+getUrlParam("section_id"), "微课作业");
+					}else{
+						addMainPageHeader("/html/homework/hw_list.html?f_flag=0", "习题作业");
+					}
+					addMainPageFooter(2);
+					// 试题列表
+//					question_list();TODO APP
+					// 动态加载dom等待时间
+					var waitTime = '2000'; 
+					setTimeout(function(){
+						
+					 },waitTime); 
+					
+			});
+		var xuanze = ['A','B','C','D','E','F','G','H'];
+		// 习题列表
+		function question_list(){
+			ysAjax("/homework/getExerciseList", {
+							homework_id: getUrlParam("homework_id"),
+							homework_type:getUrlParam("homework_type")
+						}, function(data) {
+							//console.log(data.result.question_list[0].paper_id);
+							// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+							if(data.result != null){
+								showLoadDialog();
+								for(var i=0; i < data.result.question_list.length; i++){
+									var html = '';
+									var q = data.result.question_list[i];
+									// 1单选
+									if(q.question_type == '1') {
+										html = html + '	<div class="child"> ';
+										html = html + '							<div class="quick">  ';
+										html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="question_content">  ';
+										html = html + '									<p class="question_content_title">第  ';
+										html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '										<span id="qustion_type">单选题</span>  ';
+										html = html + '									</p>  ';
+										html = html + '									<div class="question_describe">  ';
+										html = html + '										<div class="question_stem">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '											'+ c2 +'  ';
+										html = html + '										</div>  ';
+										html = html + '									<div id="choose_question">  ';
+										for(var j=0;j<q.answer_list.length;j++){
+											var a = q.answer_list[j];
+											var c1 = latex2Html(a.answer_context);
+											var c2 = makeMathJye(c1);
+											html = html + '									<div class="option_btn">  ';
+											html = html + '										<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '										<div class="option_text"> '+ c2 +'</div>  ';
+											html = html + '									</div>  ';
+											if(j != q.answer_list.length -1){
+												html = html + '								<br />  ';
+											}
+										}
+										html = html + '									</div>	  ';
+										html = html + '								 </div>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="quick_bottom">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '								</div>  ';
+										html = html + '	</div> ';
+									}
+									// 2多选
+									if(q.question_type == '2') {
+										html = html + '	<div class="child"> ';
+										html = html + '							<div class="quick">  ';
+										html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="question_content">  ';
+										html = html + '									<p class="question_content_title">第  ';
+										html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '										<span id="qustion_type">多选题</span>  ';
+										html = html + '									</p>  ';
+										html = html + '									<div class="question_describe">  ';
+										html = html + '										<div class="question_stem">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '											'+ c2 +'  ';
+										html = html + '										</div>  ';
+										html = html + '									<div id="choose_question">  ';
+										for(var j=0;j<q.answer_list.length;j++){
+											var a = q.answer_list[j];
+											html = html + '									<div class="option_btn">  ';
+											html = html + '										<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											var c1 = latex2Html(a.answer_context);
+											var c2 = makeMathJye(c1);
+											html = html + '										<div class="option_text"> '+ c2 +'</div>  ';
+											html = html + '									</div>  ';
+											if(j != q.answer_list.length){
+												html = html + '								<br />  ';
+											}
+										}
+										html = html + '									</div>	  ';
+										html = html + '								 </div>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="quick_bottom">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '								</div>  ';
+										html = html + '	</div> ';
+									}
+									//4判断
+									if(q.question_type == '4') {
+										html = html + '	<div class="child" > ';
+										html = html + '								<div class="quick">  ';
+										html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="question_content">  ';
+										html = html + '									<p class="question_content_title">第  ';
+										html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '										<span id="qustion_type">判断题</span>  ';
+										html = html + '									</p>  ';
+										html = html + '									<div class="question_describe">  ';
+										html = html + '										<div class="question_stem">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '											'+ c2 +'';
+										html = html + '										</div>  ';
+										html = html + '												<div id="decide_question" style="margin-bottom: 2.38rem;">  ';
+										html = html + '													<div class="decide" style="">  ';
+										html = html + '														<a href="javascript:;" class="btn btn-hollow-customer" style="margin-top: 0;">A</a>  ';
+										html = html + '														<span style="margin-left: 0.6rem;font-size: 0.28rem;color:#333333;">对</span>  ';
+										html = html + '													</div>  ';
+										html = html + '													<div class="decide" style="margin-left: 0.4rem;height:0.88rem">  ';
+										html = html + '														<a href="javascript:;" class="btn btn-hollow-customer" style="margin-top: 0;">B</a>  ';
+										html = html + '														<span style="margin-left: 0.6rem;font-size: 0.28rem;color:#333333;">错</span>  ';
+										html = html + '													</div>  ';
+										html = html + '												</div>  ';
+										html = html + '									</div>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="quick_bottom">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '								</div>  ';
+										html = html + '	</div> ';
+									}
+									//3填空
+									if(q.question_type == '3') {
+										html = html + '	<div class="child" > ';
+										html = html + '								<div class="quick">  ';
+										html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="question_content">  ';
+										html = html + '									<p class="question_content_title">第  ';
+										html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '										<span id="qustion_type">填空题</span>  ';
+										html = html + '									</p>  ';
+										html = html + '									<div class="question_describe">  ';
+										html = html + '										<div class="question_stem">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '											'+ c2 +'';
+										html = html + '										</div>  ';
+										html = html + '											<div id="fill_question">  ';
+										for(var j=0;j<q.answer_list.length;j++){
+											var a = q.answer_list[j];
+											html = html + '											<div class="input_frame">  ';
+											html = html + '												<span style="font-size: 0.3rem;color: #0493F0;padding-left: 0.29rem;">填空题'+a.answer_id+'：</span>  ';
+											html = html + '												<input type="text" value="" style="width: 4rem;height: 0.8rem;border: none;padding-left: 0.24rem;font-size: 0.3rem;color: #3b3f44;" readonly="readonly" />  ';
+											html = html + '											</div>  ';
+										}
+										html = html + '											</div>  ';
+										html = html + '									</div>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="quick_bottom">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '								</div>  ';
+										html = html + '	</div> ';
+									}
+									//5简答
+									if(q.question_type == '5') {
+										html = html + '	<div class="child" > ';
+										html = html + '							<div class="quick">  ';
+										html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="question_content">  ';
+										html = html + '									<p class="question_content_title">第  ';
+										html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '										<span id="qustion_type">简答题</span>  ';
+										html = html + '									</p>  ';
+										html = html + '									<div class="question_describe">  ';
+										html = html + '										<div class="question_stem">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '											'+ c2 +'';
+										html = html + '										</div>  ';
+										html = html + '										<div id="short_question">  ';
+										html = html + '											<textarea class="short_question" readonly="readonly">请输入您的答案</textarea> ';
+										html = html + '										</div>  ';
+										html = html + '									</div>  ';
+										html = html + '								</div>  ';
+										html = html + '								<div class="quick_bottom">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '								</div>  ';
+										html = html + '	</div> ';
+									}
+									//6综合
+									if(q.question_type == '6'){
+										m_flag = m_flag + 1;
+										html = html + '	<div class="child">  ';
+										html = html + '		<div class="quick">  ';
+										html = html + '			<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+										html = html + '			<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+										html = html + '		</div>  ';
+										html = html + '		<div class="question_content">  ';
+										html = html + '			<p class="question_content_title">第  ';
+										html = html + '				<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+										html = html + '				<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+										html = html + '				<span id="qustion_type">综合题</span>  ';
+										html = html + '			</p>  ';
+										html = html + '			<div class="question_describe">  ';
+										var c1 = latex2Html(q.question_context);
+										var c2 = makeMathJye(c1);
+										html = html + '				<div class="question_stem"> '+c2+' </div>  ';
+										html = html + '			</div>  ';
+										html = html + '		</div>  ';
+										html = html + '		<div class="quick_bottom2">  ';
+										html = html + '			<div class="multiple_question">  ';
+										html = html + '				<div class="multiple_img" style=""></div>  ';
+										html = html + '				<div class="swiper-container'+m_flag+'">  ';
+										html = html + '					<div class="swiper-wrapper">  ';
+										// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+										for(var z=0;z<q.compound.length;z++){ // 综合题小题列表
+											var c = q.compound[z]; // 每道小题
+											if(c.question_type == '1'){
+												html = html + '						<div class="swiper-slide">  ';
+												html = html + '							<div class="multiple_content">  ';
+												html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">单选题</span></p>  ';
+												html = html + '								<div class="question_stem">  ';
+												var c1 = latex2Html(c.question_context);
+												var c2 = makeMathJye(c1);
+												html = html + '									'+c2+'  ';
+												html = html + '								</div>  ';
+												html = html + '								<div id="choose_question">  ';
+												for(var j=0;j<c.answer_list.length;j++){ // 小题答案list
+													var a = c.answer_list[j];
+													html = html + '									<div class="option_btn">  ';
+													html = html + '										<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													var c1 = latex2Html(a.answer_context);
+													var c2 = makeMathJye(c1);
+													html = html + '										<div class="option_text"> '+ c2 +'</div>  ';
+													html = html + '									</div>  ';
+													if(j != c.answer_list.length){
+														html = html + '								<br />  ';
+													}
+												}
+												html = html + '								</div>	  ';
+												html = html + '							</div>  ';
+												html = html + '						</div>  ';
+											}
+											if(c.question_type == '2'){
+												html = html + '						<div class="swiper-slide">  ';
+												html = html + '							<div class="multiple_content">  ';
+												html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">多选题</span></p>  ';
+												html = html + '								<div class="question_stem">  ';
+												var c1 = latex2Html(c.question_context);
+												var c2 = makeMathJye(c1);
+												html = html + '									'+c2+'  ';
+												html = html + '								</div>  ';
+												html = html + '								<div id="choose_question">  ';
+												for(var j=0;j<c.answer_list.length;j++){ // 小题答案list
+													var a = c.answer_list[j];
+													html = html + '									<div class="option_btn">  ';
+													html = html + '										<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													var c1 = latex2Html(a.answer_context);
+													var c2 = makeMathJye(c1);
+													html = html + '										<div class="option_text"> '+ c2 +'</div>  ';
+													html = html + '									</div>  ';
+													if(j != c.answer_list.length){
+														html = html + '								<br />  ';
+													}
+												}
+												html = html + '								</div>	  ';
+												html = html + '							</div>  ';
+												html = html + '						</div>  ';
+											}
+											if(c.question_type == '4'){
+												html = html + '						<div class="swiper-slide">  ';
+												html = html + '							<div class="multiple_content">  ';
+												html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">判断题</span></p>  ';
+												html = html + '								<div class="question_stem">  ';
+												var c1 = latex2Html(c.question_context);
+												var c2 = makeMathJye(c1);
+												html = html + '									'+c2+ '';
+												html = html + '								</div>  ';
+												html = html + '								<div id="decide_question" style="margin-bottom: 2.38rem;">  ';
+												html = html + '									<div class="decide" style="">  ';
+												html = html + '										<a href="javascript:;" class="btn btn-hollow-customer" style="margin-top: 0;">A</a>  ';
+												html = html + '										<span style="margin-left: 0.6rem;font-size: 0.28rem;color:#333333;">对</span>  ';
+												html = html + '									</div>  ';
+												html = html + '									<div class="decide" style="margin-left: 0.4rem;">  ';
+												html = html + '										<a href="javascript:;" class="btn btn-hollow-customer" style="margin-top: 0;">B</a>  ';
+												html = html + '										<span style="margin-left: 0.6rem;font-size: 0.28rem;color:#333333;">错</span>  ';
+												html = html + '									</div>  ';
+												html = html + '								</div>  ';
+												html = html + '							</div>  ';
+												html = html + '						</div>  ';
+											}
+											if(c.question_type == '3'){
+												html = html + '						<div class="swiper-slide">  ';
+												html = html + '							<div class="multiple_content">  ';
+												html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">填空题</span></p>  ';
+												html = html + '								<div class="question_stem">  ';
+												var c1 = latex2Html(c.question_context);
+												var c2 = makeMathJye(c1);
+												html = html + '									'+c2+  '';
+												html = html + '								</div>  ';
+												html = html + '								<div id="fill_question">  ';
+												for(var j=0;j<c.answer_list.length;j++){
+													var a = c.answer_list[j];
+													html = html + '											<div class="input_frame">  ';
+													html = html + '												<span style="font-size: 0.3rem;color: #0493F0;padding-left: 0.29rem;">填空题'+a.answer_id+'：</span>  ';
+													html = html + '												<input type="text" value="" style="width: 4rem;height: 0.8rem;border: none;padding-left: 0.24rem;font-size: 0.3rem;color: #3b3f44;" readonly="readonly" />  ';
+													html = html + '											</div>  ';
+												}
+												html = html + '								</div>  ';
+												html = html + '							</div>  ';
+												html = html + '						</div>  ';
+											}
+											if(c.question_type == '5'){
+												html = html + '						<div class="swiper-slide">  ';
+												html = html + '							<div class="multiple_content">  ';
+												html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">简答题</span></p>  ';
+												html = html + '								<div class="question_stem">  ';
+												var c1 = latex2Html(c.question_context);
+												var c2 = makeMathJye(c1);
+												html = html + '									'+c2+'  ';
+												html = html + '								</div>  ';
+												html = html + '								<div id="short_question">  ';
+												html = html + '									<textarea class="short_question" readonly="readonly">请输入您的答案</textarea> ';
+												html = html + '								</div>  ';
+												html = html + '							</div>  ';
+												html = html + '						</div>  ';
+											}
+										}
+										html = html + '					</div>  ';
+										html = html + '					<div class="swiper-pagination'+m_flag+'"></div>  ';
+										html = html + '				</div>  ';
+										html = html + '			</div>  ';
+										html = html + '			<div class="multiple_btn">  ';
+										if(i == 0 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+										} else if(data.result.question_list.length == 1){
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin-left: 0.19rem;"></button>  ';
+											$("#jiayou_bg").css("left","1.5rem");
+										} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin-left: 0.19rem;"></button>  ';
+										} else {
+											html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+											html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+										}
+										html = html + '			</div>  ';
+										html = html + '		</div>  ';
+										html = html + '	</div>  ';
+								}
+								$(".container_content").append(html);
+								// 左右滑动之后隐藏(1)
+							 	var swiper = new Swiper('.swiper-container'+m_flag, {
+							      pagination: {
+							        el: '.swiper-pagination'+m_flag,
+							      },
+								});
+								//(2)
+								$(".swiper-container"+m_flag).hide();
+								// 初始化显示第一题，隐藏其他试题
+							} // question循环
+							$(".container_content .child").hide();
+							$(".container_content .child").eq(0).show();
+							$('.question_stem img').css({"width":"6.9rem","height":"","display":"inline-block"});
+							// 知识点
+							knowledge();
+							/*事件绑定处理start*/
+							// 加油打气判断
+							var approve_flag = ifApprove();
+							if(approve_flag){ // 已经加油打气
+								$(".jiayou_btn").attr("disabled","disabled").html('爱心已送达').css("color","#76B8F5"); 
+							}else{
+								$(".jiayou_btn").removeAttr("disabled").html('加油打气').css("color","#fff"); 
+							}
+						 	// 综合题显示处理
+							$(".multiple_img").on("click",function(){
+								 $('div[class*="swiper-container"]').slideToggle("hide");
+							});
+							// 试题显示处理
+							$(".button-next").on("click", function() {
+								$(this).parents(".child").next().show().siblings().hide();
+								
+							});
+							$(".button-prev").on("click", function() {
+								$(this).parents(".child").prev().show().siblings().hide();
+							});
+							/*加油打气 */
+							$(".jiayou_btn").one("click",function(){
+								oneApprove();
+	//							$(this).unbind("click").text("爱心已送达").css("color","#76B8F5");
+								$(this).attr("disabled","disabled").html('爱心已送达').css("color","#76B8F5");
+								$("#jiayou_bg").show();
+								setTimeout(
+									function() {
+										$('#jiayou_bg').hide();
+									}, 2000);
+									// 2018-11-28 added by stt 埋点-6：温柔_1（为孩子加油打气1次）
+								 	buriedPoint('6');
+							});
+							// 知识点弹窗
+							$(".layui-btn").click(function(){
+								layer.open({
+								  type: 1,
+								  title:'',
+								  skin: '', //加上边框
+								  area: ['5.99rem', '6.5rem'], //宽高
+								  content: text
+								});	
+								$(".layui-layer-content").css("height","auto");
+								// 2018-11-28 added by stt 埋点-5：理智_1（查看1次作业中知识点）
+								buriedPoint('5');
+							});
+							/*事件绑定处理end*/
+							// 关闭加载框
+							closeLoadDialog();
+							
+						} // 有数据
+					}, function(err) {
+						showAlert("服务器异常，请稍后重试");
+					}
+			);
+		}
+		
+		// 知识点
+		function knowledge(){
+			ysAjax("/homework/getKnowledge", {
+					section_id : getUrlParam("section_id")
+				}, function(data) {
+					if(data.result != null && data.result.ebook_name != null && data.result.ebook_name != ''){
+						var r = data.result;
+						text = text + '	<div class="content">  ';
+						text = text + '		<div class="k_title">  ';
+						text = text + '			您可根据以下知识点指引查看孩子课本了解详情  ';
+						text = text + '		</div>  ';
+						text = text + '		<div class="k_bottom" style="  ">  ';
+						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;年级&nbsp;&nbsp;一</span>  ';
+						text = text + '			<span class="k_b_content" >'+r.grade_name+'</span>  ';
+						text = text + '		</div>  ';
+						text = text + '		<div class="k_bottom">  ';
+						text = text + '		  <section class="g-scrollview">';
+						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节位置&nbsp;&nbsp;一</span>  ';
+						text = text + '			<span class="k_b_content" style=" display: block; font-size: 0.3rem; ">'+r.ebook_name+''+r.unit_name+''+r.section_name+'</span>  ';
+						text = text + '		  </section>';
+						text = text + '		</div>  ';
+//						text = text + '		<div class="k_bottom" style="margin-bottom:0.4rem;">  ';
+//						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节内容&nbsp;&nbsp;一</span>  ';
+//						text = text + '			<span class="k_b_content" >体积与面积</span>  ';
+//						text = text + '		</div>  ';
+						text = text + '	</div>  ';
+					}else{
+						text = text + '	<div class="content">  ';
+						text = text + '		<div class="no_knowledge">  ';
+						text = text + '	    	<img src="/static/images/homework/img_knowledge.png">  ';
+						text = text + '	        <p class="no_desc1">此作业没有关联知识点</p>  ';
+						text = text + '			<p class="no_desc2"">前往课堂了解孩子近期学习情况吧~</p>  ';
+						text = text + '		</div>  ';
+						text = text + '	</div>  ';
+					}
+				}, function(err) {
+					showAlert('服务器异常，请稍后重试');
+				}
+		 	);
+		}
+		// 公式编辑器公式显示
+		  function latex2Html(str){
+		    if (str == undefined || str == null || str == '') {
+		        return '';
+		    }
+		    str = '<span class="temp">'+ str +'</span>';
+		    var $str = $(str);
+		    if ($str.find(".kfformula").length == 0) {
+		        return $str.html();
+		    }
+		    $str.find(".kfformula").each(function(i, v){
+		        var latex = $(v).attr("data-latex");
+				if (latex != undefined && latex != null && latex != '') {
+		            latex = toSBC(latex);
+		            try {
+		                var katexHtml = katex.renderToString(latex, {displayMode: false});
+		            } catch (e) {
+		                return str;
+		            }
+		            $(v).after(katexHtml);
+		            $(v).remove();
+		        }
+		    });
+		    return $str.html();
+		}
+		// 转半角字符
+		function toSBC(str){
+		    var result = "";
+		    var len = str.length;
+		    for(var i=0;i<len;i++)
+		    {
+		        var cCode = str.charCodeAt(i);
+		        //全角与半角相差（除空格外）：65248（十进制）
+		        cCode = (cCode>=0xFF01 && cCode<=0xFF5E)?(cCode - 65248) : cCode;
+		        //处理空格
+		        cCode = (cCode==0x03000)?0x0020:cCode;
+		        result += String.fromCharCode(cCode);
+		    }
+		    return result;
+		}
+		// 菁优网公式显示
+		function makeMathJye(html){
+		    html = '<span>'+ html +'</span>'
+		    var $html = $(html);
+		    var $tables = $html.find("table");
+		    $.each($tables, function(i, v){
+		        $(v).wrap("<span class='MathJye'></span>");
+		    })
+		    var result = $html.html();
+		    return result;
+		}
+		// 进行一次加油打气
+		function oneApprove(){
+			ysAjax("/homework/approve", {
+			page : 99, // 关闭加载dialog标识
+			source_id:getUrlParam("homework_id"),
+			homework_type:getUrlParam("homework_type")
+			}, function(data) {
+			}, function(err) {
+			});
+		}
+		// 是否已经加油打气
+		function ifApprove(){
+			var af;
+			ysAjaxSynchro("/homework/getApprove", {
+				source_id:getUrlParam("homework_id")
+				}, function(data) {
+					if(data == undefined){
+						af = false;
+					}else{
+						if(data.success){
+							af = true;
+						}else{
+							af = false;
+						}
+					}
+				}, function(err) {
+				}
+			);
+			return af;
+		}
+		</script>
+	</body>
+
+</html>

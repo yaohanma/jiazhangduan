@@ -1,0 +1,100 @@
+/*知识点*/
+.layui-layer{
+	border-radius: 10px;
+}
+.layui-layer-setwin .layui-layer-close2 {
+    position: absolute;
+    right: -13px;
+    top: -5px;
+    width: 39px;
+    height: 30px;
+    margin-left: 0;
+    background-repeat: no-repeat;
+    }
+.layui-layer-ico.layui-layer-close.layui-layer-close2{
+	background: url(/static/images/homework/popup_close_default.png);
+	background-repeat: no-repeat;
+	position: absolute;
+    right: -24px;
+    top: -5px;
+    width: 39px;
+    height: 30px;
+    margin-left: 0;
+    background-size: 50%;
+}
+.layui-layer-page .layui-layer-content{
+	margin-top: 1rem;
+	    padding: 0.4rem;
+}
+.k_title{
+	font-size: 0.3rem; color: #333333; text-align: center;
+}
+.k_bottom{
+	width: 100%; height: 1.13rem; background-color: #F2F2F2; border-radius: 10px; text-align: center; padding: 0.1rem;
+	margin-bottom: 0.2rem;
+	margin-top: 0.5rem;
+}
+.k_b_title{
+	color: #c8c8c8; font-size: 0.24rem; display: inline-block; 
+	margin-bottom: 0.1rem;
+	margin-top: 0.1rem; 
+}
+.k_b_content{
+	display: block; font-size: 0.3rem;
+}
+.no_knowledge{
+	text-align:center;
+}
+.no_knowledge img{
+	width: 4rem;
+    margin-left: 0.7rem;
+}
+.no_knowledge .no_desc1{
+	font-size: 0.3rem;
+    color: #999999;
+    margin-top: 0.69rem;
+    margin-bottom: 0.1rem;
+}
+.no_knowledge .no_desc2{
+	font-size: 0.24rem;
+    color: #999999;
+}
+/*得分率*/
+.demo-progress-cricle {
+    width: 2rem;
+    height: 2rem;
+}
+.demo-progressbar {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-justify-content: space-around;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 0 .24rem;
+	background: #FFFFFF;
+}
+.score_text{
+	font-size: 0.3rem;
+    color: #999999;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+.progressbar-content{
+	font-size:0.5rem;
+	color:#0DC77A;
+}
+.progressbar-content span{
+	font-size: 0.24rem;
+}
+.progress-bar > svg > path:first-child {
+    stroke: #f0f0f0;
+}
+.layui-layer-setwin .layui-layer-close2:hover{
+	background-position: 0 0;
+}

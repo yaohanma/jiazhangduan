@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>鹰硕家长</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+
+    <link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+    <link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+    <!--学习首页 css-->
+    <link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+    <script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/ysaddr.js"></script>
+    <style>
+        .notice_title {
+            width: 100%;
+            height: auto;
+            background: #fff;
+            padding: 0.3rem;
+            padding-top: 0.5rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .notice_title > div {
+            height: 0.4rem;
+            color: #999;
+            font-size: 0.26rem;
+        }
+
+        .notice_title p {
+            font-size: 0.4rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .content_box {
+            width: 100%;
+            height: auto;
+            padding: 0.4rem 0.3rem;
+            background: #fff;
+        }
+
+        .content_box > div {
+            line-height: 0.4rem;
+            margin-bottom: 0.2rem;
+            font-size: 0.3rem;
+            line-height: 0.5rem;
+            color: #333;
+        }
+
+        .content_box img {
+            width: 100%;
+            height: 3.5rem;
+        }
+
+        .content_box .p_box {
+            margin-top: 0.69rem;
+        }
+
+        .content_box .p_box p {
+            color: #666;
+        }
+
+        /*九张图 css*/
+        .img_box {
+            margin-top: 0.3rem;
+        }
+
+        .img_box .m-grids-3 .grids-item:before,
+        .img_box .grids-item:after {
+            border: none;
+        }
+
+        .img_box .grids-txt {
+            padding: 0;
+            margin-bottom: 0.1rem;
+            height: 2rem;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .img_box .grids-item {
+            padding: 0 0.1rem;
+        }
+
+        .img_box img {
+            width: 100%;
+            height: 2rem;
+        }
+
+        .m-grids-3:before {
+            border-bottom: none;
+        }
+        .content {
+            width: 100%;
+            height: auto;
+            background: #FFFFFF;
+            position: relative;
+            z-index: 0;
+            margin-top: 1rem;
+            padding-bottom: .15rem;
+        }
+        div.bg{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            position: fixed;
+            top: 30%;
+            padding: 0 1rem;
+            font-size: 0.3rem;
+            color: #999;
+        }
+        div.bg img{
+            width: 100%;
+            margin-bottom: 0.4rem;
+        }
+        div.bg>div{
+            color: #999;
+            width: 100%;
+
+        }
+        #ImgZoomInImage{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-o-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+    </style>
+</head>
+<body>
+<section class="g-flexview">
+    <section class="g-scrollview">
+        <!--通知标题 -->
+        <div class="notice_title">
+            <!--<p>本学期第二次家长会</p>-->
+            <!--<div>-->
+                <!--<div class="pull-left">2018-05-04</div>-->
+                <!--<div class="pull-right">李老师</div>-->
+            <!--</div>-->
+        </div>
+        <!--通知标题   end-->
+        <!--通知内容 -->
+        <div class="content_box">
+            <!-- TODO APP 假数据 -->
+            <!--<div>Hi，一（三）班学生家长，诚邀您参加本学期第二次家长会，我们关注学生的健康成长与学习情况！</div>-->
+            <!--<div>如有家长没时间参加，请提前跟老师联系说明，谢谢配合~</div>-->
+            <!--<div class="p_box">-->
+                <!--<p>主题：本学期第二次家长会</p>-->
+                <!--<p>时间：5月4日19:00-20:00</p>-->
+                <!--<p>地点：学校舞蹈室</p>-->
+            <!--</div>-->
+            <!--<img src="/static/images/homework/test.png"/>-->
+
+            <!--<div class="img_box">-->
+                <!--<ul class="m-grids-3">-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<ul class="m-grids-3">-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<ul class="m-grids-3">-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="grids-item">-->
+                        <!--<div class="grids-txt">-->
+                            <!--<img src="/static/images/homework/test.png"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
+        <!--通知内容  end-->
+    </section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // header
+        var flag = getUrlParam("flag");
+        // m:消息中心列表页 h:首页
+        if (flag && flag == 'm') {
+            addMainPageHeader("/html/notice_list/notice.html", "消息详情", {
+                hasIcon: true,
+            });
+        } else if (flag && flag == 'h') {
+            addMainPageHeader("/html/common/homepage.html", "消息详情", {
+                hasIcon: true,
+            });
+        }
+//	addMainPageHeader("/html/notice_list/notice.html", "消息详情", {
+//					hasIcon:true,
+//	});
+        addMainPageFooter(1);
+        // 通知消息id
+        var msg_id = getUrlParam("msg_id");
+        msgDetail(msg_id);
+    });
+
+    // 通知详情
+    function msgDetail(msg_id) {
+        ysAjax("/mob/notification/detail", {
+            msg_id: msg_id
+        }, function (data) {
+            var html = '';
+            if (data.code == 'OK') {
+                var d = data.data;
+                // 标题
+                html = html + ' <p>' + d.noticeName + '</p> ';
+                html = html + ' <div> ';
+                html = html + ' 	<div class="pull-left">' + getNowFormatDate(d.publishTime) + '</div>    ';
+                html = html + ' 	<div class="pull-right">' + d.publisherName + '</div> ';
+                html = html + ' </div> ';
+                $('.notice_title').html(html);
+                // 内容
+                html = '';
+                html = html + ' <div style="white-space:pre-wrap;">' + d.noticeContent + '</div> ';
+                html = html + ' <div class="p_box"> ';
+                html = html + ' 	<p>主题：' + d.noticeName + '</p> ';
+                if (d.start_time == undefined) {
+                    d.start_time = '';
+                }
+                html = html + ' 	<p>时间：待定</p> ';
+                if (d.address == undefined) {
+                    d.address = '';
+                }
+                html = html + ' 	<p>地点：待定</p> ';
+                html = html + ' </div> ';
+                // 图片：1张、9张
+                var img_array;
+                if (d.imgs != undefined && d.imgs != '') {
+                    img_array = d.imgs.split(',');
+                    if (img_array.length > 9) {
+                        img_array = img_array.slice(0, 9);
+                    }
+                    if (img_array.length == 1) {
+                        html = html + ' <img  src="' + img_array[0] + '"/> ';
+                    } else {
+                        if (img_array.length <= 3) {
+                            html = html + ' <div class="img_box"> ';
+                            html = html + ' 	<ul class="m-grids-3"> ';
+                            for (var i = 0; i < img_array.length; i++) {
+                                html = html + ' 		<li class="grids-item"> ';
+                                html = html + ' 			<div class="grids-txt"> ';
+                                html = html + ' 				<img  src="' + img_array[i] + '"/> ';
+                                html = html + ' 			</div> ';
+                                html = html + ' 		</li> ';
+                            }
+                            html = html + ' 	</ul> ';
+                            html = html + ' </div> ';
+                        }
+                        if (img_array.length > 3 && img_array.length <= 6) {
+                            html = html + ' <div class="img_box"> ';
+                            html = html + ' 		<ul class="m-grids-3"> ';
+                            for (var i = 0; i < img_array.length; i++) {
+                                html = html + ' 		<li class="grids-item"> ';
+                                html = html + ' 			<div class="grids-txt"> ';
+                                html = html + ' 				<img  src="' + img_array[i] + '"/> ';
+                                html = html + ' 			</div> ';
+                                html = html + ' 		</li> ';
+                                if (i == 2) {
+                                    html = html + ' </ul> ';
+                                    html = html + ' <ul class="m-grids-3"> ';
+                                }
+                            }
+                            html = html + ' 		</ul> ';
+                            html = html + ' </div> ';
+                        }
+                        if (img_array.length > 6) {
+                            html = html + ' <div class="img_box"> ';
+                            html = html + ' 	<ul class="m-grids-3"> ';
+                            for (var i = 0; i < img_array.length; i++) {
+                                html = html + ' 		<li class="grids-item"> ';
+                                html = html + ' 			<div class="grids-txt"> ';
+                                html = html + ' 				<img  src="' + img_array[i] + '"/> ';
+                                html = html + ' 			</div> ';
+                                html = html + ' 		</li> ';
+                                if (i == 2 || i == 5) {
+                                    html = html + ' </ul> ';
+                                    html = html + ' <ul class="m-grids-3"> ';
+                                }
+                            }
+                            html = html + ' 	</ul> ';
+                            html = html + ' </div> ';
+                        }
+                    }
+                }
+                $('.content_box').html(html);
+            } else {
+                var html = "";
+                html =  html + ' <div class="bg">';
+                html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+                html =  html + ' <img src="/static/images/study_img/img_knowledge.png" />';
+                html =  html + ' </div>';
+                html =  html + ' <div style="line-height:.5rem ;">暂无数据</div>';
+                html =  html + ' </div>';
+                $('.content_box').html(html);
+                $(".notice_title").hide();
+//                getDialog().alert('当前默认孩子没有通知发布!', function () {
+//                    window.location.href = '/html/study/study_index.html';
+//                });
+            }
+        }, function (err) {
+            showAlert('服务器异常，请稍后重试');
+        });
+    }
+
+    // 时间格式化
+    function getNowFormatDate(timeString) {
+        if (timeString == '') {
+            return '';
+        } else {
+            var date = new Date(timeString.replace(/-/g,'/'));
+            var seperator1 = "-";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+    }
+
+    function crtTimeFtt(value) {
+        if (value == '') {
+            return '';
+        } else {
+            var crtTime = new Date(value);
+            return top.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);
+        }
+    }
+
+    function dateFtt(fmt, date) {
+        var o = {
+            "M+": date.getMonth() + 1,                 //月份
+            "d+": date.getDate(),                    //日
+            "h+": date.getHours(),                   //小时
+            "m+": date.getMinutes(),                 //分
+            "s+": date.getSeconds(),                 //秒
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+            "S": date.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    // 图片预览
+		$.fn.ImgZoomIn = function () {
+			var window_h = $(window).height();
+			var scroll_h = $(window).scrollTop();
+		
+			bgstr = '<div id="ImgZoomInBG" style="position: absolute;filter:Alpha(Opacity=70); opacity:0.7;z-index: 10000;background-color: #000;display: none;"></div>';
+			imgstr = '<img id="ImgZoomInImage" src="' + $(this).attr('src')+'" style="cursor:pointer; display:none; position:absolute; z-index:10001;" />';
+			if ($('#ImgZoomInBG').length < 1) {
+				$('body').append(bgstr);
+			}
+			if ($('#ImgZoomInImage').length < 1) {
+				$('body').append(imgstr);
+			}
+			else {
+				$('#ImgZoomInImage').attr('src', $(this).attr('src'));
+			}
+		
+			$('#ImgZoomInBG').css('top', scroll_h+'px');
+			$('#ImgZoomInBG').css('width', '100%');
+			$('#ImgZoomInBG').css('height', window_h+'px');
+		
+			$('#ImgZoomInImage').css('width', '100%');
+//			$('#ImgZoomInImage').css('height', (window_h/2)+'px');
+			$('#ImgZoomInImage').css('height', 'auto');
+//			$('#ImgZoomInImage').css('top', (scroll_h+window_h/4)+'px');
+			$('#ImgZoomInBG').show();
+			$('#ImgZoomInImage').show();
+		};
+		$(document).ready(function () {
+			$(document).on('touchend','img',function (t){
+				$(this).ImgZoomIn();
+				document.ontouchstart=function(){
+					return false;
+				}
+				t.preventDefault();
+			});
+		
+			$(document).on('touchend','#ImgZoomInImage',function(t){
+				$('#ImgZoomInImage').hide();
+				$('#ImgZoomInBG').hide();
+				document.ontouchstart=function(){
+					return true;
+				}
+				t.preventDefault();
+			});
+		});
+</script>
+</body>
+</html>

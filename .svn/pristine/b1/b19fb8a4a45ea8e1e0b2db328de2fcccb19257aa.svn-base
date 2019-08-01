@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--echarts js-->
+<script type="text/javascript" src="/static/js/echarts/echarts.min.js" ></script>
+<style>
+	
+  </style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="m-celltitle demo-small-pitch" style="font-size: 0.24rem; padding: 0.1rem .3rem;height: 1.04rem;">
+			<p class="fc_999" id="statisticsTime"></p>
+			<p  class="fc_999" style="margin-top: 0.13rem;">根据每门科目日常考试成绩，可一定程度反映学科发展是否均衡</p>
+		</div>
+		<div class="com_box">
+			<div class="m-cell" style="margin-bottom: 0;">
+			    <div class="cell-item mytitle">
+			        <div class="cell-left"><i></i>诊断结果概述</div>
+			        <div class="cell-right"></div>
+			    </div>
+			</div>
+			<div style="padding:.3rem;font-size: 0.28rem;line-height: .4rem;" id="diagnosis">
+			
+			<span style="color: #2db973;">数学、化学、物理成绩优秀，</span>表现很棒哦；<span style="color:#f95959;" >英语、语文成绩比较差，</span>仍需继续努力；
+
+			<span style="color:#f95959;">您的生物成绩一般，</span>继续加油！ 
+			</div>
+	  	</div>	
+		<div class="com_box">
+			<div class="m-cell" style="margin-bottom: 0;">
+			    <div class="cell-item mytitle">
+			        <div class="cell-left"><i></i>维度分析</div>
+			        <div class="cell-right"></div>
+			    </div>
+			</div>
+			<div style="padding: .3rem 0;">
+				<div id="Dimension" style="height:8.5rem;"></div>
+			</div>
+	  </div>	
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	addMainPageHeader("/html/understand_more/daily_learning.html", "学科发展");
+	addMainPageFooter(3);
+	//
+	initDimension();
+	/*维度分析*/
+function initDimension(){
+	//基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('Dimension'));
+		option = {
+			angleAxis:{
+              axisLine:{
+               lineStyle:{
+                  color: '#ccc',
+                  opacity :1  
+              }
+              }
+            },
+              grid: {
+		        position: 'center',
+		       
+                
+              
+		     },
+            radiusAxis: {
+                interval:20,
+                boundaryGap:false,
+                   type: 'value',
+                   min :0,
+                   max:100,
+                      axisLine:{
+                       lineStyle:{
+                          color: '#ccc',
+                      }
+                      } ,
+                      axisPointer:{
+                       lineStyle:{
+                          color: '#ccc'//刻度颜色
+                      }
+                      },
+                      axisTick:{
+                       interva:2,
+                       length :0//径向轴刻度长短
+                      }
+               	},
+		    polar: {
+			    },
+        	legend: {
+		  	    type: 'scroll',
+ 				orient: 'vertical',
+		          top: 0,
+		          left:0,
+		          itemWidth: 12,
+		          itemHeight: 12,
+		          data: ['我的学习情况', '班级学习情况'],
+		          textStyle: {
+		          		fontSize:14,
+		              color: '#888a97'
+		          }
+		      },
+		      
+		    radar: {
+		        shape: 'circle',
+		        radius: '80%',//设置雷达图大小
+		        splitArea: {
+		            areaStyle: {
+		            	color: ['#fff', '#fff', '#fff', '#fff', '#fff'],
+		                shadowColor: 'rgba(0, 100, 0, 0.3)'
+		            }
+		        },
+		         name: {
+                textStyle: {
+                    color: '#666',
+                },
+//              formatter: (text) => {
+//                  text = text.replace(/\S{3}/g, function(match) {
+//                      return match + '\n'
+//                  })
+//                  return text
+//              }
+           },
+//		        indicator: indicatorData
+		 indicator: [
+		           { name: '语文', max:100},
+		           { name: '生物', max:100},
+		           { name: '化学', max:100},
+		           { name: '物理', max:100},
+		           { name: '英语', max:100},
+		           { name: '数学', max:100}
+		        ]
+		    },
+		 
+		    series: [{
+		           type: 'radar',
+		           type:'radar',
+        		symbolSize: 5,
+        		rich: {
+                        color: '#666',
+                        fontSize: 26,
+                        top:10,
+               },				      				  
+		        data : [
+		            {
+		                value :[80, 100, 98, 70, 60, 90],
+		                name : "我的学习情况",
+		                areaStyle:{
+	                    normal: {
+	                        color: 'rgba(229,244,253,.5)'
+	                    }
+	                }
+		            },
+		            {
+		                 value :[88, 90, 78, 95, 70, 90],
+		                name : "班级学习情况",
+		                areaStyle:{
+	                    normal: {
+	                        color: 'rgba(255,240,240,.5)'
+	                    }
+	                }
+		            }
+		        ],
+		        color: ['#30b8fe', '#ff6a67'],
+		    }]
+		};
+				// 使用刚指定的配置项和数据显示图表。
+			    myChart.setOption(option);
+		}
+
+	//学科发展数据
+    //TODO APP
+	/*ysAjax("/study/get_learning_info", {
+	}, function(data) {
+		if (data.success) {
+			var html="";
+			var indicatorData = [];
+			var myData = [];
+			var classData = [];
+			var youxiu = '';
+			var yiban ='';
+			var jiaocha='';
+			var datalist = data.result;
+			$("#statisticsTime").html('统计时间段：'+datalist.start_time+'~' +datalist.end_time);
+			for(var i = 0; i < datalist.classInfoList.length; i++ ){
+				indicatorData.push({name:datalist.classInfoList[i].subject_name,max: 100});
+				classData.push(datalist.classInfoList[i].scoring_rate);
+				for(var z=0; z<datalist.stuInfoList.length;z++) {
+					if(datalist.classInfoList[i].subject_id == datalist.stuInfoList[z].subject_id) {
+						myData.push(datalist.stuInfoList[z].scoring_rate);
+					}
+				}
+			}
+			for(var j = 0; j < datalist.stuInfoList.length; j++) {				
+				if(datalist.stuInfoList[j].describe=='优秀') {
+					youxiu +=  datalist.stuInfoList[j].subject_name +"、";
+				}else if(datalist.stuInfoList[j].describe=='一般') {
+					yiban +=  datalist.stuInfoList[j].subject_name +"、";
+				}else if(datalist.stuInfoList[j].describe=='较差') {
+					jiaocha +=  datalist.stuInfoList[j].subject_name +"、";
+				}
+			}
+			html += '您的孩子在';
+			if(youxiu !== '' && youxiu.length !== 0) {
+				html += '<span style="color: #2db973;">'+youxiu.substr(0,youxiu.length-1)+'成绩优秀，</span>表现很棒哦；';
+			}
+			if(jiaocha !== '' && jiaocha.length !== 0) {
+				html += '<span style="color:#f95959;" >'+jiaocha.substr(0,jiaocha.length-1)+'成绩比较差，</span>仍需继续努力；';
+			}
+			if(yiban !== '' && yiban.length !== 0) {
+				html += '<span style="color:#f95959;">'+yiban.substr(0,yiban.length-1)+'成绩一般，</span>继续加油！';
+			}
+			$("#diagnosis").append(html);
+			initDimension(indicatorData,classData,myData);
+		
+		} else {
+			window.location.href="/html/understand_more/scientiic_delop_null.html";
+		}
+	}, function(err) {
+		showNotify("发生异常");
+		
+	});*/
+	});
+
+
+</script>
+</body>
+</html>

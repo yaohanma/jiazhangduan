@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//addMainPageHeader(null, "我的");
+				//				debouce(jumpIm, 1000);
+				jumpIm();
+				addMainPageFooter(2);
+			});
+
+			function debouce(func, delay) {
+				var timer = null;
+				return function() {
+					var context = this;
+					var args = arguments;
+					if(timer) clearTimeout(timer);
+					var doNow = !timer;
+					timer = setTimeout(function() {
+						timer = null;
+					}, delay);
+					if(doNow) {
+						func.apply(context, args);
+					}
+				}
+			}
+			// https://tsdevhouse.ys100.com 
+			// https://houseapp.ys100.com
+			function jumpIm() {
+				window.apiready = function() {
+					ysAjax("/mob/homepage/getParentInfo", {}, function(data) {
+						if(data.success) {
+							var url = data.result.parentHeadImage;
+							if(!!url && url.indexOf("http://thirdwx.qlogo.cn") == -1) {
+								url = 'https://tsdevhouse.ys100.com' + ysServerAddr + "/mob/homepage/download_file?url=" + url;
+							}
+							api.sendEvent({
+								name: 'imToNative',
+								extra: {
+									user_id: getUserId(),
+									user_name: data.result.parentName,
+									head_url: url,
+									childName: data.result.updateUser,
+									relationshipToChild: data.result.relationship
+								}
+							});
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+				}
+			}
+		</script>
+	</body>
+
+</html>

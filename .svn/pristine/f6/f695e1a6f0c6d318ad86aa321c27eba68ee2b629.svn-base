@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+.title_box{
+   	width: 100%;
+   	background: #0493f0;
+   	padding:0.4rem 0.3rem ;
+   }
+	 .title_box>div{
+	 	color: #fff;
+	 	line-height: 0.4rem;
+	 	margin-bottom: 0.1rem;
+	 }
+	 .title_box .pull-left{
+	 	font-size: 0.36rem;
+	 }
+	 .title_box .pull-right{
+	 	font-size: 0.28rem;
+	 }
+	 .com_box{
+	 	padding: 0.3rem;
+	 }
+	 .com_box>p{
+	 	color: #999;
+	 	font-size: 0.28rem;
+	 	margin: 0.3rem 0;
+	 }
+	 .com_box>div{
+	 	width:100%;
+	 	height: auto;
+	 	background: #fafafa;
+	 	margin: 0 auto;
+	 	padding: 0.3rem;
+	 	font-size: 0.3rem;
+	 	border-radius: 6px;
+	 	font-size:0.3rem;
+	 }
+	 .com_box>div p{
+	 	color: #666;
+	 }
+	  .com_box>div>div{
+	  	color: #333;
+	  	font-weight: bold;
+	  	margin-top: 0.3rem;
+	  }
+	  .com_box>div a{
+	  	width: 100%;
+	  	height: 0.4rem;
+	  	line-height: 0.4rem;
+	  	display: inline-block;
+	  	background: url(/static/images/study_img/icon_link@2x.png) no-repeat left -2%;
+	  	background-size: 5%;
+	  	padding-left: 0.4rem;
+	  	color: #999;
+	  	margin-top: 0.2rem;
+	  }
+  </style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="title_box">
+			<div style="font-size: 0.36rem;"><!--政治--></div>
+			<div style="font-size: 0.24rem;color: #a2bdff;"><!--共2条笔记--></div>
+		</div>
+		<!-- TODO APP 假数据 -->
+		<!-- <div class="com_box">
+			<div>
+				<p>
+					过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八
+				</p>
+				<div>
+						笔记：过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八
+				</div>
+				<a href="#">全国人大</a>
+			</div>
+			<p>05-07   添加了笔记</p>
+		</div>
+		
+		
+		<div class="com_box">
+			<div>
+				<p>
+					过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八
+				</p>
+				<div>
+						笔记：过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八	过法定程序把党的主张、人民意愿转化为国家意志,是全国人大的神圣职责。从党的十八大到十八
+				</div>
+				<a href="#">全国人大</a>
+			</div>
+			<p>05-07   添加了笔记</p>
+		</div> -->
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	addMainPageHeader("/html/read/child_reading.html", "孩子的笔记", {
+					hasIcon:true,
+					action : function() {
+					}
+	});
+	addMainPageFooter(2);
+	childReadNotes();
+});
+// 阅读笔记详情list
+function childReadNotes() {
+	ysAjax("/read/child_note_detail",{
+		resource_id:getUrlParam('resource_id')
+	},function(data) {
+		if(data.success) {
+			var array = data.result;
+			var html = '';
+			if(array != null && array.length > 0){
+				$('.title_box div').eq(0).html(array[0].resource_name);
+				$('.title_box div').eq(1).html('共'+array.length+'条笔记');
+				for(var i=0; i<array.length; i++){
+					var item = array[i];
+					html = html + '	<div class="com_box">  ';
+					html = html + '		<div>  ';
+					html = html + '			<p>  ';
+					html = html + '				'+item.select_content+'  ';
+					html = html + '			</p>  ';
+					html = html + '			<div>  ';
+					html = html + '					笔记：'+item.think_content+' ';
+					html = html + '			</div>  ';
+					html = html + '			<a>'+item.c_name+''+item.s_name+'</a>  ';
+					html = html + '		</div>  ';
+					html = html + '		<p>'+item.create_time+'  添加了笔记</p>  ';
+					html = html + '	</div>  ';
+				}
+				$('.g-scrollview').append(html);
+			}
+		} else {
+			showAlert('服务器异常，请稍后重试');
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+</script>
+
+</body>
+</html>

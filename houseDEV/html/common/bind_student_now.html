@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/plugins/iosselect/iosSelect.js"></script>
+		<style>
+		.m-cell:after{
+		 content:none;
+		}
+		.cell-item-customer {
+		    display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    position: relative;
+		    overflow: hidden;
+		 }
+		.btn-customer {
+			background-color: #0493f0;
+			margin-right:.24rem;
+			margin-left:.24rem;
+			color: #FFF;
+		}
+		.btn-block {
+		    text-align: center;
+		    position: relative;
+		    border: none;
+		    pointer-events: auto;
+		    width: 100%;
+		    display: block;
+		    font-size: 0.36rem;
+            height: 0.85rem;
+		    line-height: 0.85rem;
+		    margin-top: 0.5rem;
+		    border-radius: 10px;
+		}
+		</style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<div class="g-scrollview">
+				<div class="m-cell">
+					<div class="cell-item">
+						<div class="cell-left"></div>
+						<div class="cell-right">
+							<input id="parentName" type="text" class="cell-input" style="font-size:.3rem;color:#333333;" placeholder="请输入您的真实姓名" autocomplete="off" /></div>
+					</div>
+					<a class="cell-item">
+					       <input type="hidden" id="relashipCode" />
+        				    <label id="relashipName" class="cell-left" style="background-color:999999;font-size:.3rem;color:#999999;width:100%;"></label>
+						<div class="cell-right cell-arrow">
+						</div>
+					</a>
+				</div>
+				 <div class="cell-item-customer">
+					<button class="btn-block btn-customer" id="btnbindNow">立即绑定</button>
+			 	</div>
+			</div>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/common/bind_student.html?type="+getUrlParam("type"), "立即绑定");
+				initRelationshipSelect("relashipCode", "relashipName");
+				var requestData = new Object();
+				requestData = GetRequest();
+				var invoteCode = requestData["invoteCode"];
+				var telnum = requestData["telnum"];
+				$("#relashipCode").val("1");
+				$("#relashipName").text("妈妈");
+				//立即绑定
+				$("#btnbindNow").on("click", function() {
+					ysAjax("/homepage/bind_student", {
+						invoteCode : invoteCode,
+						parentName : $("#parentName").val(),
+						relation : $("#relashipCode").val(),
+						telnum : telnum
+					}, function(data) {
+						if (data.success) {
+							getDialog().alert('绑定成功！', function () {
+								window.location.href='/html/study/study_index.html';
+				            });
+
+						} else {
+							showNotify(data.errorMsg);
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+				});
+			});
+			
+			//获取前页面参数
+			function GetRequest() {   
+				   var url = location.search; 
+				   var theRequest = new Object();
+				   //获取url中"?"符后的字串   
+				   if (url.indexOf("?") != -1) {   
+				      var str = url.substr(1);   
+				      strs = str.split("&");   
+				      for(var i = 0; i < strs.length; i ++) {   
+				         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+				      }   
+				   }   
+				   return theRequest;   
+			}   
+		</script>
+	</body>
+
+</html>

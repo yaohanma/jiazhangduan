@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+<link rel="stylesheet" href="/static/css/my/my.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+.font-size-u{
+	font-size: .32rem;
+}
+.font-size-d{
+	font-size: .24rem;
+}
+.font-color-99{
+	color: #999999;
+}
+.font-color-33{
+	color: 333333;
+}
+.font-color-66{
+    color: #666666;
+}
+.cell-item-height{
+	height: 60px;
+}
+ .m-cell:after{
+ 	border-bottom: none;
+ }
+#ysYduiNavBarRightBtn {
+	color: #0493f0;
+}
+.navbar-item{
+	min-width: 30%;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+<div class="g-scrollview">
+	<div class="m-cell" style="margin-top: .2rem;margin-bottom: .2rem;" id="relationStudent">
+		<!-- <div class="cell-item" style="height: 70px" >
+			<div class="cell-left" >
+			 <div>
+			    <p style="font-size:18px;color:#333333;">黄小米</p>
+			    <p style="font-size:16px;color:#999999;">已绑定孩子</p> 
+			 </div>   
+			</div>
+			<div class="cell-right cell-arrow" onclick="relieveBind(123214)">
+			    <p style="font-size:16px;color:#999999;">解除绑定</p>
+			</div>
+		</div>
+		<div class="cell-item" style="height: 70px">
+			<div class="cell-left">
+			    <div>
+			      <p style="font-size:18px;color:#333333;">黄大米</p>
+			      <p style="font-size:16px;color:#999999;">已解绑</p>
+			    </div>
+			</div>
+			<div class="cell-right cell-arrow"  id="reBind">
+			    <p style="font-size:16px;color:#333333;" id="bindNow">立即绑定</p>
+			</div>
+		</div> -->
+	</div>
+	<div class="cell-item-customer">
+			<button class="btn-block btn-customer" id="btnNext">绑定孩子</button>
+	 </div>
+</div>
+</section>
+<textarea style="display: none;" id="relieveBindHtml">
+<div style="height:60px;">
+    <div style="text-align: center;margin:40px auto;">
+    	<p class="font-color-66">确定解绑吗？</p>
+    	<p class="font-color-66">解除绑定后将无法查看孩子情况</p>
+    </div>
+</div>
+</textarea>
+<textarea style="display: none;" id="reBindHtml">
+<div style="height:60px;">
+    <div style="text-align: center;margin:40px auto;">
+    	<p class="font-color-66">确定重新绑定孩子吗？</p>
+    	<p class="font-color-66">绑定后即可查看孩子情况</p>
+    </div>
+</div>
+</textarea>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+        addMainPageHeader("/html/my/my_home.html", "绑定状态", {
+            hasIcon:true,
+            text:"创建孩子账号",
+            action : function() {
+                $("#ysYduiNavBarRightBtn").attr("href","/html/login/setup_children.html?source=bind");
+            }
+        });
+		loadPage();
+		$("#btnNext").on("click", function() {
+			window.location.href="/html/login/bind_children.html";
+		});
+	});
+	
+	function loadPage() {
+		ysAjax("/mob/student/bearing", {
+		}, function(data) {
+			if (data.success) {
+				$("#relationStudent").empty();
+				var html="";
+				var datalist = data.result.studentList;
+				for(var i = 0; i < datalist.length; i++ ){
+					  html+='<div class="cell-item cell-item-height">';
+		              html+='<div class="cell-left">';
+		    		  html+='<div>';
+		    		  if(datalist[i].bindStatus=='1'){
+		    			  html+='<p class="font-size-u font-color-33">'+datalist[i].createUser+'</p>';
+			    		  html+='<p class="font-size-d font-color-99">已绑定孩子</p>';
+			    		  html+='</div>';
+			    		  html+='</div>';
+			    		  html+='<div class="cell-right cell-arrow" onclick="relieveBind(&quot;'+datalist[i].stuId+'&quot;)">';
+			    		  html+='<p class="font-size-d font-color-99">解除绑定</p>';
+		    		  }else{
+		    			  html+='<p class="font-size-u font-color-33">'+datalist[i].createUser+'</p>';
+			    		  html+='<p class="font-size-d font-color-99">已解绑</p>';
+			    		  html+='</div>';
+			    		  html+='</div>';
+			    		  html+='<div class="cell-right cell-arrow" onclick="reBind(&quot;'+datalist[i].stuId+'&quot;)">';
+			    		  html+='<p class="font-size-d font-color-99">立即绑定</p>';
+		    		  }
+		    		  html+='</div>';
+		    		  html+='</div>';
+				}
+				 $("#relationStudent").append(html);
+			} else {
+				showNotify(data.errorMsg);
+			}
+		}, function(err) {
+			showNotify("发生异常");
+		});
+	} 
+	
+	//取消绑定
+	function relieveBind(studentid) {
+        getDialog().confirm("", $("#relieveBindHtml").val(), [
+		{
+        		txt: '取消',
+        		color: false
+        },
+		{
+        		txt: '确定',
+        		color: '#158de4', //false:黑色  true:绿色 或 使用颜色值
+        		callback: function () {
+        			ysAjax("/mob/homepage/updateBindStatus", {
+        				studentId : studentid,
+        				bindStatus : 0
+					}, function(data) {
+						if (data.success) {
+						  loadPage();
+						  showNotify("解除绑定成功");
+						} else {
+							showNotify("解除绑定失败");
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+        		}
+        }
+		]);
+	}
+	
+	//重新绑定
+     function reBind(studentid) {
+        getDialog().confirm("", $("#reBindHtml").val(), [
+		{
+        		txt: '取消',
+        		color: false
+        },
+		{
+        		txt: '确定',
+        		color: '#158de4', //false:黑色  true:绿色 或 使用颜色值
+        		callback: function () {
+        			ysAjax("/mob/homepage/updateBindStatus", {
+        				studentId : studentid,
+        				bindStatus : 1
+					}, function(data) {
+						if (data.success) {
+						  loadPage();
+						  showNotify("立即绑定成功");
+						} else {
+							showNotify("立即绑定失败");
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+        		}
+        }
+		]);
+	};
+</script>
+</body>
+</html>

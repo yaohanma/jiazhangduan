@@ -1,0 +1,177 @@
+//头部样式修改
+.mint-header{
+    background-color: #fff;
+    color: #313340;
+    border-bottom: 1px solid #ddd;
+    height: 90px;
+    font-size: 34px;
+    font-weight: bold;
+}
+.mintui{
+    font-size: 34px;
+}
+.mint-header-title {
+    line-height: 90px;
+}
+#header+* {
+    margin-top: 90px;
+}
+
+
+// 拍照弹框样式修改
+.mint-actionsheet {
+    .mint-actionsheet-listitem, 
+    .mint-actionsheet-button {
+     height: 75px;
+     line-height: 75px;
+     font-size: 32px;
+     color: rgb(49, 51, 64)
+   }
+   .mint-actionsheet-button {
+       color: rgb(4, 147, 240);
+       font-size: 36px;
+   }
+}
+
+//picker
+.mint-popup {
+    .picker-toolbar {
+        display: flex;
+        .cancel-btn {
+            border-right: 2.5px solid #ddd;
+        }
+      .cancel-btn,.mint-datetime-cancel,.sure-btn,.mint-datetime-confirm {
+        line-height: 80px;
+        font-size: 30px;
+      }
+      .cancel-btn,.mint-datetime-cancel {
+          color: rgb(4, 147, 240);
+      }
+      .sure-btn,.mint-datetime-confirm {
+          color: rgb(49, 51, 64);
+      }
+    .mint-button {
+      width: 50%;
+      height: 80px;
+      line-height: 80px;
+      font-size: 30px;
+      background: #fff;
+    //   border-bottom: 2px solid #eaeaea;
+      padding: 0;
+      border-radius: 0;
+      }
+    }
+    
+  }
+  .picker-toolbar {
+      display: flex;
+      .mint-datetime-cancel {
+          border-right: 2.5px solid #ddd;
+      }
+  }
+  .picker-toolbar {
+    // width: 50%;
+    height: 80px;
+    line-height: 80px;
+    font-size: 30px;
+    background: #fff;
+    border-bottom: 2px solid #eaeaea;
+    padding: 0;
+    border-radius: 0;
+  }
+
+
+// dialog 弹框
+
+.mint-msgbox {
+    border-radius: 10px;
+    padding-top: 50px;
+    // height: 340px;
+}
+.mint-msgbox-title {
+    font-size: 32px;
+    color: #333;
+    padding-top: 30px;
+}
+.mint-msgbox .mint-msgbox-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 30px 100px 30px;
+//   height: 230px;
+}
+.mint-msgbox-message {
+    font-size: 32px;
+    color: rgb(49, 51, 64);
+}
+.mint-msgbox-btns {
+  height: 88px;
+}
+.mint-msgbox-btn {
+    font-size: 32px;
+}
+.cancelButton {
+    color: #333;
+    font-weight: bold;
+    border-right: 2.5px solid #eee;
+}
+.confirmButton {
+    color: #1b76ff;
+    font-weight: bold;
+}
+.picker-slot {
+    font-size: 30px;
+}
+
+
+// 轮播图按钮
+.mint-swipe-indicator {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #fff;
+    opacity: 1;
+    margin: 0 10px;
+}
+.mint-swipe-indicators .is-active {
+	background: #0493f0;
+}
+
+
+// 覆盖toast字体
+.mint-toast-text {
+    font-size: 28px;
+}
+
+:focus {
+    outline: none;
+  }
+// loading  Indicator 的字体大小
+.mint-indicator-text {
+    font-size: 28px;
+}
+
+.mint-indicator-wrapper {
+    z-index: 1000 !important;
+}
+
+.mint-indicator-mask {
+    background: rgba(255,255,255,0);
+    opacity: .6;
+    z-index: 100 !important;
+}
+// picker 下拉 选中描边
+.picker-center-highlight {
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.mint-button::after {
+  border: none;
+  -webkit-appearance: none;
+  background-color:rgba(0,0,0,0) !important;
+  -webkit-tap-highlight-color:transparent;
+}
+
+    

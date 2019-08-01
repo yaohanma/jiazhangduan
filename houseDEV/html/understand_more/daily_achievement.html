@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>鹰硕家长</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+
+	<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+	<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+	<!--页面css-->
+	<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+	<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+	<script src="/static/js/jquery-2.2.4.min.js"></script>
+	<script src="/static/js/ysaddr.js"></script>
+	<!--echarts js-->
+	<script type="text/javascript" src="/static/js/echarts/echarts.min.js"></script>
+	<style>
+		/* header 全部科目样式 */
+		#ysYduiNavBarRightBtn{
+			background-image: url(/static/images/homework/popup_drop@2x.png);
+			background-repeat: no-repeat;
+			background-position-x: 2.2rem;
+			background-position-y: 0.4rem;
+			padding-right: 0.6rem;
+			background-position-x:1.4rem;
+			background-size:12%;
+		}
+
+		#ysSubjectTopSheet .item {
+			width: 85%;
+			border: 1px solid #dedede;
+			display: inline-block;
+			border-radius: 29px;
+			color: #999999;
+			height: 0.5rem;
+			padding: 0.05rem 0;
+		}
+		.selected {
+			width: 85%;
+			background-color: #0493f0;
+			display: inline-block;
+			border-radius: 29px;
+			color: #fff;
+			height: 0.5rem;
+			padding: 0.05rem 0;
+		}
+		.tab-panel .tab-panel-item,
+		.tab-panel{
+			padding-bottom: 0;
+		}
+		.tab-nav-item.tab-active{
+			color:#397ff9;
+		}
+		.tab-nav-item a{
+			font-size: 0.32rem;
+		}
+		.tab-nav-item:not(:last-child):after{
+			border-right:0;
+		}
+		.content{
+			width: 100%;
+			height:4.32rem;
+			background-color: #fff;
+			overflow: hidden;
+		}
+		.subject_div{
+			width:15%;
+			height: 1rem;
+			display: inline-block;
+			float: left;
+		}
+		.subject_div img {
+			height:100%;
+		}
+		.work_content {
+			width: 85%;
+			padding:0.2rem 0.23rem;
+		}
+		.work_content .title{
+			font-size: 0.32rem;
+			color: #333333;
+			width: 100%;
+			overflow: hidden;
+			margin-bottom: 0.1rem;
+			overflow:hidden;
+			text-overflow:ellipsis;
+		}
+		.work_content .com_box{
+			margin-top: 0.2rem;
+		}
+		.work_content .com_box span{
+			display: inline-block;
+			color: #999999;
+			font-size: 0.26rem;
+		}
+		.work_content .com_box span:nth-child(1){
+			float: left;
+			font-size: 0.24rem;
+		}
+		.work_content .com_box span:nth-child(2){
+			float: right;
+		}
+		#ysSubjectTopSheet .m-grids-3 {
+			padding-bottom:0.29rem
+		}
+		#ysSubjectTopSheet .m-grids-3 .grids-item:before{
+			border-right:none;
+		}
+		#ysSubjectTopSheet .m-grids-3 .grids-item:after{
+			border:none;
+		}
+		#ysSubjectTopSheet .m-grids-3 .grids-item{
+			padding-bottom: 0;
+		}
+		.no_data{
+			width: 100%;
+			height: 3.5rem;
+			background:#fff;
+		}
+		.no_data div{
+			width: 100%;
+			height: 3rem;
+			background:url(/static/images/homework/img_msg.png) no-repeat  center;
+			background-size: 50%;
+		}
+		.no_data p{
+			color:#999;
+			text-align: center;
+			margin-top: -0.4rem;
+		}
+		.show{
+			display: block;
+		}
+		.comm_tab .tab-nav-item.tab-active a{
+			border-bottom:2px solid #0493f0;
+		}
+	</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview" id="J_List">
+		<div id="J_Tab" class="m-tab comm_tab com_box" style="margin-top: 0.2rem;">
+			<ul class="tab-nav">
+				<li class="tab-nav-item" id="daily_30"><a href="javascript:;">最近30天</a></li>
+				<li class="tab-nav-item" id="daily_7"><a href="javascript:;">最近7天</a></li>
+			</ul>
+			<div class="tab-panel">
+				<div class="tab-panel-item" style="padding:0;" id="panel_30">
+					<div class="m-cell no_marbotm mytitle" style="margin-bottom: 0;">
+						<div class="cell-item">
+							<div class="cell-left"><i></i>成绩曲线</div>
+							<div class="cell-right"></div>
+						</div>
+					</div>
+					<div id="content" class="content"></div>
+				</div>
+				<div class="tab-panel-item" id="panel_7" style="padding:0;" >
+					<div class="m-cell no_marbotm mytitle" style="margin-bottom: 0;">
+						<div class="cell-item">
+							<div class="cell-left"><i></i>成绩曲线</div>
+							<div class="cell-right"></div>
+						</div>
+					</div>
+					<div id="content999" class="content"></div>
+				</div>
+			</div>
+		</div>
+		<!--考试列表-->
+		<div class="test_list">
+			<div class="m-cell no_marbotm mytitle" style="padding: 0;">
+				<div class="cell-item">
+					<div class="cell-left"><i></i>考试列表</div>
+					<div class="cell-right"></div>
+				</div>
+			</div>
+			<div id="pagelist">
+				<!--<div class="m-celltitle demo-small-pitch" style="margin-top: .3rem;">2018-04</div>
+               <div class="m-cell">
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_task.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_task.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+               </div>
+               <div class="m-celltitle demo-small-pitch" style="margin-top: .3rem;">2018-04</div>
+               <div class="m-cell">
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_task.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+                  <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_classroom.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_classroom.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_classroom.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+                   <a href="/html/understand_more/daily_ examination.html" class="cell-item" style="">
+                       <div class="cell-left"  style="width: 100%;">
+                           <div class="subject_div">
+                               <img src="/static/images/study_img/img_classroom.png">
+                           </div>
+                           <div class="work_content">
+                               <div class="title">邹忌否齐王纳谏11111111111111111111111111111</div>
+                               <div class="com_box">
+                                   <span>共3题</span>
+                                   <span >完成时间：4-30 20:50</span>
+                               </div>
+                           </div>
+                       </div>
+                   </a>
+               </div>-->
+			</div>
+		</div>
+	</section>
+</section>
+
+<input type="hidden" id="type" />
+<input type="hidden" id="subject_id" />
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	var page = 1;
+	var pageSize = 3;
+    $(document).ready(function() {
+        var subject = getUrlParam("subject");
+        if(subject && subject != "null"){
+            var value = subject.split("_")[1];
+            subject = subject.split("_")[0];
+            $("#subject_id").val(value);
+		}else{
+            subject = getSubject();
+            // 默认语文
+            $("#subject_id").val("2");
+		}
+        addMainPageHeader("/html/understand_more/daily_learning.html", "日常成绩", {
+            hasIcon: true,
+            text: subject,
+            action: function() {
+                if ($("#ysSubjectTopSheet").css("display") == 'block') {
+                    $("#ysSubjectTopSheet").topsheet('close');
+                    $("#ysYduiNavBarRightBtn").css({
+                        "background-image": "url(/static/images/homework/popup_drop@2x.png)"
+                    });
+                    $(".mask-black-dialog").hide();
+
+                } else {
+                    showSubjectPicker(function(subjectId, subjectName) {
+                        $("#subject_id").val(subjectId);
+                        $("#ysYduiNavBarRightBtn").text(subjectName);
+                        $("#ysYduiNavBarRightBtn").css({
+                            "background-image": "url(/static/images/homework/popup_drop@2x.png)"
+                        });
+						var subJName = subjectName + "_" + subjectId;
+						var tabType = getUrlParam("tabType");
+						if(!tabType){
+                            tabType = "1";
+						}
+						$("#content").empty();
+						$("#content999").empty();
+						$("#pagelist").empty();
+						$(".list-donetip").css("display","none");
+						window.location.href = "/html/understand_more/daily_achievement.html?tabType="+getUrlParam("tabType")+"&subject="+subJName;
+                    });
+                }
+            }
+        });
+        addMainPageFooter(4);
+
+//        //初期默认语文
+//        $("#subject_id").val("2");
+
+        var tabType = getUrlParam("tabType");
+        if (tabType == '2') {
+            $('#daily_30').removeClass('tab-active');
+            $('#panel_30').removeClass('tab-active');
+			$('#panel_30').css("display","none");
+            $('#daily_7').addClass('tab-active');
+            $('#panel_7').addClass('tab-active');
+			$('#panel_7').css("display","block");
+            $("#type").val('2');
+            getCurve();
+        } else {
+            //初期默认30天
+            $('#daily_7').removeClass('tab-active');
+            $('#panel_7').removeClass('tab-active');
+			$('#panel_7').css("display","none");
+            $('#daily_30').addClass('tab-active');
+            $('#panel_30').addClass('tab-active');
+			$('#panel_30').css("display","block");
+            $("#type").val('1');
+            getCurve();
+        }
+
+        /*tab */
+        // var $tab = $('#J_Tab');
+        // $tab.tab({
+        //     nav: '.tab-nav-item',
+        //     panel: '.tab-panel-item',
+        //     activeClass: 'tab-active'
+        // });
+//        $tab.find('.tab-nav-item').on('click', function(e) {
+//            cleanSession();
+//            $(".list-loading").css("display","none");
+//            $(".list-donetip").css("display","none");
+//            if ($("#J_Tab .tab-panel .tab-panel-item").eq(0).hasClass('tab-active')) {
+//                $("#type").val('1');
+//                getCurve();
+//            }
+//            if ($("#J_Tab .tab-panel .tab-panel-item").eq(1).hasClass('tab-active')) { // tab导航
+//                $("#type").val('2');
+//                getCurve();
+//            }
+//        });
+        $("#daily_30").click(function () {
+            var subjectName = $("#ysYduiNavBarRightBtn").text();
+            var subjectId = $("#subject_id").val();
+            var subJName = subjectName + "_" + subjectId;
+			$('#daily_7').removeClass('tab-active');
+			$('#daily_30').addClass('tab-active');
+			$("#pagelist").empty();
+			$("#content").empty();
+			$("#content999").empty();
+			$(".list-donetip").css("display","none");
+            window.location.href = "/html/understand_more/daily_achievement.html?tabType=1&subject="+subJName;
+        })
+        $("#daily_7").click(function () {
+            var subjectName = $("#ysYduiNavBarRightBtn").text();
+            var subjectId = $("#subject_id").val();
+            var subJName = subjectName + "_" + subjectId;
+			$('#daily_30').removeClass('tab-active');
+			$('#daily_7').addClass('tab-active');
+			$("#pagelist").empty();
+			$("#content").empty();
+			$("#content999").empty();
+			$(".list-donetip").css("display","none");
+            window.location.href = "/html/understand_more/daily_achievement.html?tabType=2&subject="+subJName;
+        })
+
+//        /*成绩曲线图*/
+//        getCurve();
+    });
+
+    //取得折线图数据
+    function getCurve() {
+
+        ysAjax("/statistics/get_score_stu", {
+            subject_id: $("#subject_id").val(),
+            type: $("#type").val(),
+			page:2,
+			pageFlag:'1'
+        }, function(data) {
+            if (data.success) {
+                var datalist = data.result;
+                var weikeData = [];
+                var zuoyeData = [];
+                var ketangData = [];
+                var datax = [];
+                for (var i = 0; i < datalist.weike.length; i++) {
+                    weikeData.push(datalist.weike[i].rate);
+                }
+                for (var i = 0; i < datalist.zuoye.length; i++) {
+                    zuoyeData.push(datalist.zuoye[i].rate);
+                }
+                for (var i = 0; i < datalist.ketang.length; i++) {
+                    ketangData.push(datalist.ketang[i].rate);
+                }
+                for (var i = 0; i < datalist.x.length; i++) {
+                    datax.push(datalist.x[i]);
+                }
+                //取得数据列表
+                getPaperList();
+                initScoreCurve($("#type").val(), weikeData, zuoyeData, ketangData, datax);
+            } else {
+                initScoreCurve($("#type").val(), weikeData, zuoyeData, ketangData, datax);
+                var html = "";
+                html += '<div class="no_data">';
+                html += '<div></div>';
+                html += '<p style="margin-top:-0.2rem">暂无数据</p>';
+                html += '</div>';
+                $("#pagelist").html(html);
+            }
+        }, function(err) {
+            showNotify("发生异常");
+        });
+    }
+
+    //图表
+    function initScoreCurve(type, weikeData, zuoyeData, ketangData, datax) {
+        //基于准备好的dom，初始化echarts实例
+        if (type == '1') {
+            var myChart = echarts.init(document.getElementById('content'));
+            var dataZoomStart = 90;
+            var dataZoomEnd = 100;
+        } else if (type == '2') {
+            var myChart = echarts.init(document.getElementById('content999'));
+            var dataZoomStart = 10;
+            var dataZoomEnd = 100;
+        }
+
+        option = {
+            tooltip: {
+                show: true,
+                trigger: 'item'
+            },
+            legend: {
+                data: ['微课', '课堂', "作业"],
+                icon: 'rect',
+                top: 10,
+                itemWidth: 20,
+                itemHeight: 3,
+                itemGap: 40,
+                left: 30,
+                border: 1,
+                borderRadius: 2,
+                textStyle: {
+                    fontSize: 12,
+                    color: '#999'
+                }
+            },
+            grid: {
+                show: false,
+                top: "20%",
+                left: '8%',
+                right: '8%',
+                bottom: '10%',
+                containLabel: true
+            },
+            dataZoom: [{
+                type: 'inside',
+                realtime: true,
+                start: dataZoomStart,
+                end: dataZoomEnd
+            }
+
+            ],
+
+            xAxis: [
+
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: datax,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: '#999999',
+                        },
+                        interval: 0,
+                    },
+
+                    axisLine: {
+                        lineStyle: {
+                            color: '#999',
+                            width: 1,
+                        }
+                    },
+                }
+
+
+            ],
+            yAxis: [{
+                min: 0,
+                max: 100,
+                interval: 20,
+                type: 'value',
+                splitNumber: 20,
+                name: '',
+                data: ['0', '20', '40', '60', '80', '100'],
+                axisTick: {
+                    show: true,
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#999999',
+                    },
+                    formatter: '{value}%',
+                    margin: 20
+                },
+
+                splitLine: { //背景图网格线
+                    show: true,
+                    lineStyle: {
+                        color: "#999999",
+                        type: "solid"
+                    }
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                nameTextStyle: {
+                    color: '#999999'
+                }
+            }],
+
+            series: [{
+                name: '微课',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 2
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(255, 89, 107, 0.3)'
+                        }, {
+                            offset: 0.8,
+                            color: 'rgba(255, 89, 107, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#ff596b',
+                        borderColor: '#ff596b',
+                        borderWidth: 12
+
+                    }
+                },
+                data: weikeData
+            }, {
+                name: '课堂',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 2
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(68,189,114, 0.3)'
+                        }, {
+                            offset: 0.8,
+                            color: 'rgba(68,189,114, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#44c672',
+                        borderColor: '#44c672',
+                        borderWidth: 12
+
+                    }
+                },
+                data: ketangData
+            },
+                {
+                    name: '作业',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'circle',
+                    symbolSize: 5,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(4,147,240, 0.3)'
+                            }, {
+                                offset: 0.8,
+                                color: 'rgba(4,147,240, 0)'
+                            }], false),
+                            shadowColor: 'rgba(0, 0, 0, 0.1)',
+                            shadowBlur: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#0493f0',
+                            borderColor: '#0493f0',
+                            borderWidth: 12
+
+                        }
+                    },
+                    data: zuoyeData
+                }
+            ]
+
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function cleanSession() {
+        // 获取session条数
+        var length=sessionStorage.length;
+        if(length > 0){
+            for(var i=0;i<length;i++){
+                var key = window.location.pathname.toUpperCase().replace(/\/?\.?/g, '') + "_LIST_" + i;
+                if(key){
+                    sessionStorage.removeItem(key);
+                }
+            }
+        }
+    }
+    var loadMore = function(callback) {
+        var tabType = $("#type").val();
+        ysAjax("/mob/statistics/get_paper_list", {
+            subject_id: $("#subject_id").val(),
+            type: tabType,
+            page: page,
+            pageSize: pageSize
+        }, function(data) {
+            if ($(".list-donetip").length > 0) {
+                $(".list-donetip").css("display", "none");
+                $(".list-donetip:first").removeAttr("style");
+            }
+            typeof callback == 'function' && callback(data);
+        }, function(err) {
+            showNotify("发生异常");
+        });
+    }
+    function cleanNoMore(){
+        if($(".list-donetip").length>0){
+            $(".list-donetip").css("display","none");
+        }
+    }
+    //取得数据列表
+    function getPaperList() {
+        $("#pagelist").empty();
+        var tabType = $("#type").val();
+        var curentData = '';
+        var cell = 0;
+        var cell_id = "";
+        var subjectName = $("#ysYduiNavBarRightBtn").text();
+        var subjectId = $("#subject_id").val();
+        var subJName = subjectName + "_" + subjectId;
+        $('#J_List').infiniteScroll({
+            binder: '#J_List',
+            pageSize: pageSize,
+            initLoad: true,
+            backposition: true,
+            jumpLink: '.J_Link',
+            loadListFn: function() {
+                var def = $.Deferred();
+                loadMore(function(data) {
+                    console.log(data);
+                    $(".list-loading").css("display","none");
+                    $(".list-donetip").css("display","none");
+                    if (data.success) {
+                        var datalist = data.result;
+                        if (data.result != undefined && data.result.length > 0) {
+                            for (var i = 0; i < datalist.length; i++) {
+                                var html = '';
+                                var row = datalist[i];
+                                if (curentData != row.submit_time) {
+                                    cell_id = 'content'+cell;
+                                    html += '<div class="m-celltitle demo-small-pitch" style="margin-top: .3rem;">' + row.submit_time + '</div>';
+                                    html += '<div class="m-cell" id="'+cell_id+'">';
+                                    cell ++;
+                                }
+                                html += '<a class="J_Link cell-item" data-page="' + page +
+                                    '" href="/html/understand_more/daily_examination.html?paper_id=' + row.paper_id + '&classroom_id=' +
+                                    row.classroom_id + '&end_time=' + row.endTime + '&paper_from=' + row.paperFrom + '&tabType=' + tabType +
+                                    '&subject='+subJName+'" class="cell-item">';
+                                html += '<div class="cell-left" style="width: 100%;">';
+                                html += '<div class="subject_div">';
+                                if (row.paper_from == '0') { // 0:微课 1：作业2：课堂
+                                    html += '<img src="/static/images/study_img/img_flipclassroom.png">';
+                                } else if (row.paper_from == '1') {
+                                    html += '<img src="/static/images/study_img/img_task.png">';
+                                } else if (row.paper_from == '2') {
+                                    html += '<img src="/static/images/study_img/img_classroom.png">';
+                                }
+                                html += '</div>';
+                                html += '<div class="work_content">';
+                                var paperName = '';
+                                if (row.paper_name != null && row.paper_name != undefined) {
+                                    paperName = row.paper_name;
+                                }
+                                html += '<div class="title">' + paperName + '</div>';
+                                html += '<div class="com_box">';
+                                html += '<span>共' + row.count + '题</span>';
+                                if (row.end_time == undefined) {
+                                    html += '<span>完成时间：</span>';
+                                } else {
+                                    html += '<span>完成时间：' + row.end_time.substr(5, row.end_time.length) + '</span>';
+                                }
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</a>';
+                                if (curentData != row.submit_time) {
+                                    html += '</div>';
+                                    curentData = row.submit_time;
+                                    $("#pagelist").append(html);
+                                } else {
+                                    $('#' + cell_id).append(html);
+                                }
+                            }
+                            def.resolve(datalist, page);
+                            ++page;
+                        } else {
+                            if(page == 1){
+                                var html = '';
+                                html += '<div class="no_data">';
+                                html += '<div></div>';
+                                html += '<p style="margin-top:-0.2rem">暂无数据</p>';
+                                html += '</div>';
+                                $("#pagelist").html(html);
+                                def.resolve([""]);
+                                $(".list-donetip").css("display", "none");
+                            } else {
+                                def.resolve([""]);
+                                if($(".list-donetip").length>1){
+                                    $(".list-donetip").css("display","none");
+                                    $(".list-donetip:first").removeAttr("style");
+                                }
+                            }
+                        }
+
+                    } else {
+                        var html = '';
+                        html += '<div class="no_data">';
+                        html += '<div></div>';
+                        html += '<p style="margin-top:-0.2rem">暂无数据</p>';
+                        html += '</div>';
+                        $("#pagelist").html(html);
+                        def.resolve([""]);
+                        $(".list-donetip").css("display", "none");
+                    }
+                });
+                return def.promise();
+            },
+            loadStorageListFn: function(listData, retPage) {
+                var def = $.Deferred();
+                page = retPage;
+                var html = '';
+                listData.forEach(function(val) {
+                    var datalist = val.list;
+                    datalist.page = val.page;
+                    for (var i = 0; i < datalist.length; i++) {
+                        var html = '';
+                        var row = datalist[i];
+                        if (curentData != row.submit_time) {
+                            cell_id = 'content'+cell;
+                            html += '<div class="m-celltitle demo-small-pitch" style="margin-top: .3rem;">' + row.submit_time + '</div>';
+                            html += '<div class="m-cell" id="'+cell_id+'">';
+                            cell ++;
+                        }
+                        html += '<a class="J_Link cell-item" data-page="' + datalist.page +
+                            '" href="/html/understand_more/daily_examination.html?paper_id=' + row.paper_id + '&classroom_id=' +
+                            row.classroom_id + '&end_time=' + row.endTime + '&paper_from=' + row.paperFrom + '&tabType=' + tabType +
+                            '&subject='+subJName+'" class="cell-item">';
+                        html += '<div class="cell-left" style="width: 100%;">';
+                        html += '<div class="subject_div">';
+                        if (row.paper_from == '0') { // 0:微课 1：作业2：课堂
+                            html += '<img src="/static/images/study_img/img_flipclassroom.png">';
+                        } else if (row.paper_from == '1') {
+                            html += '<img src="/static/images/study_img/img_task.png">';
+                        } else if (row.paper_from == '2') {
+                            html += '<img src="/static/images/study_img/img_classroom.png">';
+                        }
+                        html += '</div>';
+                        html += '<div class="work_content">';
+                        var paperName = '';
+                        if (row.paper_name != null && row.paper_name != undefined) {
+                            paperName = row.paper_name;
+                        }
+                        html += '<div class="title">' + paperName + '</div>';
+                        html += '<div class="com_box">';
+                        html += '<span>共' + row.count + '题</span>';
+                        if (row.end_time == undefined) {
+                            html += '<span>完成时间：</span>';
+                        } else {
+                            html += '<span>完成时间：' + row.end_time.substr(5, row.end_time.length) + '</span>';
+                        }
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</a>';
+                        if (curentData != datalist[i].submit_time) {
+                            html += '</div>';
+                            curentData = row.submit_time;
+                            $("#pagelist").append(html);
+                        } else {
+                            $('#' + cell_id).append(html);
+                        }
+                    }
+                });
+                def.resolve();
+                return def.promise();
+            }
+        });
+    }
+</script>
+</body>
+</html>

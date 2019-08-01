@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--页面css-->
+        <link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		<!--滑动模块css-->
+        <link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<script type="text/javascript" src="/static/js/flexible.js"></script>
+		<script type="text/javascript" src="/static/js/iscroll.js"></script>
+		<script type="text/javascript" src="/static/js/navbarscroll.js"></script>
+		<style>
+			
+			
+			.mytable .t_body .grids-item:after{
+				border:none;
+				border: 0;
+			}
+			.font-size-tab{
+				font-size: .32rem;
+			}
+			.font-size-content{
+				font-size: .3rem;
+			}
+			.font-color-99{
+			    color: #999999;
+			}
+			.font-color-33{
+				color: 333333;
+			}
+			.cell-item-height{
+			    height: 1.2rem;
+			}
+            .m-cell.no_bor:after{
+            	border: none;
+           }
+           /*new*/
+		a {text-decoration:none}
+		a:hover{text-decoration:none}
+	
+		.clearfix:after{
+			content:".";
+			display:block;
+			height:0;
+			clear: both;
+			visibility:hidden;
+		}
+		.clearfix{zoom:1;}
+		.wrapper03 {
+			height: .9rem;
+			width: 100%;
+			overflow: hidden;
+			margin:0 auto;
+			background-color: #fff;
+			margin-top: 0.2rem;
+		}
+		.wrapper03 .scroller {
+			position:absolute;
+			/*border-bottom:1px solid #B2B2B2;*/
+			background-color: #fff;
+			height: .8rem;
+			}
+		.wrapper03 .scroller li {
+			height: .9rem;
+			color:#666666;
+			float: left;
+			/*font-size: 13px;*/
+			text-align: center;
+		}
+		.wrapper03 .scroller li a{
+			color:#666666;
+			display:block;
+			height:0.9rem;
+			line-height:1rem;
+			padding: 0 0.4rem;
+			margin: 0 0.4rem;
+			font-size:0.3rem;
+		}
+		.wrapper03 .scroller li.cur a{
+			color:#0493f0;
+			border-bottom:3px solid #0493f0;
+		}
+		.content {
+			width: 100%;
+			height: auto;
+			position: relative;
+			z-index: 0;
+			margin-top: 1.3rem;
+		}
+		.m-cell:after{
+			border-bottom: none;
+		}
+		
+		.mytitle{
+		    font-weight: bold;
+		}
+		
+		/*考勤切换样式*/
+		.tab-nav-item.tab-active:before{
+			height:0;
+		}
+		.tab-nav-item:not(:last-child):after{
+			border-right: 0;
+		}
+	
+		.tab-nav{
+			background: #fff;
+			padding:0 10%;
+			width: 100%;
+			height: 1.1rem;
+			border-bottom: 0.01rem solid #E5E5E5;
+		}
+		.attendance_box .tab-nav-item{
+			display: inline-block;
+			border: 1px solid #0493f0;
+			height: 0.58rem;
+			line-height: 0.58rem;
+			margin: auto;
+			
+		}
+		.attendance_box .tab-nav-item:nth-child(1){
+			border-radius: 6px 0 0 6px;
+			border-right: 0;
+		}
+		.attendance_box .tab-nav-item:nth-child(3){
+			border-radius: 0  6px  6px 0;
+			border-left: 0;
+		}
+		.tab-nav-item.tab-active{
+			background: #0493f0;
+		}
+		.tab-nav-item.tab-active a{
+			color: #fff;
+		}
+		.t_head.cell-item{
+			padding: 0;
+			border-bottom:0.01rem solid #e5e5e5;
+		}
+		.t_head .grids-item{
+			font-size: 0.24rem;
+			color: #999;
+		}
+		.mytable ul{
+			width: 100%;
+		}
+		.mytable .grids-item{
+			width: 20%;
+			text-align: center;
+		}
+		.tab-panel .tab-panel-item{
+			padding: 0;
+		}
+		.grids-item:after{
+			border: 0;
+		}
+		.t_head.cell-item:not(:last-child):after{
+			border:0;
+		}
+		.mytable .t_body .cell-item {
+			padding-left: 0;
+		}
+		.mytable .t_body .cell-item .grids-item{
+			font-size: 0.24rem;
+		}
+		.mytable .t_body .cell-item .grids-item:nth-child(3),
+		.mytable .t_body .cell-item .grids-item:nth-child(4),
+		.mytable .t_body .cell-item .grids-item:nth-child(5){
+			color: #666;
+		}
+		.mytable .t_body .cell-item .grids-item.red{
+			color: #FF596B;
+		}
+		.m-cell.mytable{
+			margin-bottom: 0;
+		}
+		.statistics_btn{
+			width: 100%;
+			height: 1rem;
+			background:#0493f0;
+			text-align: center;
+			line-height: 1rem;
+			position: fixed;
+			bottom: 1rem;
+		}
+		.statistics_btn a{
+			color: #fff;
+			font-size: 0.36rem;
+		}
+		.m-cell:after{
+		    content:none;
+		}
+		.no_data{
+			width: 100%;
+			height: 3.5rem;
+			background:#fff;
+		}
+		.no_data div{
+			width: 100%;
+			height: 3rem;
+			background:url(/static/images/homework/img_msg.png) no-repeat  center;
+			background-size: 50%;
+		}
+		.no_data p{
+			color: #999;
+		    text-align: center;
+		    margin-top: -0.4rem;
+		    font-size: 0.24rem;
+    		line-height: 1rem;
+		}
+		.tab-nav:after{
+			border:0;
+		}
+		.tab-nav-item a{
+			color: #0493f0;
+		}
+		.cell-item:not(:last-child):after{
+			    border-bottom: 0.01rem solid #E5E5E5
+		}
+	</style>
+	</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview">
+			<div class="wrapper wrapper03" id="wrapper03"  style="border-bottom:0.01rem solid #E5E5E5;">
+				<div class="scroller" >
+					<ul id="child">
+						<li><a class="ui-link">黄小米</a></li>  
+						<li ><a  class="ui-link">黄小米</a></li> 
+						<li ><a  class="ui-link">黄小米</a></li>  
+						<li ><a  class="ui-link">黄小米</a></li>  
+						<li ><a  class="ui-link">黄小米</a></li>  
+						<li ><a  class="ui-link">黄小米</a></li>  
+					</ul>
+				</div>
+			</div>
+
+	     	<div class="attendance_box">
+	        	<div id="J_Tab" class="m-tab">
+				    <ul class="tab-nav">
+				        <li class="tab-nav-item tab-active" ><a href="#today" >今日考勤</a></li>
+				        <li class="tab-nav-item" ><a href="#benzhou">本周考勤</a></li>
+				        <li class="tab-nav-item" ><a href="#benyue">本月考勤</a></li>
+				    </ul>
+				    <div class="tab-panel">
+				        <div class="tab-panel-item tab-active" id="today">
+				        	<div class="m-cell mytable">
+							    <div class="cell-item t_head">
+							       <ul class="" >
+							            <li class="grids-item">日期</li>
+							            <li class="grids-item">星期</li>
+							            <li class="grids-item" >时间</li>
+							             <li class="grids-item">考勤状态</li>
+							            <li class="grids-item" >进/离校</li>
+							        </ul>
+							    </div>
+							    <!--今天考勤-->
+							    <div class="t_body" >
+								<div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 ---
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                早退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                 迟到
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                 未签退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+							   </div>
+							</div>
+				        </div>
+				        <!-- 周考勤 -->
+				        <div class="tab-panel-item" id="benzhou">
+				        	<div class="m-cell mytable">
+							    <div class="cell-item t_head">
+							       <ul class="" >
+							            <li class="grids-item">日期</li>
+							            <li class="grids-item huoyue">星期</li>
+							            <li class="grids-item huoyue active" >时间</li>
+							             <li class="grids-item">考勤状态</li>
+							            <li class="grids-item huoyue" >进/离校</li>
+							        </ul>
+							    </div>
+							    <!--本周考勤-->
+							    <div class="t_body">
+								
+								 <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-11
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								  <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                早退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+							   </div>
+							</div>
+				        </div>
+				        <div class="tab-panel-item" id="benyue">
+				        	<div class="m-cell mytable">
+							    <div class="cell-item t_head">
+							       <ul class="" >
+							            <li class="grids-item">日期</li>
+							            <li class="grids-item huoyue">星期</li>
+							            <li class="grids-item huoyue active" >时间</li>
+							             <li class="grids-item">考勤状态</li>
+							            <li class="grids-item huoyue" >进/离校</li>
+							        </ul>
+							    </div>
+							    <!--本月考勤-->
+							    <div class="t_body">
+								
+								  <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-21
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								  <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                早退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                早退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item red">
+								                                早退
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+								    <div class="cell-item">
+								       <ul>
+								            <li class="grids-item">
+								            	08-01
+								            </li>
+								            <li class="grids-item">
+								                                      星期三
+								            </li>
+								            <li class="grids-item">
+								               08：05：08
+								            </li>
+								            <li class="grids-item">
+								                                 正常
+								            </li>
+								            <li class="grids-item">进校</li>
+								        </ul>
+								    </div>
+							   </div>
+							</div>
+				        </div>
+				    </div>
+				</div>
+				<div style="width: 100%;height: 0.5rem;"></div>
+		    </div>
+	        
+	        
+	        <div class="statistics_btn">
+	        	<a  id="statistics" href="/html/attendance/attendance_statistics.html?flag=msg">考勤统计</a>
+	        </div>
+
+		</section>
+	</section>
+	<input type="hidden" id="no_data"  value=""/>
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(getUrlParam('flag') == 'msg'){
+				addMainPageHeader("/html/notice_list/notice.html", "孩子考勤");
+			}else{
+				addMainPageHeader("/html/my/my_home.html", "孩子考勤");
+			}
+			addMainPageFooter(4);
+			//TODO APP
+//			childList(getUrlParam('stuId'),getUrlParam('type'),getUrlParam('data_index')); // 孩子列表
+		});
+		var $tab = $('#J_Tab');
+	    $tab.tab({
+	        nav: '.tab-nav-item',
+	        panel: '.tab-panel-item',
+	        activeClass: 'tab-active'
+	    });
+	     $('.wrapper').navbarscroll({});
+	    // 孩子列表
+//	    function childList(stuId,type,index){
+//	    	if(type == '' || type == undefined || type == null){
+//	    		type = '1';
+//	    	}
+//	    	if(index == '' || index == undefined || index == null){
+//	    		index = 0;
+//	    	}
+//	    	var default_stu_id = stuId;
+//	    	ysAjax("/student/bindStudents", {}, function(data) {
+//				if(data.success){
+//					var html = "";
+//					
+//					if(data.result != undefined && data.result.studentList.length > 0){
+//						for(i=0;i<data.result.studentList.length;i++){
+//							var c = data.result.studentList[i];
+//							if(default_stu_id == '' || default_stu_id == undefined || default_stu_id == null){
+//								default_stu_id = data.result.studentList[0].stuId;
+//							}
+//							if(c.stuId == stuId){
+//								html += '<li class="default" data_index='+i+' data_value='+c.stuId+' data_name='+c.createUser+'><a class="ui-link" onclick="showIntervalAttendance(&quot;'+c.stuId+'&quot;,&quot;'+ 1 +'&quot;)">'+c.createUser+'</a></li>  ';
+//							}else{ 
+//								html += '<li data_index='+i+' data_value='+c.stuId+' data_name='+c.createUser+'><a class="ui-link" onclick="showIntervalAttendance(&quot;'+c.stuId+'&quot;,&quot;'+ 1 +'&quot;)">'+c.createUser+'</a></li>  ';
+//							}
+//						}
+//						$("#child").html(html);
+//						// child tab 处理
+//						var options = {
+//				            defaultSelect:index, //初始选中第n个，默认第0个
+//				        }
+//						$('.wrapper').navbarscroll(options);
+//						if($('#child li').hasClass('default')){
+//							$('#child li').removeClass('cur');
+//							$('#child .default').addClass('cur');
+//						}
+//						// 展示首个孩子（指定孩子）考勤数据
+//						//TODO APP
+////						showIntervalAttendance(default_stu_id,type);
+//					}
+//				}else{
+//					showAlert('服务器异常，请稍后重试');
+//				}
+//			}, function(err) {
+//				showAlert('服务器异常，请稍后重试');
+//			});
+			// 考勤统计
+//			$('.statistics_btn').on('click',function(){
+//				window.location.href = '/html/attendance/attendance_statistics.html?stuId='
+//				+$('.cur').attr('data_value')
+//				+'&type='+$('#J_Tab .tab-nav .tab-active').attr('data-type')
+//				+'&stu_name='+encodeURI($('.cur').attr('data_name'))
+//				+'&no_data='+$('#no_data').val()
+//				+'&data_index='+$('.cur').attr('data_index');
+//			});
+//	    }
+		// 各时间段考勤信息(type:1今日考勤 2本周考勤 3本月考勤)
+//		function showIntervalAttendance(stu_id,type){
+//			$('#today').html('');
+//			$('#thisWeek').html('');
+//			$('#thisMouth').html('');
+//			// tab处理
+//			$('#J_Tab .tab-nav .tab-nav-item').removeClass('tab-active');
+//			$('#J_Tab .tab-panel .tab-panel-item').removeClass('tab-active');
+//			if(type == '1'){
+//				$('#J_Tab .tab-nav .tab-nav-item').eq(0).addClass('tab-active');
+//				$('#J_Tab .tab-panel .tab-panel-item').eq(0).addClass('tab-active');
+//			}else if(type == '2'){
+//				$('#J_Tab .tab-nav .tab-nav-item').eq(1).addClass('tab-active');
+//				$('#J_Tab .tab-panel .tab-panel-item').eq(1).addClass('tab-active');
+//			}else{
+//				$('#J_Tab .tab-nav .tab-nav-item').eq(2).addClass('tab-active');
+//				$('#J_Tab .tab-panel .tab-panel-item').eq(2).addClass('tab-active');
+//			}
+//			// 选中孩子
+//			if(stu_id == ''){
+//				stu_id = $('.cur').attr('data_value');
+//			}
+//			// 获取考勤数据
+//			ysAjax("/attendance/list", {
+//				stu_id:stu_id,
+//			 	type:type
+//			},function(data) {
+//				if(data.code == 'OK'){
+//					var html="";
+//					if(data.data != undefined && data.data.length > 0){
+//						for(i=0;i<data.data.length;i++){
+//							var c_a = data.data[i];
+//							html = html + '<div class="cell-item">  ';
+//							html = html + '   <ul>  ';
+//							html = html + '		<li class="grids-item">  ';
+//							html = html + '			'+c_a.attenadnceDay+'  ';
+//							html = html + '		</li>  ';
+//							html = html + '		<li class="grids-item">  ';
+//							html = html + '			'+c_a.week+'  ';
+//							html = html + '		</li>  ';
+//							html = html + '		<li class="grids-item">  ';
+//							html = html + '		   '+c_a.attenadnceTime+'  ';
+//							html = html + '		</li>  ';
+//							if(c_a.state != '1' && c_a.state != '6'){
+//								html = html + '		<li class="grids-item red">  ';
+//							}else{
+//								html = html + '		<li class="grids-item">  ';
+//							}
+//							if(c_a.state == '1'){
+//								html = html + '			正常  ';
+//							}else if(c_a.state == '2'){
+//								html = html + '			迟到  ';
+//							}else if(c_a.state == '3'){
+//								html = html + '			早退  ';
+//							}else if(c_a.state == '4'){
+//								html = html + '			未签到  ';
+//							}else if(c_a.state == '5'){
+//								html = html + '			未签退  ';
+//							}else{
+//								html = html + '			---  ';
+//							}
+//							html = html + '		</li>  ';
+//							html = html + '		<li class="grids-item"> ';
+//							if(c_a.type == '1'){
+//								html = html + '			进校  ';
+//							}else if(c_a.type == '2'){
+//								html = html + '			离校  ';
+//							}else{
+//								html = html + '			进校离校  ';
+//							}
+//							html = html + '		</li>  ';
+//							html = html + '	</ul>  ';
+//							html = html + '</div>  ';
+//							$('#no_data').val('');
+//						}
+//					}else{
+//						html+='<div class="no_data">';
+//						html+='<div></div>';
+//						html+='<p>暂无数据</p>';
+//						html+='</div>';
+//						$('#no_data').val('true');
+//					}
+//					if(type == '1'){
+//						$('#today').html(html);
+//					}else if(type == '2'){
+//						$('#thisWeek').html(html);
+//					}else{
+//						$('#thisMouth').html(html);
+//					}
+//				}else{
+//					showAlert('考勤服务器异常，请稍后重试');
+//				}
+//			}, function(err) {
+//				showAlert('考勤服务器异常，请稍后重试');
+//			});
+//		}
+	</script>
+</body>
+
+</html>

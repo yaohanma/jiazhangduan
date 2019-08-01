@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.code_bg {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, .8);
+				padding: 0.32rem 0.2rem;
+			}
+			
+			.code_bg .code_bg_box {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.code_bg .code_bg_box .btn_box {
+				width: 100%;
+				height: 3.90rem;
+				padding-top: 0.5rem;
+				border-radius: 8px 8px 0 0;
+				background: #fff;
+				border-color: #fff;
+			}
+			
+			.code_bg .code_bg_box .title {
+				font-size: 0.3rem;
+				color: #333333;
+				text-align: center;
+			}
+			
+			.code_bg .code_bg_box .btn_box p {
+				width: 5.3rem;
+				text-align: center;
+				border-bottom: 1px solid #d5d5d5;
+				font-size: 0.4rem;
+				color: "#333333";
+				margin: 0 auto;
+				margin-top: 0.4rem;
+				font-weight: bold;
+			}
+			
+			.code_bg .code_bg_box .btn_box .btn-block {
+				width: 5.3rem;
+				height: 0.7rem;
+				line-height: 0.7rem;
+				border-radius: 18px;
+				margin: 0 auto;
+				color: #fff;
+				background-color: #0493f0;
+				margin-top: 0.44rem;
+				font-size: 0.26rem;
+			}
+			
+			.bg_line {
+				width: 100%;
+				height: 0.8rem;
+				background: url(/static/images/invited/img_bg_line@2x.png)no-repeat;
+				background-size: 100% 100%;
+				background-position: center;
+				margin-top: -0.1rem;
+				margin-bottom: -0.1rem;
+			}
+			
+			.erweima {
+				width: 100%;
+				background: #fff;
+				padding-top: 0.5rem;
+				padding-bottom: 1.9rem;
+				border-radius: 0 0 8px 8px;
+			}
+			
+			.erweima_img {
+				width: 100%;
+				text-align: center;
+				margin-top: 0.88rem;
+			}
+			
+			.erweima_img img {
+				width: 3.36rem;
+				height: 3.36rem;
+				margin: 0 auto;
+			}
+			
+			.erweima p {
+				font-size: 0.26rem;
+				color: #666666;
+				text-align: center;
+				margin-top: 0.45rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="code_bg">
+					<div class="code_bg_box">
+						<div class="btn_box">
+							<div class="title">请复制邀请码</div>
+							<p id="invitateCode">12445</p>
+							<button id="copyBtn" type="button" class="btn-block">点击复制</button>
+						</div>
+						<div class="bg_line"></div>
+						<div class="erweima">
+							<div class="title">官方二维码</div>
+							<div class="erweima_img">
+								<img src="/static/images/invited/img_erweima@2x.png" />
+								<!--<img src="/html/invited_member/shaoguan_test.jpg" />-->
+							</div>
+							<p>长按识别关注公众号</p>
+						</div>
+					</div>
+				</div>
+
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/clipboard.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var invitate_code = getUrlParam('invitate_code');
+				if(invitate_code != '' && invitate_code != undefined) {
+					$('#invitateCode').html(invitate_code);
+				}
+				//复制内容
+				var clipboard = new ClipboardJS('#copyBtn', {
+					target: function() {
+						return document.querySelector('#invitateCode');
+					}
+				});
+				clipboard.on('success', function(e) {
+					e.clearSelection();
+					showAlert('复制成功！');
+				});
+				clipboard.on('error', function(e) {
+					e.clearSelection();
+					showAlert('复制失败！请手动长按邀请码复制');
+				});
+				// 埋点统计
+				ysAjax("/medal/statistics_share", {
+					openid:getUrlParam('openid'),
+					stu_id:getUrlParam('stu_id'),
+					app_id:getUrlParam('app_id'),
+					auth_key:getUrlParam('auth_key')
+				}, function(data) {
+//					if(data.success){
+//					}else{
+//					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

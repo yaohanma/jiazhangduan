@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.com_box {
+				margin-bottom: 0.2rem;
+			}
+			
+			.grids-item:after,
+			.m-grids-3:before {
+				border-bottom: none;
+			}
+			
+			.m-grids-3 .grids-item:not(:nth-child(3n)):before {
+				border-right: none;
+			}
+			
+			.m-grids-3 .grids-txt>div {
+				width: 1.84rem;
+				height: 1.85rem;
+				font-size: 0.48rem;
+				text-align: center;
+				line-height: 2.35rem;
+			}
+			
+			.m-grids-3 .grids-txt>p {
+				font-size: 0.28rem;
+				color: #333;
+				margin-top: -0.1rem;
+				text-align: center;
+			}
+			/*考试类型  css*/
+			
+			.yuekao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_kaoshi_monthlytest@2x.png) center;
+				background-size: 100%;
+				color: #fd7302;
+			}
+			
+			.zhoukao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_kaoshi_zhou@2x.png);
+				background-size: 100%;
+				color: #0890e7;
+			}
+			
+			.rckao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_kaoshi_richang@2x.png);
+				background-size: 100%;
+				color: #37b563;
+			}
+			
+			.qzkao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_kaoshi_qizhong@2x.png);
+				background-size: 100%;
+				color: #f44a5d;
+			}
+			
+			.dykao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_kaoshi_danyuan@2x.png);
+				background-size: 100%;
+				color: #6076a0;
+			}
+			
+			.qimokao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_moni@2x.png);
+				background-size: 100%;
+				color: #A16BE3;
+			}
+			
+			.monikao .grids-txt>div {
+				margin: 0 auto;
+				background: url(/static/images/study_img/icon_qimo@2x.png);
+				background-size: 100%;
+				color: #7d5758;
+			}
+			
+			#term {
+				background-color: #fff;
+				text-align: center;
+				font-weight: bold;
+				color: #397ff9;
+			}
+			div.bg {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			div.bg img {
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<!-- <div id="term" style="font-size: 0.26rem;color: #0493F0;padding: 0.2rem ">（2017~2018第二学期)</div>
+		<div class="com_box">
+			<div class="m-cell mytitle">
+				<div class="m-cell" style="margin-bottom: 0;">
+				    <div class="cell-item">
+				        <div class="cell-left"><i></i>5月</div>
+				        <div class="cell-right"></div>
+				    </div>
+				</div>
+			</div>
+			<ul class="m-grids-3">
+	            <li class="grids-item yuekao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+		                <div class="grids-txt">
+		                	<div>01</div>
+		                	<p>月考</p>
+		                </div>
+	            	</a>
+	            </li>
+	            <li class="grids-item zhoukao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>周考</p>
+	                </div>
+	                </a>
+	            </li>
+	            <li class="grids-item rckao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>日常考</p>
+	                </div>
+	                </a>
+	            </li>
+	            <li class="grids-item qzkao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>期中考</p>
+	                </div>
+	                </a>
+	            </li>
+	            <li class="grids-item qimokao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>期末考</p>
+	                </div>
+	                </a>
+	            </li>
+	            <li class="grids-item monikao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>模拟考</p>
+	                </div>
+	                </a>
+	            </li>
+	        </ul>
+		</div>
+		<div class="com_box">
+			<div class="m-cell mytitle">
+				<div class="m-cell" style="margin-bottom: 0;">
+				    <div class="cell-item">
+				        <div class="cell-left"><i></i>4月</div>
+				        <div class="cell-right"></div>
+				    </div>
+				</div>
+			</div>
+			<ul class="m-grids-3">
+	            <li class="grids-item dykao">
+	            	<a href="/html/exam_schedule/exam_schedule_details.html">
+	                <div class="grids-txt">
+	                	<div>01</div>
+	                	<p>单元考</p>
+	                </div>
+	                </a>
+	            </li>
+	        </ul>
+		</div> -->
+
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				// header
+				addMainPageHeader("/html/understand_more/understand_index.html", "考试日程");
+
+				addMainPageFooter(4);
+				// 考试日程
+				examSchedule();
+			});
+			// 考试日程
+			function examSchedule() {
+				// 考试列表
+				var gobal_month = '';
+				var append_id = '';
+				ysAjax("/exam/schedule", {
+
+				}, function(data) {
+					if(data.retCode == 'SUCCESS') {
+						if(data.list != undefined && data.list.length > 0) {
+							// 日期格式化处理
+							for(var i = 0; i < data.list.length; i++) {
+								if(data.list[i].start_time != undefined) {
+									data.list[i].start_time = getNowFormatDate(data.list[i].start_time);
+									//console.log(getNowFormatDate(data.list[i].start_time))
+								}
+							}
+							// 填充数据
+							for(var j = 0; j < data.list.length; j++) {
+								var item = data.list[j];
+								if(item.start_time != undefined && item.start_time != '' && item.start_time != null) {
+									if(gobal_month == item.start_time.substring(5, 7)) {
+										var html = '';
+										if(item.exam_type == '周考') {
+											html = html + ' 		<li class="grids-item zhoukao"> ';
+										} else if(item.exam_type == '月考') {
+											html = html + ' 		<li class="grids-item yuekao"> ';
+										} else if(item.exam_type == '期中考') {
+											html = html + ' 		<li class="grids-item qzkao"> ';
+										} else if(item.exam_type == '期末考') {
+											html = html + ' 		<li class="grids-item qimokao"> ';
+										} else if(item.exam_type == '模拟考') {
+											html = html + ' 		<li class="grids-item monikao"> ';
+										} else if(item.exam_type == '日常考试') {
+											html = html + ' 		<li class="grids-item rckao"> ';
+										} else { // 单元考
+											html = html + ' 		<li class="grids-item dykao"> ';
+										}
+										var start_time = '' + item.start_time.substring(5, item.start_time.length) + '';
+										html = html + ' 			<a href="/html/exam_schedule/exam_schedule_details.html?exam_id=' + item.exam_id + '&start_time=' + start_time + '&exam_type=' + encodeURI(item.exam_type) + '"> ';
+										html = html + ' 			<div class="grids-txt"> ';
+										html = html + ' 				<div>' + item.start_time.substring(8, item.start_time.length) + '</div> ';
+										html = html + ' 				<p>' + item.exam_type + '</p> ';
+										html = html + ' 			</div> ';
+										html = html + ' 			</a> ';
+										html = html + ' 		</li> ';
+										$('#' + append_id + ' .m-grids-3').append(html);
+									} else {
+										append_id = "box" + j;
+										gobal_month = item.start_time.substring(5, 7);
+										var html = '';
+										html = html + ' <div class="com_box" id="box' + j + '"> ';
+										html = html + ' 	<div class="m-cell mytitle"> ';
+										html = html + ' 		<div class="m-cell" style="margin-bottom: 0;"> ';
+										html = html + ' 			<div class="cell-item"> ';
+										var t = item.start_time.substring(5, 7);
+										if(t.substring(0, 1) == '0') {
+											t = item.start_time.substring(6, 7)
+										}
+										html = html + ' 				<div class="cell-left"><i></i>' + t + '月</div> ';
+										html = html + ' 				<div class="cell-right"></div> ';
+										html = html + ' 			</div> ';
+										html = html + ' 		</div> ';
+										html = html + ' 	</div> ';
+										html = html + ' 	<ul class="m-grids-3"> ';
+										if(item.exam_type == '周考') {
+											html = html + ' 		<li class="grids-item zhoukao"> ';
+										} else if(item.exam_type == '月考') {
+											html = html + ' 		<li class="grids-item yuekao"> ';
+										} else if(item.exam_type == '期中考') {
+											html = html + ' 		<li class="grids-item qzkao"> ';
+										} else if(item.exam_type == '期末考') {
+											html = html + ' 		<li class="grids-item qimokao"> ';
+										} else if(item.exam_type == '模拟考') {
+											html = html + ' 		<li class="grids-item monikao"> ';
+										} else if(item.exam_type == '日常考试') {
+											html = html + ' 		<li class="grids-item rckao"> ';
+										} else { // 单元考
+											html = html + ' 		<li class="grids-item dykao"> ';
+										}
+										var start_time = '' + item.start_time.substring(5, item.start_time.length) + '';
+										html = html + ' 				<a href="/html/exam_schedule/exam_schedule_details.html?exam_id=' + item.exam_id + '&start_time=' + start_time + '&exam_type=' + encodeURI(item.exam_type) + '"> ';
+										html = html + ' 				<div class="grids-txt"> ';
+										html = html + ' 					<div>' + item.start_time.substring(8, item.start_time.length) + '</div> ';
+										html = html + ' 					<p>' + item.exam_type + '</p> ';
+										html = html + ' 				</div> ';
+										html = html + ' 				</a> ';
+										html = html + ' 			</li> ';
+										html = html + ' 	</ul> ';
+										html = html + ' </div> ';
+										$('.g-scrollview').append(html);
+									}
+								}
+							}
+							// 学期数据
+							ysAjax("/exam/term", {}, function(data) {
+								if(data.success) {
+									$('#term').html('（' + data.result + '）');
+								}
+							}, function(err) {
+								showAlert('服务器异常，请稍后重试');
+							});
+						} else { // 无考试日程
+//							window.location.href = '/html/exam_schedule/exam_schedule_null.html';
+							var html = '<div class="bg">' +
+								'<div style="padding: 0 1rem; height: auto;">' +
+								'<img src="/static/images/homework/img_msg.png"></div>' +
+								'<p align="center" style="margin-top: 4%;font-size:.33rem;color:#999999;">暂无考试安排</p>' +
+								'<p align="center" style="font-size:.3rem;color:#999999;">学习是种日常，考试不是目的~</P></div>';
+                            $(".g-scrollview").html(html);
+						}
+					} else {
+						showAlert('服务器异常，请稍后重试');
+					}
+				}, function(err) {
+					showAlert('服务器异常，请稍后重试');
+				});
+			}
+			// 时间格式化
+			function getNowFormatDate(timeString) {
+				var date = new Date(timeString);
+				var seperator1 = "-";
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var strDate = date.getDate();
+				if(month >= 1 && month <= 9) {
+					month = "0" + month;
+				}
+				if(strDate >= 0 && strDate <= 9) {
+					strDate = "0" + strDate;
+				}
+				var currentdate = year + seperator1 + month + seperator1 + strDate;
+				return currentdate;
+			}
+		</script>
+	</body>
+
+</html>

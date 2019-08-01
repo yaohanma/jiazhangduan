@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+				<!--页面css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.demo-progress-cricle {
+				width: 2rem;
+				height: 2rem;
+			}
+			
+			.demo-progressbar {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-justify-content: space-around;
+				-ms-flex-pack: distribute;
+				justify-content: space-around;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				-ms-flex-align: center;
+				align-items: center;
+				padding: 0 .24rem;
+				background: #FFFFFF;
+			}
+			
+			.demo-small-pitch {
+				margin-top: .35rem;
+			}
+			
+			.noborder:after {
+				border: 0px !important;
+			}
+			
+			.noborder .cell-left {
+				font-size: 0.28rem;
+				color: #666666;
+			}
+			
+			.noborder .cell-right {
+				font-size: 0.36rem;
+				color: #999999;
+			}
+			
+			.noborder .cell-right span {
+				font-size: 0.24rem;
+				color: #999999;
+			}
+			
+			.txtdiv {
+				padding: 10px;
+				font-size: 16px;
+				font-weight: bold;
+				text-align: center;
+			}
+			
+			.m-cell:after {
+				border: 0px !important;
+			}
+			
+			.m-cell {
+				margin-bottom: 0px !important;
+			}
+			
+			.title {
+				width: 100%;
+				font-size: 0.32rem;
+				color: #333333;
+			}
+			
+			.m-grids-2:after {
+				border: 0px !important;
+			}
+			
+			.m-grids-2:before {
+				border: 0px !important;
+			}
+			
+			.m-grids-2 .grids-item:after {}
+			
+			border: 0px !important;
+			.m-grids-2 .grids-item:before {
+				border: 0px !important;
+			}
+			
+			.m-grids-2 .grids-item:not(:nth-child(2n)):before {
+				border: 0px !important;
+			}
+			
+			.grids-txt {
+				font-size: 0.24rem;
+				color: #999999;
+			}
+			
+			.progress-bars> svg> path {
+				border-radius: 20px !important;
+				height: 6px !important;
+			}
+			
+			.progress-bars> svg {
+				border-radius: 20px;
+				height: 6px !important;
+			}
+			
+			.p_tb30 {
+				padding-bottom: 0.30rem;
+			}
+			
+			.progressbar-content {
+				color: #0dc77a;
+				font-size: 0.6rem;
+			}
+			
+			.progressbar-content .bfb {
+				color: #0dc77a;
+				font-size: 0.24rem;
+			}
+			
+			.cell-right {
+				font-size: 0.32px;
+				color: #333333 !important;
+			}
+			
+			.rcolor {
+				color: #0493F0 !important;
+			}
+			.jdtw{
+				height: 6px;
+				width: 100%;
+				background: #DCDCDC;
+				border-radius: 5px;
+			}
+			.jdtn{
+				background: #0493F0;
+				height: 6px;
+				border-radius: 5px;
+			}
+			.fwdiv{
+				height:0.3rem;
+				width: 100%;
+				background: #FFFFFF;
+			}
+			.jdtzy{
+				padding:0rem 0.3rem 0rem 0.3rem;
+			}
+			div.bg{
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			div.bg img{
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+			.quick_bottom{
+			z-index: 999;
+    		bottom: 1.1rem;
+    		display: block;
+			}
+			/*底部按钮适配*/
+			/* x xs */
+			@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+			   .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+			/* xr */
+			@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+			    .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+			@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+			   .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview" id="J_ProgressBox" >
+				<div class="m-cell" hidden="hidden">
+					<div class="cell-item noborder">
+						<div class="cell-left" id="exerciseText"></div>
+						<div class="cell-right" ><p id="mydf"></p><span>分</span></div>
+					</div>
+
+					<div class="demo-progressbar">
+						<div class="demo-progress-cricle">
+							<!-- 代码部分start -->
+							<div class="progress-bar demo-progress-cricle" id="J_Progresss">
+								<div class="progressbar-content"><span id="mydfl"></span><span class="bfb" >%</span></div>
+							</div>
+							<!-- 代码部分end -->
+						</div>
+						<div class="demo-progress-cricle">
+							<!-- 代码部分start -->
+							<div class="progress-bar demo-progress-cricle" id="J_Progress">
+								<div class="progressbar-content"><span id="bjdfl"></span><span class="bfb" >%</span></div>
+							</div>
+							<!-- 代码部分end -->
+						</div>
+					</div>
+				</div>
+				<ul class="m-grids-2" hidden="hidden">
+					<li class="grids-item">
+
+						<div class="grids-txt">本次练习个人得分率</div>
+					</li>
+					<li class="grids-item">
+
+						<div class="grids-txt">本次班级得分率</div>
+					</li>
+				</ul>
+				<div id="htmllist" style="margin-bottom: 80px;">
+					
+				</div>
+				<div class="quick_bottom fix_bottom"style="z-index: 999;" hidden="hidden">
+					<button type="button" class="btn-block btn-customer" style="">
+						<a href="javascript:;">答案解析</a>
+					</button>
+				</div>
+				 
+
+			</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				/**
+				 * Javascript API调用Tab
+				 */
+				addMainPageHeader("/html/courseevent/courseEventListInfo.html?origin=course&id="+getUrlParam("id")+"&channel="+getUrlParam("channel"), "课堂");
+				addMainPageFooter(4);
+				var purpose = "";
+				ysAjax("/courseevent/getCoursesReviewExerciseInfo", {
+					paper_id: getUrlParam("paper_id"),channel:getUrlParam("channel")
+				}, function(data) {
+					console.log(data.resultOb)
+				if(data.resultOb.typeList.length==0){
+//					window.location.href="/html/courseevent/courseEventListInfoExample_null.html?id="+getUrlParam("id")+"&channel="+getUrlParam("channel");
+					var html = '<div class="bg">' +
+                        '<div style="padding: 0 1rem; height: auto;">' +
+                        '<img src="/static/images/study_img/img_knowledge.png" />' +
+                        '</div>' +
+                        '<p align="center" style="margin-top: 4%;font-size:.33rem;color:#999999;">老师还没有同步课堂数据</p>' +
+                        '<p align="center" style="font-size:.3rem;color:#999999;">稍后再来看看吧~</P>' +
+                        '</div>';
+                    $(".g-scrollview").html(html);
+					return false;
+				}
+				$(".m-cell").show();
+				$(".m-grids-2").show();
+				$(".quick_bottom").show();
+				$('#exerciseText').html(data.resultOb.typeList[0].paper_name);
+				$('#mydf').html(data.resultOb.mydf);
+				$('#bjdfl').html(data.resultOb.bjdfl);
+				$('#mydfl').html(data.resultOb.mydfl);
+				$('#J_Progress').progressBar({
+					type: 'circle',
+					strokeWidth: 5,
+					strokeColor: '#B2B2B2',
+					trailWidth: 5,
+					trailColor: '#0dc77a',
+					fill: '#FFF',
+					progress: data.resultOb.bjdfl/100,
+					binder: '#J_ProgressBox'
+				});
+				$('#J_Progresss').progressBar({
+					type: 'circle',
+					strokeWidth: 5,
+					strokeColor: '#B2B2B2',
+					trailWidth: 5,
+					trailColor: '#0dc77a',
+					fill: '#FFF',
+					progress: data.resultOb.mydfl/100,
+					binder: '#J_ProgressBox'
+				});
+				 var resources = data.resultOb.typeList;
+				 for(var i=0;i<resources.length;i++){
+		 
+		 			var html ='';
+					    html +='<div class="m-cell" style="border-radius: 4px;margin: 10px;">';
+						html +='<div class="cell-item txtdiv noborder">';
+						html +='<span class="title">'+resources[i].type_name+'</span>';
+						html +='</div>';
+						html +='<div class="cell-item noborder">';
+					    html +=' <div class="cell-left">'+resources[i].type_name+'完成<span class="rcolor">'+resources[i].wwc+'</span><span>/'+resources[i].countnum+'</span>个，得分：</div>';
+						html +='<div class="cell-right" style="font-size: 0.32rem;" ><span class="rcolor"    style="font-size: 0.32rem;" >'+resources[i].goal_score+'</span>/'+resources[i].question_score+'</div>';
+						html +='</div>';
+						html +='<div class="jdtzy" >';
+						html +='<div class="jdtw"   >';
+						var a = resources[i].goal_score/resources[i].question_score*100;
+						html +='<div class="jdtn" style="width:'+a+'%;" >';
+						html +='</div>';
+						html +='</div>';
+						html +='</div>';
+						html +='<div class="fwdiv" ></div>';
+						html +='</div>';
+						$('#htmllist').append(html);
+						purpose = data.resultOb.purpose;
+					}
+				
+					//查看详情
+				    $('.btn-customer').on('click', function (e) {
+				    	// 快速出题
+				    	if(purpose == "2") {
+				    		window.location.href="/html/understand_more/daily_examination_quicknei.html?paper_id=" + getUrlParam("paper_id")+"&classroom_id="+getUrlParam("channel")+"&id="+getUrlParam("id")+"&type=4";
+				    	} else{
+				    		window.location.href="/html/understand_more/daily_examination_nei.html?paper_id=" + getUrlParam("paper_id")+"&classroom_id="+getUrlParam("channel")+"&id="+getUrlParam("id")+"&type=4";
+				    	}
+				     });
+				}, function(err) {
+					console.log(err)
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

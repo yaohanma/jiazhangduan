@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.bclor {
+				border: 1px solid red;
+				margin: 10px;
+				border-radius: 3px;
+			}
+			
+			.progress-wrapper {
+				height: 6px;
+				width: 100%;
+				background: #dcdcdc;
+				border-radius: 50px;
+			}
+			
+			.progress-left {
+				float: left;
+				width: 10%;
+			}
+			
+			.progress-right {
+				float: right;
+				width: 10%;
+			}
+			
+			.progress-btn {
+				border-radius: 50px;
+				width: 10px;
+				height: 10px;
+				background: #0493f0;
+				position: absolute;
+				top: 8px;
+				left: 20px;
+				border: 1px solid #FFFFFF;
+			}
+			
+			.progress {
+				height: 6px;
+				width: 0%;
+				background: #0493f0;
+				border-radius: 10px;
+			}
+			
+			.p_10 {
+				padding: 10px 20px 10px 20px;
+			}
+			
+			.timetitle {
+				width: 100%;
+				height: 20px;
+				line-height: 20px;
+				padding: 0px 20px 0px 20px;
+				margin-top: 1.2rem;
+				color: #999999;
+				font-size: 0.24rem;
+			}
+			
+			.imgbig {
+				margin-top: 1.6rem;
+				width: 3.2rem;
+				height: 3.2rem;
+			}
+			
+			.m-cell {
+				background: #F5F5F5 !important;
+			}
+			
+			.m-cell:after {
+				border: 0px;
+			}
+			
+			.playcss {
+				width: 1.32rem;
+				height: 1.32rem;
+			}
+			#htmltemp img{
+			width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview" id="htmltemp" >
+ 
+			</div>
+			</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//TODO APP
+//				ysAjax("/courseevent/getFileMeta", {
+//					resourceId: getUrlParam("resourceId")
+//				}, function(data) {
+//					console.log(data)
+//					//$("#iframe").attr("src",data.result.subUrl[0]).ready()
+//					for(var i =1;i<data.result.subUrl.length;i++){
+//						// 每读取一个jpg，随时添加到html中显示。
+//						$("#htmltemp").append('<img src="'+data.result.subUrl[i]+'" />');
+//					}
+//				}, function(err) {
+//					console.log(err)
+//				});
+
+				addMainPageHeader(getUrlParam("backurl"), "课堂");
+				addMainPageFooter(3);
+ 
+			});
+		</script>
+	</body>
+
+</html>

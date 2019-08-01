@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+	body .com_box .m-cell:after,
+	 body .grids-item:after,
+	 body .grids-txt:after,
+	 body  .m-grids-3:before,
+	 body  .m-grids-3:after,
+	 body  .m-grids-3 .grids-item:not(:nth-child(3n)):before{
+	  content: 0;
+	 }
+	.grids-txt{
+		text-align: center;
+	}
+	.grids-txt img {
+		width: 50%;
+		margin: 0 auto;
+	}
+	.m-grids-3:before,
+	.m-grids-3 .grids-item:after{
+		border-bottom: 0;
+	}
+	.m-grids-4 .grids-item:not(:nth-child(4n)):before,
+	.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+		border-right: 0;
+	}
+	.mytable ul{
+		width: 100%;
+	}
+	.mytable .grids-txt{
+		padding: 0;
+	}
+	.mytable .grids-item:after{
+		border: 0;
+	}
+	.mytable ul,
+	.mytable .grids-item{
+		line-height: 0.5rem;
+		font-size:0.25rem;
+	}
+	.mytable .grids-item:nth-child(1){
+		width: 10%;
+		color: #333;
+		font-weight: bold;
+	}
+	.mytable .grids-item:nth-child(2){
+		width: 30%;
+	}
+	.mytable .grids-item:nth-child(3){
+		width: 30%;
+	}
+	.mytable .grids-item:nth-child(4){
+		width: 30%;
+	}
+	.mytable img{
+		width: 50%;
+	}
+	.t_head li{
+		color: #999;
+		text-align: center;
+	}
+	.t_body div.cell-item:nth-child(1) div{
+		font-size: 0.33rem;
+		color:  #0493F0;
+
+	}
+	.t_body div.cell-item:nth-child(1){
+		border: 1px solid #0493F0;
+		
+		font-weight: bold;
+	}
+	.t_head li.grids-item:nth-child(4) i,
+	.t_head li.grids-item:nth-child(3) i{
+		width: .25rem;
+    	height: .25rem;
+    	display: inline-block;
+		background: url(/static/images/homework/popup_drop@2x.png) no-repeat;
+		background-position-y: 55%;
+		background-position-x: center;
+	    background-size: 65%;
+	    background-repeat: no-repeat;
+	}
+	.t_head li.grids-item:nth-child(4).active,
+	.t_head li.grids-item:nth-child(3).active{
+		color: #0493F0;
+	}
+	.t_head li.grids-item:nth-child(4).active i,
+	.t_head li.grids-item:nth-child(3).active i{
+		
+		background: url(/static/images/study_img/popup_drop_pressed.png) center center no-repeat;
+    	background-size: 65%;
+	}
+	.t_body div.cell-item li{
+		line-height: 0.5rem;
+	}
+	.m-cell{
+		margin-bottom: 0;
+	}
+	.t_body div.cell-item:nth-child(2),
+	.t_body div.cell-item:nth-child(3),
+	.t_body div.cell-item:nth-child(4){
+		color: #313340;
+		font-weight: bold;
+	}
+	 body .grids-txt{
+	 	color: #313340;
+	 }
+  </style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="com_box" style="margin-top: 0.2rem;">
+			<div class="m-cell">
+				<ul class="m-grids-3">
+		            
+		            <li class="grids-item">
+		                <div class="grids-txt">
+		                	<a href="/html/understand_more/daily_achievement.html">
+		                	<img src="/static/images/study_img/icon_achievement.png" />
+					      	<div style="width: 100%; font-size: 0.26rem; margin-top: 0.19rem;">日常成绩</div>
+		                	</a>
+		                </div>
+		            </li>
+		            <li class="grids-item">
+		                <div class="grids-txt">
+		                	<a href="/html/understand_more/analysis.html">
+		                	<img src="/static/images/appimg/icon_chapter.png" />
+					      	<div style="width: 100%;font-size: 0.26rem;margin-top: 0.19rem;">章节分析</div>
+					      	</a>
+		                </div>
+		            </li>
+		            <li class="grids-item">
+		                <div class="grids-txt">
+		                	<a href="/html/understand_more/scientific_delop.html">
+		                	<img src="/static/images/appimg/icon_Development.png" />
+					      	<div style="width: 100%;font-size: 0.26rem;margin-top: 0.19rem;">学科发展</div>
+					      	</a>
+		                </div>
+		            </li>
+		       </ul>
+			</div>
+			
+		</div>
+		<div class="com_box">
+			<div class="m-cell ">
+				<div class="m-cell" style="margin-bottom: 0;">
+			    <div class="cell-item  mytitle">
+			        <div class="cell-left"><i></i>日常活跃值排行</div>
+			        <div class="cell-right"></div>
+			    </div>
+			</div>
+			<div class="m-cell mytable">
+			    <div class="cell-item t_head">
+			       <ul class="" >
+			            <li class="grids-item"></li>
+			            <li class="grids-item">姓名</li>
+			            <li class="grids-item huoyue" id="term">本学期活跃值<i></i></li>
+			            <li class="grids-item huoyue active" id="week">本周活跃值<i></i></li>
+			        </ul>
+			    </div>
+			    <div class="t_body" id="livelst">
+				<div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">张晓明</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">
+				                	<img src="/static/images/study_img/logo_no1.png"  style=""/>
+				                </div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">王凤明</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt" style="">
+				                	<img src="/static/images/study_img/logo_no2.png" />
+				                </div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">郑丹丹</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt" >
+				                	<img src="/static/images/study_img/logo_no3.png"/>
+				                </div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">李思思</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">4</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">章明明</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">张晓明</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">6</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">王海燕</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">7</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">李大宝</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>
+				    <div class="cell-item">
+				       <ul>
+				            <li class="grids-item">
+				                <div class="grids-txt">8</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">王明辉</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">125</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">5</div>
+				            </li>
+				        </ul>
+				    </div>   
+				    
+			   </div>
+			</div>
+		</div>
+	
+		
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	// 2018-11-28 added by stt 埋点-9：宏观分析_2（进入“学情分析”累计2次）
+	buriedPoint('9');
+	addMainPageHeader("/html/understand_more/understand_index.html", "日常学情");
+	addMainPageFooter(3);
+	$('.mytable .grids-item.huoyue').click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+	});
+	$("#week").click(function(){
+        //TODO APP loadPage(1);
+	});
+	$("#term").click(function(){
+        //TODO APP loadPage(2);
+	});
+	//TODO APP loadPage(1);
+	
+});
+
+//活跃值排行
+function loadPage(orderType){
+	ysAjax("/study/getStuLivenessList", {
+		orderType : orderType
+	}, function(data) {
+		if (data.success) {
+			var html="";
+			$("#livelst").empty();
+			var datalist = data.result.liveList;
+			for(var i = 0; i < datalist.length; i++ ){
+				html+='<div class="cell-item">';
+				html+='<ul>';
+				html+='<li class="grids-item">';
+				if(datalist[i].num == '1'){
+					html+='<div class="grids-txt"><img src="/static/images/study_img/logo_no1.png" /></div>';
+				}else if(datalist[i].num == '2'){
+					html+='<div class="grids-txt"><img src="/static/images/study_img/logo_no2.png" /></div>';
+				}else if(datalist[i].num == '3'){
+					html+='<div class="grids-txt"><img src="/static/images/study_img/logo_no3.png" /></div>';
+				}else{
+					html+='<div class="grids-txt">'+datalist[i].num+'</div>';
+				}
+				html+='</li>';
+				html+='<li class="grids-item">';
+				html+='<div class="grids-txt">'+datalist[i].stu_name+'</div>';
+				html+='</li>';
+				html+='<li class="grids-item">';
+				if(data.result.orderType == '1'){
+					html+='<div class="grids-txt">'+datalist[i].liveness_score_term+'</div>';
+				} else {
+					html+='<div class="grids-txt">'+datalist[i].liveness_score+'</div>';
+				}
+				html+='</li>';
+				html+='<li class="grids-item">';
+				if(data.result.orderType == '1'){
+					html+='<div class="grids-txt">'+datalist[i].liveness_score+'</div>';
+				} else {
+					html+='<div class="grids-txt">'+datalist[i].liveness_score_term+'</div>';
+				}
+				html+='</li>';
+				html+='</ul>';
+				html+='</div>';
+			}
+			$("#livelst").append(html);
+		} else {
+			showNotify("没有数据");
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+	
+}
+
+</script>
+</body>
+</html>

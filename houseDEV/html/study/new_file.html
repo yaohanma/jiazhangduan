@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+	/*选择题选项样式*/
+	.option_btn{
+	    position: relative;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+	    background-color: #fff;
+	    height: .8rem;
+	}
+	.option_btn .btn-group-addon {
+		position: absolute;
+		left: 0;
+		width: 10%;
+	    display: inline-block;
+    	line-height: .8rem;
+    	color: #555;
+    	text-align: center;
+    	font-size: .3rem;
+    	color: #0493F0;
+    	border-radius:4px 0 0 4px;
+	}
+	.option_btn .option_text {
+    	position: absolute;
+		right: 0;
+    	z-index: 2;
+   		display: inline-block;
+    	width:90%;
+    	margin-bottom: 0;
+    	line-height: .6rem;
+    	height: .6rem;
+    	margin-top: .1rem;
+    	border-left: 1px solid #ccc;
+    	padding-left: .2rem;
+	}
+	/*选项选中状态*/
+	.option_btn.active{
+		border-color:#0493F0 ;
+	}
+	.option_btn.active .btn-group-addon{
+		color:#fff;
+		background: #0493F0;
+		
+	}
+	.option_btn.active .option_text{
+		border-left: 0;
+		color:#0493F0 ;
+	}
+	.min_option_btn.option_btn{
+		width: 40%;
+		float: left;
+	}
+	.min_option_btn.option_btn .btn-group-addon {
+		width: 20%;
+	}
+	.min_option_btn.option_btn .option_text {
+		width: 80%;
+		text-align: center;
+	}
+	
+	/*错误选项*/
+	.option_btn.active.danger{
+		border-color:#EF4F4F;
+	}
+	.option_btn.active.danger .btn-group-addon{
+		background: #EF4F4F;
+		position: relative;
+	}
+	.option_btn.active.danger i{
+		width: .3rem;
+		height: .3rem;
+		display: inline-block;
+		background:url(/static/images/study_img/msg_error.png);
+		background-size: 100%;
+		position: absolute;
+		bottom: -.1rem;
+		right: 0;
+		border-radius:5px 0 5px 0;
+	}
+	
+	/*正确选项*/
+	.option_btn.active.primary{
+		border-color:#04BE02;
+	}
+	.option_btn.active.primary .btn-group-addon{
+		background: #04BE02;
+		position: relative;
+	}
+	.option_btn.active.primary i{
+		width: .3rem;
+		height: .3rem;
+		display: inline-block;
+		background:url(/static/images/study_img/msg_Correct.png);
+		background-size: 100%;
+		position: absolute;
+		bottom: -.1rem;
+		right: 0;
+		border-radius:5px 0 5px 0;
+	}
+	.option_btn.active.danger .option_text,
+	.option_btn.active.primary .option_text{
+		color: #333;
+	}
+	/*加油打气 */
+	.jiayou_btn{
+		width: 100%;
+		height: 1.2rem;
+		padding: .2rem;
+		background: #fff;
+		position: relative;
+	
+	}
+	.jiayou_btn input{
+		width: 100%;
+		height: .8rem;
+		line-height: .8rem;
+		font-size: .35rem;
+		background: #0493F0;
+		color: #fff; 
+		border-radius: 5px;
+	}
+	#jiayou_bg{
+		width: 100%;
+		height: 6.23rem;
+		background:url(/static/images/study_img/jiayou_gif3.gif) no-repeat center;
+		display: none;
+		z-index: 999;
+		position: absolute;
+		bottom: 1rem;
+	}
+
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="option_btn">
+	      <div class="btn-group-addon">A</div>
+	     	<div class="option_text"> 对</div>
+	    </div>
+	    <br />
+	    <div class="option_btn active">
+	      <div class="btn-group-addon">A</div>
+	     	<div class="option_text"> 对</div>
+	    </div>
+	    <br />
+	    <!--小 选项-->
+	    <div style="height:.8rem;">
+	    	<div class="min_option_btn option_btn">
+		      <div class="btn-group-addon">A</div>
+		     	<div class="option_text"> 对</div>
+		    </div>
+			<div class="min_option_btn  option_btn active" style="float: right;" >
+		      <div class="btn-group-addon">A</div>
+		     	<div class="option_text"> 对</div>
+		    </div>
+	    </div>
+		
+	   	<div class="m-celltitle demo-small-pitch">错误选项 添加danger类名</div>
+	    <div class="option_btn active danger">
+	      <div class="btn-group-addon">A</div>
+	     	<div class="option_text"> 错误答案<i></i></div>
+	    </div>
+	   	<div class="m-celltitle demo-small-pitch">正确选项 添加primary类名</div>
+	    <div class="option_btn active primary">
+	      <div class="btn-group-addon">A</div>
+	     	<div class="option_text"> 正确答案<i></i></div>
+	    </div>
+	    
+	    
+	    <h1>加油打气</h1>
+	    
+	    <div class="jiayou_btn">
+	    	
+			<div class="jiayou_bg" id="jiayou_bg"></div>
+		    	
+		    
+			<input id="btn1" type="button" class="btn" value="加油打气" />
+	    </div>
+		
+		
+		
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	addMainPageHeader("/ydui/index.html", "我的首页");
+	addMainPageFooter(2);
+/*加油打气 */
+	 setTimeout(function(){$('#jiayou_bg').hide();},3500);//2秒后执行该方法
+     $(".jiayou_btn input").one("click",function(){
+		$(this).attr("disabled","disabled").val('已加油打气').css("color","#eee"); 
+		$("#jiayou_bg").show();
+		
+	});
+});
+	
+	
+</script>
+
+
+</body>
+</html>

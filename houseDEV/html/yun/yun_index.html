@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+<style>
+	
+	.cell-item img{
+		width: 1.18rem;
+		height: 1.18rem;
+	   border-radius: 50%;
+	}
+	.cell-item{
+		height: 1.9rem;
+		padding: 0.3rem 0.2rem;
+	}
+	.cell-item .cell-left{
+		width: 100%;
+		display: flex;
+	}
+	.cell-item .cell-left>div{
+		flex: 1;
+		padding-left: 0.2rem;
+		color: #313340;
+		font-size: 0.3rem;
+		font-weight: bold;
+	}
+   
+#ysYduiNavBarRightBtn{
+	color:#0493f0;
+	
+}
+.progress-bar{
+	border-radius: 20%;
+}
+/*.cell-right{
+	padding-left: 0.24rem;
+}*/
+.cell-left .title{
+	color: #313340;
+	font-size: 0.3rem;
+	font-weight: bold;
+}
+.cell-left p{
+	color: #999999;
+	font-size: 0.2rem;
+	margin: 0.1rem 0;
+}
+.progress-bar{
+	width: 80%;
+	height: 0.08rem;
+}
+	div.bg {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		position: fixed;
+		top: 30%;
+		padding: 0 1rem;
+		font-size: 0.3rem;
+		color: #999;
+	}
+	div.bg img {
+		width: 100%;
+		margin-bottom: 0.4rem;
+	}
+	.cell-item span{
+		width: 1.28rem;
+		height: 0.4rem;
+		line-height: 0.4rem;
+		border-radius: 0.04rem;
+		display: inline-block;
+		font-size: 0.24rem;
+		font-weight: 100;
+		text-align: center;
+		margin-right: 0.2rem;
+	}
+   </style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+					<!--<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/1@2x.png" />
+							<div style="text-align: left;width: 100%;">
+								<div class="title">陈小清</div>
+								<p>云空间容量1.5G/5G</p>
+								<div class="progress-bar" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0'}"></div>
+							</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>-->
+					
+					<!--<a class="cell-item" href="#">-->
+						<!--<div class="cell-left">-->
+							<!--<img src="/static/images/appimg/3@2x.png" />-->
+							<!---->
+						<!--</div>-->
+						<!--<div class="cell-right cell-arrow">-->
+							<!--<div style="text-align: left;width: 100%;">-->
+								<!--<div class="title">陈小清</div>-->
+								<!--<p>云空间容量1.5G/5G</p>-->
+	<!---->
+								<!--<div  class="progress-bar" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0'}"></div>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="cell-item" href="#">-->
+						<!--<div class="cell-left">-->
+							<!--<img src="/static/images/appimg/2@2x.png" />-->
+						<!--</div>-->
+						<!--<div class="cell-right cell-arrow">-->
+							<!--<div style="text-align: left;width: 100%;">-->
+								<!--<div class="title">陈小清</div>-->
+								<!--<p>云空间容量1.5G/5G</p>-->
+	<!---->
+								<!--<div  class="progress-bar" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0'}"></div>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/Avatarsample110@2x.png" />
+							<div>待付款（11）</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>-->
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/my/my_home.html", "云空间", {
+				});
+				initChild();
+			});
+
+			function initChild(){
+			    // 初始化方法 获取所有孩子
+                ysAjax("/mob/student/getStrudentInfo", {status:'bind'}, function(data) {
+                    console.log(data);
+                    if(data && data.success){
+                        if(data.result && data.result.length > 0){
+                            var html = "";
+                            $(data.result).each(function (i) {
+                                var result = data.result[i];
+                                var headImage = "";
+                                if(result.stu_head_image) {
+                                    headImage = result.stu_head_image;
+                                }else{
+                                    // 如果没有头像显示默认头像
+                                    headImage ="/static/images/common/img_moren.png";
+                                }
+                                html += '<a class="cell-item" href="https://cloudspace.ys100.com/mergeweb/phone/parentindex?username='+result.stu_id+'">' +
+                                    '<div class="cell-left">' +
+                                    '<img src='+headImage+' />' +
+                                    '<div style="text-align: left;width: 100%;">' +
+                                    '<div class="title">'+result.stu_name+'</div><p id="yunInfo_'+i+'"></p>' +
+                                    '<div id="J_Progress_'+i+'" class="progress-bar"></div></div>' +
+                                    '</div>' +
+                                    '<div class="cell-right cell-arrow"></div></a>';
+                            })
+                            $(".m-cell").html(html);
+                            $(data.result).each(function (i) {
+                                // 获取云空间数据
+                                getYunInfo(data.result[i].stu_id,i);
+                            })
+						}else{
+							var html = '<div class="bg"><div style="padding: 0 1rem; height: auto;">' +
+                                '<img src="/static/images/homework/img_msg.png"></div>' +
+                                '<div style="line-height:.5rem ;">暂无数据</div></div>';
+                            $(".m-cell").html(html);
+						}
+
+                    }
+                }, function(err) {
+                    showNotify("发生异常");
+                });
+			}
+
+			// 获取云盘空间数据
+			function getYunInfo(stuId,i) {
+                ysAjax("/mob/student/getYunInfo", {
+                    "stuId":stuId
+				}, function(data) {
+                    console.log(data);
+                    if(data && data.result && data.result.code == "1"){
+                        // 总空间 MB
+                        var capacity = data.result.data.capacity*1;
+						//总空间GB显示
+						capacity = capacity / 1024;
+                        // 已使用 B
+                        var capacity_used = data.result.data.capacity_used*1;
+                        var pro = 0;
+                        if(capacity_used > 0){
+                            // 进度条已使用数据转为GB
+                            pro = (capacity_used/1024/1024/1024).toFixed(1);
+                            if(pro < 0.1){
+                                pro = 0.1;
+							}
+                        }
+                        // 已使用空间+type
+                        var usedCapacity = spaceSize(capacity_used);
+                        $("#yunInfo_"+i).html("云空间容量"+usedCapacity+"/"+capacity+"GB");
+                        // 进度条
+                        $('#J_Progress_'+i).progressBar({
+                            type: 'line',
+                            strokeWidth: 4,
+                            progress: pro,
+                            trailColor: '#0493f0'
+                        });
+                    }else{
+                        $("#yunInfo_"+i).html("云空间容量0GB/0GB");
+                        // 进度条
+                        $('#J_Progress_'+i).progressBar({
+                            type: 'line',
+                            strokeWidth: 4,
+                            progress: 0,
+                            trailColor: '#0493f0'
+                        });
+					}
+                }, function(err) {
+                    showNotify("发生异常");
+                });
+            }
+
+            //计算空间大小方法
+            function spaceSize (nums){
+                var num = parseFloat(nums);
+                if(num < 1024){
+                    if(num == 0){
+                        return num + "GB";
+					}else{
+                        return num + "B";
+                    }
+                }else if(num >= 1024 && num <1024 * 1024){
+                    return parseInt((num / 1024) * 100) / 100 + "KB";
+                }else if(num >= 1024 * 1024 && num <1024 * 1024 * 1024){
+                    return parseInt((num / 1024 / 1024) * 100) / 100 + "MB";
+                }else if(num >= 1024 * 1024 * 1024 && num < 1024 * 1024 * 1024 * 1024){
+                    return parseInt((num / 1024 / 1024 / 1024) * 100) / 100 + "GB";
+                }else{
+                    return parseInt((num / 1024 / 1024 / 1024 / 1024) * 100) / 100 + "TB";
+                }
+            }
+		</script>
+	</body>
+
+</html>

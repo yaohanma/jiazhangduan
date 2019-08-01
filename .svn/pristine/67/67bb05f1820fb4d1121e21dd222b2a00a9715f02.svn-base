@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*选择题样式*/
+			.c_wrap{
+				width: 6.9rem;
+				margin-bottom: 0.3rem;
+			}
+			.c_title{
+				width: 0.74rem;
+			    height: 0.8rem;
+			    border: 1px solid #cccccc;
+			    border-radius: 0.1rem;
+			    color: #0493f0;
+			    font-size: 0.3rem;
+			    line-height: 0.8rem;
+			    text-align: center;
+			    display: inline-block;
+			    vertical-align: top;
+			}
+			.c_content{	
+				display: inline-block;
+			    width: 5.86rem;
+			    min-height: 0.8rem;
+			    line-height: 0.6rem;
+			    height: auto;
+			    margin-left: 0.2rem;
+			    border: 1px solid #cccccc;
+			    border-radius: 0.1rem;
+			    padding: 0.1rem;
+			    font-size: 0.3rem;
+    			color: #3b3f44;
+			}
+			/*选中蓝色：服务器没有存数据*/
+			/*.c_wrap .c_title.active{
+			    color: #fff;
+			    background-color: #0493f0;
+			}
+			.c_wrap .c_content.active{
+			   border:1px solid #0493f0;
+			}*/
+			/*正确答案*/
+			.c_wrap .c_title.true{
+			    color: #fff;
+			    background-color: #0dc77a;
+			    border:none;
+			}
+			/*选错*/
+			.c_wrap .c_title.choose_false{
+				background: url('/static/images/homework/error3.png') no-repeat center;
+    			background-color: #f95959;
+    			border:none;
+			}
+			.c_wrap .c_content.choose_false{
+				border-color: #f95959;
+			}
+			/*选对*/
+			.c_wrap .c_title.choose_true{
+				background: url('/static/images/homework/right3.png') no-repeat center;
+    			background-color: #0dc77a;
+    			border:none;
+			}
+			.c_wrap .c_content.choose_true{
+				border-color: #0dc77a;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="c_wrap">
+	<div class="c_title true">
+	  A
+	</div>
+	<div class="c_content">
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	</div>
+</div>
+  <div class="c_wrap">
+	<div class="c_title choose_false">
+	  
+	</div>
+	<div class="c_content choose_false">
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	</div>
+  </div>
+   <div class="c_wrap">
+	<div class="c_title choose_true">
+	  
+	</div>
+	<div class="c_content choose_true">
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	</div>
+  </div>
+   <div class="c_wrap">
+	<div class="c_title">
+	  D
+	</div>
+	<div class="c_content">
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	  12safaf撒发沙发沙发萨法阿斯顿发生所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所所3
+	</div>
+  </div>
+	</body>
+</html>

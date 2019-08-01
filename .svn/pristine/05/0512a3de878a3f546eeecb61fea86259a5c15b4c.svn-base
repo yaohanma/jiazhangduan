@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+	<style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    
+    
+    .scrolltab-nav{
+    	display: none;
+    }
+    .scrolltab-content{
+    	height: 50%;
+    	bottom: 0;
+    }
+    .scrolltab-content-item{
+    	width: 30%;
+    	float: left;
+    }
+  </style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="swiper-container swiper-container-horizontal">
+    <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-375px, 0px, 0px);">
+      <div class="swiper-slide swiper-slide-prev" style="width: 375px;">
+      	<div class="m-scrolltab" data-ydui-scrolltab="">
+           
+            <div class="scrolltab-content">
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">空调</strong>
+                    <div style="height: 300px;background-color: gray;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">冰箱</strong>
+                    <div style="height: 300px;background-color: blue;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">洗衣机</strong>
+                    <div style="height: 300px;background-color: yellow;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">热水器</strong>
+                    <div style="height: 300px;background-color: green;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">厨房大家电</strong>
+                    <div style="height: 300px;background-color: saddlebrown;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">厨房小家电</strong>
+                    <div style="height: 300px;background-color: darkgoldenrod;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">生活家电</strong>
+                    <div style="height: 300px;background-color: indianred;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">风扇</strong>
+                    <div style="height: 300px;background-color: aqua;"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="swiper-slide swiper-slide-active" style="width: 375px;">
+      	<div class="m-scrolltab" data-ydui-scrolltab="">
+            <div class="scrolltab-nav">
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category1"></i></div>
+                    <div class="scrolltab-title">空调</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category2"></i></div>
+                    <div class="scrolltab-title">冰箱</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category3"></i></div>
+                    <div class="scrolltab-title">洗衣机</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item crt">
+                    <div class="scrolltab-icon"><i class="demo-icons-category4"></i></div>
+                    <div class="scrolltab-title">热水器</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category5"></i></div>
+                    <div class="scrolltab-title">厨房大家电</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category6"></i></div>
+                    <div class="scrolltab-title">厨房小家电</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category7"></i></div>
+                    <div class="scrolltab-title">生活家电</div>
+                </a>
+                <a href="javascript:;" class="scrolltab-item">
+                    <div class="scrolltab-icon"><i class="demo-icons-category8"></i></div>
+                    <div class="scrolltab-title">风扇</div>
+                </a>
+            </div>
+            <div class="scrolltab-content">
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">空调</strong>
+                    <div style="height: 300px;background-color: gray;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">冰箱</strong>
+                    <div style="height: 300px;background-color: blue;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">洗衣机</strong>
+                    <div style="height: 300px;background-color: yellow;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">热水器</strong>
+                    <div style="height: 300px;background-color: green;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">厨房大家电</strong>
+                    <div style="height: 300px;background-color: saddlebrown;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">厨房小家电</strong>
+                    <div style="height: 300px;background-color: darkgoldenrod;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">生活家电</strong>
+                    <div style="height: 300px;background-color: indianred;"></div>
+                </div>
+                <div class="scrolltab-content-item">
+                    <strong class="scrolltab-content-title">风扇</strong>
+                    <div style="height: 300px;background-color: aqua;"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="swiper-slide swiper-slide-next" style="width: 375px;">Slide 3</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 4</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 5</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 6</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 7</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 8</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 9</div>
+      <div class="swiper-slide" style="width: 375px;">Slide 10</div>
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+    <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
+  <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+			<section/>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// 试题列表
+			
+				addMainPageHeader("/html/homework/hw_list.html", "习题作业");
+				addMainPageFooter(2);
+			
+			
+			
+			
+ 
+			});
+		</script>
+		<script>
+    var swiper = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+	</body>
+
+</html>

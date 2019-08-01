@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+		.com_box {
+				width: 100%;
+				padding: 0.3rem 0.2rem;
+				margin-top: 0.2rem;
+				/*display:none;*/
+			}
+			
+			.title {
+				width: 100%;
+				height: 0.88rem;
+				background: #f2f9fe;
+				border-radius: 4px;
+				font-size: 0.33rem;
+				color: #333;
+				font-weight: bold;
+				padding: 0 .2rem;
+			}
+			
+			.title .cell-left {
+				width: 80%;
+			}
+			
+			.title .cell-right {
+				width: 20%;
+				float: right;
+				line-height: 1rem;
+			}
+			
+			.title>div {
+				display: inline-block;
+			}
+			
+			.title span {
+				line-height: 1rem;
+			}
+			
+			.title i {
+				width: .25rem;
+				height: .25rem;
+				display: inline-block;
+				background: url(/static/images/study_img/popup_drop_pressed.png) center center no-repeat;
+				background-size: 65%;
+			}
+		}
+		.tab_box.cell-item:after {
+			border-bottom: none;
+		}
+		.classes {
+			margin-top: 0.2rem;
+		}
+		.classes .tim_box {
+			color: #0493f0;
+			font-size: 0.25rem;
+			padding: 0.2rem 0;
+		}
+		.classes.open .title {
+			background: #0493f0;
+			color: #fff;
+		}
+		.classes.open .title i {
+			width: .25rem;
+			height: .25rem;
+			display: inline-block;
+			background: url(/static/images/study_img/arrow_selected.png) center center no-repeat;
+			background-size: 65%;
+		}
+		.classes.open .title>div {
+			color: #fff;
+		}
+		.classes.open .title i {}
+		.classes.open .class_box {
+			display: block;
+			padding-bottom: 0.3rem;
+		}
+		.class_box {
+			background: #f2f9fe;
+			display: none;
+			padding: 0 0.2rem;
+			padding-bottom: 0.2rem;
+		}
+		.class_box .m-grids-4 {
+			margin: 0 -0.1rem;
+			background: #f2f9fe;
+		}
+		.class_box .grids-item>div {
+			box-shadow: 2px 8px 25px rgba(9, 67, 240, .1);
+		}
+		.class_box .grids-item:after {
+			border-bottom: none;
+		}
+		.m-grids-4:before,
+		.m-grids-4 .grids-item:not(:nth-child(4n)):before {
+			border: none;
+		}
+		.m-grids-4 a {
+			padding: 0.1rem;
+			padding-bottom: 0.3rem;
+		}
+		.m-grids-4 a .grids-txt {
+			width: 100%;
+			height: 0.9rem;
+			line-height: 0.9rem;
+			float: left;
+			border-radius: 6px 6px;
+			color: #fff;
+			font-weight: bold;
+			font-size: 0.3rem;
+			z-index: 999;
+		}
+		.m-grids-4 a .grids_box {
+			padding: 0.2rem;
+			background: #fff;
+			border-radius: 0 0 6px 6px;
+			font-size: 0.2rem;
+			text-align: center;
+			padding-top: 1.2rem;
+		}
+		.m-grids-4 a .grids_box p:nth-child(1) {
+			margin-bottom: 0.2rem;
+		}
+		/*各个学科颜色 css*/
+		.class_box .yu .grids_box {
+			color: #ff596b;
+		}
+		.class_box .yu .grids-txt {
+			background: #ff596b;
+			box-shadow: 0px 8px 18px rgba(255, 89, 170, .2);
+		}
+		.class_box .shu .grids-txt {
+			background: #44c672;
+			box-shadow: 0px 8px 18px rgba(68, 198, 114, .2);
+		}
+		.class_box .ying .grids-txt {
+			background: #ff8f4b;
+			box-shadow: 0px 8px 18px rgba(225, 143, 75, .2);
+		}
+		.class_box .hua .grids-txt {
+			background: #39c9bd;
+			box-shadow: 0px 8px 18px rgba(57, 201, 189, 0.2);
+		}
+		.class_box .di .grids-txt {
+			background: #0493f0;
+			box-shadow: 0px 8px 18px rgba(4, 147, 240, .2);
+		}
+		.class_box .sheng .grids-txt {
+			background: #997777;
+			box-shadow: 0px 8px 18px rgba(153, 119, 119, .2);
+		}
+		.class_box .zheng .grids-txt {
+			background: #ad7cea;
+			box-shadow: 0px 8px 18px rgba(173, 124, 234, .2);
+		}
+		.class_box .lishi .grids-txt {
+			background: #ed71ba;
+			box-shadow: 0px 8px 18px rgba(237, 113, 186, 0.2);
+		}
+		.class_box .wu .grids-txt {
+			background: #30b8fe;
+			box-shadow: 0px 10px 18px rgba(4, 147, 240, 0.2);
+		}
+		.class_box .qi .grids-txt {
+			background: #6f79fb;
+			box-shadow: 0px 8px 18px rgba(111, 121, 251, .2);
+		}
+		.class_box .wuke .grids-txt {
+			background: #a0a4b1;
+			box-shadow: 0px 8px 18px rgba(200, 200, 200, .2);
+		}
+		div.bg{
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			position: fixed;
+			top: 30%;
+			padding: 0 1rem;
+			font-size: 0.3rem;
+			color: #999;
+		}
+		div.bg img{
+			width: 100%;
+			margin-bottom: 0.4rem;
+		}
+		div.bg>div{
+			color: #999;
+			width: 100%;
+
+		}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="com_box" hidden="hidden">
+					<div id="c0" class="classes">
+						<div class="title">
+							<div class="cell-left">
+								<span>周一</span>
+							</div>
+							<div class="cell-right">
+								<i></i>
+							</div>
+						</div>
+						<div class="class_box">
+							<p class="tim_box">上午</p>
+							<div class="m-grids-4">
+								<a id="c01" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c02" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c03" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c04" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+							<p class="tim_box">下午</p>
+							<div class="m-grids-4">
+								<a id="c05" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c06" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c07" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c08" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="c1" class="classes">
+						<div class="title">
+							<div class="cell-left">
+								<span>周二</span>
+							</div>
+							<div class="cell-right">
+								<i></i>
+							</div>
+						</div>
+						<div class="class_box">
+							<p class="tim_box">上午</p>
+							<div class="m-grids-4">
+								<a id="c11" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c12" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c13" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c14" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+							<p class="tim_box">下午</p>
+							<div class="m-grids-4">
+								<a id="c15" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c16" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c17" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c18" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="c2" class="classes">
+						<div class="title">
+							<div class="cell-left">
+								<span>周三</span>
+							</div>
+							<div class="cell-right">
+								<i></i>
+							</div>
+						</div>
+						<div class="class_box">
+							<p class="tim_box">上午</p>
+							<div class="m-grids-4">
+								<a id="c21" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c22" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c23" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c24" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+							<p class="tim_box">下午</p>
+							<div class="m-grids-4">
+								<a id="c25" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c26" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c27" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c28" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="c3" class="classes">
+						<div class="title">
+							<div class="cell-left">
+								<span>周四</span>
+							</div>
+							<div class="cell-right">
+								<i></i>
+							</div>
+						</div>
+						<div class="class_box">
+							<p class="tim_box">上午</p>
+							<div class="m-grids-4">
+								<a id="c31" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c32" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c33" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c34" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+							<p class="tim_box">下午</p>
+							<div class="m-grids-4">
+								<a id="c35" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c36" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c37" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c38" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="c4" class="classes">
+						<div class="title">
+							<div class="cell-left">
+								<span>周五</span>
+							</div>
+							<div class="cell-right">
+								<i></i>
+							</div>
+						</div>
+						<div class="class_box">
+							<p class="tim_box">上午</p>
+							<div class="m-grids-4">
+								<a id="c41" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c42" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c43" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c44" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+							<p class="tim_box">下午</p>
+							<div class="m-grids-4">
+								<a id="c45" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c46" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c47" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+								<a id="c48" href="javascript:;" class="grids-item wuke">
+									<div class="grids-txt">无课</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// header
+				addMainPageHeader("/html/understand_more/understand_index.html", "本学期课表", {
+					hasIcon: true
+				});
+				addMainPageFooter(4);
+				// 学生课表信息
+				stuSyllabus();
+				//点击展开课表 
+				$('.classes .title').click(function() {
+					$(this).parent('.classes').toggleClass('open').siblings().removeClass('open');
+				})
+			});
+			// 学生课表信息
+			function stuSyllabus() {
+				ysAjax("/syllabus/init", {}, function(data) {
+					if(data.success) {
+						var html = '';
+						// 课表数据list
+						var array = data.result.syllabus_list;
+						if(array == undefined || array == null || array.length == 0) {
+//                            window.location.href = '/html/classCard/classCard_null.html';
+							var html = '<div class="bg">' +
+								'<div style="padding: 0 1rem; height: auto;">' +
+								'<img src="/static/images/study_img/img_knowledge.png" /></div>' +
+								'<div style="line-height:.5rem ;">暂无数据</div></div>';
+							$(".g-scrollview").html(html);
+//                            $('.com_box').show();
+						} else {
+							$('.com_box').show();
+							// 今天周几
+							var current_day = array[0].current_day_name;
+							// 周一 至 周五
+							var week = new Array('周一', '周二', '周三', '周四', '周五');
+							for(var d = 0; d < week.length; d++) {
+								if((parseInt(current_day) - 1) == d) {
+									$("#c" + d).addClass("open");
+								}
+								// 上午下午有无课程判断
+								var am_flag = false;
+								var pm_flag = false;
+								for(var i = 0; i < array.length; i++) {
+									var tmp = array[i];
+									if(parseInt(tmp.lesson_id) <= 4) {
+										am_flag = true;
+										break;
+									}
+								}
+								for(var i = 0; i < array.length; i++) {
+									var tmp = array[i];
+									if(parseInt(tmp.lesson_id) >= 5) {
+										pm_flag = true;
+										break;
+									}
+								}
+								if(!am_flag) {
+									$("#c" + d + " .class_box .tim_box").eq(0).hide();
+									$("#c" + d + " .class_box .m-grids-4").eq(0).hide();
+								} else {
+									for(var i = 0; i < array.length; i++) {
+										var item = array[i];
+										// 周几上午
+										if((parseInt(item.day_id) - 1) == d) {
+											if(parseInt(item.lesson_id) <= 4) {
+												if(item.subject_id == '1') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('shu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '2') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('yu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '3') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('ying');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '4') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('wu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '5') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('hua');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '6') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('di');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '7') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('lishi');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '8') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('zheng');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '43') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('sheng');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('qi');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												}
+											}
+										}
+									}
+								}
+								if(!pm_flag) {
+									$("#c" + d + " .class_box .tim_box").eq(1).hide();
+									$("#c" + d + " .class_box .m-grids-4").eq(1).hide();
+								} else {
+									for(var i = 0; i < array.length; i++) {
+										var item = array[i];
+										// 周几下午
+										if((parseInt(item.day_id) - 1) == d) {
+											if(parseInt(item.lesson_id) >= 5) {
+												if(item.subject_id == '1') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('shu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '2') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('yu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '3') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('ying');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '4') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('wu');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '5') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('hua');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '6') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('di');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '7') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('lishi');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '8') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('zheng');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else if(item.subject_id == '43') {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('sheng');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												} else {
+													$("#c" + d + item.lesson_id).removeClass('wuke').addClass('qi');
+													$("#c" + d + item.lesson_id + " div").html(item.subject_name);
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					} else {
+						showAlert('服务器异常，请稍后重试');
+					}
+				}, function(err) {
+					showAlert('服务器异常，请稍后重试');
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+.bg_box {
+		width: 100%;
+		height: 4.7rem;
+		background: url(/static/images/study_img/椭圆1421拷贝2.png) no-repeat bottom;
+		background-size: 100%;
+	}
+	
+	.demo-progress-cricle {
+		width: 3rem;
+		height: 2rem;
+		margin-top: -0.5rem;
+	}
+	
+	.demo-progressbar {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-justify-content: space-around;
+		-ms-flex-pack: distribute;
+		justify-content: space-around;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		padding: 0 .24rem;
+		padding-bottom: 0.4rem;
+	}
+	
+	.demo-small-pitch {
+		margin-top: .35rem;
+	}
+	
+	.noborder:after {
+		border: 0px !important;
+	}
+	
+	.noborder .cell-left {
+		width: 100%;
+		font-size: 0.32rem;
+		color: #333333;
+	}
+}
+.noborder .cell-right {
+	font-size: 0.32rem;
+	color: #0493F0;
+}
+.noborder .cell-right span {
+	font-size: 0.32rem;
+	color: #0493F0;
+}
+.txtdiv {
+	padding: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+.m-cell:after {
+	border: 0px !important;
+}
+.m-cell {
+	margin-bottom: 0px !important;
+}
+.title {
+	width: 100%;
+	font-size: 0.32rem;
+	color: #333333;
+}
+.m-grids-2:after {
+	border: 0px !important;
+}
+.m-grids-2:before {
+	border: 0px !important;
+}
+.m-grids-2 .grids-item:after {}
+border: 0px !important;
+.m-grids-2 .grids-item:before {
+	border: 0px !important;
+}
+.m-grids-2 .grids-item:not(:nth-child(2n)):before {
+	border: 0px !important;
+}
+.grids-txt {
+	font-size: 0.28rem;
+	color: #999999;
+}
+.progress-bars>svg>path {
+	border-radius: 20px !important;
+	height: 6px !important;
+}
+.progress-bars>svg {
+	border-radius: 20px;
+	height: 6px !important;
+}
+.p_tb30 {
+	padding-bottom: 0.30rem;
+}
+/*圈里面的字*/
+.progressbar-content {
+	width: 100%;
+	color: #ff596b;
+	font-size: 0.6rem;
+	text-align: center;
+}
+.progressbar-content>div {
+	margin-top: 0.8rem;
+	font-size: 0.6rem;
+	font-weight: bold;
+	position: relative;
+}
+.progressbar-content>div span {
+	font-size: 0.24rem;
+	position: absolute;
+	top: 0.1rem;
+}
+.progressbar-content p {
+	color: #999;
+	font-size: 0.24rem;
+	text-align: center;
+}
+.cell-right {
+	font-size: 0.32rem;
+	color: #333333 !important;
+}
+.rcolor {
+	color: #0493F0;
+}
+.lan_btn {
+	background: #0493F0;
+	color: #fff;
+	margin-top: 0;
+	border-radius: 10px;
+}
+.dingdi {
+	width: 100%;
+	float: left;
+	height: 2rem;
+}
+.demo-progressbar-item{
+	width: 100%;	
+}
+.demo-progressbar.p_tb30{
+/*	margin-bottom: 0.3rem;*/
+}
+
+</style>
+</head>
+
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview" id="J_ProgressBox">
+		<div class="m-cell">
+			<div class="cell-item noborder">
+				<div class="cell-left" style=" font-weight: bold;">语文</div>
+				<div class="cell-right" style="font-size:0.24rem;color:#666;font-weight: bold;"><span style="font-size:0.36rem;color:#666;">90</span>分</div>
+			</div>
+
+			<div class="demo-progressbar bg_box">
+				<div class="demo-progress-cricle">
+					<!-- 代码部分start -->
+					<div class="progress-bar demo-progress-cricle" id="J_Progress">
+						<div class="progressbar-content">
+							<div id="classBeatRate">40<span>%</span></div>
+							<p>打败同班同学</p>
+						</div>
+					</div>
+					<!-- 代码部分end -->
+				</div>
+				<div class="demo-progress-cricle">
+					<!-- 代码部分start -->
+					<div class="progress-bar demo-progress-cricle" id="J_Progress2">
+						<div class="progressbar-content">
+							<div id="schoolBeatRate">60<span>%</span></div>
+							<p>打败同年级同学</p>
+						</div>
+					</div>
+					<!-- 代码部分end -->
+				</div>
+			</div>
+		</div>
+		<div id="question_type_list"></div>
+		<div class="m-cell" style="border-radius: 4px;">
+			<div class="cell-item txtdiv noborder">
+				<span class="title">选择题</span>
+			</div>
+			<div class="cell-item noborder">
+				<div class="cell-left">选择题完成<span class="rcolor" style="margin-top: 0.1rem;">3</span>/4个，得分：</div>
+				<div class="cell-right"><span class="rcolor">3</span>/4</div>
+			</div>
+			<div class="demo-progressbar p_tb30">
+				<div class="demo-progressbar-item">
+					<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+				</div>
+			</div>
+		</div>
+		<div class="m-cell" style="border-radius: 4px;">
+			<div class="cell-item txtdiv noborder">
+				<span class="title">填空题</span>
+			</div>
+			<div class="cell-item noborder">
+				<div class="cell-left">选择题完成<span class="rcolor" style="margin-top: 0.1rem;">3</span>/4个，得分：</div>
+				<div class="cell-right"><span class="rcolor">3</span>/4</div>
+			</div>
+			<div class="demo-progressbar p_tb30">
+				<div class="demo-progressbar-item">
+					<div class="progress-bar progress-bars demo-progress-line" 
+						data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dingdi"></div>
+		<div class="quick_bottom fix_bottom" style="z-index: 999;bottom: 1rem;">
+			<button type="button" class="btn-block btn-customer">
+				<a onclick="detail();">查看详情</a>
+			</button>
+		</div>
+	</section>
+
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	function detail(){
+		window.location.href = '/html/exam_schedule/exam_report_detail.html?examId='+getUrlParam('examId')+'&subjectId='+getUrlParam('subjectId');
+	}
+$(document).ready(function() {
+	addMainPageHeader("/html/exam_schedule/exam_results.html?examId="+getUrlParam('examId')+"&flag=msg", "考试报告");
+	addMainPageFooter(3);
+
+	// 考试id
+	var examId = getUrlParam('examId');
+	var subjectId = getUrlParam('subjectId');
+	$('#J_Progress').progressBar({
+        type: 'circle',
+        strokeWidth: 2,
+        strokeColor: '#B2B2B2',
+        trailWidth: 5,
+        trailColor: '#92cff7',
+        fill: '#FFF',
+        progress:0.4
+    });
+    $('#J_Progress2').progressBar({
+        type: 'circle',
+        strokeWidth: 2,
+        strokeColor: '#B2B2B2',
+        trailWidth: 5,
+        trailColor: '#92cff7',
+        fill: '#FFF',
+        progress:0.6
+    });
+    // 考试报告
+//	subjectReport(examId,subjectId);TODO APP
+});
+// 考试成绩
+function subjectReport(examId,subjectId) {
+	ysAjax("/exam/subject_report", {
+		examId: examId,
+		subjectId: subjectId
+	}, function(data) {
+		if(data.retCode == 'SUCCESS'){
+			// 科目及得分
+			$('.noborder div').eq(0).html(data.subjectName);
+			$('.noborder div').eq(1).children('span').html(data.totalScore);
+			//打败同学
+			var classBeatRate = parseInt(data.classBeatRate) / 100;  
+			$('#J_Progress').progressBar('set', classBeatRate);
+			$('#classBeatRate').prepend(parseInt(data.classBeatRate));
+			//打败学校
+			var schoolBeatRate = parseInt(data.schoolBeatRate) / 100; 
+			$('#J_Progress2').progressBar('set', schoolBeatRate);
+			$('#schoolBeatRate').prepend(parseInt(data.schoolBeatRate));
+			// 题型列表
+			var questionTypeList = data.questionTypeList;
+			var html = '';
+			if(questionTypeList != null ){
+				for(var i=0;i<questionTypeList.length;i++){
+					var item = questionTypeList[i];
+					html = html + ' <div class="m-cell" style="border-radius: 4px;margin: 10px;"> ';
+					html = html + ' 	<div class="cell-item txtdiv noborder"> ';
+					html = html + ' 		<span class="title">'+item.questionTypeName+'</span> ';
+					html = html + ' 	</div> ';
+					html = html + ' 	<div class="cell-item noborder" style="height: 0.3rem;margin-top: 0.3rem;margin-bottom: 0.2rem;"> ';
+					html = html + ' 		<div class="cell-left">'+item.questionTypeName+'完成<span class="rcolor">'+item.stuFinish+'</span>/'+item.totalCount+'个，得分：</div> ';
+					html = html + ' 		<div class="cell-right"><span class="rcolor">'+item.stuScore+'</span>/'+item.totalScore+'</div> ';
+					html = html + ' 	</div> ';
+					html = html + ' 	<div class="demo-progressbar p_tb30"> ';
+					html = html + ' 		<div class="demo-progressbar-item"> ';
+					var progress = parseInt(item.stuScore/item.totalScore*100);
+					var progress2 = 100-progress;
+								html = html + ' <div class="progress-bar progress-bars demo-progress-line"> ';
+								html = html + ' 	<svg viewBox="0 0 100 4" preserveAspectRatio="none" style="width: 100%; height: 100%;"> ';
+								html = html + ' 		<path d="M 0,2 L 100,2" stroke="#E5E5E5" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: '+progress+'"></path> ';
+								html = html + ' 		<path d="M 0,2 L 100,2" stroke="#0493f0" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: '+progress2+'; stroke-dasharray: 100, 100;"></path> ';
+								html = html + ' 	</svg> ';
+								html = html + ' </div> ';
+					html = html + ' 		</div> ';
+					html = html + ' 	</div> ';
+					html = html + ' </div> ';
+				}
+				$('#question_type_list').html(html);
+			}
+		}else{
+			showAlert('服务器异常，请稍后重试');
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+</script>
+</body>
+
+</html>

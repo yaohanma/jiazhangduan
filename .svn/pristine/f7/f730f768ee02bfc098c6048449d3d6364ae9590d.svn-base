@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--滑动模块css-->
+		<link rel="stylesheet" href="/static/css/study/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/js/layer/theme/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/homework.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<script src="/static/js/swiper.min.js"></script>
+		<script src="/static/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			/*滑动处理*/
+			div[class*="swiper-container"]{
+				width: 100%;
+				height: 5.5rem;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.swiper-container-horizontal>.swiper-pagination-bullets,
+			.swiper-pagination-custom,
+			.swiper-pagination-fraction {
+				    right: 0.3rem;
+				    top: 0.5rem;
+				    height: 0.3rem;
+				    position: absolute;
+				    z-index: 1000;
+			}
+			div[class*="swiper-pagination"] {
+				text-align: right;
+				padding-right: 0.2rem;
+			}
+			/*.swiper-pagination {
+				text-align: right;
+			}*/
+			/*end*/ 
+			
+			.quick {
+				width: 100%;
+				/*height: 4rem;*/
+				background-color: #ffffff;
+				margin-top: 0.25rem;
+				padding: 0.3rem;
+				padding-bottom: 0;
+			}
+			
+			.quick .quick_title {
+				font-size: 0.36rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.quick .quick_sub {
+				color: #0493f0;
+				padding-top: 0.3rem;
+				font-size: 0.24rem;
+			}
+			
+			.question_content {
+				width: 100%;
+				height: auto;
+				background-color: #ffffff;
+				padding: .3rem;
+				padding-top: 0.59rem;
+				padding-bottom: 0.4rem;
+				min-height: 7.1rem;
+			}
+			
+			.question_content_title {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.btn-customer {
+				background-color: #0493F0;
+				color: #FFFFFF;
+			}
+			
+			.btn-hollow {
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer {
+				/*background-color: #FFF;*/
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer:after {
+				content: '';
+				width: 200%;
+				height: 143%;
+				position: absolute;
+				top: 0.15rem;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border-right: 2px solid #CCCCCC;
+				/*border-radius: 6px;*/
+			}
+			
+			.btn {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				height: 0.88rem;
+				line-height: 1rem;
+				display: inline-block;
+				padding: 0 .2rem;
+				border-radius: 10px 0 0 10px;
+				width: 0.88rem;
+				margin-top: .5rem;
+				font-size: 0.3rem;
+			}
+			
+			.btn-hollow:after {
+				content: '';
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border: 1px solid #cccccc;
+				border-radius: 10px;
+			}
+			
+			.quick_bottom {
+				width: 100%;
+				height: 1.43rem;
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				padding: 0.3rem;
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.quick_bottom2 {
+				width: 100%;
+				/*height: 1.43rem;*/
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				/*padding: 0.3rem;*/
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.btn-block {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 6.9rem;
+				display: block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				margin-top: 0;
+				border-radius: 10px;
+			}
+			
+			.btn-block-customer {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 3.3rem;
+				display: inline-block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				border-radius: 10px;
+			}
+			
+			.float_button {
+				position: fixed;
+				width: 2rem;
+				height: 0.7rem;
+				background-color: #4FB3F4;
+				right: -0.15rem;
+				bottom: 2.7rem;
+				border-radius: 10px;
+				color: #ffffff;
+				padding: 0.15rem;
+				font-size: 0.26rem;
+				z-index: 1000;
+			}
+			
+			.decided {
+				width: 3rem;
+				height: 0.88rem;
+				display: inline-block;
+				border: 1px solid #0493F0;
+				border-radius: 10px;
+				margin-top: .5rem;
+				border-left: none;
+			}
+			
+			.decide {
+				width: 3rem;
+				display: inline-block;
+				border: 1px solid #CCCCCC;
+				border-radius: 10px;
+				margin-top: .5rem;
+			}
+			
+			.input_frame {
+				width: 6.5rem;
+				border: 1px solid #0493F0;
+				height: 0.88rem;
+				border-radius: 4px;
+				background-color: #F2FAFF;
+				margin-top: .3rem;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				background-color: #fff;
+				height: .8rem;
+			}
+			
+			.option_btn .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 10%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 8px 0 0 8px;
+			}
+			
+			.option_btn .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 90%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+				padding-right: .2rem;
+				overflow-y: auto;
+			}
+			/*选项选中状态*/
+			
+			.option_btn.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			/*.option_btn.active.primary i{
+			
+		}*/
+			
+			.option_btn.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-repeat: no-repeat;
+				background-size: 0.3rem 0.3rem;
+				background-position-x: 6.58rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn.active.danger .option_text,
+			.option_btn.active.primary .option_text {
+				color: #333;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn_customer {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background-color: #fff;
+				height: .8rem;
+				width: 3rem;
+				display: inline-block;
+				float: left;
+			}
+			
+			.option_btn_customer .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 30%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 4px 0 0 4px;
+			}
+			
+			.option_btn_customer .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 70%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+			}
+			/*选项选中状态*/
+			
+			.option_btn_customer.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn_customer.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn_customer.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn_customer.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn_customer.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			
+			.option_btn_customer.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-size: 0.3rem 0.3rem;
+				background-repeat: no-repeat;
+				background-position-x: 2.7rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn_customer.active.danger .option_text,
+			.option_btn_customer.active.primary .option_text {
+				color: #333;
+			}
+			
+			.question_stem {
+				margin-top: 0.29rem;
+				color: #333333;
+				font-size: 0.32rem;
+				margin-bottom: 0.4rem;
+				font-weight: bold;
+			}
+			
+			.choose_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.choose_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.choose_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			
+			.choose_answer a:nth-child(1)~span {
+				font-size: 0.26rem;
+				color: #0493F0;
+			}
+			
+			.choose_answer a:nth-child(4)~span {
+				font-size: 0.26rem;
+				color: #0DC77A;
+			}
+			
+			.analysis {
+				width: 5rem;
+				font-size: 0.28rem;
+				color: #0493F0;
+				margin-top: 0.6rem;
+			}
+			
+			.icon_down {
+				background: url(/static/images/homework/icon_eject@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_up {
+				background: url(/static/images/homework/icon_takeup@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_content {
+				font-size: 0.28rem;
+				color: #666666;
+			}
+			
+			.decide_answer {
+				width: 100%;
+				height: auto;
+				padding-top: 1.2rem;
+			}
+			
+			.decide_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			.decide_answer a:nth-child(1)+span{
+				color: #0493F0;
+			}
+			.decide_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			.decide_answer a:nth-child(4)+span{
+				color: #0DC77A;
+			}
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			.fill_answer a:nth-child(1)+span{
+				font-size: 0.26rem;
+				color: #0493F0;
+			}
+			.fill_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			.fill_answer a:not(:first-child)+span {
+				font-size: 0.26rem;
+				color: #0DC77A;
+			}
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			/*.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.fill_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}*/
+			/*综合题*/
+			.child {
+				min-height: 13rem;
+				background-color: #FFFFFF;
+			}
+			
+			.multiple_img {
+				width: 100%;
+				height: 0.4rem;
+				background: url(/static/images/homework/multiple_2.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			
+			.multiple_content {
+				padding: 0.3rem;
+				background-color: #FFFFFF;
+				/*display: none;*/
+				/*height: 5.5rem;
+    			overflow-y: auto;*/
+			}
+			
+			.multiple_btn {
+				width: 100%;
+				padding: 0.3rem;
+			}
+			/*加油打气 */
+			.jiayou_btn{
+				width: 100%;
+				height: 1.2rem;
+				padding: .2rem;
+				background: #fff;
+				position: relative;
+			
+			}
+			.jiayou_btn input{
+				width: 100%;
+				height: .8rem;
+				line-height: .8rem;
+				font-size: .35rem;
+				background: #0493F0;
+				color: #fff; 
+				border-radius: 5px;
+			}
+			#jiayou_bg{
+			    width: 100%;
+			    height: 4rem;
+			    background: url(/static/images/study_img/jiayou_gif3.gif) no-repeat center;
+			    display: none;
+			    z-index: 999;
+			    position: absolute;
+			    bottom: -0.1rem;
+			    background-size: 40%;
+			    left: 0.7rem;
+			}
+			.answer_img {
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid #e5e5e5;
+				border-radius: 10px;
+				margin-top: 0.2rem;
+				padding: 0.1rem;
+				background-color: #f4f5f7;
+				display: inline-block;
+			}
+			.answer_img img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview" id="J_ProgressBox">
+			<div class="container_content">
+				
+			</div>
+			<div class="float_button">
+				<a href="/html/homework/hw_list.html?f_flag=1">返回作业列表</a>
+			</div>
+			<div class="dingdi" style="width: 100%; float: left; height: 1.2rem;"></div>
+		<section/>
+	</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	var text = '';
+	var score = '';
+	var score_value = 0;
+	var m_flag = 0;
+	$(document).ready(function() {
+		// header  footer
+		addMainPageHeader("/html/homework/done/hw_micro_done.html?homework_id="+getUrlParam("homework_id")+
+					"&homework_type="+getUrlParam("homework_type")+"&section_id="+getUrlParam("section_id"), "微课作业");
+		addMainPageFooter(2);
+		// 试题列表
+//		question_list();TODO APP
+		// 知识点
+//		knowledge(); TODO APP
+		// 得分率
+//		scoring(); TODO APP
+		// 动态加载dom等待时间
+		var waitTime = '1000'; 
+		setTimeout(function(){  
+		 	// 解析处理
+			$(".analysis").on("click", function() {
+				if($(this).find('i').hasClass("icon_down")) {
+					$(this).find('i').removeClass("icon_down").addClass("icon_up");
+					$(this).siblings(".icon_content").show();
+				} else {
+					$(this).find('i').removeClass("icon_up").addClass("icon_down");
+					$(this).siblings(".icon_content").hide();
+				}
+			});
+			// 综合题显示处理
+			$(".multiple_img").on("click",function(){
+				 $('div[class*="swiper-container"]').slideToggle("hide");
+			});
+			// 试题显示处理
+			$(".button-next").on("click", function() {
+				$(this).parents(".child").next().show().siblings().hide();
+				// 隐藏当前解析内容
+				$(".analysis i").removeClass("icon_up").addClass("icon_down");
+				$(".icon_content").hide();
+				
+			});
+			$(".button-prev").on("click", function() {
+				$(this).parents(".child").prev().show().siblings().hide();
+				// 隐藏当前解析内容
+				$(".analysis i").removeClass("icon_up").addClass("icon_down");
+				$(".icon_content").hide();
+			});
+			// 知识点弹窗
+			$(".layui-btn").click(function(){
+				layer.open({
+				  type: 1,
+				  title:'',
+				  skin: '', //加上边框
+				  area: ['5.99rem', '6.5rem'], //宽高
+				  content: text
+				});	
+				$(".layui-layer-content").css("height","auto");
+				// 2018-11-28 added by stt 埋点-5：理智_1（查看1次作业中知识点）
+				buriedPoint('5')
+			});
+			// 得分率start			
+			$(".btn_score").click(function(){
+				layer.open({
+				  type: 1,
+				  title:'',
+				  skin: '', //加上边框
+				  area: ['5.99rem', '6.5rem'], //宽高
+				  content: score
+				});	
+				// 得分率进度
+				$('#J_Progress').progressBar({
+					type: 'circle',
+					strokeWidth: 5,
+					strokeColor: '#B2B2B2',
+					trailWidth: 5,
+					trailColor: '#0dc77a',
+					fill: '#FFF',
+					progress: score_value, // 传参
+					binder: '#J_ProgressBox'
+				});
+				/*弹窗加油打气*/
+				 $(".jiayou_btn input").one("click",function(){
+				 	
+					$(this).attr("disabled","disabled").val('爱心已送达').css("color","#76B8F5"); 
+					$("#jiayou_bg").show();
+					setTimeout(function(){
+							$('#jiayou_bg').hide();
+							// 关闭弹窗
+							setTimeout(function(){
+								$(".layui-layer-shade").remove();
+								$(".layui-layer").remove();
+							},1000);
+							
+					},2000);
+					// 2018-11-28 added by stt 埋点-6：温柔_1（为孩子加油打气1次）
+				 	buriedPoint('6')
+				});
+			});
+			/*得分率弹窗 end*/
+		 },waitTime); 
+	});// ready
+	var xuanze = ['A','B','C','D','E','F','G','H'];
+		// 习题列表
+	function question_list(){
+		ysAjax("/homework/getExerciseList", {
+						homework_id: getUrlParam("homework_id"),
+						homework_type:getUrlParam("homework_type")
+					}, function(data) {
+						//console.log(data.result.question_list[0].paper_id);
+						// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+						if(data.result != null){
+							for(var i=0; i < data.result.question_list.length; i++){
+								var html = '';
+								var q = data.result.question_list[i];
+								// 1单选
+								if(q.question_type == '1') {
+									html = html + '	<div class="child"> ';
+									html = html + '							<div class="quick">  ';
+									html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">单选题</span>  ';
+									html = html + '									</p>  ';
+									html = html + '										<div class="question_describe">  ';
+									html = html + '										<p class="question_stem">  ';
+									html = html + '											'+ q.question_context +' ';
+									html = html + '										</p>  ';
+									html = html + '										<div id="choose_question">  ';
+									for(var j=0;j<q.answer_list.length;j++){ // 原答案
+											var a = q.answer_list[j];
+											if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+												html = html + '						<div class="option_btn active btn_true">  ';
+												html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '							<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '						</div>  ';
+											}else if(a.right_flag == '1'){ // 正确答案
+												html = html + '						<div class="option_btn active primary btn_true">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}else if(a.stu_choose_flag == '1'){ // 学生选择
+												html = html + '						<div class="option_btn active">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}else{ // 
+												html = html + '						<div class="option_btn">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}
+											if(j != q.answer_list.length - 1){
+												html = html + '								<br />  ';
+											}
+									}
+									html = html + '										    <div class="choose_answer">  ';
+									for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+										var st= q.stu_answer_list[0];
+										html = html + '											<a>已选答案</a><span>'+xuanze[st.stu_answer_id - 1]+'</span><br />';
+									}
+									for(var x=0;x<q.answer_list.length;x++){
+										if(q.answer_list[x].right_flag == '1'){
+											html = html + '										<a>正确答案</a><span style="color:#0DC77A;">'+xuanze[q.answer_list[x].answer_id - 1]+'</span>  ';
+										}
+									}
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									html = html + '											<p class="icon_content" style="display: none;"> '+q.question_desc+'</p>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								// 2多选
+								if(q.question_type == '2') {
+									html = html + '	<div class="child"> ';
+									html = html + '							<div class="quick">  ';
+									html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">多选题</span>  ';
+									html = html + '									</p>  ';
+									html = html + '										<div class="question_describe">  ';
+									html = html + '										<p class="question_stem">  ';
+									html = html + '											'+ q.question_context +' ';
+									html = html + '										</p>  ';
+									html = html + '										<div id="choose_question">  ';
+									outer:
+									for(var j=0;j<q.answer_list.length;j++){ // 原答案
+											var a = q.answer_list[j];
+											if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+												html = html + '						<div class="option_btn active btn_true">  ';
+												html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '							<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '						</div>  ';
+											}else if(a.right_flag == '1'){ // 正确答案
+												html = html + '						<div class="option_btn active primary btn_true">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}else if(a.stu_choose_flag == '1'){ // 学生选择
+												html = html + '						<div class="option_btn active">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}else{ // 
+												html = html + '						<div class="option_btn">  ';
+												html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+												html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+												html = html + '					    </div>  ';
+											}
+											if(j != q.answer_list.length - 1){
+												html = html + '								<br />  ';
+											}
+									}
+									html = html + '										    <div class="choose_answer">  ';
+									html = html + '												<a>已选答案</a><span>';
+									for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+										var st= q.stu_answer_list[s];
+										html = html + '											'+xuanze[st.stu_answer_id - 1]+'';
+									}
+									html = html + '												</span><br />';
+									html = html + '												<a>正确答案</a><span style="color:#0DC77A;">';
+									for(var x=0;x<q.answer_list.length;x++){
+										if(q.answer_list[x].right_flag == '1'){
+											html = html + '										'+xuanze[q.answer_list[x].answer_id - 1]+'';
+										}
+									}
+									html = html + '												</span>  ';
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									html = html + '											<p class="icon_content" style="display: none;"> '+q.question_desc+'</p>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//4判断
+								if(q.question_type == '4') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="quick">  ';
+									html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">判断题</span>  ';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<p class="question_stem">  ';
+									html = html + '											'+ q.question_context +'';
+									html = html + '										</p>  ';
+									html = html + '										<div id="decide_question">  ';
+									for(var j=0;j<q.answer_list.length;j++){ // 原答案 
+											var a = q.answer_list[j];
+											if(j == 0){
+												for(var e=0;e<q.stu_answer_list.length;e++){ // 学生答案
+													var st= q.stu_answer_list[e];
+													if(a.right_flag == '1'){
+														if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+															html = html + '							    <div class="option_btn_customer active btn_true">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else{ // 正确的 非学生选择的
+															html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}
+													}else{ // 不正确的 学生选择
+														if(st.stu_answer_id == a.answer_id){ 
+															html = html + '							    <div class="option_btn_customer active">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else{ // 不正确的 非学生选择的
+															html = html + '							    <div class="option_btn_customer">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}
+													}
+												}
+											}else{
+												for(var e=0;e<q.stu_answer_list.length;e++){ // 学生答案
+													var st= q.stu_answer_list[e];
+													if(a.right_flag == '1'){
+														if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+															html = html + '							    <div class="option_btn_customer active btn_true" style="margin-left:0.9rem;">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else{ // 正确的 非学生选择的
+															html = html + '							    <div class="option_btn_customer active primary btn_true" style="margin-left:0.9rem;">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}
+													}else{ // 不正确的 学生选择
+														if(st.stu_answer_id == a.answer_id){ 
+															html = html + '							    <div class="option_btn_customer active" style="margin-left:0.9rem;">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else{ // 不正确的 非学生选择的
+															html = html + '							    <div class="option_btn_customer" style="margin-left:0.9rem;">  ';
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}
+													}
+												}
+											}
+									}
+									html = html + '										</div>  ';
+									html = html + '										<div class="decide_answer">  ';
+									for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+											if(q.stu_answer_list[0].stu_answer_context == '1'){
+												html = html + '									<a>已选答案</a><span>对</span>  ';	
+											}else{
+												html = html + '									<a>已选答案</a><span>错</span>  ';
+											}
+										}
+									html = html + '</br>';
+									for(var x=0;x<q.answer_list.length;x++){ // 原答案
+										if(q.answer_list[x].right_flag == '1'){
+												html = html + '									<a>正确答案</a><span>'+q.answer_list[x].answer_context+'</span>  ';
+										}
+									}
+									html = html + '										</div>  ';
+									html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									html = html + '										<p class="icon_content" style="display: none;"> '+q.question_desc+'</p>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//3填空
+								if(q.question_type == '3') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="quick">  ';
+									html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">填空题</span>  ';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<p class="question_stem">  ';
+									html = html + '											'+ q.question_context +'';
+									html = html + '										</p>  ';
+									html = html + '										<div class="fill_answer">  ';
+									html = html + '											<a>已选答案</a><span>';
+									for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+										if(s == q.stu_answer_list.length -1 ){
+											html = html + ''+q.stu_answer_list[s].stu_answer_context+'';
+										}else{
+											html = html + ''+q.stu_answer_list[s].stu_answer_context+';';
+										}
+									}
+									html = html + 											'</span>';
+									html = html + '											<br />  ';
+									html = html + '											<a>正确答案</a><span>';
+									for(var j=0;j<q.answer_list.length;j++){
+										if(j == q.answer_list.length -1 ){
+											html = html + ''+q.answer_list[j].answer_context+'';
+										}else{
+											html = html + ''+q.answer_list[j].answer_context+';';
+										}
+									}
+									html = html + 											'</span>  ';
+									html = html + '										</div>  ';
+									html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									html = html + '										<p class="icon_content" style="display: none;"> '+q.question_desc+'</p>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//5简答
+								if(q.question_type == '5') {
+									html = html + '	<div class="child" > ';
+									html = html + '							<div class="quick">  ';
+									html = html + '									<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '									<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">简答题</span>  ';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<p class="question_stem">  ';
+									html = html + '											'+ q.question_context +'';
+									html = html + '										</p>  ';
+									html = html + '										<div id="short_question">  ';
+									
+									html = html + '											<div class="fill_answer">  ';
+									html = html + '												<a>已做答案</a><br/>';
+									for(var t=0;t<q.stu_answer_list.length;t++){ // 学生图片答案
+													html = html + '								<div class="answer_img">  ';
+//													html = html + '									<img src="'+q.stu_answer_list[t].stu_answer_context+'" />  ';
+													html = html + '									<img src="/static/images/homework/icon_Photograph.png" />  ';
+													html = html + '								</div>  ';
+									}
+									html = html + '												<br />  ';
+									for(var x=0;x<q.answer_list.length;x++){
+										html = html + '										<a>正确答案</a><span style="color:  #0DC77A;">'+q.answer_list[0].answer_context+'</span>  ';
+									}
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									html = html + '											<p class="icon_content" style="display: none;">  '+q.question_desc+'</p>  ';
+									html = html + '											<div style="height: 0.2rem; width: 8rem; background-color: #F5F5F5; margin-top: 0.4rem; margin-left: -0.5rem;"></div>  ';
+									html = html + '											<div class="fill_answer">  ';
+									html = html + '												<a>老师打分</a><span>'+q.goal_score.substring(0,q.goal_score.indexOf('.'))+'分</span>  ';
+									html = html + '												<br />  ';
+									html = html + '												<a style="background-color: #cde9fc;color: #0493F0;">评语</a><span>'+q.tch_comment+'</span>  ';
+									html = html + '											</div>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//6综合
+								if(q.question_type == '6'){
+									m_flag = m_flag + 1;
+									html = html + '	<div class="child">  ';
+									html = html + '		<div class="quick">  ';
+									html = html + '			<p class="quick_title">'+q.name+'：'+q.topic+'</p>  ';
+									html = html + '			<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>  ';
+									html = html + '		</div>  ';
+									html = html + '		<div class="question_content">  ';
+									html = html + '			<p class="question_content_title">第  ';
+									html = html + '				<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '				<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '				<span id="qustion_type">综合题</span>  ';
+									html = html + '			</p>  ';
+									html = html + '			<div class="question_describe">  ';
+									html = html + '				<p class="question_stem"> '+q.question_context+' </p>  ';
+									html = html + '			</div>  ';
+									html = html + '		</div>  ';
+									html = html + '		<div class="quick_bottom2">  ';
+									html = html + '			<div class="multiple_question">  ';
+									html = html + '				<div class="multiple_img" style=""></div>  ';
+									html = html + '				<div class="swiper-container'+m_flag+'">  ';
+									html = html + '					<div class="swiper-wrapper">  ';
+									// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+									for(var z=0;z<q.compound.length;z++){ // 综合题小题列表
+										var c = q.compound[z]; // 每道小题
+										if(c.question_type == '1'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">单选题</span></p>  ';
+											html = html + '								<p class="question_stem">  ';
+											html = html + '									'+c.question_context+'  ';
+											html = html + '								</p>  ';
+											html = html + '								<div id="choose_question">  ';
+											for(var j=0;j<c.answer_list.length;j++){ // 原答案
+													var a = c.answer_list[j];
+													if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+														html = html + '						<div class="option_btn active btn_true">  ';
+														html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '							<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '						</div>  ';
+													}else if(a.right_flag == '1'){ // 正确答案
+														html = html + '						<div class="option_btn active primary btn_true">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}else if(a.stu_choose_flag == '1'){ // 学生选择
+														html = html + '						<div class="option_btn active">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}else{ // 
+														html = html + '						<div class="option_btn">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}
+													if(j != c.answer_list.length - 1){
+														html = html + '								<br />  ';
+													}
+											}
+											html = html + '										    <div class="choose_answer">  ';
+											for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+												var st= c.stu_answer_list[0];
+												html = html + '											<a>已选答案</a><span>'+xuanze[st.stu_answer_id - 1]+'</span><br />';
+											}
+											for(var x=0;x<c.answer_list.length;x++){
+												if(c.answer_list[x].right_flag == '1'){
+													html = html + '										<a>正确答案</a><span style="color:#0DC77A;">'+xuanze[c.answer_list[x].answer_id - 1]+'</span>  ';
+												}
+											}
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											html = html + '											<p class="icon_content" style="display: none;"> '+c.question_desc+'</p>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.question_type == '2'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">多选题</span></p>  ';
+											html = html + '								<p class="question_stem">  ';
+											html = html + '									'+c.question_context+'  ';
+											html = html + '								</p>  ';
+											html = html + '								<div id="choose_question">  ';
+											outer:
+											for(var j=0;j<c.answer_list.length;j++){ // 原答案
+													var a = c.answer_list[j];
+													if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+														html = html + '						<div class="option_btn active btn_true">  ';
+														html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '							<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '						</div>  ';
+													}else if(a.right_flag == '1'){ // 正确答案
+														html = html + '						<div class="option_btn active primary btn_true">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}else if(a.stu_choose_flag == '1'){ // 学生选择
+														html = html + '						<div class="option_btn active">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}else{ // 
+														html = html + '						<div class="option_btn">  ';
+														html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+														html = html + '					     	<div class="option_text"> '+ a.answer_context +'<i></i></div>  ';
+														html = html + '					    </div>  ';
+													}
+													if(j != c.answer_list.length - 1){
+														html = html + '								<br />  ';
+													}
+											}
+											html = html + '										    <div class="choose_answer">  ';
+											html = html + '												<a>已选答案</a><span>';
+											for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+												var st= c.stu_answer_list[s];
+												html = html + '											'+xuanze[st.stu_answer_id - 1]+'';
+											}
+											html = html + '												</span><br />';
+											html = html + '												<a>正确答案</a><span style="color:#0DC77A;">';
+											for(var x=0;x<c.answer_list.length;x++){
+												if(c.answer_list[x].right_flag == '1'){
+													html = html + '										'+xuanze[c.answer_list[x].answer_id - 1]+'';
+												}
+											}
+											html = html + '												</span>  ';
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											html = html + '											<p class="icon_content" style="display: none;"> '+q.question_desc+'</p>  ';
+											html = html + '									</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.question_type == '4'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">判断题</span></p>  ';
+											html = html + '								<p class="question_stem">  ';
+											html = html + '									'+c.question_context+ '';
+											html = html + '								</p>  ';
+											html = html + '							<div id="decide_question">  ';
+											for(var j=0;j<c.answer_list.length;j++){ // 原答案 
+												var a = c.answer_list[j];
+												if(j == 0){
+													for(var e=0;e<c.stu_answer_list.length;e++){ // 学生答案
+														var st= c.stu_answer_list[e];
+														if(a.right_flag == '1'){
+															if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+																html = html + '							    <div class="option_btn_customer active btn_true">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}else{ // 正确的 非学生选择的
+																html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}
+														}else{ // 不正确的 学生选择
+															if(st.stu_answer_id == a.answer_id){ 
+																html = html + '							    <div class="option_btn_customer active">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}else{ // 不正确的 非学生选择的
+																html = html + '							    <div class="option_btn_customer">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}
+														}
+													}
+												}else{
+													for(var e=0;e<c.stu_answer_list.length;e++){ // 学生答案
+														var st= c.stu_answer_list[e];
+														if(a.right_flag == '1'){
+															if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+																html = html + '							    <div class="option_btn_customer active btn_true" style="margin-left:0.9rem;">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}else{ // 正确的 非学生选择的
+																html = html + '							    <div class="option_btn_customer active primary btn_true" style="margin-left:0.9rem;">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}
+														}else{ // 不正确的 学生选择
+															if(st.stu_answer_id == a.answer_id){ 
+																html = html + '							    <div class="option_btn_customer active" style="margin-left:0.9rem;">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}else{ // 不正确的 非学生选择的
+																html = html + '							    <div class="option_btn_customer" style="margin-left:0.9rem;">  ';
+																html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+																html = html + '							      <div class="option_text"> '+a.answer_context+'<i></i></div>  ';
+																html = html + '							    </div>  ';
+															}
+														}
+													}
+												}
+											}
+											html = html + '								</div>  ';
+											html = html + '								<div class="decide_answer">  ';
+											for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+													if(c.stu_answer_list[0].stu_answer_context == '1'){
+														html = html + '							<a>已选答案</a><span>对</span>  ';	
+													}else{
+														html = html + '							<a>已选答案</a><span>错</span>  ';
+													}
+												}
+											html = html + '</br>';
+											for(var x=0;x<c.answer_list.length;x++){ // 原答案
+												if(c.answer_list[x].right_flag == '1'){
+														html = html + '							<a>正确答案</a><span>'+c.answer_list[x].answer_context+'</span>  ';
+												}
+											}
+											html = html + '								 </div>  ';
+											html = html + '								<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											html = html + '								<p class="icon_content" style="display: none;"> '+c.question_desc+'</p>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.question_type == '3'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">填空题</span></p>  ';
+											html = html + '								<p class="question_stem">  ';
+											html = html + '									'+c.question_context+  '';
+											html = html + '								</p>  ';
+											html = html + '								<div class="fill_answer">  ';
+											html = html + '											<a>已选答案</a><span>';
+											for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+												if(s == c.stu_answer_list.length -1 ){
+													html = html + ''+c.stu_answer_list[s].stu_answer_context+'';
+												}else{
+													html = html + ''+c.stu_answer_list[s].stu_answer_context+';';
+												}
+											}
+											html = html + 											'</span>';
+											html = html + '											<br />  ';
+											html = html + '											<a>正确答案</a><span>';
+											for(var j=0;j<c.answer_list.length;j++){
+												if(j == c.answer_list.length -1 ){
+													html = html + ''+c.answer_list[j].answer_context+'';
+												}else{
+													html = html + ''+c.answer_list[j].answer_context+';';
+												}
+											}
+											html = html + 											'</span>  ';
+											html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											html = html + '										<p class="icon_content" style="display: none;"> '+c.question_desc+'</p>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.question_type == '5'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">简答题</span></p>  ';
+											html = html + '								<p class="question_stem">  ';
+											html = html + '									'+c.question_context+'  ';
+											html = html + '								</p>  ';
+											html = html + '								<div id="short_question">  ';
+											html = html + '											<div class="fill_answer">  ';
+											html = html + '												<a>已做答案</a><br/>';
+											for(var t=0;t<c.stu_answer_list.length;t++){ // 学生图片答案
+															html = html + '								<div class="answer_img">  ';
+		//													html = html + '									<img src="'+c.stu_answer_list[t].stu_answer_context+'" />  ';
+															html = html + '									<img src="/static/images/homework/icon_Photograph.png" />  ';
+															html = html + '								</div>  ';
+											}
+											html = html + '												<br />  ';
+											for(var x=0;x<c.answer_list.length;x++){
+												html = html + '										<a>正确答案</a><span style="color:  #0DC77A;">'+c.answer_list[0].answer_context+'</span>  ';
+											}
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											html = html + '											<p class="icon_content" style="display: none;">  '+c.question_desc+'</p>  ';
+											html = html + '											<div style="height: 0.2rem; width: 8rem; background-color: #F5F5F5; margin-top: 0.4rem; margin-left: -0.5rem;"></div>  ';
+											html = html + '											<div class="fill_answer">  ';
+											html = html + '												<a>老师打分</a><span>'+c.goal_score.substring(0,c.goal_score.indexOf('.'))+'分</span>  ';
+											html = html + '												<br />  ';
+											html = html + '												<a style="background-color: #cde9fc;color: #0493F0;">评语</a><span>'+c.tch_comment+'</span>  ';
+											html = html + '											</div>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+									}
+									html = html + '					</div>  ';
+									html = html + '					<div class="swiper-pagination'+m_flag+'"></div>  ';
+									html = html + '				</div>  ';
+									html = html + '			</div>  ';
+									html = html + '			<div class="multiple_btn">  ';
+									if(i == 0 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.result.question_list.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+									} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '			</div>  ';
+									html = html + '		</div>  ';
+									html = html + '	</div>  ';
+							}
+							$(".container_content").append(html);
+							// 左右滑动之后隐藏(1)
+						 	var swiper = new Swiper('.swiper-container'+m_flag, {
+						      pagination: {
+						        el: '.swiper-pagination'+m_flag,
+						      },
+							});
+							//(2)
+							$(".swiper-container"+m_flag).hide();
+							// 初始化显示第一题，隐藏其他试题
+						} // question循环
+						$(".container_content .child").hide();
+						$(".container_content .child").eq(0).show();
+					} // 有数据
+				}, function(err) {
+					showAlert("服务器异常，请稍后重试");
+				}
+		);
+	}
+		// 得分率
+		function scoring(){
+			ysAjax("/homework/getExerciseList", {
+					homework_id: getUrlParam("homework_id"),
+					homework_type:getUrlParam("homework_type")
+				},function(data) {
+					var question_score = 0; // 每题分数
+					var goal_score = 0; // 得分
+					var html_val;
+					if(data.result != null){
+						for(var i=0; i < data.result.question_list.length; i++){
+							var s = data.result.question_list[i];
+							question_score = parseInt(s.question_score) + parseInt(s.question_score);
+							goal_score = parseInt(s.goal_score) + parseInt(s.goal_score);
+						}
+						score_value = goal_score / question_score;
+						html_val = parseInt(score_value * 100);
+					}
+					score_value = html_val /100;
+					
+					score = score + '	<div class="content">  ';
+					score = score + '		<div class="demo-progressbar">  ';
+					score = score + '			<div class="demo-progress-cricle"> ';
+					score = score + '				<div class="progress-bar demo-progress-cricle" id="J_Progress"> ';
+					score = score + '					<div class="progressbar-content">'+ html_val +'<span>%</span></div> ';
+					score = score + '				</div> ';
+					score = score + '			</div> ';
+					score = score + '		</div>';
+					score = score + '		<p class="score_text">本次作业得分率</p>';
+					score = score + '		<div class="jiayou_btn"> ';
+					score = score + '			<div class="jiayou_bg" id="jiayou_bg"></div> ';
+					score = score + '			<input id="btn1" type="button" class="btn" value="加油打气" /> ';
+				    score = score + '		</div> ';
+					score = score + '	</div>  ';
+				}, function(err) {
+					showAlert('服务器异常，请稍后重试');
+				}
+		 	);
+		}
+		// 知识点
+		function knowledge(){
+			ysAjax("/homework/getKnowledge", {
+					section_id : getUrlParam("section_id")
+				}, function(data) {
+					if(data.result != null && data.result.ebook_name != null && data.result.ebook_name != ''){
+						var r = data.result;
+						text = text + '	<div class="content">  ';
+						text = text + '		<div class="k_title">  ';
+						text = text + '			您可根据以下知识点指引查看孩子课本了解详情  ';
+						text = text + '		</div>  ';
+						text = text + '		<div class="k_bottom" style="  ">  ';
+						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;年级&nbsp;&nbsp;一</span>  ';
+						text = text + '			<span class="k_b_content" >'+r.grade_name+'</span>  ';
+						text = text + '		</div>  ';
+						text = text + '		<div class="k_bottom">  ';
+						text = text + '		  <section class="g-scrollview">';
+						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节位置&nbsp;&nbsp;一</span>  ';
+						text = text + '			<span class="k_b_content" style=" display: block; font-size: 0.3rem; ">'+r.ebook_name+''+r.unit_name+''+r.section_name+'</span>  ';
+						text = text + '		  </section>';
+						text = text + '		</div>  ';
+//						text = text + '		<div class="k_bottom" style="margin-bottom:0.4rem;">  ';
+//						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节内容&nbsp;&nbsp;一</span>  ';
+//						text = text + '			<span class="k_b_content" >体积与面积</span>  ';
+//						text = text + '		</div>  ';
+						text = text + '	</div>  ';
+					}else{
+						text = text + '	<div class="content">  ';
+						text = text + '		<div class="no_knowledge">  ';
+						text = text + '	    	<img src="/static/images/homework/img_knowledge.png">  ';
+						text = text + '	        <p class="no_desc1">此作业没有关联知识点</p>  ';
+						text = text + '			<p class="no_desc2"">前往课堂了解孩子近期学习情况吧~</p>  ';
+						text = text + '		</div>  ';
+						text = text + '	</div>  ';
+					}
+				}, function(err) {
+					showAlert('服务器异常，请稍后重试');
+				}
+		 	);
+		}
+</script>
+</body>
+
+</html>

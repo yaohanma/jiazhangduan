@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+	.m-cell{
+		margin-top: 0.2rem;
+		color: #999;
+		padding-right: 0.24rem;
+	}
+	.m-cell:after{
+		border-bottom: none;
+	}
+	.m-cell a{
+		    display: block;
+		    padding-top: 0.3rem;
+	}
+	.m-cell p{
+		font-size: 0.33rem;
+		line-height: 0.5rem;
+		margin-top: 0.1rem;
+		color: #333;
+		margin-bottom: 0.19rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.m-cell p.active{
+		color:#999;
+	}
+	.cell-item div{
+		width: 100%;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    display: -webkit-box;
+	    font-size: 0.28rem;
+	    -webkit-box-orient: vertical;
+	    -webkit-line-clamp: 1;
+	    color: #999;
+	    margin-bottom: 0.3rem;
+	}
+	.no_data{
+		margin-top: 0.1rem;
+		color: #999;
+		text-align: center;
+		color: #b4b4b4;
+		font-size: 0.26rem;
+	}
+	.badge{
+		padding: 4px;
+		top: -0.1rem;
+		font-size: 0.4rem;
+	}
+	
+	/*暂无数据 css*/
+div.bg {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    padding: 0 1rem;
+    font-size: 0.3rem;
+    color: #999;
+}
+div.bg img {
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+.cell-item span{
+	width: 1.28rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+	border-radius: 0.04rem;
+	display: inline-block;
+	font-size: 0.24rem;
+	font-weight: 100;
+	text-align: center;
+	margin-right: 0.2rem;
+}
+/*考试日程*/
+.exam_rc span{
+	background-color: rgba(48,184,254,0.2);
+	color: #30b8fe;
+}
+/*重要通知*/
+.informtion_box span{
+	background-color: rgba(255,106,103,0.2);
+	color: #ff6a67;
+}
+/*考试成绩*/
+.exam_cj span{
+	background-color: rgba(62,199,186,0.2);
+	color: #3ec7ba;
+}
+/*考勤*/
+.kaoqin span{
+	background-color: rgba(116,137,254,0.2);
+	color: #7489fe;
+}
+
+/*2019/4/22 修改*/
+.cell-item p.read{
+		color: #999;
+	}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--暂无数据-->
+		<div class="bg">
+			<!--<div style="padding: 0 1rem; height: auto;">
+				<img src="/static/images/homework/img_msg.png">
+			</div>
+			<div style="line-height:.5rem ;">暂无数据</div>-->
+		</div>
+			<div class="m-cell">
+				<!-- TODO APP 假数据 -->
+				<!--考试日程-->
+	            <a href="/html/exam_schedule/exam_schedule_details.html?flag=msg" class="cell-item">
+	              <p class="exam_rc"> <span>考试日程</span>2018~2019第二学期一年级期中考试
+	              </p>
+	              <div>2018-05-4</div>
+	            </a>
+	            <!--重要通知-->
+	            <a href="/html/notice_list/notice_nei.html?flag=msg" class="cell-item">
+	              <p class="informtion_box  read"> <span>重要通知</span> 本学期第一次家长会 </p>
+	              <div>2018-05-4</div>
+	            </a>
+	            <!--考试成绩-->
+	            <a href="/html/exam_schedule/exam_results.html?flag=msg" class="cell-item">
+	              <p class="exam_cj"> <span>考试成绩</span> 2018年第二学期摸底考试成绩
+	              </p>
+	              <div>2018-05-4</div>
+	            </a>
+	            <!--考勤提醒-->
+	            <a href="/html/attendance/children_attendance.html?flag=msg" class="cell-item">
+	              <p class="kaoqin"> <span>考勤提醒</span> 考勤提醒
+	              </p>
+	              <div>2018-05-4</div>
+	            </a>
+	        </div>
+	        <div class="no_data">没有更多了~</div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	// header
+	addMainPageHeader("/html/common/homepage.html", "消息中心");
+	addMainPageFooter(1);
+	// “没有更多了~”
+	$('.no_data').hide();
+	// TODO APP 通知列表
+	//notice_list();
+});
+// 通知列表
+function notice_list() {
+	var page = 1,
+		pageSize = 10;
+	var loadMore = function(callback) {
+		ysAjax("/notification/init", {
+			page: page,
+			pageSize: pageSize
+		}, function(data) {
+			typeof callback == 'function' && callback(data);
+		}, function(err) {
+			showAlert('服务器异常，请稍后重试');
+		});
+	};
+	$('.m-cell').pullRefresh({
+		loadListFn: function() {
+			var def = $.Deferred();
+			loadMore(function(data) {
+				var html = '';
+				if(data.retCode == 'SUCCESS'){
+					if(data.list !=undefined && data.list.length > 0){
+						for(var i=0; i<data.list.length; i++){
+							var item = data.list[i];
+							html = html + ' <a href="/html/notice_list/notice_nei.html?msg_id='+item.msg_id+'&is_read='+item.is_read+'" class="cell-item"> ';
+							if(item.is_read == 0){ // 未读
+								html = html + '   <p>'+item.msg_title+'</p> ';
+							}else{
+								html = html + '   <p class="active">'+item.msg_title+'</p> ';	
+							}
+							html = html + '   <div>'+item.msg_content+'</div> ';
+							html = html + '   <div>'+getNowFormatDate(item.create_date)+'</div> ';
+							html = html + ' </a> ';
+						}
+						$('.m-cell').append(html);
+					}else{
+						$('.no_data').hide();
+						html = html + ' <div style="padding: 0 1rem; height: auto;"> ';
+						html = html + ' 	<img src="/static/images/homework/img_msg.png"> ';
+						html = html + ' </div> ';
+						html = html + ' <div style="line-height:.5rem ;">暂无数据</div> ';
+						$('.bg').html(html);
+					}
+					def.resolve();
+					++page;
+					var tipStr;
+					if(page > 2){
+						if(data.list.length <= 0) {
+							tipStr = '已是最新内容';
+							YDUI.dialog.toast(tipStr, 'none', 1000);
+							$('.no_data').show();// “没有更多了~”
+						}
+					}
+				}else{
+					showAlert('服务器异常，请稍后重试');
+				}
+			});
+			return def.promise();
+		}
+	});
+}
+// 时间格式化
+function getNowFormatDate(timeString) {
+        var date = new Date(timeString);
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+}
+</script>
+</body>
+</html>

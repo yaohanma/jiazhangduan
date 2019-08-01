@@ -1,0 +1,4 @@
+.demo-icons-weixin:before { content: '?'; }
+* {
+	touch-action: pan-y;
+}

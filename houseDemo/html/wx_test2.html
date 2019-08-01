@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<script src="/static/plugins/iosselect/iosSelect.js"></script>
+
+</head>
+<body>
+<section class="g-flexview">
+     <div class="g-scrollview">
+     	<div style="width: 100%;text-align: center;">欢迎加入鹰硕家长端~ </div>
+     	<img src="/static/images/common/eaglesoulQRcode.png" style="width: 100%;margin-top: 10px;" />
+     </div>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+//	alert(getUrlParam('app_id'));
+//	alert(getUrlParam('auth_key'));
+	test();
+});
+function test(){
+	ysAjax("/medal/statistics_share", {
+		openid:getUrlParam('openid'),
+		stu_id:getUrlParam('stu_id'),
+		app_id:getUrlParam('app_id'),
+		auth_key:getUrlParam('auth_key')
+	}, function(data) {
+		if(data.success){
+			showAlert(getUrlParam('invitate_code')+"**"+
+				getUrlParam('openid')+"**"+
+				getUrlParam('stu_id')+"**"+
+				getUrlParam('app_id')+"**"+getUrlParam('auth_key')
+			);
+		}else{
+			showAlert(data.errorMsg);
+		}
+	});
+}
+</script>
+</body>
+</html>

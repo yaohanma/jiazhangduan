@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+	.txtdiv {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+	}
+	.cell-item.noborder:after{
+		border-bottom: none;
+	}
+	.cell-item .title {
+	    width: 100%;
+	    font-size: 0.32rem;
+	    color: #333333;
+	    text-align: left;
+	    overflow: hidden;
+
+	}
+	.cell-item .cell-left{
+		font-size: 0.28rem;
+	    color: #666;
+	}.cell-item .cell-right{
+		font-size: 0.24rem;
+	    color: #999;
+	}
+	
+	
+	/*进度条 样式*/
+	.demo-progress-cricle {
+		width: 2rem;
+		height: 2rem;
+	}
+			
+	.demo-progressbar {
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-justify-content: space-around;
+	    -ms-flex-pack: distribute;
+	    justify-content: space-around;
+	    -webkit-box-align: center;
+	    -webkit-align-items: center;
+	    -ms-flex-align: center;
+	    align-items: center;
+	    padding: 0 .24rem;
+	    background: #FFFFFF;
+	}
+	.demo-progressbar-item{
+		width: 100%;
+	}
+	.progress-bars > svg {
+	    border-radius: 20px;
+	    height: 6px !important;
+	}
+	.progress-bars > svg > path {
+		border-radius: 20px !important;
+		height: 6px !important;
+	} 
+	.progress-bars > svg {
+		border-radius: 20px;
+		height: 6px !important;
+	}
+	.p_tb30{
+		padding-bottom: 0.30rem;
+	}
+	.m-cell:after{
+		border-bottom: none;
+	}
+	/*暂无数据 css*/
+div.bg {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    padding: 0 1rem;
+    font-size: 0.3rem;
+    color: #999;
+}
+div.bg img {
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+.cell-item:not(:last-child):after{
+	width:0;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--暂无数据-->
+	    <!--<div class="bg">
+			<div style="padding: 0 1rem; height: auto;">
+				<img src="/static/images/homework/img_msg.png" />
+			</div>
+			<div style="line-height:.5rem ;">暂无数据</div>
+		</div>-->
+		<!-- TODO APP 假数据 -->
+		<!-- <div class="m-cell" style="border-radius: 4px;margin: 10px;">
+			<div class="cell-item txtdiv noborder">
+				<span class="title">终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长终身成长</span>
+			</div>
+			<div class="cell-item noborder">
+				<div class="cell-left">阅读进度:85%</div>
+				<div class="cell-right">上次阅读日期：2018.05.11</div>
+			</div>
+			<div class="demo-progressbar p_tb30">
+				<div class="demo-progressbar-item">
+					<div class="progress-bar progress-bars demo-progress-line"><svg viewBox="0 0 100 4" preserveAspectRatio="none" style="width: 100%; height: 100%;"><path d="M 0,2 L 100,2" stroke="#E5E5E5" stroke-width="4" fill-opacity="0"></path><path d="M 0,2 L 100,2" stroke="#0493f0" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: 60; stroke-dasharray: 100, 100;"></path></svg></div>
+				</div>
+			</div>
+		</div>
+		<div class="m-cell" style="border-radius: 4px;margin: 10px;">
+			<div class="cell-item txtdiv noborder">
+				<span class="title">终身成长</span>
+			</div>
+			<div class="cell-item noborder">
+				<div class="cell-left">阅读进度:85%</div>
+				<div class="cell-right">上次阅读日期：2018.05.11</div>
+			</div>
+			<div class="demo-progressbar p_tb30">
+				<div class="demo-progressbar-item">
+					<div class="progress-bar progress-bars demo-progress-line"><svg viewBox="0 0 100 4" preserveAspectRatio="none" style="width: 100%; height: 100%;"><path d="M 0,2 L 100,2" stroke="#E5E5E5" stroke-width="4" fill-opacity="0"></path><path d="M 0,2 L 100,2" stroke="#0493f0" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: 60; stroke-dasharray: 100, 100;"></path></svg></div>
+				</div>
+			</div>
+		</div> -->
+	
+		
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	addMainPageHeader("/html/read/child_reading.html", "孩子的阅读历史", {
+					hasIcon:true,
+					action : function() {
+					}
+	});
+	addMainPageFooter(2);
+	childReadHistory();
+});
+
+// 阅读历史信息
+function childReadHistory() {
+	ysAjax("/read/child_read_history",{},function(data) {
+		if(data.success) {
+			var array = data.result;
+			var html = '';
+			if(array != null && array.length > 0){
+				for(var i=0; i<array.length; i++){
+					var item = array[i];
+					var progress = 100 - parseInt(item.read_progress);
+					html = html + '	<div class="m-cell" style="border-radius: 4px;margin: 10px;">  ';
+					html = html + '		<div class="cell-item txtdiv noborder">  ';
+					html = html + '			<span class="title">'+item.resource_name+'</span>  ';
+					html = html + '		</div>  ';
+					html = html + '		<div class="cell-item noborder">  ';
+					html = html + '			<div class="cell-left">阅读进度:'+item.read_progress+'%</div>  ';
+					html = html + '			<div class="cell-right">上次阅读日期：'+item.last_read_time+'</div>  ';
+					html = html + '		</div>  ';
+					html = html + '		<div class="demo-progressbar p_tb30">  ';
+					html = html + '			<div class="demo-progressbar-item">  ';
+					html = html + '				<div class="progress-bar progress-bars demo-progress-line"> ';
+					html = html + '					<svg viewBox="0 0 100 4" preserveAspectRatio="none" style="width: 100%; height: 100%;"> ';
+					html = html + '						<path d="M 0,2 L 100,2" stroke="#E5E5E5" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: '+parseInt(item.read_progress)+';"></path> ';
+					html = html + '						<path d="M 0,2 L 100,2" stroke="#0493f0" stroke-width="4" fill-opacity="0" style="stroke-dashoffset: '+progress+'; stroke-dasharray: 100, 100;"></path> ';
+					html = html + '					</svg> ';
+					html = html + '				</div>  ';
+					html = html + '			</div>  ';
+					html = html + '		</div>  ';
+					html = html + '	</div>  ';
+				}
+				$('.g-scrollview').html(html);
+			}else{
+				html = html + '	<div class="bg">  ';
+				html = html + '		<div style="padding: 0 1rem; height: auto;">  ';
+				html = html + '			<img src="/static/images/homework/img_msg.png" />  ';
+				html = html + '		</div>  ';
+				html = html + '		<div style="line-height:.5rem ;">暂无数据</div>  ';
+				html = html + '	</div>  ';
+				$('.g-scrollview').html(html);
+			}
+		} else {
+			showAlert('服务器异常，请稍后重试');
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+</script>
+
+</body>
+</html>

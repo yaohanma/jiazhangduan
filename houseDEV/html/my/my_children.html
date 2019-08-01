@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--滑动模块css-->
+        <link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<!--<script type="text/javascript" src="/static/js/flexible.js"></script>-->
+		<script type="text/javascript" src="/static/js/iscroll.js"></script>
+		<script type="text/javascript" src="/static/js/navbarscroll.js"></script>
+			<style>
+			
+	   div.img_box{
+		width: 1rem;
+		height: 1rem;
+		float: left;
+		margin-right: .2rem;
+		border-radius: 50%;
+	}
+	   div.img_box img{
+		width: 100%;
+		height: 100%;
+	   border-radius: 50%;
+	}
+       .no_data{
+           width: 3.24rem;
+           margin-left:35%;
+       }
+       .no_data img{
+           width: 3.24rem;
+           height: 3.04rem;
+           margin-top: 25%;
+       }
+       .no_data p{
+           padding-left: 0.2rem;
+           color: #888a97;
+           font-size: 0.24rem;
+           margin-top: 0.3rem;
+       }
+       .no_data_text{
+           display: inline-block;
+           color: #888a97;
+           font-size: 0.24rem;
+           margin-left:30%;
+           margin-top: 0.3rem;
+
+       }
+       .no_data_text a{
+           color:#0493f0;
+       }
+		/*.tab-nav-item:not(:last-child):after{
+				border-right: 0px;
+			}
+			.tab-nav{
+				position: fixed;
+			    width: 100%;
+			    z-index: 100;
+			    top:.8rem;
+			}
+			.tab-nav-item a {
+				background-color: #FFFFFF;
+				margin-top: 0.25rem;
+			}
+			.tab-nav-item{
+				background-color: #F5F5F5;
+				color:#999999
+			}
+			.tab-nav-item.tab-active{
+				background-color: #F5F5F5;
+			}
+			.tab-panel{
+				   	margin-top: 11%;
+				    background: none;
+			}
+			.tab-panel .tab-panel-item{
+				padding: 0;
+				margin-bottom: 1.15rem;
+			}
+			.tab-nav-item.tab-active {
+			    color: #0493F0;
+			}
+			.tab-nav:after {
+			    content: '';
+			    position: absolute;
+			    z-index: 3;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 1px;
+			    border-bottom: 1px solid #e5e5e5;
+			    -webkit-transform: scaleY(0.5);
+			    transform: scaleY(0.5);
+			    -webkit-transform-origin: 0 100%;
+			    transform-origin: 0 100%;
+			 }*/
+			.font-size-tab{
+				font-size: .32rem;
+			}
+			.font-size-content{
+				font-size: .3rem;
+			}
+			.font-color-99{
+			    color: #999999;
+			}
+			.font-color-33{
+				color: #333333;
+			}
+			.cell-item-height{
+			    height: 1.2rem;
+			}
+            .m-cell.no_bor:after{
+            	border: none;
+           }
+           /*new*/
+          	ul,li{margin:0;padding:0;}
+	ul{list-style:none;}
+	a {text-decoration:none}
+	a:hover{text-decoration:none}
+
+	.clearfix:after{
+		content:".";
+		display:block;
+		height:0;
+		clear: both;
+		visibility:hidden;
+	}
+	.clearfix{zoom:1;}
+	.wrapper03 {
+		position:relative;
+		height: .9rem;
+		width: 100%;
+		z-index:1000;
+		overflow: hidden;
+		margin:0 auto;
+		background-color: #fff;
+		margin-top: 0.2rem;
+	}
+	.wrapper03 .scroller {
+		position:absolute;
+		/*border-bottom:1px solid #B2B2B2;*/
+		background-color: #fff;
+		height: .8rem;
+		}
+	.wrapper03 .scroller li {
+		height: .9rem;
+		color:#666666;
+		float: left;
+		/*font-size: 13px;*/
+		text-align: center;
+	}
+	.wrapper03 .scroller li a{
+		color:#666666;
+		display:block;
+		height:0.9rem;
+		line-height:0.9rem;
+		padding: 0 0.4rem;
+		margin: 0 0.4rem;
+	}
+	.wrapper03 .scroller li.cur a{
+		color:#0493f0;
+		border-bottom:3px solid #0493f0;
+		}
+.content {
+	width: 100%;
+	height: auto;
+	position: relative;
+	z-index: 0;
+	margin-top: 1rem;
+}
+.m-cell:after{
+	border-bottom: none;
+}
+
+.mytitle{
+    font-weight: bold;
+}
+body .tab-panel-item .m-cell.no_bor:after,
+body  .tab-panel-item .grids-item.no_bor:after,
+body .tab-panel-item .cell-item.no_bor:not(:last-child):after{
+	border-bottom:0;
+}
+.tab-panel .tab-panel-item,
+.tab-panel{
+	padding-bottom: 0;
+}
+.tab-nav-item.tab-active{
+	color:#397ff9;
+}
+.tab-nav-item a{
+	font-size: 0.32rem;
+}
+.tab-nav-item:not(:last-child):after{
+	border-right:0;
+}
+.hide-item{
+	display: none;
+}				
+		</style>
+	</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview">
+
+			<div class="wrapper wrapper03" id="wrapper03" style="border-bottom:1px solid #e5e5e5;" hidden="hidden">
+				<div class="scroller" >
+					<ul class="clearfix"style="border-bottom:2px solid #0493f0;" id="child">
+						<!-- 	<li ><a  class="ui-link">黄小米</a></li>
+                            <li ><a  class="ui-link">黄小米</a></li>
+                            <li ><a  class="ui-link">黄小米</a></li>
+                            <li ><a  class="ui-link">黄小米</a></li>
+                            <li ><a  class="ui-link">黄小米</a></li>
+                            <li ><a  class="ui-link">黄小米</a></li>   -->
+
+					</ul>
+				</div>
+			</div>
+
+				<div class="tab-panel" id="nei">
+					<!--<div class="tab-panel-item tab-active">
+						<div class="m-cell no_bor"  style="margin-bottom: .2rem;">
+							<div class="cell-item" style="height: 90px;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">头像</p>
+								</div>
+								<div class="cell-right cell-arrow">
+									<span class=""><img  src="/static/images/appimg/default_boy.png" style="width: 1rem;height: 1rem;"></span></span>
+								</div>
+							</div>
+						</div>
+						<div class="m-cell" style="margin-bottom:0;">
+							<div class="cell-item cell-item-height" href="javascript:;" style="height: 0.88rem;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">姓名</p>
+								</div>
+								<div class="cell-right">
+									<p style="font-size: 0.28rem; color: #888a97;">黄小米</p>
+								</div>
+							</div>
+							<div class="cell-item" href="javascript:;" style="height: 0.88rem;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">学校</p>
+								</div>
+								<div class="cell-right">
+									<p style="font-size: 0.28rem; color: #888a97;">深圳新安中学</p>
+								</div>
+							</div>
+							<div class="cell-item" href="javascript:;" style="height: 0.88rem;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">年级</p>
+								</div>
+								<div class="cell-right">
+									<p style="font-size: 0.28rem; color: #888a97;">八年级</p>
+								</div>
+							</div>
+							<div class="cell-item" href="javascript:;" style="height: 0.88rem;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">班级</p>
+								</div>
+								<div class="cell-right">
+									<p style="font-size: 0.28rem; color: #888a97;">八三班</p>
+								</div>
+							</div>
+							<div class="cell-item" href="javascript:;" style="height: 0.88rem;">
+								<div class="cell-left">
+									<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">学籍号</p>
+								</div>
+								<div class="cell-right">
+									<p style="font-size: 0.28rem; color: #888a97;">12345677889</p>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
+				</div>
+			</div>
+		</section>
+	</section>
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/my/my_home.html", "我的孩子");
+				//wl test
+               // setUserId("15998594091");
+               // setToken("1b2e266d9c01f8b34e62bfd2540da397071140e8");
+				loadPage();
+			});
+			var array=[];
+			//学生信息
+			function loadPage() {
+				ysAjax("/mob/student/getStrudentInfo", {
+				    status:'bind'
+				}, function(data) {
+					if (data.success) {
+						var html="";
+						if(data.result && data.result.length>0){
+                            $(".wrapper").show();
+                            var datalist = data.result;
+                            for(i=0;i<datalist.length;i++){
+                                html+='<li ><a  class="ui-link font-size-tab" onclick="showContent(&quot;'+datalist[i].stu_id+'&quot;,&quot;'+datalist[i].school_id+'&quot;)" >'+datalist[i].stu_name+'</a></li>  ';
+                            }
+                            $("#child").html(html);
+                            var chtml="";
+                            for(j=0;j<datalist.length;j++){
+                                array.push(datalist[j].stu_id);
+                                chtml+='<div id="content'+datalist[j].stu_id+'" class="tab-panel-item">';
+                                chtml+='<div class="m-cell no_bor"  style="margin-bottom: .2rem;">';
+                                chtml+='<div class="cell-item" style="height: 90px;;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">头像</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<span class="">';
+                                if(datalist[j].stu_head_image != null && datalist[j].stu_head_image != '') {
+                                    chtml+='<img src="'+datalist[j].stu_head_image+'" style="width: 1rem;height: 1rem;border-radius:50%">';
+                                }else{
+                                    chtml+='<img src="/static/images/common/img_moren.png" style="width: 1rem;height: 1rem;border-radius:50%">';
+                                }
+                                chtml+='</span>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='<div class="m-cell" style="margin-top: 0rem;margin-bottom: 0rem;">';
+                                chtml+='<div class="cell-item b-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">昵称</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_nickName+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">姓名</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_name+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item c-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">性别</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                if(datalist[j].stu_sex){
+                                    if(datalist[j].stu_sex == "0"){
+                                        datalist[j].stu_sex = "男";
+                                    }else{
+                                        datalist[j].stu_sex = "女";
+                                    }
+                                }
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_sex+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item c-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">出生日期</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_birthday+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item c-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">学段</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                if(datalist[j].stu_period){
+                                    if(datalist[j].stu_period == "0"){
+                                        datalist[j].stu_period = "幼儿园";
+                                    }else if(datalist[j].stu_period == "1"){
+                                        datalist[j].stu_period = "小学";
+                                    }else if(datalist[j].stu_period == "7"){
+                                        datalist[j].stu_period = "初中";
+                                    }else if(datalist[j].stu_period == "10"){
+                                        datalist[j].stu_period = "高中";
+                                    }
+                                }
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_period+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item c-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">账号</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_id+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item b-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">学校</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].school_name+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div> ';
+                                chtml+='<div class="cell-item b-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">年级</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].grade_name+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-item b-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">班级</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].class_name+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-item b-class" style="height: 0.88rem;">';
+                                chtml+='<div class="cell-left">';
+                                chtml+='<p style="font-size: 0.3rem; color: #313340;font-weight: bold;">学籍号</p>';
+                                chtml+='</div>';
+                                chtml+='<div class="cell-right">';
+                                chtml+='<p style="font-size: 0.28rem; color: #888a97;">'+datalist[j].stu_no+'</p>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                                chtml+='</div>';
+                            }
+                            $("#nei").html(chtml);
+                            showContent(datalist[0].stu_id,datalist[0].school_id);
+                            $('.wrapper').navbarscroll();
+						}else{
+//							location.href="/html/my/no_child.html";
+							var html = '<div class="no_data">' +
+                                '<img src="/static/images/newAPPimg/no_data.png" />' +
+                                '<p>暂无孩子信息哦~</p></div><p class="no_data_text">' +
+                                '<a href="/html/login/set_children.html?flag=1">添加孩子</a>可查看孩子信息</p>';
+                            $(".g-scrollview").html(html);
+                            $(".g-scrollview").css("background","#fff");
+						}
+					/*	html+='<ul class="tab-nav">';
+						for(i=0;i<datalist.length;i++){
+						if(i==0){
+				             html+='<li class="tab-nav-item tab-active"><a href="javascript:;" class="font-size-tab">'+datalist[i].stu_name+'</a></li>';
+						}else{
+					         html+='<li class="tab-nav-item"><a href="javascript:;" class="font-size-tab">'+datalist[i].stu_name+'</a></li>';
+						}
+						}
+						html+='</ul>';
+						html+='<div class="tab-panel">';
+						for(j=0;j<datalist.length;j++){
+							
+							if(j==0){
+							html+='<div class="tab-panel-item tab-active">';
+							}else{
+							html+='<div class="tab-panel-item">';
+							}
+							html+='<div class="m-cell"  style="margin-bottom: .2rem;">';
+							html+='<div class="cell-item" style="height: 1.5rem;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">头像</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<div class="img_box">';
+							if(datalist[j].stu_head_image != null && datalist[j].stu_head_image != '') {
+								html+='<img src="'+datalist[j].stu_head_image+'">';
+							}else{
+								html+='<img src="/static/images/common/img_moren.png">';
+							}
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							html+='<div class="m-cell .no_bor">';
+							html+='<div class="cell-item cell-item-height" href="javascript:;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">姓名</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<p class="font-size-tab font-color-99">'+datalist[j].stu_name+'</p>';
+							html+='</div>';
+							html+='</div> ';
+							html+='<div class="cell-item cell-item-height" href="javascript:;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">学校</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<p class="font-size-tab font-color-99">'+datalist[j].school_name+'</p>';
+							html+='</div>';
+							html+='</div> ';
+							html+='<div class="cell-item cell-item-height" href="javascript:;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">年级</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<p class="font-size-tab font-color-99">'+datalist[j].grade_name+'</p>';
+							html+='</div>';
+							html+='</div>';
+							html+='<div class="cell-item cell-item-height" href="javascript:;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">班级</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<p class="font-size-tab font-color-99">'+datalist[j].class_name+'</p>';
+							html+='</div>';
+							html+='</div>';
+							html+='<div class="cell-item cell-item-height" href="javascript:;">';
+							html+='<div class="cell-left">';
+							html+='<p class="font-size-tab font-color-33">学籍号</p>';
+							html+='</div>';
+							html+='<div class="cell-right">';
+							html+='<p class="font-size-tab font-color-99">'+datalist[j].stu_no+'</p>';
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							}
+						html+='</div>';
+						$("#J_Tab").append(html);
+						var $tab = $('#J_Tab');
+					    $tab.tab({
+					        nav: '.tab-nav-item',
+					        panel: '.tab-panel-item',
+					        activeClass: 'tab-active'
+					    }); */
+					} else {
+						showNotify("孩子信息取得失败");
+					}
+				}, function(err) {
+					showNotify("发生异常");
+				});
+			} 
+		
+			//显示学生内容
+			function showContent(stu_id,schoolId){
+				for(var i=0; i<array.length; i++){
+					if(stu_id != array[i]){
+                        $("#content"+array[i]).removeClass("tab-active")
+					}
+				}
+                $("#content"+stu_id).addClass("tab-active")
+                if(schoolId == "jzdxnxx201905"){
+                    //虚拟学校id--> 对应C端孩子
+                    $(".b-class").addClass("hide-item");
+                    $(".c-class").removeClass("hide-item");
+                }else{
+                    $(".c-class").addClass("hide-item");
+                    $(".b-class").removeClass("hide-item");
+                }
+			}
+		
+		</script>
+</body>
+
+</html>

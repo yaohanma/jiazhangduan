@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+	
+	/*滑动样式*/
+   
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      width: 1.64rem;
+     /* padding: .4rem .3rem;*/
+    }
+	.swiper-slide>a>div{
+		font-size: 0.26rem;
+		color: #333;
+		text-align: center;
+		margin-top: 0.1rem;
+	}
+  .swiper-slide img{
+  	width: 70%;
+  	margin: 0 auto;
+  	margin-top: 0.3rem;
+  }
+  /*日常学情*/
+ .demo-spinner p{
+ 	background: #fafafa;
+ 	border-radius: 10px;
+ 	text-align: center;
+ 	color:#0493F0;
+ 	line-height: 1rem;
+ }
+ .demo-spinner p span {
+ 	width: auto;
+ 	color:#0493F0;
+ 	font-size: .28rem;
+ 	display:inline-block;
+ 	text-align: center;
+ 	line-height: 1rem;
+ 	  vertical-align: middle;
+        text-align: center;
+ }
+.demo-spinner p span img{
+	width: .5rem;
+	line-height: 1px;
+}
+.m-grids-2 .grids-item.no_bor:not(:nth-child(2n)):before,
+.m-grids-2 .grids-item.no_bor:after{
+	border: 0;
+}
+ .m-cell.no_bor:after{
+ 	border: none;
+ }
+ .m-cell.no_bor  .cell-left{
+ 	font-size:0.28rem;
+ }
+ /*考试成绩 css*/
+.exam_box .my-left{
+	display: block;
+	padding-top: 0.3rem;
+	padding-bottom: 0.15rem;
+}
+.exam_box .cell-left .title{
+	color: #333;
+}
+.exam_box .cell-left .time {
+    font-size: 0.24rem;
+    color: #999;
+    margin-top: 0.2rem;
+}
+.exam_box .cell-left span{
+	display: inline-block;
+    width: auto;
+    padding:0  0.1rem;
+   height: auto;
+    line-height: 0.36rem;
+    background: none;
+    border-radius: 4px;
+    font-size: 0.24rem;
+    text-align: center;
+   	color: #ff596b;
+    border: 1px solid #ff596b;
+   margin-top: 0.2rem;
+}
+.no_data{
+	    width: 100%;
+    height: 3.5rem;
+    background: #fff;
+}
+.no_data div{
+	width: 100%;
+    height: 3rem;
+    background: url(/static/images/homework/img_msg.png) no-repeat center;
+    background-size: 50%;
+}
+.no_data p{
+    color: #999;
+    text-align: center;
+    margin-top: -0.2rem;
+    font-size: 0.24rem;
+    line-height: .5rem;
+}
+.app_box{
+	background: #fff;
+	padding: 0.3rem 0;
+	/*border-bottom: 1px solid #e5e5e5;*/
+}
+.app_box a{
+	 display: inline-block;
+	text-align: center;
+}
+.app_box a img{
+	width: 0.98rem;
+	height: 0.98rem;
+	margin: 0 auto;
+}
+.app_box a div{
+	font-size: 0.24rem;
+	color: #313340;
+	margin-top: 0.2rem;
+}
+.com_box{
+	margin-bottom: 0;
+}
+.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+	border-right:0;
+}
+.m-grids-3:before,
+.grids-item:after{
+	border-bottom: 0;
+}
+/* 学生课表 和考试日程 样式*/
+.m-grids-2:before,
+.grids-item:after{
+	border-bottom: 0;
+}
+.m-grids-2 .grids-item:not(:nth-child(2n)):before{
+	border-right:0;
+}
+  </style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--了解更多首页-->
+		<div class="app_box m-grids-2">
+			<a href="/html/classCard/classCard.html"  class="grids-item">
+	      		<img src="/static/images/study_img/icon_timetable.png" />
+	      		<div style="">学生课表</div>
+	      	</a>
+		   	<a href="/html/exam_schedule/exam_schedule.html" class="grids-item">
+	      		<img src="/static/images/study_img/icon_schedule.png" />
+	      		<div style="">考试日程</div>
+	      	</a>
+			<!--<a href="/html/read/child_reading.html" class="grids-item">
+	      		<img src="/static/images/appimg/icon_read.png" />
+	      		<div style="">鹰硕阅读</div>
+	      	</a>-->
+		</div>
+		<!--滑动模块-->
+		<!--<div class="com_box" style="height: 2.12rem;margin-top: 0.2rem;">
+			<div class="swiper-container swiper-container-horizontal">
+			    <div class="swiper-wrapper">
+				    <div class="swiper-slide">
+				    <a href="/html/classCard/classCard.html">
+			      		<img src="/static/images/study_img/icon_timetable.png" />
+			      		<div style="width: 100%;">学生课表</div>
+			      	</a>
+				    </div>
+				   <div class="swiper-slide">
+				   	<a href="/html/exam_schedule/exam_schedule.html">
+			      		<img src="/static/images/study_img/icon_schedule.png" />
+			      		<div style="width: 100%;">考试日程</div>
+			      	</a>
+				    </div>
+	      			<div class="swiper-slide">
+	      			<a href="/html/read/child_reading.html">
+			      		<img src="/static/images/study_img/icon_read.png" />
+			      		<div style="width: 100%;">鹰硕阅读</div>
+			      		</a>
+				    </div>
+				    <div class="swiper-slide">
+				      <a href="/html/understand_more/understand_null.html">
+			      		<img src="/static/images/study_img/icon_analysis.png" />
+			      		<div style="width: 100%;">手写分析</div>
+			      		</a>
+				    </div>
+				    <div class="swiper-slide">
+				      <a href="/html/understand_more/understand_null.html">
+			      		<img src="/static/images/study_img/icon_statistics.png" />
+			      		<div style="width: 100%;">获奖统计</div>
+			      		</a>
+				    </div>
+				    <div class="swiper-slide">
+				      <a href="/html/understand_more/understand_null.html">
+			      		<img src="/static/images/study_img/1288.png" />
+			      		<div style="width: 100%;">综合分析</div>
+			      		</a>
+				    </div>
+	    		</div>
+   			</div>
+		</div>-->
+		<!--滑动模块  end-->
+		<div class="com_box">
+			<div class="m-cell no_marbotm mytitle">
+			    <div class="cell-item">
+			        <div class="cell-left"><i></i>日常学情</div>
+			        <div class="cell-right cell-arrow"><a class="fc_999" href="/html/understand_more/daily_learning.html">进入专栏</a></div>
+			    </div>
+			</div>
+			
+			<div class="">
+	            <div class="cell-item" style="padding-bottom: 0.76rem;">
+	                <div class="cell-left" style="font-size: 0.28rem;" >今日排行TOP</div>
+	                <div class="cell-right" style="color: #0493F0;font-size: 0.3rem;" id="topnum"></div>
+	            </div>
+	      		
+				<!--<ul class="" style="height: 2rem;margin-top: .3rem;">
+		            <li class="" style="width: 50%;float: left;">
+		                <div class="grids-txt fc_999">今日排行TOP</div>
+		                <div class="grids-txt" style="font-size: 0.8rem;color: #0493F0;">2</div>
+		                 <div class="grids-txt fc_999">自律使人成长</div>
+		            </li>
+		            <li class="" style="width: 50%;float:  right;">
+		                <div class="grids-txt fc_999">连续学习天数</div>
+		                <div class="grids-txt" style="font-size: 0.8rem;">8</div>
+		                 <div class="grids-txt fc_999">坚持是种习惯</div>
+		            </li>
+		        </ul>-->
+			</div>
+		</div>
+	
+		<div class="com_box">
+			<div>
+				<div class="m-cell no_marbotm mytitle">
+				    <div  class="cell-item">
+				        <div class="cell-left"><i></i>错题本</div>
+				        <div class="cell-right cell-arrow"><a class="fc_999" href="/html/understand_more/wrong_book.html">进入专栏</a></div>
+				    </div>
+				</div>
+			</div>
+	        <div class="m-cell no_bor" style="margin-bottom: 0;">
+	            <div class="cell-item">
+	                <div class="cell-left">今日错题总数</div>
+	                <div class="cell-right" id="errorCount" style="font-size: 0.3rem;"></div>
+	            </div>
+	            <div class="cell-item">
+	                 <div class="cell-left">今日最多做错次数</div>
+	                <div class="cell-right" id="maxErrorNum" style="font-size: 0.3rem;"></div>
+	            </div>
+	        </div>
+		</div>
+		
+		<!--考试成绩-->
+		<div class="com_box exam_box" id="exam">
+			<div>
+				<div class="m-cell no_marbotm mytitle">
+				    <div  class="cell-item">
+				        <div class="cell-left"><i></i>考试成绩</div>
+				        <div class="cell-right cell-arrow"><a class="fc_999" href="/html/exam_schedule/exam_list.html">进入专栏</a></div>
+				    </div>
+				</div>
+			</div>
+            <div  class="cell-item">
+		        <div class="cell-left my-left" id="latestExam">
+		        	<p class="title"></p>
+		        	<p>
+		        		<span>最新考试</span>
+		        	</p>
+		        	<p class="time"></p>
+		        </div>
+		        <div class="no_data" style="display: none;">
+		        	<div></div>
+		        	<p>暂无数据</p>
+		        </div>
+		    </div>
+		</div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	addMainPageHeader("/html/study/study_index.html", "了解更多");
+	addMainPageFooter(4);
+	ysAjax("/study/getUnderstandInfo", {
+	}, function(data) {
+		if (data.success) {
+			$("#errorCount").text(data.result.errorQuestionCount);
+			$("#maxErrorNum").text(data.result.maxErrorNum);
+			$("#topnum").text(data.result.topnum);
+		} else {
+			showNotify("没有数据");
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+	
+	//滑动模块
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+    /*added by stt 最新考试成绩——start*/
+    latestExam();
+	 /*added by stt 最新考试成绩——end*/
+});
+	/*added by stt 最新考试成绩——start*/
+	function latestExam(){
+		ysAjax("/exam/init", {
+			page: 1,
+			pageSize: 10
+		}, function(data) {
+			if(data.retCode == 'SUCCESS') {
+				if(data.examList !=undefined && data.examList != null && data.examList.length > 0) {
+						var item = data.examList[0];
+						$('#latestExam p').eq(0).html(item.examName);
+						$('#latestExam p').eq(2).html(item.startTime+'~'+item.endTime);
+						$('#latestExam').parent('div').click(function(){
+							window.location.href = '/html/exam_schedule/exam_results.html?examId='+item.examId+'&flag=1';
+						});
+				}else{
+					$('#latestExam').hide();
+					$('#latestExam').next('div .cell-right').hide();
+					$('.no_data').show();
+				}
+			}else{
+				showAlert('服务器异常，请稍后重试');
+			}
+		}, function(err) {
+			showAlert('服务器异常，请稍后重试');
+		});
+	}
+	/*added by stt 最新考试成绩——end*/
+</script>
+
+</body>
+</html>

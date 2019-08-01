@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+       <link href="/static/plugins/videojs/video-js.css" rel="stylesheet">
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+ .video-js{
+width: 100%;
+}
+.video-play{
+margin-top: 2.71rem;
+}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview">
+				<div align="center">
+					<div class="video-play">
+						<video id="ys_video" class="video-js ys-video vjs-big-play-centered" controls preload="auto" poster="/" data-setup="{}">
+							<source   id="videopath" src="" type='video/mp4'>
+							<source   src="" type='video/x-flv'>
+							<source   src="" type='video/webm'>
+							<p class="vjs-no-js">
+								您的浏览器不支持我，呜呜呜~~~~~~~~~~~~~
+								<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+							</p>
+						</video>
+						<div id="playFinish" class="play-finish ys-video pull-middle" hidden>
+							<span class="middle"></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/plugins/videojs/video.js"></script>
+		<script src="/static/plugins/videojs/html5media.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#videopath").attr("src",getUrlParam("path"));
+				videojs("ys_video").ready(function() {
+					var myPlayer = this;
+
+				});
+ 
+
+				addMainPageHeader(getUrlParam("backurl"), "课堂");
+				addMainPageFooter(3);
+
+				 
+
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+<style>
+	#ysYduiNavBarRightBtn{
+		background-image: url(/static/images/study_img/icon_record.png);
+	    background-repeat: no-repeat;
+	    background-position-y: 0.3rem;
+	    padding-right: 0.6rem;
+	    background-position-x: 1.3rem;
+	    background-size: 22%;
+	}
+	/*滑动样式*/
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      width: 1.64rem;
+      padding: .4rem 0;
+    }
+	.swiper-slide>a>div{
+		font-size: 0.26rem;
+		color: #333;
+		text-align: left;
+		margin-top: 0.1rem;
+		width: 100%;
+		line-height: .4rem;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		-webkit-box-orient:vertical;
+		-webkit-line-clamp:2; 
+		display:-webkit-box; 
+		position:relative;
+	}
+	.swiper-slide img{
+	  	width: 100%;
+	}
+	.bidu span{
+		font-size: 0.2rem;
+		display: inline-block;
+		width:0.8rem;
+		height: 0.4rem;
+		line-height: 0.4rem;
+		text-align: center;
+		border-radius: 10px 0 0 10px;
+		font-size: ;
+		background: #0493f0;
+		color: #fff;
+		position:absolute;
+		right: -0.1rem;
+		top: 0.1rem;
+	}
+	
+  /**/
+  .mess{
+  	width: 100%;
+  	height: 0.8rem;
+  	background: #81c9f7;
+  	color: #fff;
+  	font-size: 0.24rem;
+  	padding: 0 0.3rem;
+  	line-height: 0.8rem;
+  }
+  .cell-arrow.no:after{
+  	content:"";
+  }
+  
+  /*读书笔记*/
+  .book_box>div{
+		width: 100%;
+		padding: .4rem .3rem;
+		height: 2.03rem;
+		background: #fff;
+		margin-bottom: 0.2rem;
+	}
+	
+    .book_box .cell{
+    	display: block;
+    	width:100%;
+    	overflow: hidden;
+    }
+    .m-cell.book_box .cell-item{
+    	padding: 0 0.24rem;
+    }
+    .book_box .cell>div{
+    	width:100%;
+    	font-size: 0.32rem;
+    	font-weight: bold;
+    	color: #333;
+    	height: 0.4rem;
+        overflow:hidden;
+        text-overflow:ellipsis; 
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        margin-bottom: 0.2rem;
+    }
+    .book_box .cell{
+    	padding: 0.4rem 0;
+    }
+    .book_box .cell p{
+    	font-size: 0.28rem;
+    	color: #999;
+    	margin-top: 0.2rem;
+    }
+     .book_box .cell p .pull-left{
+     	float:left;
+     }
+    .book_box .cell p .pull-right{
+    	 background: url(/static/images/study_img/icon_more@2x.png) no-repeat  center right;
+    	 padding-right: 0.3rem;
+    	 background-size: 5%;
+    }
+
+    .no_bor.m-cell:after{
+		border-bottom: none;
+	}
+/*暂无数据 css*/
+.bg {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #999;
+	margin-left:-0.3rem;
+}
+.bg>div{
+	width: 100%;
+	height: 80%;
+	background: url(/static/images/homework/img_msg.png) no-repeat center;
+	background-size:50% ;
+	
+}
+.bg p{
+	line-height:.5rem;
+	text-align: center;
+	font-size: 0.24rem;
+	margin-top: -0.2rem;
+}
+.book_box>.bg {
+    width: 100%;
+    padding:0;
+    height:4rem;
+    background: #fff;
+    margin:0;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="mess">
+			累计阅读2小时，超越了同班98%的同学
+		</div>
+		<div class="com_box">
+			<div class="m-cell no_marbotm mytitle">
+			    <div class="cell-item">
+			        <div class="cell-left"><i></i>书架</div>
+			        <div class="cell-right cell-arrow no"><a class="fc_999" href="javascript:;" id="shell_count"><!--共15本--></a></div>
+			    </div>
+			</div>
+		
+			<!--滑动模块-->
+			<div class="com_box" style="height: 3.88rem;">
+				<div class="swiper-container swiper-container-horizontal">
+				    <div class="swiper-wrapper" style="padding:0 0.3rem;">
+				    	<!--暂无数据-->
+				    	<!--<div class="bg">
+							<div></div>
+							<p style="">暂无数据</p>
+						</div>-->
+						<div class="swiper-slide bidu">
+							<a href="#">
+								<span>必读</span>
+								<img src="/static/images/read/7@2x.png" />
+								<div style="width: 100%;">红与黑</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<img src="/static/images/read/6@2x.png" />
+								<div style="width: 100%;">中国古典文学名著欣赏</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#">
+								<img src="/static/images/read/5@2x.png" />
+								<div style="width: 100%;">一九八四</div>
+							</a>
+						</div>
+					    <div class="swiper-slide">
+						    <a href="#">
+					      		<img src="/static/images/read/3@2x.png" />
+					      		<div style="width: 100%;">钢铁是怎样炼成的钢铁是怎样炼成的</div>
+					      	</a>
+					    </div>
+		      			 <div class="swiper-slide">
+						    <a href="#">
+					      		<img src="/static/images/read/4@2x.png" />
+					      		<div style="width: 100%;">飘</div>
+					      	</a>
+					    </div>
+		    		</div>
+	   			</div>
+			</div>
+			<!--滑动模块  end-->
+			
+		</div>
+		<!--读书笔记-->
+		<div class="com_box">
+			<div class="m-cell no_marbotm mytitle">
+			    <div class="cell-item">
+			        <div class="cell-left"><i></i>读书笔记</div>
+			        <div class="cell-right cell-arrow no"><a class="fc_999" href="javascript:;" id="note_count"><!--笔记总数：16--></a></div>
+			    </div>
+			</div>
+			<div class="m-cell book_box  no_bor">
+				<!--暂无数据-->
+				    	<!--<div class="bg">
+							<div></div>
+							<p style="">暂无数据</p>
+						</div>-->
+			        <a href="/html/read/child_read_notes.html" class="cell-item">
+		                <div class="cell">
+		                		<div>《红与黑》读书笔记</div>
+		                	<p>
+		                		<span  class="pull-left">最新添加日期：2018.05.11</span>
+		                		<span  class="pull-right">笔记总数：2</span>
+		                	</p>
+		                </div>
+			        </a>
+			         <a href="/html/read/child_read_notes.html" class="cell-item">
+		                <div class="cell">
+		                		<div>《海底两万里》读书笔记</div>
+		                	<p>
+		                		<span  class="pull-left">最新添加日期：2018.05.11</span>
+		                		<span  class="pull-right">笔记总数：2</span>
+		                	</p>
+		                </div>
+			        </a>
+			         <a href="/html/read/child_read_notes.html" class="cell-item">
+		                <div class="cell">
+		                		<div>《童年》读书笔记</div>
+		                	<p>
+		                		<span  class="pull-left">最新添加日期：2018.05.11</span>
+		                		<span  class="pull-right">笔记总数：2</span>
+		                	</p>
+		                </div>
+			        </a>
+			         <a href="/html/read/child_read_notes.html" class="cell-item">
+		                <div class="cell">
+		                		<div>《飘》读书笔记</div>
+		                	<p>
+		                		<span  class="pull-left">最新添加日期：2018.05.11</span>
+		                		<span  class="pull-right">笔记总数：2</span>
+		                	</p>
+		                </div>
+			        </a>
+	           <!--<a href="/html/read/child_read_notes.html" class="cell-item">
+	                <div class="cell">
+	                		<div>封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义封神演义</div>
+	                	<p>
+	                		<span  class="pull-left">最新添加日期：2018.05.11</span>
+	                		<span  class="pull-right">笔记总数：2</span>
+	                	</p>
+	                </div>-->
+	               <!-- <div class="cell-right cell-arrow">笔记总数：2</div>-->
+	            <!--</a>-->
+	           
+	            <!--  <a href="#" class="cell-item">
+	                <div class="cell-left">
+	                	<div>封神演义</div>
+	                	<p>最新添加日期：2018.05.11</p>
+	                </div>
+	                <div class="cell-right cell-arrow">笔记总数：2</div>
+	            </a>
+	           <a href="#" class="cell-item">
+	                <div class="cell-left">
+	                	<div>封神演义</div>
+	                	<p>最新添加日期：2018.05.11</p>
+	                </div>
+	                <div class="cell-right cell-arrow">笔记总数：2</div>
+	            </a>
+	           <a href="#" class="cell-item">
+	                <div class="cell-left">
+	                	<div>封神演义</div>
+	                	<p>最新添加日期：2018.05.11</p>
+	                </div>
+	                <div class="cell-right cell-arrow">笔记总数：2</div>
+	            </a>-->
+	        </div>
+	   </div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	// 2018-11-28 added by stt 埋点-10：全民发展_2（进入“鹰硕阅读”累计2次）
+	//TODO APP buriedPoint('10');
+	addMainPageHeader("/html/understand_more/understand_index.html", "孩子的阅读", {
+					hasIcon:true,
+					action : function() {
+						$("#ysYduiNavBarRightBtn").attr("href","/html/read/child_read_history.html"); 
+					}
+	});
+	addMainPageFooter(3);
+	// TODO APP 阅读信息
+	//childReadInfo();
+	//滑动模块
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+}); // ready
+// 阅读信息
+function childReadInfo() {
+	ysAjax("/read/child_read_init",{},function(data) {
+		if(data.success) {
+			var item = data.result;
+			// 阅读时长
+			$('.mess').html('累计阅读时长'+item.read_time+'，超越了同班' + item.over_percent.substring(0,item.over_percent.lastIndexOf('.')) + '%的同学');
+			// 书架
+			var shell_html = '';
+			if(item.book_shell_list != null && item.book_shell_list.length > 0){
+				$('#shell_count').html('共'+item.book_shell_list.length+'本');
+				for(var i=0; i<item.book_shell_list.length; i++){
+					var book = item.book_shell_list[i];
+					if(book.read_flag == '1'){ // 必读
+						shell_html = shell_html + '	<div class="swiper-slide bidu">  ';
+					}else{
+						shell_html = shell_html + '	<div class="swiper-slide">  ';
+					}
+					shell_html = shell_html + '		<a>  ';
+					shell_html = shell_html + '			<div style="box-shadow: 1px 3px 10px rgba(0,0,0,.3);height: 2.2rem;">  ';
+					if(book.read_flag == '1'){// 必读
+						shell_html = shell_html + '			<span>必读</span>  ';
+					}
+					if(book.thumb_pic != null && book.thumb_pic != ''){
+						shell_html = shell_html + '			<img src="'+book.thumb_pic+'" />  ';
+					}else{
+						shell_html = shell_html + '			<img src="/static/images/homework/test.png" />  ';	
+					}
+					shell_html = shell_html + '			</div>  ';
+					shell_html = shell_html + '			<div style="width: 100%;">'+book.resource_name+'</div>  ';
+					shell_html = shell_html + '		</a>  ';
+					shell_html = shell_html + '	</div>  ';
+				}
+				shell_html = shell_html + ' <div class="swiper-slide" style="width:0.03rem;"> ';
+				shell_html = shell_html + ' 	<a> ';
+				shell_html = shell_html + ' 		 ';
+				shell_html = shell_html + ' 		<div style="width: 100%;">&nbsp;</div> ';
+				shell_html = shell_html + ' 	</a> ';
+				shell_html = shell_html + ' </div> ';
+				$('.swiper-wrapper').html(shell_html);
+				//滑动模块
+			    var swiper = new Swiper('.swiper-container', {
+			      slidesPerView: 'auto',
+			      spaceBetween: 30,
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			    });
+			}else{// 无数据
+				$('#shell_count').html('共0本');
+				shell_html = shell_html+ '	<div class="bg">  ';
+				shell_html = shell_html+ '		<div></div>  ';
+				shell_html = shell_html+ '		<p style="">暂无数据</p>  ';
+				shell_html = shell_html+ '	</div>  ';
+				$('.swiper-wrapper').html(shell_html);
+			}
+			// 读书笔记 
+			var note_html = '';
+			if(item.book_notes != null && item.book_notes.length > 0){
+				var note_count = 0;
+				for(var j=0; j<item.book_notes.length; j++){
+					var note = item.book_notes[j];
+					note_html = note_html + '	<a href="/html/read/child_read_notes.html?resource_id='+note.resource_id+'" class="cell-item">  ';
+					note_html = note_html + '		<div class="cell">			  ';
+					note_html = note_html + '			<div>'+note.resource_name+'</div>  ';
+					note_html = note_html + '			<p>  ';
+					note_html = note_html + '				<span  class="pull-left">最新添加日期：'+note.update_time+'</span>  ';
+					note_html = note_html + '				<span  class="pull-right">笔记总数：'+note.op_count+'</span>  ';
+					note_html = note_html + '			</p>  ';
+					note_html = note_html + '		</div>  ';
+					note_html = note_html + '	</a>  ';
+					note_count = note_count + parseInt(note.op_count);
+				}
+//				$('#note_count').html('笔记总数：'+note_count);
+				$('.book_box').html(note_html);
+			}else{// 无数据
+//				$('#note_count').html('笔记总数：0');
+				note_html = note_html+ '	<div class="bg">  ';
+				note_html = note_html+ '		<div></div>  ';
+				note_html = note_html+ '		<p style="">暂无数据</p>  ';
+				note_html = note_html+ '	</div>  ';
+				$('.book_box').html(note_html);
+			}
+		} else {
+			showAlert('服务器异常，请稍后重试');
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+
+
+</script>
+
+</body>
+</html>

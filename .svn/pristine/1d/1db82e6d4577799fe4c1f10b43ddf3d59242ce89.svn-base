@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+  .title_box{
+  	width: 100%;
+  	height: 2.73rem;
+  	padding: 0.5rem 0.3rem;
+  	background: #0796f2;
+  	color: #fff;
+  	position: absolute;
+  }
+  .title_box .st_name{
+  		font-size: 0.36rem;
+  		font-weight: bold;
+  }
+  .title_box>p{
+  	font-size: 0.24rem;
+  	margin-top: 0.1rem;
+  }
+  .title_box .score_box{
+  		width:100%;
+  		height: 1.57rem;
+  		background: #fff;
+  		z-index: 999;
+  		position: relative;
+  		top: 30%;
+  		border-radius: 4px;
+  		padding: 0.39rem 0;
+  		box-shadow: 8px 0px 20px rgba(225,225,225,0.6);
+  }
+  .mytable .m-grids-5:before,
+  .title_box .grids-item:after,
+  .title_box .m-grids-3:before{
+  	border-bottom: none;
+  }
+  .title_box .cell-item:after,
+  .title_box  .m-grids-3 .grids-item:before{
+  		border-right: none;
+  }
+  .title_box .grids-item{
+  	padding: 0;
+  	border-right:1px solid #D9D9D9;
+  }
+  .title_box .score_box .grids-item:nth-child(3){
+  	border-right:0;
+  }
+    .title_box .score_box .grids-item:nth-child(1) .grids-txt p{
+	  	font-size: 0.48rem;
+	  	color: #0493f0;
+	  	font-weight: bold;
+  }
+   .title_box .score_box .grids-item .grids-txt p{
+	  	font-size: 0.36rem;
+	  	color: #333;
+	  	line-height: 0.5rem;
+  }
+   .title_box .score_box .grids-item .grids-txt div{
+	   	font-size: 0.24rem;
+	  	color: #999;
+   }
+   
+   
+   /*表格*/
+    .mytable{
+	   	width: 100%;
+	   	background: #fff;
+	   	padding-top: 2.73rem;
+	   }
+	 .mytable .t_head  .grids-item{
+	 	color: #999;
+	 }
+	 .mytable .grids-item{
+	 	text-align: center;
+	 }
+	.t_head .m-grids-5:before,
+	
+	.mytable .grids-item:after{
+		border-bottom: none;
+	}
+   .mytable ul {
+   	width: 100%;
+   }
+   .mytable .m-grids-5 .grids-item:before{
+   	border-right: none;
+   }
+   .mytable li:nth-child(1),
+   .mytable li:nth-child(2){
+   	width: 20%;
+   	color: #333;
+   	font-size: 0.28rem;
+   }
+   .mytable li:nth-child(2) .grids-txt{
+   		font-size: 0.30rem;
+   		font-weight: bold;
+   } 
+    .mytable li:nth-child(2) .grids-txt span{
+    	color:#888a97;
+	   	font-size: 0.25rem;
+    }
+   .mytable li:nth-child(3),
+   .mytable li:nth-child(4){
+   	width: 25%;
+   	
+   }
+   .mytable li:nth-child(3) .grids-txt,
+   .mytable li:nth-child(4) .grids-txt{
+   	color: #666;
+   	font-size: 0.28rem;
+   }
+    .mytable li:nth-child(5){
+   	width: 10%;
+   }
+   .mytable .cell-item a{
+   	width: 100%;
+   }
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="title_box">
+			<div class="st_name">肖战同学</div>
+			<p>2017年第一学期摸底考试成绩单</p>
+			<div class="score_box">
+				<ul class="m-grids-3">
+		       <li class="grids-item">
+		            <div class="grids-txt">
+		            	<p id="totalScore">528</p>
+		            	<div>总得分</div>
+		            </div>
+		        </li>
+		        <li class="grids-item">
+		            <div class="grids-txt">
+		            	<div class="grids-txt">
+		                	<p id="classAverageScore">540</p>
+		                	<div>班级平均分</div>
+		                </div>
+		            </div>
+		        </li>
+		        <li class="grids-item">
+		            <div class="grids-txt">
+		            	<div class="grids-txt">
+		            	<p id="classHighScore">650</p>
+		            	<div>班级最高分</div>
+		            </div>
+		            </div>
+		        </li>
+		     	</ul>
+			</div>
+		</div>
+		<div style="height: 1.07rem; background: #f5f5f5;"></div>
+		
+		    
+		<div class="mytable">
+			<div class="table">
+				<div class="cell-item t_head">
+			       <ul class="m-grids-5">
+			            <li class="grids-item">科目</li>
+			            <li class="grids-item">得分</li>
+			            <li class="grids-item">班级平均分</li>
+			            <li class="grids-item">班级最高分</li>
+			             <li class="grids-item"> </li>
+			        </ul>
+			       
+			  </div>
+		    <div class="t_body">
+					<div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html?flag=msg">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">语文</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">120<span>/120</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">104</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">120</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html?flag=msg">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">数学</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">110<span>/120</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">104</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">118</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				   <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html?flag=msg">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">英语</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">106<span>/120</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">98</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">110</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html?flag=msg">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">物理</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">97<span>/100</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">82</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">90</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html?flag=msg">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">生物</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">95<span>/100</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">94</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">80</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">历史</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">90<span>/100</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">96</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">70</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div class="cell-item">
+						<a href="/html/exam_schedule/exam_report.html">
+				       <ul class="m-grids-5">
+				            <li class="grids-item">
+				                <div class="grids-txt">化学</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">89<span>/100</span></div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">94</div>
+				            </li>
+				            <li class="grids-item">
+				                <div class="grids-txt">88</div>
+				            </li>
+				           <li class="grids-item" style="width: 10%;">
+				               <div class="cell-arrow"></div>
+				            </li>
+				        </ul>
+				       </a>
+				  </div>
+				  <div id="fullScore" style="text-align: right;color: #999;line-height: 0.8rem;padding-right: 0.3rem;">本次考试满分：720分</div>
+			  </div>
+		  </div>
+
+		</div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	// header
+	if(getUrlParam('flag') == '1'){
+		addMainPageHeader("/html/understand_more/understand_index.html", "成绩详情");
+	}else if(getUrlParam('flag') == 'msg'){
+		addMainPageHeader("/html/notice_list/notice.html", "成绩详情");
+	}else{
+		addMainPageHeader("/html/exam_schedule/exam_list.html", "成绩详情");
+	}
+	addMainPageFooter(3);
+	// 考试id
+	var examId = getUrlParam('examId');
+	// 考试成绩
+//	examReport(examId);TODO APP
+});
+// 考试成绩
+function examReport(examId){
+	ysAjax("/exam/report", {
+		examId: examId
+	}, function(data) {
+		if(data.retCode == 'SUCCESS') {
+			$('.st_name').html(data.studentName); // 孩子姓名
+			$('.st_name').next().html(data.examName); // 考试名称
+			$('#totalScore').html(data.totalScore); // 总分
+			$('#classAverageScore').html(data.classAverageScore); // 班级平均分
+			$('#classHighScore').html(data.classHighScore);// 班级最高分
+			$('#fullScore').html('本次考试满分：'+data.fullScore+'分');
+			// 每科成绩列表
+			var stuSubjectList = data.stuSubjectList;
+			var html = '';
+			if(stuSubjectList != null && stuSubjectList.length > 0){
+				for(var i=0; i<stuSubjectList.length; i++){
+					var item = stuSubjectList[i];
+					html = html + ' <div class="cell-item"> ';
+					html = html + '    <a href="/html/exam_schedule/exam_report.html?examId='+data.examId+'&subjectId='+item.subjectId+'"> ';
+					html = html + '    <ul class="m-grids-5"> ';
+					html = html + ' 		<li class="grids-item"> ';
+					html = html + ' 			<div class="grids-txt">'+item.subjectName+'</div> ';
+					html = html + ' 		</li> ';
+					html = html + ' 		<li class="grids-item"> ';
+					html = html + ' 			<div class="grids-txt" style="padding:0px;">'+item.totalScore+'<span>/'+item.fullScore+'</span></div> ';
+					html = html + ' 		</li> ';
+					html = html + ' 		<li class="grids-item"> ';
+					html = html + ' 			<div class="grids-txt">'+item.averageScore+'</div> ';
+					html = html + ' 		</li> ';
+					html = html + ' 		<li class="grids-item"> ';
+					html = html + ' 			<div class="grids-txt">'+item.highScore+'</div> ';
+					html = html + ' 		</li> ';
+					html = html + ' 	   <li class="grids-item" style="width: 10%;"> ';
+					html = html + ' 		   <div class="cell-arrow"></div> ';
+					html = html + ' 		</li> ';
+					html = html + ' 	</ul> ';
+					html = html + '    </a> ';
+					html = html + ' </div> ';
+				}
+				$('.t_body').prepend(html);
+			}
+		}else{
+			getDialog().alert('当前默认孩子没有考试成绩发布!', function () {
+				window.location.href = '/html/study/study_index.html';
+            });
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+</script>
+</body>
+</html>

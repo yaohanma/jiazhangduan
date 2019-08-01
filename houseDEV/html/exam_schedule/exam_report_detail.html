@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--滑动模块css-->
+		<link rel="stylesheet" href="/static/css/study/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/js/layer/theme/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/homework.css"/>
+		<!--公式显示css-->
+		<link rel="stylesheet" type="text/css" href="/static/plugins/katex/katex.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/formula.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<script src="/static/js/swiper.min.js"></script>
+		<script src="/static/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 公式显示js -->
+		<script src="/static/plugins/katex/katex.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#ImgZoomInImage{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-o-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+			/*滑动处理*/
+			div[class*="swiper-container"]{
+				width: 100%;
+				height: 5.5rem;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.swiper-container-horizontal>.swiper-pagination-bullets,
+			.swiper-pagination-custom,
+			.swiper-pagination-fraction {
+				   /* right: 0.3rem;*/
+				    top: 0.75rem;
+				    height: 0.3rem;
+				    position: absolute;
+				    z-index: 1000;
+				    text-align: center;
+			}
+			div[class*="swiper-pagination"] {
+				text-align: right;
+				padding-right: 0.2rem;
+			}
+			/*.swiper-pagination {
+				text-align: right;
+			}*/
+			/*end*/ 
+			
+			.quick {
+				width: 100%;
+				/*height: 4rem;*/
+				background-color: #ffffff;
+				margin-top: 0.25rem;
+				padding: 0.3rem;
+				padding-bottom: 0;
+			}
+			
+			.quick .quick_title {
+				font-size: 0.36rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.quick .quick_sub {
+				color: #0493f0;
+				padding-top: 0.3rem;
+				font-size: 0.24rem;
+			}
+			
+			.question_content {
+				width: 100%;
+				height: auto;
+				background-color: #ffffff;
+				padding: .3rem;
+				padding-top: 0.59rem;
+				padding-bottom: 0.4rem;
+				min-height: 7.1rem;
+			}
+			
+			.question_content_title {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.btn-customer {
+				background-color: #0493F0;
+				color: #FFFFFF;
+			}
+			
+			.btn-hollow {
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer {
+				/*background-color: #FFF;*/
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer:after {
+				content: '';
+				width: 200%;
+				height: 143%;
+				position: absolute;
+				top: 0.15rem;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border-right: 2px solid #CCCCCC;
+				/*border-radius: 6px;*/
+			}
+			
+			.btn {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				height: 0.88rem;
+				line-height: 1rem;
+				display: inline-block;
+				padding: 0 .2rem;
+				border-radius: 10px 0 0 10px;
+				width: 0.88rem;
+				margin-top: .5rem;
+				font-size: 0.3rem;
+			}
+			
+			.btn-hollow:after {
+				content: '';
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border: 1px solid #cccccc;
+				border-radius: 10px;
+			}
+			
+			.quick_bottom {
+				width: 100%;
+				height: 1.43rem;
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				padding: 0.3rem;
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.quick_bottom2 {
+				width: 100%;
+				/*height: 1.43rem;*/
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				/*padding: 0.3rem;*/
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.btn-block {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 6.9rem;
+				display: block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				margin-top: 0;
+				border-radius: 10px;
+			}
+			
+			.btn-block-customer {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 3.3rem;
+				display: inline-block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				border-radius: 10px;
+			}
+			
+			.float_button {
+				position: fixed;
+				width: 2rem;
+				height: 0.7rem;
+				background-color: #4FB3F4;
+				right: -0.15rem;
+				bottom: 2.7rem;
+				border-radius: 10px;
+				color: #ffffff;
+				padding: 0.15rem;
+				font-size: 0.26rem;
+				z-index: 1000;
+			}
+			
+			.decided {
+				width: 3rem;
+				height: 0.88rem;
+				display: inline-block;
+				border: 1px solid #0493F0;
+				border-radius: 10px;
+				margin-top: .5rem;
+				border-left: none;
+			}
+			
+			.decide {
+				width: 3rem;
+				display: inline-block;
+				border: 1px solid #CCCCCC;
+				border-radius: 10px;
+				margin-top: .5rem;
+			}
+			
+			.input_frame {
+				width: 6.5rem;
+				border: 1px solid #0493F0;
+				height: 0.88rem;
+				border-radius: 4px;
+				background-color: #F2FAFF;
+				margin-top: .3rem;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				background-color: #fff;
+				height: .8rem;
+			}
+			
+			.option_btn .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 10%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 8px 0 0 8px;
+			}
+			
+			.option_btn .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 90%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+				padding-right: .2rem;
+				overflow-y: auto;
+			}
+			/*选项选中状态*/
+			
+			.option_btn.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			/*.option_btn.active.primary i{
+			
+		}*/
+			
+			.option_btn.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-repeat: no-repeat;
+				background-size: 0.3rem 0.3rem;
+				background-position-x: 6.58rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn.active.danger .option_text,
+			.option_btn.active.primary .option_text {
+				color: #333;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn_customer {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background-color: #fff;
+				height: .8rem;
+				width: 3rem;
+				display: inline-block;
+				float: left;
+			}
+			
+			.option_btn_customer .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 30%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 4px 0 0 4px;
+			}
+			
+			.option_btn_customer .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 70%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+			}
+			/*选项选中状态*/
+			
+			.option_btn_customer.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn_customer.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn_customer.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn_customer.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn_customer.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			
+			.option_btn_customer.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-size: 0.3rem 0.3rem;
+				background-repeat: no-repeat;
+				background-position-x: 2.7rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn_customer.active.danger .option_text,
+			.option_btn_customer.active.primary .option_text {
+				color: #333;
+			}
+			
+			.question_stem {
+				margin-top: 0.29rem;
+				color: #333333;
+				font-size: 0.32rem;
+				margin-bottom: 0.4rem;
+				font-weight: bold;
+				word-wrap: break-word;
+			}
+			.choose_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.choose_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.choose_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			
+			.choose_answer a:nth-child(1)~span {
+				font-size: 0.26rem;
+				color: #0493F0;
+			}
+			
+			.choose_answer a:nth-child(4)~span {
+				font-size: 0.26rem;
+				color: #0DC77A;
+			}
+			
+			.analysis {
+				width: 5rem;
+				font-size: 0.28rem;
+				color: #0493F0;
+				margin-top: 0.6rem;
+			}
+			
+			.icon_down {
+				background: url(/static/images/homework/icon_eject@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_up {
+				background: url(/static/images/homework/icon_takeup@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_content {
+				font-size: 0.28rem;
+				color: #666666;
+			}
+			
+			.decide_answer {
+				width: 100%;
+				height: auto;
+				padding-top: 1.2rem;
+			}
+			
+			.decide_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			.decide_answer a:nth-child(1)~span {
+				color: #0493F0;
+			}
+			.decide_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			.decide_answer a:nth-child(4)~span {
+				color: #0DC77A;
+			}
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			.fill_answer a:nth-child(1)~span {
+				color: #0493F0;
+			}
+			.fill_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			.fill_answer a:not(:first-child)~span {
+				color: #0DC77A;
+			}
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			/*.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.fill_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}*/
+			/*综合题*/
+			.child {
+				min-height: 13rem;
+				background-color: #FFFFFF;
+			}
+			
+			.multiple_img {
+				width: 100%;
+				height: 0.4rem;
+				background: url(/static/images/homework/multiple_2.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			
+			.multiple_content {
+				padding: 0.3rem;
+				background-color: #FFFFFF;
+				/*display: none;*/
+				/*height: 5.5rem;
+    			overflow-y: auto;*/
+			}
+			
+			.multiple_btn {
+				width: 100%;
+				padding: 0.3rem;
+			}
+			/*加油打气 */
+			.jiayou_btn{
+				width: 100%;
+				height: 1.2rem;
+				padding: .2rem;
+				background: #fff;
+				position: relative;
+			
+			}
+			.jiayou_btn input{
+				width: 100%;
+				height: .8rem;
+				line-height: .8rem;
+				font-size: .35rem;
+				background: #0493F0;
+				color: #fff; 
+				border-radius: 5px;
+			}
+			#jiayou_bg{
+			    width: 100%;
+			    height: 4rem;
+			    background: url(/static/images/study_img/jiayou_gif3.gif) no-repeat center;
+			    display: none;
+			    z-index: 999;
+			    position: absolute;
+			    bottom: 0.9rem;
+			    background-size: 40%;
+			    left: 2.7rem;
+			}
+			.answer_img {
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid #e5e5e5;
+				border-radius: 10px;
+				margin-top: 0.2rem;
+				padding: 0.1rem;
+				background-color: #f4f5f7;
+				display: inline-block;
+			}
+			.answer_img img {
+				width: 85px;
+    			height: 85px;
+    			display: inline-block;
+			}
+			.option_text img{
+				height: 100%;
+				display: inline-block;
+			}
+			.question_stem img{
+				width:6.9rem;
+    			display: inline-block;
+			}
+			.icon_content img{
+				width: 6.9rem;
+    			display: inline-block;
+			}
+			.fill_answer span img{
+				width: 6.9rem;
+    			display: inline-block;
+			}
+			span.new_gray{
+				width: 1.07rem;
+			    height: 0.5rem;
+			    line-height: 0.5rem;
+			    display: inline-block;
+			    background-color: #e0e9f2;
+			    font-size: 0.24rem;
+			    border-radius: 4px;
+			    text-align: center;
+			    margin-right: 0.2rem;
+			    margin-top: 0.2rem;
+			}
+			/*适应iPhone X 底部button*/
+			@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+			 .quick_bottom {
+			  bottom: 1.5rem !important;
+			 }
+			}
+		</style>
+	</head>
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview" id="J_ProgressBox">
+			<div class="container_content"></div>
+			<!--<div class="float_button">
+				<a href="javascript:;" onclick="returnParentPage();">返回考试报告</a>
+			</div>-->
+			<div class="jiayou_bg" id="jiayou_bg"></div>
+			<div class="dingdi" style="width: 100%; float: left; height: 1.2rem;"></div>
+		<section/>
+	</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	// 返回考试报告
+	function returnParentPage(){
+		window.location.href = '/html/exam_schedule/exam_report.html?examId='+getUrlParam('examId')+'&subjectId='+getUrlParam('subjectId')+"&flag="+getUrlParam('flag');
+	}
+	var text = '';
+	var score = '';
+	var score_value = 0;
+	var m_flag = 0;
+	var array = new Array();
+	$(document).ready(function() {
+		var examId = getUrlParam('examId');
+		var subjectId = getUrlParam('subjectId');
+		var flag = getUrlParam('flag');
+		addMainPageHeader("/html/exam_schedule/exam_report.html?examId="+examId+"&subjectId="+subjectId+"&flag="+flag, "报告详情");
+		addMainPageFooter(4);
+		// 试题列表
+		question_list();
+	});// ready
+	var xuanze = ['A','B','C','D','E','F','G','H'];
+	// 习题列表
+	function question_list(){
+		ysAjax("/exam/report_detail", {
+						examId: getUrlParam('examId'),
+						subjectId:getUrlParam('subjectId')
+					}, function(data) {
+						// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+						if(data.retCode == 'SUCCESS'){
+							showLoadDialog();
+							for(var i=0; i < data.questionList.length; i++){
+								var html = '';
+								var q = data.questionList[i];
+								// 1单选
+								if(q.cardQuestionType == '1') {
+									html = html + '	<div class="child"> ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">单选题（'+q.score+'分）</span>  ';
+									// 得分
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+ stuScore +'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '										<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+c2+'  ';
+									html = html + '										</div>  ';
+									html = html + '										<div id="choose_question">  ';
+									if(q.question != undefined){
+										for(var j=0;j<q.question.answer.length;j++){ // 原答案
+												var a = q.question.answer[j];
+												var c1 = latex2Html(a.answerContext);
+												var c2 = makeMathJye(c1);
+												if(xuanze[a.answerId - 1] == q.stuAnswer && q.rightKey == xuanze[a.answerId - 1]){ // 学生选择且正确
+													html = html + '						<div class="option_btn active btn_true">  ';
+													html = html + '							<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '						</div>  ';
+												}else if(xuanze[a.answerId - 1] == q.rightKey){ // 正确答案
+													html = html + '						<div class="option_btn active primary btn_true">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}else if(xuanze[a.answerId - 1] == q.stuAnswer){ // 学生选择
+													html = html + '						<div class="option_btn active">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}else{ // 
+													html = html + '						<div class="option_btn">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}
+												if(j != q.question.answer.length - 1){
+													html = html + '								<br />  ';
+												}
+										}
+									}
+									html = html + '										    <div class="choose_answer">  ';
+									var stuAnswer = q.stuAnswer == undefined?'':q.stuAnswer;
+									html = html + '												<a>已选答案</a><span>'+stuAnswer+'</span><br />';
+									html = html + '												<a>正确答案</a><span style="color:#0DC77A;">'+q.rightKey+'</span>  <br>';
+									var k = '';
+									if(q.question != undefined){
+										k = q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+ 									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var desc = '';
+									if(q.question != undefined){
+										desc = q.question.questionDesc;
+									}
+									var c1 = latex2Html(desc);
+									var c2 = makeMathJye(c1);
+									html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+//								// 2多选
+								if(q.cardQuestionType == '2') {
+									html = html + '	<div class="child"> ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">多选题（'+q.score+'分）</span>  ';
+									// 得分
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '										<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+c2+'  ';
+									html = html + '										</div>  ';
+									html = html + '										<div id="choose_question">  ';
+									if(q.question != undefined){
+										// 判断选项css,利用原答案列表rightFlag赋值判断 true：正确：choose：学生选择且正确：and
+										var array_true = q.rightKey.split(','); // 正确答案
+										var array_choose = q.stuAnswer.split(','); // 学生选择
+										for(var j=0;j<q.question.answer.length;j++){// 判断是正确答案
+											var old = q.question.answer[j];
+											for(var z=0; z<array_true.length; z++){
+												if(xuanze[old.answerId - 1] == array_true[z]){
+													old.rightFlag = 'true';
+												}
+											}
+										}
+										for(var j=0;j<q.question.answer.length;j++){// 判断是学生选择
+											var old = q.question.answer[j];
+											for(var z=0; z<array_choose.length; z++){
+												if(xuanze[old.answerId - 1] == array_choose[z]){
+													if(old.rightFlag == 'true'){
+														old.rightFlag = 'and';
+													}else{
+														old.rightFlag = 'choose';
+													}
+												}
+											}
+										}
+										for(var j=0;j<q.question.answer.length;j++){ // 原答案
+												var a = q.question.answer[j];
+												var c1 = latex2Html(a.answerContext);
+												var c2 = makeMathJye(c1);
+												if(a.rightFlag == 'and'){ // 学生选择且正确
+													html = html + '						<div class="option_btn active btn_true">  ';
+													html = html + '							<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '						</div>  ';
+												}else if(a.rightFlag == 'true'){ // 正确答案
+													html = html + '						<div class="option_btn active primary btn_true">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}else if(a.rightFlag == 'choose'){ // 学生选择
+													html = html + '						<div class="option_btn active">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}else{ // 
+													html = html + '						<div class="option_btn">  ';
+													html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+													html = html + '					    </div>  ';
+												}
+												if(j != q.question.answer.length - 1){
+													html = html + '								<br />  ';
+												}
+										}
+									}
+									html = html + '										    <div class="choose_answer">  ';
+									var stuAnswer = q.stuAnswer == undefined?'':q.stuAnswer;
+									html = html + '												<a>已选答案</a><span>'+stuAnswer+'</span><br />';
+									html = html + '												<a>正确答案</a><span style="color:#0DC77A;">'+q.rightKey+'</span>  <br>';
+									var k = '';
+									if(q.question != undefined){
+										k = q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+ 									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var desc = '';
+									if(q.question != undefined){
+										desc = q.question.questionDesc;
+									}
+									var c1 = latex2Html(desc);
+									var c2 = makeMathJye(c1);
+									html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+//								//4判断
+								if(q.cardQuestionType == '4') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">判断题（'+q.score+'分）</span>  ';
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+ c2 +'';
+									html = html + '										</div>  ';
+									html = html + '										<div id="decide_question">  ';
+									if(q.question != undefined){
+										for(var j=0;j<q.question.answer.length;j++){ // 原答案
+												var a = q.question.answer[j];
+												var c1 = latex2Html(a.answerContext);
+												var c2 = makeMathJye(c1);
+												if(xuanze[a.answerId - 1] == q.stuAnswer && q.rightKey == xuanze[a.answerId - 1]){ // 学生选择且正确
+													if(j ==q.question.answer.length - 1){
+														html = html + '							    <div style="float:right;" class="option_btn_customer active btn_true">  ';
+													}else{
+														html = html + '							    <div class="option_btn_customer active btn_true">  ';
+													}
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else if(xuanze[a.answerId - 1] == q.rightKey){ // 正确答案
+													if(j ==q.question.answer.length - 1){
+														html = html + '							    <div style="float:right;" class="option_btn_customer active primary btn_true">  ';
+													}else{
+														html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+													}
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else if(xuanze[a.answerId - 1] == q.stuAnswer){ // 学生选择
+													if(j ==q.question.answer.length - 1){
+														html = html + '							    <div style="float:right;" class="option_btn_customer active">  ';
+													}else{
+														html = html + '							    <div class="option_btn_customer active">  ';
+													}
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else{ // 
+													if(j ==q.question.answer.length - 1){
+														html = html + '							    <div style="float:right;" class="option_btn_customer">  ';
+													}else{
+														html = html + '							    <div class="option_btn_customer">  ';
+													}
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}
+										}
+									}
+									html = html + '										</div>  ';
+									html = html + '										<div class="decide_answer">  ';
+									var answer = '';
+									if(q.stuAnswer != undefined && q.stuAnswer != '' && q.stuAnswer != null){
+										if(q.stuAnswer == 'T'){
+											answer = '对';
+										}else{
+											answer = '错';
+										}
+									}
+									html = html + '												<a>已选答案</a><span>'+answer+'</span></br>  ';	
+									var t_answer = '';
+									if(q.rightKey != undefined && q.rightKey != '' && q.rightKey != null){
+										if(q.rightKey == 'T'){
+											t_answer = '对';
+										}else{
+											t_answer = '错';
+										}
+									}
+									html = html + '												<a>正确答案</a><span>'+t_answer+'</span><br>';
+									var k = '';
+									if(q.question != undefined){
+										k = q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '										</div>  ';
+									html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var desc = '';
+									if(q.question != undefined){
+										desc = q.question.questionDesc;
+									}
+									var c1 = latex2Html(desc);
+									var c2 = makeMathJye(c1);
+									html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+//								//3填空
+								if(q.cardQuestionType == '3') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">填空题（'+q.score+'分）</span>  ';
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+ c2 +'';
+									html = html + '										</div>  ';
+									html = html + '										<div class="fill_answer">  ';
+									html = html + '											<a>已选答案</a><br>';
+									if(q.stuAnswer != undefined){
+										var array_img = q.stuAnswer.split(',');
+										for(var t=0;t<array_img.length;t++){ // 学生图片答案
+													if(array_img[t] != ''){
+														html = html + '								<div class="answer_img">  ';
+														html = html + '									<img src="'+array_img[t]+'" />  ';	
+	//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+														html = html + '								</div>  ';
+													}
+										}
+									}
+									html = html + '											<br />  ';
+									html = html + '											<a>正确答案</a><span>'+q.rightKey+'</span> <br> ';
+									var k='';
+									if(q.question != undefined){
+										k= q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '										</div>  ';
+									html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var des='';
+									if(q.question != undefined){
+										des= q.question.questionDesc;
+									}
+									var c1 = latex2Html(des);
+									var c2 = makeMathJye(c1);
+									html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+//								//5简答
+								if(q.cardQuestionType == '5') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">简答题（'+q.score+'分）</span>  ';
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+ c2 +'';
+									html = html + '										</div>  ';
+									html = html + '										<div id="short_question">  ';
+									
+									html = html + '											<div class="fill_answer">  ';
+									html = html + '												<a style="display:block;">已做答案</a>';
+									if(q.stuAnswer != undefined){
+										var array_img = q.stuAnswer.split(',');
+										for(var t=0;t<array_img.length;t++){ // 学生图片答案
+													if(array_img[t] != ''){
+														html = html + '								<div class="answer_img">  ';
+														html = html + '									<img src="'+array_img[t]+'" />  ';	
+		//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+														html = html + '								</div>  ';
+													}
+										}
+									}
+									html = html + '												<br />  ';
+									html = html + '												<a>正确答案</a><span style="color:  #0DC77A;">'+q.rightKey+'</span> <br> ';
+									var k='';
+									if(q.question != undefined){
+										k= q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var des='';
+									if(q.question != undefined){
+										des= q.question.questionDesc;
+									}
+									var c1 = latex2Html(des);
+									var c2 = makeMathJye(c1);
+									html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//7作文题
+								if(q.cardQuestionType == '7') {
+									html = html + '	<div class="child" > ';
+									html = html + '								<div class="question_content">  ';
+									html = html + '									<p class="question_content_title">第  ';
+									html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '										<span id="total">' + data.questionList.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									html = html + '										<span id="qustion_type">作文题（'+q.score+'分）</span>  ';
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '										<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '									</p>  ';
+									html = html + '									<div class="question_describe">  ';
+									html = html + '										<div class="question_stem">  ';
+									var qc = '暂无题干信息~';
+									if(q.question != undefined){
+										qc = q.question.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '											'+ c2 +'';
+									html = html + '										</div>  ';
+									html = html + '										<div id="short_question">  ';
+									
+									html = html + '											<div class="fill_answer">  ';
+									html = html + '												<a style="display:block;">已做答案</a>';
+									if(q.stuAnswer != undefined){
+										var array_img = q.stuAnswer.split(',');
+										for(var t=0;t<array_img.length;t++){ // 学生图片答案
+													if(array_img[t] != ''){
+														html = html + '								<div class="answer_img">  ';
+														html = html + '									<img src="'+array_img[t]+'" />  ';	
+	//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+														html = html + '								</div>  ';
+													}
+										}
+									}
+									html = html + '												<br />  ';
+									html = html + '												<a>正确答案</a><span style="color:  #0DC77A;">'+q.rightKey+'</span> <br> ';
+									var k='';
+									if(q.question != undefined){
+										k= q.question.knowledge;
+										k = k== null?'':k;
+									}
+									html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+q.classAvg+'分；年级平均分：'+q.gradeAvg+'分</span>';
+									html = html + '											</div>  ';
+									html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+									var des='';
+									if(q.question != undefined){
+										des= q.question.questionDesc;
+									}
+									var c1 = latex2Html(des);
+									var c2 = makeMathJye(c1);
+									html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+									html = html + '										</div>  ';
+									html = html + '									</div>  ';
+									html = html + '								</div>  ';
+									html = html + '								<div class="quick_bottom">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '								</div>  ';
+									html = html + '	</div> ';
+								}
+								//6综合
+								if(q.cardQuestionType == '6' || q.cardQuestionType == '8'){
+									m_flag = m_flag + 1;
+									html = html + '	<div class="child">  ';
+									html = html + '		<div class="question_content">  ';
+									html = html + '			<p class="question_content_title">第  ';
+									html = html + '				<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+									html = html + '				<span id="total">' + data.questionList.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+									if(q.cardQuestionType == '8'){
+										html = html + '				<span id="qustion_type">听力题（'+q.score+'分）</span>  ';	
+									}else{
+										html = html + '				<span id="qustion_type">综合题（'+q.score+'分）</span>  ';
+									}
+									var stuScore = q.stuScore == undefined?0:q.stuScore;
+									html = html + '				<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+									html = html + '			</p>  ';
+									html = html + '			<div class="question_describe">  ';
+									var qc = '暂无题干信息~';
+									if(q.questionContext != undefined && q.questionContext != ''){
+										qc = q.questionContext;
+									}
+									var c1 = latex2Html(qc);
+									var c2 = makeMathJye(c1);
+									html = html + '				<div class="question_stem"> '+c2+' </div>  ';
+									html = html + '			</div>  ';
+									html = html + '		</div>  ';
+									html = html + '		<div class="quick_bottom2">  ';
+									html = html + '			<div class="multiple_question">  ';
+									html = html + '				<div class="multiple_img" style=""></div>  ';
+									html = html + '				<div class="swiper-container'+m_flag+'">  ';
+									html = html + '					<div class="swiper-wrapper">  ';
+									// 题目类型：1单选、2多选、3填空、4判断、5解答
+	/***********************/		for(var z=0;z<q.childQuestion.length;z++){ // 综合题小题列表
+										var c = q.childQuestion[z]; // 每道小题
+										if(c.cardQuestionType == '1'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">单选题（'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '								</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+'  ';
+											html = html + '								</div>  ';
+											html = html + '								<div id="choose_question">  ';
+											if(c.question != undefined){
+												for(var j=0;j<c.question.answer.length;j++){ // 原答案
+														var a = c.question.answer[j];
+														var c1 = latex2Html(a.answerContext);
+														var c2 = makeMathJye(c1);
+														if(xuanze[a.answerId - 1] == c.stuAnswer && c.rightKey == xuanze[a.answerId - 1]){ // 学生选择且正确
+															html = html + '						<div class="option_btn active btn_true">  ';
+															html = html + '							<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '						</div>  ';
+														}else if(xuanze[a.answerId - 1] == c.rightKey){ // 正确答案
+															html = html + '						<div class="option_btn active primary btn_true">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}else if(xuanze[a.answerId - 1] == c.stuAnswer){ // 学生选择
+															html = html + '						<div class="option_btn active">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}else{ // 
+															html = html + '						<div class="option_btn">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}
+														if(j != c.question.answer.length - 1){
+															html = html + '								<br />  ';
+														}
+												}
+											}
+											html = html + '										    <div class="choose_answer">  ';
+											var stuAnswer = c.stuAnswer == undefined?'':c.stuAnswer;
+											html = html + '												<a>已选答案</a><span>'+stuAnswer+'</span><br />';
+											html = html + '												<a>正确答案</a><span style="color:#0DC77A;">'+c.rightKey+'</span> <br> ';
+											var k = '';
+											if(c.question != undefined){
+												k = c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+ 											html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var desc = '';
+											if(c.question != undefined){
+												desc = c.question.questionDesc;
+											}
+											var c1 = latex2Html(desc);
+											var c2 = makeMathJye(c1);
+											html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.cardQuestionType == '2'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">多选题（'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '								</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+'  ';
+											html = html + '								</div>  ';
+											html = html + '								<div id="choose_question">  ';
+											if(c.question != undefined){
+												// 判断选项css,利用原答案列表rightFlag赋值判断 true：正确：choose：学生选择且正确：and
+												var array_true = c.rightKey.split(','); // 正确答案
+												var array_choose = c.stuAnswer.split(','); // 学生选择
+												for(var j=0;j<c.question.answer.length;j++){// 判断是正确答案
+													var old = c.question.answer[j];
+													for(var s=0; s<array_true.length; s++){
+														if(xuanze[old.answerId - 1] == array_true[s]){
+															old.rightFlag = 'true';
+														}
+													}
+												}
+												for(var j=0;j<c.question.answer.length;j++){// 判断是学生选择
+													var old = c.question.answer[j];
+													for(var s=0; s<array_choose.length; s++){
+														if(xuanze[old.answerId - 1] == array_choose[s]){
+															if(old.rightFlag == 'true'){
+																old.rightFlag = 'and';
+															}else{
+																old.rightFlag = 'choose';
+															}
+														}
+													}
+												}
+												for(var j=0;j<c.question.answer.length;j++){ // 原答案
+														var a = c.question.answer[j];
+														var c1 = latex2Html(a.answerContext);
+														var c2 = makeMathJye(c1);
+														if(a.rightFlag == 'and'){ // 学生选择且正确
+															html = html + '						<div class="option_btn active btn_true">  ';
+															html = html + '							<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '						</div>  ';
+														}else if(a.rightFlag == 'true'){ // 正确答案
+															html = html + '						<div class="option_btn active primary btn_true">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}else if(a.rightFlag == 'choose'){ // 学生选择
+															html = html + '						<div class="option_btn active">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}else{ // 
+															html = html + '						<div class="option_btn">  ';
+															html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+															html = html + '					    </div>  ';
+														}
+														if(j != c.question.answer.length - 1){
+															html = html + '								<br />  ';
+														}
+												}
+											}
+											html = html + '										    <div class="choose_answer">  ';
+											var stuAnswer = c.stuAnswer == undefined?'':c.stuAnswer;
+											html = html + '												<a>已选答案</a><span>'+stuAnswer+'</span><br />';
+											html = html + '												<a>正确答案</a><span style="color:#0DC77A;">'+c.rightKey+'</span>  <br>';
+											var k = '';
+											if(c.question != undefined){
+												k = c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+		 									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var desc = '';
+											if(c.question != undefined){
+												desc = c.question.questionDesc;
+											}
+											var c1 = latex2Html(desc);
+											var c2 = makeMathJye(c1);
+											html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+											html = html + '									</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.cardQuestionType == '4'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">判断题'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '									</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+ '';
+											html = html + '								</div>  ';
+											html = html + '							<div id="decide_question" style="margin-bottom:1.5rem">  ';
+											if(c.question != undefined){
+												for(var j=0;j<c.question.answer.length;j++){ // 原答案
+														var a = c.question.answer[j];
+														var c1 = latex2Html(a.answerContext);
+														var c2 = makeMathJye(c1);
+														if(xuanze[a.answerId - 1] == c.stuAnswer && c.rightKey == xuanze[a.answerId - 1]){ // 学生选择且正确
+															if(j == c.question.answer.length -1){
+																html = html + '							    <div style="float:right;" class="option_btn_customer active btn_true">  ';	
+															}else{
+																html = html + '							    <div class="option_btn_customer active btn_true">  ';
+															}
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else if(xuanze[a.answerId - 1] == c.rightKey){ // 正确答案
+															if(j == c.question.answer.length -1){
+																html = html + '							    <div style="float:right;" class="option_btn_customer active primary btn_true">  ';	
+															}else{
+																html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+															}
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else if(xuanze[a.answerId - 1] == c.stuAnswer){ // 学生选择
+															if(j == c.question.answer.length -1){
+																html = html + '							    <div style="float:right;" class="option_btn_customer active">  ';	
+															}else{
+																html = html + '							    <div class="option_btn_customer active">  ';
+															}
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}else{ // 
+															if(j == c.question.answer.length -1){
+																html = html + '							    <div style="float:right;"  class="option_btn_customer">  ';	
+															}else{
+																html = html + '							    <div class="option_btn_customer">  ';
+															}
+															html = html + '							      <div class="btn-group-addon">'+xuanze[a.answerId - 1]+'</div>  ';
+															html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+															html = html + '							    </div>  ';
+														}
+												}
+											}
+											html = html + '								</div>  ';
+											html = html + '								<div class="decide_answer" style="padding-top: 0rem;">  ';
+											var answer = '';
+											if(c.stuAnswer != undefined && c.stuAnswer != '' && c.stuAnswer != null){
+												if(c.stuAnswer == 'T'){
+													answer = '对';
+												}else{
+													answer = '错';
+												}
+											}
+											html = html + '												<a>已选答案</a><span>'+answer+'</span></br>  ';	
+											var t_answer = '';
+											if(c.rightKey != undefined && c.rightKey != '' && c.rightKey != null){
+												if(c.rightKey == 'T'){
+													t_answer = '对';
+												}else{
+													t_answer = '错';
+												}
+											}
+											html = html + '												<a>正确答案</a><span>'+t_answer+'</span><br>';
+											var k = '';
+											if(c.question != undefined){
+												k = c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+		   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：' +c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '									</div>  ';
+											html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var desc = '';
+											if(c.question != undefined){
+												desc = c.question.questionDesc;
+											}
+											var c1 = latex2Html(desc);
+											var c2 = makeMathJye(c1);
+											html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.cardQuestionType == '3'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">填空题（'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '								</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+  '';
+											html = html + '								</div>  ';
+											html = html + '								<div class="fill_answer">  ';
+											html = html + '											<a>已选答案</a><br>';
+											if(c.stuAnswer != undefined){
+												var array_img = c.stuAnswer.split(',');
+												for(var t=0;t<array_img.length;t++){ // 学生图片答案
+															if(array_img[t] != ''){
+																html = html + '								<div class="answer_img">  ';
+																html = html + '									<img src="'+array_img[t]+'" />  ';	
+			//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+																html = html + '								</div>  ';
+															}
+												}
+											}
+											html = html + '											<br />  ';
+											html = html + '											<a>正确答案</a><span>'+c.rightKey+'</span> <br> ';
+											var k='';
+											if(c.question != undefined){
+												k= c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+		   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var des='';
+											if(c.question != undefined){
+												des= c.question.questionDesc;
+											}
+											var c1 = latex2Html(des);
+											var c2 = makeMathJye(c1);
+											html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.cardQuestionType == '5'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">简答题（'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '								</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+'  ';
+											html = html + '								</div>  ';
+											html = html + '								<div id="short_question">  ';
+											html = html + '											<div class="fill_answer">  ';
+											html = html + '												<a style="display:block;">已做答案</a>';
+											if(c.stuAnswer != undefined){
+												var array_img = c.stuAnswer.split(',');
+												for(var t=0;t<array_img.length;t++){ // 学生图片答案
+															if(array_img[t] != ''){
+																html = html + '								<div class="answer_img">  ';
+																html = html + '									<img src="'+array_img[t]+'" />  ';	
+			//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+																html = html + '								</div>  ';
+															}
+												}
+											}
+											html = html + '												<br />  ';
+											html = html + '												<a>正确答案</a><span style="color:  #0DC77A;">'+c.rightKey+'</span> <br> ';
+											var k='';
+											if(c.question != undefined){
+												k= c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+		   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var des='';
+											if(c.question != undefined){
+												des= c.question.questionDesc;
+											}
+											var c1 = latex2Html(des);
+											var c2 = makeMathJye(c1);
+											html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+										if(c.cardQuestionType == '7'){
+											html = html + '						<div class="swiper-slide">  ';
+											html = html + '							<div class="multiple_content">  ';
+											html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">作文题（'+c.score+'分）</span>';
+											var stuScore = c.stuScore == undefined?0:c.stuScore;
+											html = html + '									<span style="float: right;">得分：<font style="color: #ff596b;font-size: 0.36rem;">'+stuScore+'</font>分</span>';
+											html = html + '								</p>  ';
+											html = html + '								<div class="question_stem">  ';
+											var qc = '暂无题干信息~';
+											if(c.question != undefined){
+												qc = c.question.questionContext;
+											}
+											var c1 = latex2Html(qc);
+											var c2 = makeMathJye(c1);
+											html = html + '									'+c2+'  ';
+											html = html + '								</div>  ';
+											html = html + '								<div id="short_question">  ';
+											html = html + '											<div class="fill_answer">  ';
+											html = html + '												<a style="display:block;">已做答案</a>';
+											if(c.stuAnswer != undefined){
+												var array_img = c.stuAnswer.split(',');
+												for(var t=0;t<array_img.length;t++){ // 学生图片答案
+															if(array_img[t] != ''){
+																html = html + '								<div class="answer_img">  ';
+																html = html + '									<img src="'+array_img[t]+'" />  ';	
+			//													html = html + '									<img src="/static/images/homework/icon_eject.png" />  ';
+																html = html + '								</div>  ';
+															}
+												}
+											}
+											html = html + '												<br />  ';
+											html = html + '												<a>正确答案</a><span style="color:  #0DC77A;">'+c.rightKey+'</span> <br> ';
+											var k='';
+											if(c.question != undefined){
+												k= c.question.knowledge;
+												k = k== null?'':k;
+											}
+											html = html + '												<span class="new_gray" style="color: #999999;">知识点</span> <span style="color: #999999;">'+k+'</span><br>';
+		   									html = html + '												<span class="new_gray" style="color: #999999;">平均分</span> <span style="color: #999999;">班级平均分：'+c.classAvg+'分；年级平均分：'+c.gradeAvg+'分</span>';
+											html = html + '											</div>  ';
+											html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+											var des='';
+											if(c.question != undefined){
+												des= c.question.questionDesc;
+											}
+											var c1 = latex2Html(des);
+											var c2 = makeMathJye(c1);
+											html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+											html = html + '								</div>  ';
+											html = html + '							</div>  ';
+											html = html + '						</div>  ';
+										}
+									}
+									html = html + '					</div>  ';
+									html = html + '					<div class="swiper-pagination'+m_flag+'"></div>  ';
+									html = html + '				</div>  ';
+									html = html + '			</div>  ';
+									html = html + '			<div class="multiple_btn">  ';
+									if(i == 0 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+									} else if(data.questionList.length == 1){
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">加油打气</button>  ';
+									} else if(i == data.questionList.length - 1 && data.questionList.length > 1) {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">加油打气</button>';
+									} else {
+										html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+										html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin-left: 0.19rem;">下一题</button>  ';
+									}
+									html = html + '			</div>  ';
+									html = html + '		</div>  ';
+									html = html + '	</div>  ';
+									
+							}
+							$(".container_content").append(html);
+							if(q.cardQuestionType == '6' || q.cardQuestionType == '8'){
+								// 左右滑动之后隐藏(1)
+							 	var swiper = new Swiper('.swiper-container'+m_flag, {
+							      pagination: {
+							        el: '.swiper-pagination'+m_flag,
+							      },
+								});
+								//(2)
+								$(".swiper-container"+m_flag).hide();
+							}
+							// 初始化显示第一题，隐藏其他试题
+						} // question循环
+						$(".container_content .child").hide();
+						$(".container_content .child").eq(0).show();
+						/*事件绑定处理start*/
+						// 解析处理
+						$(".analysis").on("click", function() {
+							if($(this).find('i').hasClass("icon_down")) {
+								$(this).find('i').removeClass("icon_down").addClass("icon_up");
+								$(this).siblings(".icon_content").show();
+							} else {
+								$(this).find('i').removeClass("icon_up").addClass("icon_down");
+								$(this).siblings(".icon_content").hide();
+							}
+						});
+						// 综合题显示处理
+						$(".multiple_img").on("click",function(){
+							 $('div[class*="swiper-container"]').slideToggle("hide");
+						});
+						// 试题显示处理
+						$(".button-next").on("click", function() {
+							$(this).parents(".child").next().show().siblings().hide();
+							$('.g-scrollview').scrollTop(0);
+							// 隐藏当前解析内容
+							$(".analysis i").removeClass("icon_up").addClass("icon_down");
+							$(".icon_content").hide();
+							
+						});
+						$(".button-prev").on("click", function() {
+							$(this).parents(".child").prev().show().siblings().hide();
+							$('.g-scrollview').scrollTop(0);
+							// 隐藏当前解析内容
+							$(".analysis i").removeClass("icon_up").addClass("icon_down");
+							$(".icon_content").hide();
+						});
+						/*弹窗加油打气*/
+						 var approve_flag = ifApprove();
+						 if(approve_flag){ // 已经加油打气
+						 	$(".btn_score").attr("disabled","disabled").html('爱心已送达').css("color","#76B8F5"); 
+						 }else{
+						 	$(".btn_score").removeAttr("disabled").html('加油打气').css("color","#fff"); 
+						 }
+						 $(".btn_score").one("click",function(){
+						 	 	oneApprove();
+								$(this).attr("disabled","disabled").html('爱心已送达').css("color","#76B8F5"); 
+								$("#jiayou_bg").show();
+								setTimeout(function(){
+										$('#jiayou_bg').hide();
+								},2000);
+						});
+						/*事件绑定处理end*/
+						// 关闭加载框
+						closeLoadDialog();
+					}else{
+						showAlert("服务器异常，请稍后重试");
+					} // 有数据
+				}, function(err) {
+					showAlert("服务器异常，请稍后重试");
+				}
+		);
+	}
+		// 是否已经加油打气
+		function ifApprove(){
+			var af;
+			ysAjaxSynchro("/mob/homework/getApprove", {
+				source_id:getUrlParam('examId')
+				}, function(data) {
+					if(data == undefined){
+						af = false;
+					}else{
+						if(data.success){
+							af = true;
+						}else{
+							af = false;
+						}
+					}
+				}, function(err) {
+				}
+			);
+			return af;
+		}
+		// 进行一次加油打气
+		function oneApprove(){
+			ysAjax("/mob/homework/approve", {
+			page : 99, // 关闭加载dialog标识
+			source_id:getUrlParam('examId'),
+			homework_type:'exam'
+			}, function(data) {
+			}, function(err) {
+			});
+		}
+		// 公式编辑器公式显示
+		  function latex2Html(str){
+		    if (str == undefined || str == null || str == '') {
+		        return '';
+		    }
+		    str = '<span class="temp">'+ str +'</span>';
+		    var $str = $(str);
+		    if ($str.find(".kfformula").length == 0) {
+		        return $str.html();
+		    }
+		    $str.find(".kfformula").each(function(i, v){
+		        var latex = $(v).attr("data-latex");
+				if (latex != undefined && latex != null && latex != '') {
+		            latex = toSBC(latex);
+		            try {
+		                var katexHtml = katex.renderToString(latex, {displayMode: false});
+		            } catch (e) {
+		                return str;
+		            }
+		            $(v).after(katexHtml);
+		            $(v).remove();
+		        }
+		    });
+		    return $str.html();
+		}
+		// 转半角字符
+		function toSBC(str){
+		    var result = "";
+		    var len = str.length;
+		    for(var i=0;i<len;i++)
+		    {
+		        var cCode = str.charCodeAt(i);
+		        //全角与半角相差（除空格外）：65248（十进制）
+		        cCode = (cCode>=0xFF01 && cCode<=0xFF5E)?(cCode - 65248) : cCode;
+		        //处理空格
+		        cCode = (cCode==0x03000)?0x0020:cCode;
+		        result += String.fromCharCode(cCode);
+		    }
+		    return result;
+		}
+		// 菁优网公式显示
+		function makeMathJye(html){
+		    html = '<span>'+ html +'</span>'
+		    var $html = $(html);
+		    var $tables = $html.find("table");
+		    $.each($tables, function(i, v){
+		        $(v).wrap("<span class='MathJye'></span>");
+		    })
+		    var result = $html.html();
+		    return result;
+		}
+		// 图片预览
+		$.fn.ImgZoomIn = function () {
+			var window_h = $(window).height();
+			var scroll_h = $(window).scrollTop();
+		
+			bgstr = '<div id="ImgZoomInBG" style="position: absolute;filter:Alpha(Opacity=70); opacity:0.7;z-index: 10000;background-color: #000;display: none;"></div>';
+			imgstr = '<img id="ImgZoomInImage" src="' + $(this).attr('src')+'" style="cursor:pointer; display:none; position:absolute; z-index:10001;" />';
+			if ($('#ImgZoomInBG').length < 1) {
+				$('body').append(bgstr);
+			}
+			if ($('#ImgZoomInImage').length < 1) {
+				$('body').append(imgstr);
+			}
+			else {
+				$('#ImgZoomInImage').attr('src', $(this).attr('src'));
+			}
+		
+			$('#ImgZoomInBG').css('top', scroll_h+'px');
+			$('#ImgZoomInBG').css('width', '100%');
+			$('#ImgZoomInBG').css('height', window_h+'px');
+		
+			$('#ImgZoomInImage').css('width', '100%');
+//			$('#ImgZoomInImage').css('height', (window_h/2)+'px');
+			$('#ImgZoomInImage').css('height', 'auto');
+//			$('#ImgZoomInImage').css('top', (scroll_h+window_h/4)+'px');
+			$('#ImgZoomInBG').show();
+			$('#ImgZoomInImage').show();
+		};
+		$(document).ready(function () {
+			$(document).on('touchend','img',function (t){
+				$(this).ImgZoomIn();
+				document.ontouchstart=function(){
+					return false;
+				}
+				t.preventDefault();
+			});
+		
+			$(document).on('touchend','#ImgZoomInImage',function(t){
+				$('#ImgZoomInImage').hide();
+				$('#ImgZoomInBG').hide();
+				document.ontouchstart=function(){
+					return true;
+				}
+				t.preventDefault();
+			});
+		});
+</script>
+</body>
+
+</html>

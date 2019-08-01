@@ -1,0 +1,5 @@
+createCommittee    --创建家委会
+familyMember       --家委会成员
+switchToCommittee  --切换家委会
+inviteCode         --家委会邀请码
+my                 --我的

@@ -1,0 +1,27 @@
+.cell-item-customer {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+ }
+.btn-customer {
+	background-color: #0493f0;
+	margin-right:.24rem;
+	margin-left:.24rem;
+	color: #FFF;
+}
+.btn-block {
+    text-align: center;
+    position: relative;
+    border: none;
+    pointer-events: auto;
+    width: 100%;
+    display: block;
+    font-size: 0.36rem;
+    height: 0.85rem;
+    line-height: 0.85rem;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+}

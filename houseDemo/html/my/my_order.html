@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+<style>
+	
+	  .cell-item img{
+		width: 1.6rem;
+		height: 1.2rem;
+	   border-radius: 0.1rem;
+	}
+	.cell-item{
+		height: 1.9rem;
+		padding: 0.3rem 0.2rem;
+	}
+	.cell-item .cell-left{
+		display: flex;
+	}
+	.cell-item .cell-left>div{
+		flex: 1;
+		padding-left: 0.2rem;
+		color: #313340;
+		font-size: 0.3rem;
+		font-weight: bold;
+	}
+   
+#ysYduiNavBarRightBtn{
+	color:#0493f0;
+	
+}
+   </style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+					<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/1@2x.png" />
+							<div>待付款（11）</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/3@2x.png" />
+							<div>待付款（18）</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/2@2x.png" />
+							<div>已关闭（05）</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<!--<a class="cell-item" href="#">
+						<div class="cell-left">
+							<img src="/static/images/appimg/Avatarsample110@2x.png" />
+							<div>待付款（11）</div>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>-->
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/my/my_home.html", "订单管理", {
+					hasIcon:true,
+					text:"全部订单",
+					action : function() {
+						$("#ysYduiNavBarRightBtn").attr("href",""); 
+					}
+	});
+			});
+		</script>
+	</body>
+
+</html>

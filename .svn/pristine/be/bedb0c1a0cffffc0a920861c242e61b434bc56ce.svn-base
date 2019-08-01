@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.bclor {
+				border: 1px solid red;
+				margin: 10px;
+				border-radius: 3px;
+			}
+			
+			.progress-wrapper {
+				height: 6px;
+				width: 100%;
+				background: #dcdcdc;
+				border-radius: 50px;
+			}
+			
+			.progress-left {
+				float: left;
+				width: 10%;
+			}
+			
+			.progress-right {
+				float: right;
+				width: 10%;
+			}
+			
+			.progress-btn {
+				border-radius: 50px;
+				width: 10px;
+				height: 10px;
+				background: #0493f0;
+				position: absolute;
+				top: 8px;
+				left: 20px;
+				border: 1px solid #FFFFFF;
+			}
+			
+			.progress {
+				height: 6px;
+				width: 0%;
+				background: #0493f0;
+				border-radius: 10px;
+			}
+			
+			.p_10 {
+				padding: 10px 20px 10px 20px;
+			}
+			.timetitle{
+				    width: 100%;
+				    height: 20px;
+				    line-height: 20px;
+				    padding: 0px 20px 0px 20px;
+				    margin-top: 1.2rem;
+				    color: #999999;
+				    font-size: 0.24rem;
+			}
+			.imgbig{
+				margin-top: 1.6rem;
+				width: 3.2rem;
+				height: 3.2rem;
+			}
+			.m-cell{
+				background: #F5F5F5 !important;
+			}
+			.m-cell:after{
+				border: 0px;
+			}
+			.playcss{
+				width: 1.32rem;
+				height: 1.32rem;
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview">
+				<div align="center">
+				<img class="imgbig" src="/static/img/courseevent/voice_default.png" />
+				</div>
+				<div class="timetitle" >
+					<div class="progress-left" id="start"></div>
+
+					<div class="progress-right" id ="end" ></div>
+				</div>
+				<div class="m-cell p_10">
+
+					<div class="progress-wrapper" id="progress-wrapper">
+						<div class="progress"></div>
+						<div class="progress-btn"></div>
+					</div>
+				</div>
+				<div align="center"><img class="playcss" onclick="plays();" id="playcss" src="/static/img/courseevent/voice_play_default.png" /></div>
+
+			</div>
+			</div>
+
+	<div class="container" style="display: none;">
+		<audio id="player" loop="loop" controls>
+		<source src="" type="audio/mpeg">
+		</audio>
+		<div id="lrcArea"></div>
+	</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+		//定义变量
+		var playcurrentTime = 0;
+		var start = "00:00";
+		var end = "00:00";
+		var t1;
+		var pp = 1;
+		var audio = document.getElementById("player");
+        var playcss = document.getElementById("playcss");
+		var starts = document.getElementById('start');
+		starts.innerHTML = start;
+		var ends = document.getElementById('end');
+		ends.innerHTML = end;
+			$(document).ready(function() {
+		 audio.src =getUrlParam("path");
+				/**
+				 * Javascript API调用Tab
+				 */
+				const progressWrapper = document.querySelector('.progress-wrapper')
+				const progress = document.querySelector('.progress')
+				const progressBtn = document.querySelector('.progress-btn')
+				const progressWrapperWidth = progressWrapper.offsetWidth
+				
+
+				let touchPoint = 0;
+				let btnLeft = 0
+				progressBtn.addEventListener('touchstart', e => {
+					
+					let touch = e.touches[0]
+					touchPoint = touch.clientX // 获取触摸的初始位置
+					btnLeft = parseInt(getComputedStyle(progressBtn, null)['left'], 10) // 此处忽略IE浏览器兼容性
+				})
+				progressBtn.addEventListener('touchmove', e => {
+					e.preventDefault()
+					window.clearInterval(t1);
+					pp=2;
+ 					plays();
+					let touch = e.touches[0]
+
+					let diffX = touch.clientX - touchPoint // 通过当前位置与初始位置之差计算改变的距离
+					let btnLeftStyle = btnLeft + diffX // 为按钮定义新的left值
+					if(btnLeftStyle > progressWrapperWidth) {
+						btnLeftStyle = progressWrapperWidth
+					} else if(btnLeftStyle < 0) {
+						btnLeftStyle = 0
+					}
+					var cd = btnLeftStyle;
+					if(cd < 18) {
+						cd = 18;
+					}else{
+						cd = cd+18;
+					}
+					touch.target.style.left = cd + 'px'
+					playcurrentTime = cd;
+					progress.style.width = ((btnLeftStyle)/ progressWrapperWidth) * 100+ '%' // 通过按钮的left值与进度条容器长度的比值，计算进度条的长度百分比
+					console.log((btnLeftStyle / progressWrapperWidth) * 100)
+				})
+		
+				progressBtn.addEventListener('touchend', e => {
+					e.preventDefault()
+						var div = document.getElementById('progress-wrapper');  
+      					var width = div.style.width || div.clientWidth || div.offsetWidth || div.scrollWidth; width
+						 
+					audio.currentTime = (playcurrentTime/width) * audio.duration;
+					pp=1;
+ 					plays();
+ 				
+				})
+		
+			 
+
+				addMainPageHeader(getUrlParam("backurl"), "课堂");
+				addMainPageFooter(4);
+
+				/*ysAjax("/wechatController/getUserToken", {
+					code: getUrlParam("code")
+				}, function(data) {
+					// SessionStorage 中保存Token和UserId
+					setUserId(data.result.wxUnionid);
+					setToken(data.result.token);
+
+					//			showAlert("Token:" + getToken());
+					//			showAlert("UserId:" + getUserId());
+				}, function(err) {
+
+				});*/
+
+			});
+			
+
+		function formatTime(second) {
+			return [ parseInt(second / 60 % 60), parseInt(second % 60) ].join(
+					":").replace(/\b(\d)\b/g, "0$1");
+		}
+		//播放
+			function plays() {
+				if (pp == 1) {
+	
+					if (audio.paused) {
+					audio.play();
+					}
+					
+					
+					t1 = window.setInterval(function() {
+						const progress = document.querySelector('.progress');
+						progress.style.width =(audio.currentTime / audio.duration)* 100 + '%';
+						starts.innerHTML = formatTime(parseInt(audio.currentTime));
+						ends.innerHTML = formatTime(parseInt(audio.duration));
+						var div = document.getElementById('progress-wrapper');  
+      					var width = div.style.width || div.clientWidth || div.offsetWidth || div.scrollWidth; width
+						const progressBtn = document.querySelector('.progress-btn')
+						
+						progressBtn.style.left =(audio.currentTime / audio.duration)*(width)+18+ 'px';
+	
+					}, 200);
+	
+					playcss.src="/static/img/courseevent/voice_suspend_default.png";
+					pp = 2;
+				} else {
+					playcss.src="/static/img/courseevent/voice_play_default.png";
+					audio.pause();
+					window.clearInterval(t1);
+					pp = 1;
+				}
+	
+			}
+		</script>
+	</body>
+
+</html>

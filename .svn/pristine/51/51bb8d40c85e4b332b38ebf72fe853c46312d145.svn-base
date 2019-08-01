@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<button class="btn">Copy</button>
+				<br />
+				<span>hello success!</span>
+				<img src="/static/images/common/eaglesoulQRcode.png" style="width: 100%;margin-top: 10px;" />
+				<br />
+				<!--<div class="imgs-box" id="img_box">-->
+					<!--<img src="/static/img/courseevent/img_classroom.png" alt="" style="width: 100px;height: 100px;" />
+					<img src="/static/img/courseevent/voice_default.png" alt="" style="width: 100px;height: 100px;" />-->
+					<img id="preview" src="/static/images/common/eaglesoulQRcode.png" alt="" style="width: 100px;height: 100px;" />
+				<!--</div>-->
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/md5.js"></script>
+		<script src="/static/js/previewImage.min.js"></script>
+		<script src="/static/js/clipboard.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				//复制内容
+				var clipboard = new ClipboardJS('.btn', {
+					target: function() {
+						return document.querySelector('span');
+					}
+				});
+				clipboard.on('success', function(e) {
+					showAlert(e.text);
+				});
+				clipboard.on('error', function(e) {
+					showAlert('复制失败！');
+				});
+				// 自定义分享内容
+				init();
+				$('#preview').on('click',function(){
+//					alert('success');
+					wx.previewImage({
+						current: 'http://tshousehold.ys100.com/static/images/common/eaglesoulQRcode.png', // 当前显示图片的http链接
+						urls: ['http://tshousehold.ys100.com/static/images/common/eaglesoulQRcode.png'] // 需要预览的图片http链接列表
+					});
+				});
+			});
+			
+			
+			function init() {
+				// 邀请码
+				var invitate_code = '';
+				var nickname = getNickName();
+				var openid = getUserId();
+				var stu_id = '';
+				var app_id = 'share1225';
+				var auth_key = 'wx_share_qzedJ2JrpKeJIP6kGtQBdNeWuxNTvNIY';
+				ysAjax("/invitation/get_inviteCode", {}, function(data) {
+					if(data.success) {
+						var item = data.result;
+						stu_id = item.stu_id;
+						invitate_code = item.invitation_code;
+					}
+				});
+				// WX
+				ysAjax("/wechatController/get_signature", {
+					url: location.href
+				}, function(data) {
+					if(data.success) {
+						var item = data.result;
+						if(wx) {
+							wx.config({
+								debug: false,
+								appId: item.appid, // 必填，公众号的唯一标识
+								timestamp: item.timestamp, // 必填，生成签名的时间戳
+								nonceStr: item.nonceStr, // 必填，生成签名的随机串
+								signature: item.signature, // 必填，签名
+								jsApiList: [ // 必填，需要使用的JS接口列表
+									'onMenuShareAppMessage', //1.0 分享到朋友
+									'onMenuShareTimeline', //1.0分享到朋友圈
+									'updateAppMessageShareData', //1.4 分享到朋友
+									'updateTimelineShareData', //1.4分享到朋友圈
+									'previewImage',
+								]
+							});
+							wx.ready(function() {
+								// 自定义“分享给朋友”及“分享到QQ”按钮的分享内容
+								wx.updateAppMessageShareData({
+									title: nickname + ' 邀请你加入鹰硕家长', // 分享标题
+									desc: '家校互联互通，用爱呵护孩子成长', // 分享描述
+									link: 'http://tshousehold.ys100.com/html/wx_test2.html?invitate_code=' + invitate_code+"&stu_id="+stu_id+"&openid="+openid+"&app_id="+app_id+"&auth_key="+auth_key, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+									imgUrl: 'http://tshousehold.ys100.com/static/images/common/eaglesoulQRcode.png', // 分享图标
+									success: function() {
+										showAlert('自定义分享内容成功！');
+									}
+								});
+								// 自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
+								wx.updateTimelineShareData({
+									title: nickname + ' 邀请你加入鹰硕家长', // 分享标题
+									link: 'http://tshousehold.ys100.com/html/wx_test2.html?invitate_code=' + invitate_code+"&stu_id="+stu_id+"&openid="+openid+"&app_id="+app_id+"&auth_key="+auth_key, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+									imgUrl: 'http://tshousehold.ys100.com/static/images/common/eaglesoulQRcode.png', // 分享图标
+									success: function() {
+										showAlert('自定义朋友圈内容成功！');
+									}
+								});
+							});
+							wx.error(function(res) {
+								showAlert(res.errMsg);
+							});
+						}
+					}
+				});
+			}
+			/////////////////////////////////////////////////
+//			var global = {};
+//			/**
+//			 * get multiple elements
+//			 * @public
+//			 */
+//			global.all = function(selector, contextElement) {
+//				var nodeList,
+//					list = [];
+//				if(contextElement) {
+//					nodeList = contextElement.querySelectorAll(selector);
+//				} else {
+//					nodeList = document.querySelectorAll(selector);
+//				}
+//				if(nodeList && nodeList.length > 0) {
+//					list = Array.prototype.slice.call(nodeList);
+//				}
+//				return list;
+//			}
+//
+//			/**
+//			 * delegate an event to a parent element
+//			 * @public
+//			 * @param  array     $el        parent element
+//			 * @param  string    eventType  name of the event
+//			 * @param  string    selector   target's selector
+//			 * @param  function  fn
+//			 */
+//			global.delegate = function($el, eventType, selector, fn) {
+//				if(!$el) {
+//					return;
+//				}
+//				$el.addEventListener(eventType, function(e) {
+//					var targets = global.all(selector, $el);
+//					if(!targets) {
+//						return;
+//					}
+//					// findTarget:
+//					for(var i = 0; i < targets.length; i++) {
+//						var $node = e.target;
+//						while($node) {
+//							if($node == targets[i]) {
+//								fn.call($node, e);
+//								break; //findTarget;
+//							}
+//							$node = $node.parentNode;
+//							if($node == $el) {
+//								break;
+//							}
+//						}
+//					}
+//				}, false);
+//			};
+//
+//			var urls = [];
+//			var imgs = global.all('img', global.all('#img_box')[0]);
+//			imgs.forEach(function(v, i) {
+//				urls.push(v.src);
+//			})
+//
+//			global.delegate(document.querySelector('#img_box'), 'click', 'img', function() {
+//				var current = this.src;
+//				var obj = {
+//					urls: urls,
+//					current: current
+//				};
+//				previewImage.start(obj);
+//			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      margin-left:0;
+      margin-right: 0;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+   
+    #img_btn {
+     	padding-top: .2rem;
+     }
+    #img_btn .swiper-pagination-bullet{
+    	/*margin: 0;*/
+    }
+    #img_btn .swiper-pagination-bullet-active,
+    #img_btn div{
+    	/*background: none;*/
+    }
+    #img_btn div{
+    	width: 1rem;
+    	height:1rem;
+    	border-radius: 0;
+    	padding: 0;
+    	margin: 0;
+    	background-repeat: no-repeat;
+    }
+	#hd_img_box .swiper-wrapper>div{
+		background-repeat: no-repeat;
+	}
+ 
+  </style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--  <div class="swiper-container gallery-top swiper-container-horizontal" style="height: 90%;" id="hd_img_box">
+			<!-- 大图片 div-->
+		    	<!-- <div class="swiper-wrapper">
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image: url(/static/images/homework/test.png); "></div>
+		    </div>
+		    <!-- 大图片 div end-->
+  		<!-- 	</div>
+  		<div class="swiper-container gallery-thumbs swiper-container-horizontal" style="height:  1.5rem;background: #fff;">
+  			<!-- 缩略图 div-->
+		 	<!--    <div  id="img_btn" class="swiper-wrapper">
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	        	<div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+	            <div class="swiper-slide" style="background-image:url(/static/images/homework/test.png); "></div>
+		    </div>
+		    <!-- 缩略图 div  end-->
+  	<!-- 		</div>-->
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+		addMainPageHeader("/html/understand_more/daily_examination_quicknei.html?paper_id=" + getUrlParam("paper_id")+"&classroom_id="+getUrlParam("classroom_id")+"&type="+getUrlParam("type"), "素材图片预览");
+		addMainPageFooter(2);
+		//TODO APP
+		/*ysAjax("/study/getQuikImgList", {
+	        paper_id : getUrlParam("paper_id")
+		}, function(data) {
+			if (data.success) {
+				var html="";
+				var datalist = data.result.img_list;
+				html = html + '<div class="swiper-container gallery-top swiper-container-horizontal" style="height: 90%;" id="hd_img_box">';
+				html = html + '<!-- 大图片 div-->';
+				html = html + '<div class="swiper-wrapper">';
+				for(i = 0; i< datalist.length; i++) {
+					html = html + '<div class="swiper-slide" style="background-image: url('+datalist[i].image_path+'); background-size:350px 100%;"></div>';
+				}
+				html = html + '</div>';
+				html = html + '<!-- 大图片 div end-->';
+				html = html + '</div>';
+				html = html + '<div class="swiper-container gallery-thumbs swiper-container-horizontal" style="height:1.5rem;background: #fff;">';
+				html = html + '<!-- 缩略图 div-->';
+				html = html + '<div id="img_btn" class="swiper-wrapper">';
+				for(i = 0; i< datalist.length; i++) {
+				html = html + '<div class="swiper-slide" style="background-image:url('+datalist[i].image_path+'); "></div>';
+				}
+				html = html + '</div>';
+				html = html + '<!-- 缩略图 divend-->';
+				html = html + '</div>';
+				$(".g-scrollview").append(html);
+				/!*图片滑动*!/
+			    var galleryTop = new Swiper('.gallery-top', {
+			      spaceBetween: 10,
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+			    });
+			    var galleryThumbs = new Swiper('.gallery-thumbs', {
+			      spaceBetween: 10,
+			      centeredSlides: true,
+			      slidesPerView: 'auto',
+			      touchRatio: 0.2,
+			      slideToClickedSlide: true,
+			    });
+			    galleryTop.controller.control = galleryThumbs;
+			    galleryThumbs.controller.control = galleryTop;
+				// 缩略图居左展示
+				var w_= $("#img_btn div").length;
+				if(w_ > 1){
+					w_ = w_ * 50;
+				}
+				var w = ($(".swiper-wrapper").width() - 50) / 2 - w_;
+				$("#img_btn").css("transform","translate3d("+ (w) +"px, 0px, 0px)");
+			  	$("#img_btn .swiper-slide").css({"background-size": "90% 95%"});
+			}
+		});*/
+	});
+</script>
+
+</body>
+</html>

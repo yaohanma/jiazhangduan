@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<script src="/static/plugins/iosselect/iosSelect.js"></script>
+
+</head>
+<body>
+<section class="g-flexview">
+     <div class="g-scrollview">
+     </div>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script src="/static/js/base64.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var encdata = getUrlParam("encdata");
+	var code = getUrlParam("code");
+	var base = new Base64();
+	var jsonStr = JSON.parse(base.decode(encdata));
+	
+ ysAjax("/wechatController/getUserToken", {
+		code : code
+	}, function(data) {
+		// SessionStorage 中保存Token和UserId
+		setUserId(data.result.wxOpenid);
+		setToken(data.result.token);
+		setHeadImgUrl(data.result.headimgurl);
+		setNickName(data.result.nickname);
+		ysAjax("/mob/homepage/updateActivite", {
+			studentId : jsonStr.stu_id
+		}, function(data) {
+			if (data.success) {
+				if (jsonStr.msg_type == '4') {
+					window.location.href = '/html/notice_list/notice_nei.html?msg_id='
+						+ jsonStr.msg_id;
+				} else if (jsonStr.msg_type == '1') {
+					window.location.href = '/html/exam_schedule/exam_results.html?examId='
+						+ jsonStr.examId;
+				} else if (jsonStr.msg_type == '5') {
+					window.location.href = '/html/exam_schedule/exam_schedule_details.html?exam_id=' +
+						jsonStr.examId+'&start_time='+jsonStr.start_time+'&exam_type='+jsonStr.exam_type;
+				} else if (jsonStr.msg_type == '99'){
+					window.location.href = '/html/attendance/children_attendance.html?stuId='+ jsonStr.stu_id;
+				}
+			} else {
+				showNotify("设为默认孩子失败");
+			}
+		}, function(err) {
+			showNotify("发生异常");
+		});
+
+	}); 
+});
+</script>
+</body>
+</html>

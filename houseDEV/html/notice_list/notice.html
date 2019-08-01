@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+	.m-cell{
+		margin-top: 0.2rem;
+		color: #999;
+		padding-right: 0.24rem;
+	}
+	body .m-cell:after{
+		border-bottom: none;
+	}
+	.m-cell a{
+		    display: block;
+		    padding-top: 0.3rem;
+	}
+	.m-cell p{
+		font-size: 0.33rem;
+		line-height: 0.5rem;
+		margin-top: 0.1rem;
+		color: #333;
+		margin-bottom: 0.19rem;
+	}
+	.m-cell p.active{
+		color:#999;
+	}
+	.cell-item div{
+		width: 100%;
+	    font-size: 0.28rem;
+	    /*overflow: hidden;
+	    text-overflow: ellipsis;
+	    display: -webkit-box;
+	    -webkit-box-orient: vertical;
+	    -webkit-line-clamp: 1;*/
+	    color: #999;
+	   margin-bottom: 0.3rem;
+	}
+	/*.no_data{*/
+		/*margin-top: 0.1rem;*/
+		/*color: #999;*/
+		/*text-align: center;*/
+		/*color: #b4b4b4;*/
+		/*font-size: 0.26rem;*/
+	/*}*/
+	.badge{
+		padding: 4px;
+		top: -0.1rem;
+		font-size: 0.4rem;
+	}
+	
+	/*暂无数据 css*/
+div.bg {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    padding: 0 1rem;
+    font-size: 0.3rem;
+    color: #999;
+}
+div.bg img {
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+.cell-item span{
+	width: 1.28rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+	border-radius: 0.04rem;
+	display: inline-block;
+	font-size: 0.24rem;
+	font-weight: 100;
+	text-align: center;
+	margin-right: 0.2rem;
+}
+/*考试日程*/
+.exam_rc span{
+	background-color: rgba(48,184,254,0.2);
+	color: #30b8fe;
+}
+/*重要通知*/
+.informtion_box span{
+	background-color: rgba(255,106,103,0.2);
+	color: #ff6a67;
+}
+/*考试成绩*/
+.exam_cj span{
+	background-color: rgba(62,199,186,0.2);
+	color: #3ec7ba;
+}
+/*考勤*/
+.kaoqin span{
+	background-color: rgba(116,137,254,0.2);
+	color: #7489fe;
+}
+.m-cell p.read{
+	color: #999;
+}
+.m-cell p{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview" id="J_List">
+		<!--暂无数据-->
+		<!--<div class="bg">-->
+			<!--&lt;!&ndash;<div style="padding: 0 1rem; height: auto;">-->
+				<!--<img src="/static/images/homework/img_msg.png">-->
+			<!--</div>-->
+			<!--<div style="line-height:.5rem ;">暂无数据</div>&ndash;&gt;-->
+		<!--</div>-->
+			<div class="m-cell" id="J_ListContent">
+				<!--&lt;!&ndash; TODO APP 假数据 &ndash;&gt;-->
+				<!--&lt;!&ndash;考试日程&ndash;&gt;-->
+	            <!--<a href="/html/exam_schedule/exam_schedule_details.html" class="cell-item">-->
+	              <!--<p class="exam_rc"> <span>考试日程</span>2018~2019第二学期一年级期中考试-->
+	              <!--</p>-->
+	              <!--<div>2018-05-4</div>-->
+	            <!--</a>-->
+	            <!--&lt;!&ndash;重要通知&ndash;&gt;-->
+	            <!--<a href="/html/notice_list/notice_nei.html" class="cell-item">-->
+	              <!--<p class="informtion_box"> <span>重要通知</span> 这边的话其实最多会	有40个字大概可能以及的肯定就是两行差不多了-->
+	              <!--</p>-->
+	              <!--<div>2018-05-4</div>-->
+	            <!--</a>-->
+	            <!--&lt;!&ndash;考试成绩&ndash;&gt;-->
+	            <!--<a href="/html/exam_schedule/exam_results.html" class="cell-item">-->
+	              <!--<p class="exam_cj"> <span>考试成绩</span> 这边的话其实最多会	有40个字大概可能以及的肯定就是两行差不多了-->
+	              <!--</p>-->
+	              <!--<div>2018-05-4</div>-->
+	            <!--</a>-->
+	            <!--&lt;!&ndash;考勤提醒&ndash;&gt;-->
+	            <!--<a href="/html/attendance/children_attendance.html" class="cell-item">-->
+	              <!--<p class="kaoqin"> <span>考勤提醒</span> 这边的话其实最多会	有40个字大概可能以及的肯定就是两行差不多了-->
+	              <!--</p>-->
+	              <!--<div>2018-05-4</div>-->
+	            <!--</a>-->
+	        </div>
+	        <!--<div class="no_data">没有更多了~</div>-->
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	// header
+	addMainPageHeader("/html/common/homepage.html", "消息中心");
+//	addMainPageFooter(1);
+	// “没有更多了~”
+//	$('.no_data').hide();
+	notice_list();
+});
+// 通知列表
+var page = 1;
+var	pageSize = 10;
+var loadMore = function(callback) {
+    ysAjax("/mob/notification/list", {
+        page: page,
+        pageSize: pageSize,
+        msg_type: 'list'
+    }, function(data) {
+        typeof callback == 'function' && callback(data);
+    }, function(err) {
+        showAlert('服务器异常，请稍后重试');
+    });
+};
+function notice_list() {
+
+    $('#J_List').infiniteScroll({
+        binder: '#J_List',
+        pageSize: pageSize,
+        initLoad: true,
+        backposition: true,
+        jumpLink: '.cell-item',
+        loadListFn: function () {
+            var def = $.Deferred();
+            loadMore(function(data) {
+                var html = '';
+                if(data.success == true){
+                    console.log(data);
+                    if(data.result !=undefined && data.result.length > 0){
+                        data.result.page = page;
+                        for(var i=0; i<data.result.length; i++){
+                            var item = data.result[i];
+                            if(item.msg_type == '0'){
+                                var classFlag = "kaoqin";
+                                if(item.read_flag == '1'){// 0:未读 1:已读
+                                    classFlag += " " + "read"
+                                }
+                                html += '<a href="javascript:void(0)" class="cell-item" data-page="'+data.result.page+'">' +
+                                    '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/attendance/children_attendance.html?stuId='+item.stu_id+'&flag=m",this)>' +
+                                    '<p class="'+classFlag+'"> ' +
+                                    '<span>考勤提醒</span>'+item.stu_name+" "+item.kaoqin_time+" "+item.kaoqin_status+'提醒</p>' +
+                                    '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                            }else if(item.msg_type == '1'){
+                                var classFlag = "exam_cj";
+                                if(item.read_flag == '1'){// 0:未读 1:已读
+                                    classFlag += " " + "read"
+                                }
+                                html += '<a href="javascript:void(0)" class="cell-item" data-page="'+data.result.page+'">' +
+                                    '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_results.html?examId='+item.exam_id+'&flag=m",this)>' +
+                                    '<p class="'+classFlag+'">' +
+                                    '<span>考试成绩</span>'+item.exam_name+'</p>' +
+                                    '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                            }else if(item.msg_type == '4'){
+                                var classFlag = "informtion_box";
+                                if(item.read_flag == '1'){// 0:未读 1:已读
+                                    classFlag += " " + "read"
+                                }
+                                html += '<a href="javascript:void(0)" class="cell-item" data-page="'+data.result.page+'">' +
+                                    '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/notice_list/notice_nei.html?msg_id='+item.msg_id+'&flag=m",this)>' +
+                                    '<p class="'+classFlag+'">' +
+                                    '<span>重要通知</span>'+item.msg_title+'</p>' +
+                                    '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                            }else if(item.msg_type == '5'){
+                                var classFlag = "exam_rc";
+                                if(item.read_flag == '1'){// 0:未读 1:已读
+                                    classFlag += " " + "read"
+                                }
+                                var start_time = "";
+                                if(item.start_time){
+                                    start_time = new Date(item.start_time.replace(/-/g,'/'));
+                                    // 月/日小于9时 前面追加0
+                                    var month = ("0" + (start_time.getMonth()*1 + 1)).slice(-2);
+                                    var day = ("0" + start_time.getDate()).slice(-2);
+                                    start_time = month + "-" + day;
+                                }
+                                html += '<a href="javascript:void(0)" class="cell-item" data-page="'+data.result.page+'">' +
+                                    '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_schedule_details.html?exam_id='+item.exam_id+'&start_time='+start_time+'&flag=m",this)>' +
+                                    '<p class="'+classFlag+'">' +
+                                    '<span>考试日程</span>'+item.exam_name+'</p>' +
+                                    '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                            }
+                        }
+                        $('.m-cell').append(html);
+                        def.resolve(data.result,page);
+                        ++page;
+                    }else{
+                        if(page == 1){
+                            var html = '<div class="bg"><div style="padding: 0 1rem; height: auto;">' +
+                                '<img src="/static/images/homework/img_msg.png"></div>' +
+                                '<div style="line-height:.5rem ;">暂无数据</div></div>';
+                            $('.m-cell').html(html);
+                            def.resolve([""]);
+                            $(".list-donetip").css("display","none");
+						}else{
+                            def.resolve([""]);
+                            if($(".list-donetip").length>1){
+                                $(".list-donetip").css("display","none");
+                                $(".list-donetip:first").removeAttr("style");
+                            }
+						}
+
+                    }
+                }else{
+                    showAlert('服务器异常，请稍后重试');
+                }
+            });
+
+            return def.promise();
+        },
+		loadStorageListFn: function (listData, retPage) {
+            var def = $.Deferred();
+
+            page = retPage;
+
+            var html = '';
+            listData.forEach(function (val) {
+                var list = val.list;
+                list.page = val.page;
+                for(var i=0; i<list.length; i++){
+                    var item = list[i];
+                    if(item.msg_type == '0'){
+                        var classFlag = "kaoqin";
+                        if(item.read_flag == '1'){// 0:未读 1:已读
+                            classFlag += " " + "read"
+                        }
+                        html += '<a href="javascript:void(0)" class="cell-item" data-page="'+list.page+'">' +
+                            '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/attendance/children_attendance.html?stuId='+item.stu_id+'&flag=m",this)>' +
+                            '<p class="'+classFlag+'"> ' +
+                            '<span>考勤提醒</span>'+item.stu_name+" "+item.kaoqin_time+" "+item.kaoqin_status+'</p>' +
+                            '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                    }else if(item.msg_type == '1'){
+                        var classFlag = "exam_cj";
+                        if(item.read_flag == '1'){// 0:未读 1:已读
+                            classFlag += " " + "read"
+                        }
+                        html += '<a href="javascript:void(0)" class="cell-item" data-page="'+list.page+'">' +
+                            '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_results.html?examId='+item.exam_id+'&flag=m",this)>' +
+                            '<p class="'+classFlag+'">' +
+                            '<span>考试成绩</span>'+item.exam_name+'</p>' +
+                            '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                    }else if(item.msg_type == '4'){
+                        var classFlag = "informtion_box";
+                        if(item.read_flag == '1'){// 0:未读 1:已读
+                            classFlag += " " + "read"
+                        }
+                        html += '<a href="javascript:void(0)" class="cell-item" data-page="'+list.page+'">' +
+                            '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/notice_list/notice_nei.html?msg_id='+item.msg_id+'&flag=m",this)>' +
+                            '<p class="'+classFlag+'">' +
+                            '<span>重要通知</span>'+item.msg_title+'</p>' +
+                            '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                    }else if(item.msg_type == '5'){
+                        var classFlag = "exam_rc";
+                        if(item.read_flag == '1'){// 0:未读 1:已读
+                            classFlag += " " + "read"
+                        }
+                        var start_time = "";
+                        if(item.start_time){
+                            start_time = new Date(item.start_time.replace(/-/g,'/'));
+                            // 月/日小于9时 前面追加0
+                            var month = ("0" + (start_time.getMonth()*1 + 1)).slice(-2);
+                            var day = ("0" + start_time.getDate()).slice(-2);
+                            start_time = month + "-" + day;
+                        }
+                        html += '<a href="javascript:void(0)" class="cell-item" data-page="'+list.page+'">' +
+                            '<div onclick=updateReadFlag("'+item.read_flag+'","'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_schedule_details.html?exam_id='+item.exam_id+'&start_time='+start_time+'&flag=m",this)>' +
+                            '<p class="'+classFlag+'">' +
+                            '<span>考试日程</span>'+item.exam_name+'</p>' +
+                            '<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+                    }
+                }
+                $('.m-cell').html(html);
+            });
+            def.resolve();
+            return def.promise();
+        }
+
+    });
+
+//	$('.m-cell').pullRefresh({
+//		loadListFn: function() {
+//			var def = $.Deferred();
+//			loadMore(function(data) {
+//				var html = '';
+//				if(data.success == true){
+//				    console.log(data);
+//					if(data.result !=undefined && data.result.length > 0){
+//						for(var i=0; i<data.result.length; i++){
+//							var item = data.result[i];
+//
+//							if(item.msg_type == '0'){
+//							    var classFlag = "kaoqin";
+//							    if(item.read_flag == '1'){// 0:未读 1:已读
+//                                    classFlag += " " + "read"
+//								}
+//							    html += '<a href="javascript:void(0)" class="cell-item">' +
+//									'<div onclick=updateReadFlag("'+item.msg_type+'","'+item.id+'","/html/attendance/children_attendance.html?stuId='+item.stu_id+'")>' +
+//									'<p class="'+classFlag+'"> ' +
+//									'<span>考勤提醒</span>'+item.stu_name+" "+item.kaoqin_time+" "+item.kaoqin_status+'</p>' +
+//									'<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+//							}else if(item.msg_type == '1'){
+//                                var classFlag = "exam_cj";
+//                                if(item.read_flag == '1'){// 0:未读 1:已读
+//                                    classFlag += " " + "read"
+//                                }
+//							    html += '<a href="javascript:void(0)" class="cell-item">' +
+//                                    '<div onclick=updateReadFlag("'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_results.html?examId='+item.exam_id+'")>' +
+//									'<p class="'+classFlag+'">' +
+//									'<span>考试成绩</span>'+item.exam_name+'</p>' +
+//									'<div>'+getNowFormatDate(item.create_date)+'</div></div></a>'
+//							}else if(item.msg_type == '4'){
+//                                var classFlag = "informtion_box";
+//                                if(item.read_flag == '1'){// 0:未读 1:已读
+//                                    classFlag += " " + "read"
+//                                }
+//                                html += '<a href="javascript:void(0)" class="cell-item">' +
+//                                    '<div onclick=updateReadFlag("'+item.msg_type+'","'+item.id+'","/html/notice_list/notice_nei.html?msg_id='+item.msg_id+'")>' +
+//									'<p class="'+classFlag+'">' +
+//									'<span>重要通知</span>'+item.msg_title+'</p>' +
+//									'<div>'+getNowFormatDate(item.create_date)+'</div></a>'
+//                            }else if(item.msg_type == '5'){
+//                                var classFlag = "exam_rc";
+//                                if(item.read_flag == '1'){// 0:未读 1:已读
+//                                    classFlag += " " + "read"
+//                                }
+//                                html += '<a href="javascript:void(0)" class="cell-item">' +
+//                                    '<div onclick=updateReadFlag("'+item.msg_type+'","'+item.id+'","/html/exam_schedule/exam_schedule_details.html?exam_id='+item.exam_id+'&start_time='+getNowFormatDate(item.start_time)+'")>' +
+//                                    '<p class="'+classFlag+'">' +
+//                                    '<span>考试日程</span>'+item.exam_name+'</p>' +
+//                                    '<div>'+getNowFormatDate(item.create_date)+'</div></a>'
+//                            }
+////							html = html + ' <a href="/html/notice_list/notice_nei.html?msg_id='+item.msg_id+'&is_read='+item.is_read+'" class="cell-item"> ';
+////							if(item.is_read == 0){ // 未读
+////								html = html + '   <p>'+item.msg_title+'</p> ';
+////							}else{
+////								html = html + '   <p class="active">'+item.msg_title+'</p> ';
+////							}
+////							html = html + '   <div>'+item.msg_content+'</div> ';
+////							html = html + '   <div>'+getNowFormatDate(item.create_date)+'</div> ';
+////							html = html + ' </a> ';
+//						}
+//						$('.m-cell').append(html);
+//					}else{
+//						$('.no_data').hide();
+//						html = html + ' <div style="padding: 0 1rem; height: auto;"> ';
+//						html = html + ' 	<img src="/static/images/homework/img_msg.png"> ';
+//						html = html + ' </div> ';
+//						html = html + ' <div style="line-height:.5rem ;">暂无数据</div> ';
+//						$('.bg').html(html);
+//					}
+//					def.resolve();
+//					++page;
+//					var tipStr;
+//					if(page > 2){
+//						if(data.result.length <= 0) {
+//							tipStr = '已是最新内容';
+//							YDUI.dialog.toast(tipStr, 'none', 1000);
+//							$('.no_data').show();// “没有更多了~”
+//						}
+//					}
+//				}else{
+//					showAlert('服务器异常，请稍后重试');
+//				}
+//			});
+//			return def.promise();
+//		}
+//	});
+}
+// 时间格式化
+function getNowFormatDate(timeString) {
+        var date = new Date(timeString);
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+}
+// 修改消息状态
+function updateReadFlag(read_flag,msgType,msgId,url,obj) {
+ 	// 埋点统计 积极配合_1(确认1次通知) added by stt 20190710
+ 	if(read_flag == '0'){
+ 		buriedPoint('3');
+ 	}
+    ysAjax("/mob/notification/updateReadFlag", {
+        msg_type: msgType,
+        id: msgId
+    }, function(data) {
+        console.log(data);
+        window.location.href = url;
+    }, function(err) {
+        showAlert('服务器异常，请稍后重试');
+    });
+
+    // 获取当前点击数据所在页码
+    var pageNow = $(obj).closest("a").attr("data-page");
+    // 获取当前数据页码session数据key
+    var primaryKey = window.location.pathname.toUpperCase().replace(/\/?\.?/g, '') + "_LIST_" + pageNow;
+    // 获取当前数据页码session数据value
+    var dataList = sessionStorage.getItem(primaryKey);
+    if(dataList){
+        dataList = JSON.parse(dataList);
+        for (var i = 0; i < dataList.length; i++){
+            if(dataList[i].id && dataList[i].id == msgId){
+                // 修改session数据中状态为已读
+                dataList[i].read_flag = '1';
+                break;
+            }
+        }
+        sessionStorage.setItem(primaryKey,JSON.stringify(dataList));
+    }
+}
+</script>
+</body>
+</html>

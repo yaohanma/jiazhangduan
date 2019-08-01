@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<script src="/static/plugins/iosselect/iosSelect.js"></script>
+
+</head>
+<body>
+<section class="g-flexview">
+     <div class="g-scrollview">
+     </div>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+// 		 ysAjax("/mob/common/checkToken", {}, function(data) {
+// 			// SessionStorage 中保存Token和UserId
+// 			// setUserId(data.result.wxOpenid);
+// 			// setToken(data.result.token);
+// 			// setHeadImgUrl(data.result.headimgurl);
+// 			// setNickName(data.result.nickname);
+// //			window.location.href = '/html/wx_test.html';
+//              if (data.success) {
+//                  ysAjax("/common/checkbindstudent", {
+//                  }, function(data) {
+//                      if (data.success) {
+//                          window.location.href="/html/study/study_index.html";
+//                      } else {
+//                          window.location.href="/html/common/bind_student.html";
+//                      }
+//                  });
+//              } else {
+//                  if (data.errorCode = 'ERR001') {
+//                      window.location.href="/html/login.html";
+//                  }
+//              }
+// 		});
+	window.location.href="/html/login/login_index.html";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+
+		<style>
+			.m-cell {
+				margin-bottom: 0px !important;
+			}
+			
+			.m-celltitle {
+				height: 0.58rem;
+				line-height: 0.58rem;
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.cell-left .limg {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				border-radius: 3px;
+				height: 0.88rem;
+				width: 0.88rem;
+			}
+			
+			.rtext {
+				margin-left: 0.2rem;
+				line-height: 0.48rem;
+				height: 0.88rem;
+			}
+			
+			.xtitle {
+				font-size: 0.32rem;
+				color: #333333;
+			}
+			
+			.xtime {
+				color: #999999;
+				font-size: 0.24rem;
+			}
+			
+			.xtime img {
+				width: 0.24rem;
+				height: 0.24rem;
+				float: left;
+				margin-top: 4px;
+				margin-right: 2px
+			}
+			div.bg{
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			div.bg img{
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview">
+				<div class="m-cell" hidden="hidden">
+					<img src="/static/img/courseevent/img_classroom.png" width="100%" style="height:2.4rem" />
+					<div class="cell-left" style="height:0.88rem;"><span style=" margin-left: 0.3rem;font-size: 0.3rem;color: #333333;"> </span></div>
+				</div>
+				<section class="g-scrollview"  id="J_List">
+				<div id="J_ListContent" > </div>
+				</section>
+		
+			</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/template.js"></script>
+		<script id="J_ListHtml" type="text/html">
+				<div class="m-cell" id="jfcty{{id}}">
+			
+
+				</div>
+		</script>
+		<script id="J_ListHtmlnei" type="text/html">
+
+					<a href="/html/courseevent/courseEventListInfo.html?id={{id}}&channel={{channel}}" data-page="{{page}}" class="cell-item">
+						<div class="cell-left">
+							<img class="limg" src="/static/img/courseevent/mask_play.png" />
+							<ul class="rtext">
+								<li class="xtitle">{{subject_name}}|{{custom_name}}</li>
+								<li class="xtime"><img src="/static/img/courseevent/icon_time.png" />{{dif_second}}</li>
+							</ul>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+
+		</script>
+		<script id="J_ListHtmlTitle" type="text/html">
+				<div class="m-celltitle demo-small-pitch">{{start_time}}</div>
+		</script>
+		<script type="text/javascript">
+            var page = 1,
+                pageSize = 10;
+			$(document).ready(function() {
+			// 2018-11-28 added by stt 埋点-7：关爱_2（累计查看课堂情况2天）
+			buriedPoint('7');
+			 var  bltime = "";
+			 var  blid="";
+			 var szbl=0;
+			var loadMore = function(callback) {
+				ysAjax("/mob/courseevent/getCoursesReviewList", {
+					page: page,
+                    pageSize: pageSize
+				}, function(data) {
+					console.log(data)
+					if(page==1&&data.resultOb.length==0){
+//					window.location.href="/html/courseevent/courseEventList_back_null.html";
+						var html = '<div class="bg">' +
+                            '<div style="padding: 0 1rem; height: auto;">' +
+                            '<img src="/static/images/study_img/img_knowledge.png" />' +
+                            '</div>' +
+                            '<p align="center" style="margin-top: 4%;font-size:.33rem;color:#999999;">老师还没有同步课堂数据</p>' +
+                            '<p align="center" style="font-size:.3rem;color:#999999;">稍后再来看看吧~</P>' +
+                            '</div>';
+                        $(".g-scrollview").html(html);
+					return false;
+					}
+					typeof callback == 'function' && callback(data);
+				}, function(err) {
+					console.log(err)
+				});
+			};
+
+			$('#J_List').infiniteScroll({
+				binder: '#J_List',
+				pageSize: pageSize,
+				initLoad: true,
+                backposition: true,
+                jumpLink: '.cell-item',
+				doneTxt:'没有更多数据了',
+				loadListFn: function() {
+					var def = $.Deferred();
+					loadMore(function(listArr) {
+					    $(".m-cell").show();
+						for(var i = 0;i<listArr.resultOb.length;i++){
+                            listArr.resultOb[i].page = page;
+                            //是否建立标题
+						 if(listArr.resultOb[i].start_time==bltime){
+						 	
+						 	var html = template('J_ListHtmlnei',listArr.resultOb[i]);
+						 	$('#'+blid).append(html);
+						 
+						 }else{
+
+						 	blid= "jfcty"+szbl;
+						 	var date = {id:szbl};
+						 	bltime = listArr.resultOb[i].start_time;
+						 	var html = template('J_ListHtmlTitle',listArr.resultOb[i]);
+						 	$('#J_ListContent').append(html);
+						 	var html = template('J_ListHtml',date);
+						 	$('#J_ListContent').append(html);
+						 	var html = template('J_ListHtmlnei',listArr.resultOb[i]);
+						 	$('#'+blid).append(html);
+						 	szbl++;
+						 }
+//							console.log(listArr.resultOb[i])
+							
+						}
+						
+						//var html = template('J_ListHtml', {		list: listArr});
+						
+						//J_ListHtmlnei
+						//$('#J_ListContent').append(html);
+
+						def.resolve(listArr.resultOb,page);
+                        ++page;
+
+					});
+
+					return def.promise();
+				},
+                loadStorageListFn: function (listData, retPage) {
+
+                    $(".m-cell").show();
+
+                    var def = $.Deferred();
+
+                    page = retPage;
+                    var html = '';
+                    listData.forEach(function (val) {
+                        var list = val.list;
+						if(list && list.length){
+                            for(var i = 0;i<list.length;i++){
+                                list[i].page = val.page;
+                                //是否建立标题
+                                if(list[i].start_time==bltime){
+
+                                    var html = template('J_ListHtmlnei',list[i]);
+                                    $('#'+blid).append(html);
+
+                                }else{
+
+                                    blid= "jfcty"+szbl;
+                                    var date = {id:szbl};
+                                    bltime = list[i].start_time;
+                                    var html = template('J_ListHtmlTitle',list[i]);
+                                    $('#J_ListContent').append(html);
+                                    var html = template('J_ListHtml',date);
+                                    $('#J_ListContent').append(html);
+                                    var html = template('J_ListHtmlnei',list[i]);
+                                    $('#'+blid).append(html);
+                                    szbl++;
+                                }
+//							console.log(listArr.resultOb[i])
+
+                            }
+						}
+
+
+                    });
+                    def.resolve();
+                    return def.promise();
+                }
+			});
+
+			addMainPageHeader("/html/study/study_index.html", "课堂");
+			addMainPageFooter(4);
+
+			});
+		</script>
+	</body>
+
+</html>

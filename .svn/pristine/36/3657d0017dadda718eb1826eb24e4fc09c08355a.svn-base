@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			/*logo*/
+			
+			.logo_box {
+				margin-top: 1.5rem;
+				/*margin-bottom: 1.05rem;*/
+			}
+			
+			input::-webkit-input-placeholder {
+				color: #a0a4b1;
+			}
+			
+			.cell-item input:focus {
+				outline: none;
+			}
+			
+			.cell-item input {
+				margin-top: 0.3rem;
+				padding: 0.30rem 0;
+				color: #313340;
+				background: 0;
+				border: 0;
+				outline: none;
+				-webkit-appearance: none!important;
+				-webkit-user-select: auto!important;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				cursor: pointer;
+			}
+			
+			.logo_box img {
+				margin: 0 auto;
+			}
+			
+			.logo_form {
+				width: 100%;
+				padding: 0.5rem;
+				padding-top: 1.5rem;
+			}
+			
+			.m-cell {
+				margin-bottom: 0.52rem;
+				position: relative;
+			}
+			
+			.code_btn {
+				min-width: 2.5rem;
+				height: 0.66rem;
+				line-height: 0.66rem;
+				border-radius: 6px;
+				/*font-weight:bold;*/
+				/*background-color: #f89629;*/
+				color: #fff;
+				font-size: 0.25rem;
+				text-align: center;
+				/*padding: 0 0.2rem;*/
+				/*display: none;*/
+			}
+			
+			p {
+				color: #a0a4b1;
+				font-size: 0.18rem;
+				margin-bottom: 0.64rem;
+			}
+			
+			.login_btn {
+				width: 100%;
+				height: 0.78rem;
+				border-radius: 4px;
+				/*background: rgba(4,147,240);*/
+				background: #0493f0;
+				color: #6eb8f5;
+				margin-bottom: 0.48rem;
+			}
+			/*登录按钮 点击*/
+			
+			.login_btn.active {
+				color: #fff;
+			}
+			
+			.Account_box {
+				display: flex;
+				font-size: 0.24rem;
+				color: #a0a4b1;
+			}
+			.Account_box a{
+				padding:0.5rem 0;
+				
+			}
+			.icon-error {
+				font-size: 24px;
+				color: #a0a4b1;
+				right: 0;
+				top: 35%;
+				position: absolute;
+			}
+			
+			.icon-error {
+				color: #a0a4b1;
+			}
+			
+			body .m-navbar:after {
+				border-bottom: 0;
+			}
+			
+			.m-navbar {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				height: 0.9rem;
+				z-index: 999;
+				background: #fff;
+			}
+			/*2019/4/22 */
+			
+			.logo_box img {
+				width: 1.84rem;
+				height: 0.65rem;
+			}
+			
+			.hairline .g-scrollview {
+				margin-top: 1px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #fff;">
+		<section class="g-flexview">
+
+			<header class="m-navbar">
+				<a id="backApp" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title"></span>
+				</div>
+			</header>
+			<section class="g-scrollview">
+				<div class="logo_box">
+					<img src="/static/images/logo_img/login_img.png" />
+				</div>
+				<div class="logo_form">
+					<div class="m-cell">
+						<!--<div class="cell-item">
+                    <input id="invoteCode" class="cell-input" placeholder="输入邀请码" maxlength="8"/>
+                    <i id="invoteCode_icon" class="icon-error" style="display: none;"></i>
+                </div>-->
+						<div class="cell-item" style="padding-left:0;">
+							<input id="telnum" type="tel" class="cell-input" placeholder="输入手机号码用于登录/注册"  pattern="[0-9]*" oninput="if(value.length>11)value=value.slice(0,11)" />
+							<i id="telnum_icon" class="icon-error" style="display: none;"></i>
+						</div>
+
+						<div class="cell-item" style="padding-left:0;">
+							<div class="cell-left"><input id="verificationCd" class="cell-input" placeholder="短信验证码" type="tel" pattern="[0-9]*" oninput="if(value.length>6)value=value.slice(0,6)" /></div>
+
+							<label class="cell-right" style="padding-right: 0;width: 1.5rem;">
+
+                        <!--<button type="button" class="btn btn-code" id="J_GetCode">获取</button>-->
+                        <div class="btn btn-warning code_btn" id="J_GetCode">
+                           		 获取验证码
+                        </div>
+                    </label>
+						</div>
+					</div>
+					<p>温馨提示：未注册鹰硕家长的手机号，登录时将自动注册（初始密码为：123456）</p>
+					<button type="button" class="btn-block login_btn" onclick="register()">登录</button>
+					<div class="Account_box">
+						<a href="#" style="flex:1">用户协议</a>
+						<a href="/html/login/login2.html">密码登录</a>
+					</div>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script>
+			//获取验证码
+			var dialog = YDUI.dialog;
+			var $getCode = $('#J_GetCode');
+			// 定义参数
+			$getCode.sendCode({
+				disClass: 'btn-disabled', // 禁用按钮样式【必填】
+				secs: 60, // 倒计时时长 [可选，默认：60秒]
+				run: false, // 是否初始化自动运行 [可选，默认：false]
+				runStr: '{%s}秒后重新获取', // 倒计时显示文本 [可选，默认：58秒后重新获取]
+				resetStr: '重新获取验证码' // 倒计时结束后按钮显示文本 [可选，默认：重新获取验证码]
+			});
+
+			$getCode.on('click', function() {
+				if($('#telnum').val() == '' || $('#telnum').val() == undefined) {
+					YDUI.dialog.toast('请输入正确的手机号码', 'error', 1000);
+					return;
+				} else {
+					if($('#telnum').val().length < 11 || !/^1(3|4|5|7|8)\d{9}$/.test($('#telnum').val())) {
+						YDUI.dialog.toast('请输入正确的手机号码', 'error', 1000);
+						return;
+					}
+				}
+				var $this = $(this);
+				dialog.loading.open('发送中...');
+				// ajax 成功发送验证码后调用【start】
+				setTimeout(function() { //模拟ajax发送
+					ysAjax("/homepage/sendVerificationCode", {
+						telnum: $("#telnum").val(),
+						type: "app"
+					}, function(data) {
+						if(data.success) {
+							dialog.loading.close();
+							$this.sendCode('start');
+							dialog.toast('已发送', 'success', 1500);
+						} else {
+							showNotify("发送失败,请重新获取验证码");
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+				}, 800);
+			});
+
+			$(function() {
+				$('#backApp').off().on('click', function() {
+					api.sendEvent({
+						name: 'backTeacher'
+					});
+				});
+				// 手机号
+				$("#telnum").bind("input propertychange", function(event) {
+					$('#telnum_icon').css('display', '');
+					if($(this).val() != '') {
+						if($('#verificationCd').val() != '') {
+							$('.login_btn').addClass('active');
+						} else {
+							$('.login_btn').removeClass('active');
+						}
+					} else {
+						$('.login_btn').removeClass('active');
+						$('#telnum_icon').css('display', 'none');
+					}
+				});
+				$('#telnum_icon').click(function() {
+					$('#telnum').val('');
+					$(this).css('display', 'none');
+					$('.login_btn').removeClass('active');
+				});
+				// 验证码
+				$("#verificationCd").bind("input propertychange", function(event) {
+					if($(this).val() != '') {
+						if($('#telnum').val() != '') {
+							$('.login_btn').addClass('active');
+						} else {
+							$('.login_btn').removeClass('active');
+						}
+					} else {
+						$('.login_btn').removeClass('active');
+					}
+				});
+			});
+
+			// 注册
+			function register() {
+				if($('.login_btn').hasClass('active')) {
+					if($('#telnum').val() == '' || $('#telnum').val() == undefined) {
+						YDUI.dialog.toast('请输入正确的手机号码', 'error', 1000);
+						return;
+					} else {
+						if($('#telnum').val().length < 11 || !/^1(3|4|5|7|8)\d{9}$/.test($('#telnum').val())) {
+							YDUI.dialog.toast('请输入正确的手机号码', 'error', 1000);
+							return;
+						}
+					}
+					if($('#verificationCd').val() == '' || $('#verificationCd').val() == undefined) {
+						YDUI.dialog.toast('请输入正确的验证码', 'error', 1000);
+						return;
+					}
+					removeUserId();
+					removeToken();
+					ysAjax("/mob/homepage/checkVerificationCode", {
+						telnum: $('#telnum').val(),
+						verificationCd: $('#verificationCd').val(),
+						type: 'app'
+					}, function(data) {
+						if(data.success) {
+							// 注册登录
+							ysAjax("/mob/homepage/registerAccount", {
+								telnum: $('#telnum').val()
+							}, function(data) {
+								if(data.success) {
+									if(data.result != undefined && data.result != null) {
+										setUserId(data.result.parentMobile);
+										setToken(data.result.token);
+//										window.apiready = function() {
+											api.sendEvent({
+												name: 'loginParent',
+												extra: {
+													"phone": data.result.parentMobile
+												}
+											});//										}
+										if(data.result.remark == '1') {
+											window.location.href = '/html/login/set_children.html?flag=2';
+										} else {
+											window.location.href = '/html/common/homepage.html';
+										}
+									}
+								} else {
+									YDUI.dialog.toast(data.errorMsg, 'error', 1000);
+								}
+							}, function(err) {
+								showAlert('服务器异常，请稍后重试');
+							});
+
+						} else {
+							YDUI.dialog.toast('请输入正确的验证码', 'error', 1000);
+						}
+					}, function(err) {
+						showAlert('服务器异常，请稍后重试');
+					});
+				}
+			}
+		</script>
+	</body>
+
+</html>

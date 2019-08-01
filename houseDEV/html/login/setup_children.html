@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/plugins/iosselect/iosSelect.js"></script>
+		<style>
+			input::-webkit-input-placeholder {
+		         color: #a0a4b1;
+		    }
+			.radio_box>div{
+				width: 100%;
+				text-align: left;
+			}
+			
+			.radio_box .advice{
+				display: inline-block;
+				width: 1.2rem;
+				height: 0.5rem;
+				border-radius: 2px;
+				border: 1px solid #a0a4b1;
+				text-align: center;
+				line-height: 0.5rem;
+				margin-left: 0.1rem;
+			}
+			.cell-right.radio_box input{
+				display: none;
+			}
+			.cell-right.radio_box input[type="radio"]:checked + .advice{
+				background: #0493f0;
+				color: #fff;
+				border:1px solid #0493f0;
+			}
+			.login_btn {
+			    width: 100%;
+			    height: 0.78rem;
+			    line-height: 0.78rem;
+			    border-radius: 4px;
+			    background: #0493f0;
+			    color: #6eb8f5;
+			    margin-bottom: 0.48rem;
+			    color: #fff;
+			}
+			.layui-layer.my_layer{
+				border-radius:0;
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+			.my_layer{
+				padding: 0.25rem 0.8rem;
+				border-radius: 0;
+			}
+			.my_layer .img_box img{
+				width: 1.12rem;
+				height: 1.12rem;
+				margin: 0 auto;
+			}
+			.my_layer .title{
+				color: #313340;
+				font-size: 0.36rem;
+				text-align: center;
+				font-weight: bold;
+				margin-top: 0.15rem;
+			}
+			.my_layer p{
+				font-size: 0.28rem;
+				margin-top:0.52rem ;
+				color: #313340;
+			}
+			.my_layer p span{
+				margin-right: 0.15rem;
+			}
+			.my_layer .layui-layer-btn{
+				text-align: center;
+			}
+			.my_layer .layui-layer-btn0{
+				width: 100%;
+				height: 0.78rem;
+				line-height: 0.78rem;
+				font-size: 0.28rem;
+				margin: 0 auto;
+				text-align: center;
+			}
+			#success_box{
+				display: none;
+			}
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+				    <div class="cell-item">
+				        <div class="cell-left">孩子姓名：</div>
+				        <div class="cell-right"><input type="" id="childName" class="cell-input" placeholder="请输入孩子的真实姓名" maxlength="15" /></div>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子性别：</div>
+				        <div class="cell-right radio_box">
+				        	<div id="childSex">
+				        		<label>
+					                <input type="radio" name="sex" id="adviceRadio1" value="1" checked hidden/>
+					                <label for="adviceRadio1" class="advice">男</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="sex" id="adviceRadio2" value="0" hidden/>
+					                <label for="adviceRadio2" class="advice">女</label>
+					            </label>
+				        	</div>
+
+				        </div>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子出生日期：</div>
+				        <label class="cell-right cell-arrow" id="selectDate" style="color:#a0a4b1">
+				           <div style="text-align:left;width: 100%;" id="birthday"></div>
+				        </label>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子学段：</div>
+				        <div class="cell-right radio_box">
+				        	<div id="grade">
+				        		<label>
+					                <input type="radio" name="learning" id="adviceRadio3" value="0"  checked hidden/>
+					                <label for="adviceRadio3" class="advice">幼儿园</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning" id="adviceRadio4" value="1" hidden/>
+					                <label for="adviceRadio4" class="advice">小学</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning" id="adviceRadio5" value="7" hidden/>
+					                <label for="adviceRadio5" class="advice">初中</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning"  id="adviceRadio6" value="10" hidden/>
+					                <label for="adviceRadio6" class="advice">高中</label>
+					            </label>
+				        	</div>
+					        
+				        </div>
+				    </div>
+				</div>
+
+				<div style="margin: 0 0.48rem;">
+					<button type="button" class="btn-block login_btn" id="createBtn">确定</button>
+				</div>
+				
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/layer/layer.js"></script>
+		<script>
+			$(document).ready(function() {
+				var index = 0;
+                if(getUrlParam("source") == "bind"){
+                    addMainPageHeader("/html/my/my_bind_status.html?source="+getUrlParam("source"), "创建孩子账号");
+                	window.apiready = function() {
+						api.addEventListener({
+							name: 'keyback'
+						}, function(ret, err) {
+							if(index != 0) {
+								layer.close(index);
+								index = 0;
+								return;
+							}
+							if($("#YDUI_CONFRIM").length > 0) {
+								closeYduiDialog("YDUI_CONFRIM");
+								return;
+							}
+							if($("#YDUI_ALERT").length > 0) {
+								closeYduiDialog("YDUI_ALERT");
+								return;
+							}
+							// 出生年，关系选择
+							if($(".olay").length > 0) {
+								$(".olay").remove();
+								return;
+							}
+							window.location.href = "/html/my/my_bind_status.html?source="+getUrlParam("source");
+						})
+					}
+                } else {
+                    addMainPageHeader("/html/login/set_children.html?flag="+getUrlParam("source"), "创建孩子账号");
+					window.apiready = function() {
+						api.addEventListener({
+							name: 'keyback'
+						}, function(ret, err) {
+							if(index != 0) {
+								layer.close(index);
+								index = 0;
+								return;
+							}
+							if($("#YDUI_CONFRIM").length > 0) {
+								closeYduiDialog("YDUI_CONFRIM");
+								return;
+							}
+							if($("#YDUI_ALERT").length > 0) {
+								closeYduiDialog("YDUI_ALERT");
+								return;
+							}
+							// 出生年，关系选择
+							if($(".olay").length > 0) {
+								$(".olay").remove();
+								return;
+							}
+							window.location.href = "/html/login/set_children.html?flag="+getUrlParam("source");
+						})
+					}
+                }
+                $("#childName").on('input',function(e){
+                    var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
+                    var nameValue = $("#childName").val();
+                    var nameValueRe = nameValue.replace(regStr, '');
+                    if(nameValue != nameValueRe) {
+                        showNotify("不能输入表情符");
+                        $("#childName").val(nameValueRe);
+                    }
+                });
+
+				var selectDateDom = $('#selectDate');
+				var showDateDom = $('#birthday');
+				var now = new Date();
+			    var nowYear = now.getFullYear();
+			    var nowMonth = now.getMonth() + 1;
+			    var nowDate = now.getDate();
+                showDateDom.attr('data-year', nowYear);
+                showDateDom.attr('data-month', nowMonth);
+                showDateDom.attr('data-date', nowDate);
+			    // 数据初始化
+			    function formatYear (nowYear) {
+			        var arr = [];
+			        for (var i = nowYear - 20; i <= nowYear; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i 
+			            });
+			        }
+			        return arr;
+			    }
+			    function formatMonth () {
+			        var arr = [];
+			        for (var i = 1; i <= 12; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i 
+			            });
+			        }
+			        return arr;
+			    }
+			    function formatDate (count) {
+			        var arr = [];
+			        for (var i = 1; i <= count; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i
+			            });
+			        }
+			        return arr;
+			    }
+		    var yearData = function(callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            callback(formatYear(nowYear))
+		        // }, 2000)
+		    }
+		    var monthData = function (year, callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            callback(formatMonth());
+		        // }, 2000);
+		    };
+		    var dateData = function (year, month, callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            if (/^(1|3|5|7|8|10|12)$/.test(month)) {
+		                callback(formatDate(31));
+		            }
+		            else if (/^(4|6|9|11)$/.test(month)) {
+		                callback(formatDate(30));
+		            }
+		            else if (/^2$/.test(month)) {
+		                if (year % 4 === 0 && year % 100 !==0 || year % 400 === 0) {
+		                    callback(formatDate(29));
+		                }
+		                else {
+		                    callback(formatDate(28));
+		                }
+		            }
+		            else {
+		                throw new Error('month is illegal');
+		            }
+
+		    };
+		    selectDateDom.bind('click', function () {
+                var oneLevelId = showDateDom.attr('data-year');
+                var twoLevelId = showDateDom.attr('data-month');
+                var threeLevelId = showDateDom.attr('data-date');
+		        var iosSelect = new IosSelect(3, 
+		            [yearData, monthData, dateData],
+		            {
+		                title: '孩子出生日期',
+		                itemHeight: 50,
+                        oneLevelId: oneLevelId,
+                        twoLevelId: twoLevelId,
+                        threeLevelId: threeLevelId,
+		                showLoading: true,
+                        itemShowCount: 5,
+                        callback: function(selectOneObj, selectTwoObj, selectThreeObj) { // 用户确认选择后的回调函数
+		                    if (selectOneObj.value == nowYear) {
+                                if (selectTwoObj.value > nowMonth) {
+                                    YDUI.dialog.toast('请选择本月之前月份', 'error', 1000);
+                                    return;
+                                } else if (selectTwoObj.value == nowMonth) {
+                                    if (selectThreeObj.value > nowDate) {
+                                        YDUI.dialog.toast('请选择本日之前日期', 'error', 1000);
+                                        return;
+									}
+								}
+							}
+                            showDateDom.attr('data-year', selectOneObj.id);
+                            showDateDom.attr('data-month', selectTwoObj.id);
+                            showDateDom.attr('data-date', selectThreeObj.id);
+                            $("#birthday").html(selectOneObj.value + '年' + selectTwoObj.value + '月' + selectThreeObj.value + '日');
+                        }
+		        });
+		    });
+		    
+		    $('#createBtn').click(function () {
+                let childName = $.trim($('#childName').val());
+                let childSex = $('input:radio[name="sex"]:checked').val();
+                let grade = $('#grade').find('input:radio[name="learning"]:checked').val();
+                let birthday = $("#birthday").html();
+                if (childName == '' || childName == undefined) {
+                    YDUI.dialog.toast('请输入孩子姓名', 'error', 1000);
+                    return;
+                }else{
+                    if(childName.length > 15){
+                        YDUI.dialog.toast('孩子姓名最多15字', 'error', 1000);
+                        return;
+                    }
+                }
+                if (birthday == '' || birthday == undefined) {
+                    YDUI.dialog.toast('请选择孩子生日', 'error', 1000);
+                    return;
+                }
+				let param = {
+                    childName : childName,
+                    sex : childSex,
+                    birthday : birthday,
+                    grade : grade
+				};
+                console.log(param)
+                ysAjax("/mob/student/createChild",param,function(data) {
+                    if(data.success){
+                        $('#lay_child_name').html(childName);
+						if (childSex == '1'){
+                            $('#lay_child_sex').html('男');
+						} else {
+                            $('#lay_child_sex').html('女');
+						}
+                        $('#lay_child_birthday').html(birthday);
+                        $('#lay_child_no').html(data.result);
+						if (grade == '0') {
+                            $('#lay_child_grade').html('幼儿园');
+						} else if (grade == '1') {
+                            $('#lay_child_grade').html('小学');
+						} else if (grade == '7') {
+                            $('#lay_child_grade').html('初中');
+						} else if (grade == '10') {
+                            $('#lay_child_grade').html('高中');
+						}
+
+                        showLayer(data.result);
+                    }else{
+                        showAlert('创建学生失败，请稍后重试');
+                    }
+                }, function(err) {
+                    showAlert('服务器异常，请稍后重试');
+                });
+            })
+		    
+		    //创建成功弹窗
+		     function showLayer(result){
+				index =	layer.open({
+				  type: 1 //Page层类型
+				  , area: ['90%', '9rem']//宽高
+				  ,title:false
+				  ,shade: 0.6 //遮罩透明度
+				  ,maxmin:false
+				  ,anim: 1 //0-6的动画形式，-1不开启
+				  ,skin:"my_layer"
+				  ,closeBtn: 0 //不显示关闭按钮
+				  ,shadeClose: true //开启遮罩关闭
+				  ,content: $("#success_box")
+				   ,btn: ['确定并绑定孩子'],
+				   yes:function(index,layero){
+					layer.close(index); //关闭弹出框
+					 location.href="/html/login/choice_relation.html?account_id=" + result + "&source=" + getUrlParam('source');
+					}
+				}); 
+			}
+	     
+		})
+		</script>
+	</body>
+	<div  id="success_box" class="my_layer">
+		<div class="img_box">
+			<img src="/static/images/newAPPimg/chuangjian2x.png" />
+		</div>
+		<div class="title">创建成功</div>
+		<p>
+			<span>孩子姓名：</span><span id="lay_child_name"></span>
+		</p>
+		<p>
+			<span>孩子性别：</span><span id="lay_child_sex"></span>
+		</p>
+		<p>
+			<span>孩子出生日期：</span><span id="lay_child_birthday"></span>
+		</p>
+		<p>
+			<span>孩子学段：</span><span id="lay_child_grade"></span>
+		</p>
+		<p style="color: #313340;font-weight: bold;">
+			<span>孩子账号：</span><span id="lay_child_no"></span>
+		</p>
+		<p style="color: #313340;font-weight: bold;">
+			<span>孩子密码：</span>123456
+		</p>
+		
+	</div>
+</html>

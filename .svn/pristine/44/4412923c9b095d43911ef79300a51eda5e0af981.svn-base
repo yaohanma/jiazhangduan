@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<link rel="stylesheet" href="/static/css/my/my.css"/>
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.m-cell:after{
+				content:none;
+			}
+			.input_tel {
+			width: 100%;
+			
+		}
+		.input_tel input{
+			border: 0;
+			width: 100%;
+			margin-right: 0.24rem;
+		}
+		input::-webkit-input-placeholder {
+			font-weight: bold;
+			font-size: 0.3rem;
+		}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell"  style="margin-top: .3rem;margin-bottom: .6rem;">
+					<div class="cell-item" style="height: 80px;">
+						<div class="cell-left input_tel">
+							<input placeholder="手机号">
+							<!--<p style="font-size:.33rem;color:#333333;">手机号</p>-->
+						</div>
+						<div class="cell-right">
+							<p style="font-size:.33rem;color:#999999;" id="telNum"></p>
+						</div>
+					</div>
+				</div>
+				<div class="cell-item-customer">
+					<button class="btn-block btn-customer" id="btnNext">
+						<a href="/html/my/my_information.html" style="display: block;">更换收手机号码</a></button>
+					</button>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/my/my_information.html", "手机号码");
+				var requestData = new Object();
+				requestData = GetRequest();
+				var telNumber = requestData["telNumber"];
+				$("#telNum").html(telNumber);
+				$("#btnNext").on("click", function() {
+//					ysAjax("/homepage/chekupdatetel", { TODO APP
+//					}, function(data) {
+//						if (data.success) {
+//							window.location.href="/html/my/my_new_telnumber.html";
+//						} else {
+//							showNotify("今天已经更新过手机号码不能再次更新");
+//						}
+//					}, function(err) {
+//						showNotify("发生异常");
+//					});
+				})
+			});
+			
+			//获取前页面参数
+			function GetRequest() {   
+				   var url = location.search; 
+				   var theRequest = new Object();
+				   //获取url中"?"符后的字串   
+				   if (url.indexOf("?") != -1) {   
+				      var str = url.substr(1);   
+				      strs = str.split("&");   
+				      for(var i = 0; i < strs.length; i ++) {   
+				         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+				      }   
+				   }   
+				   return theRequest;   
+			}   
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+<style>
+	   div.img_box{
+		width: 1rem;
+		height: 1rem;
+		float: left;
+		margin-right: .2rem;
+		border-radius: 50%;
+	}
+	   div.img_box img{
+		width: 100%;
+		height: 100%;
+	   border-radius: 50%;
+	}
+   .font-size-head{
+	font-size: .35rem;
+    }
+   .font-size-content{
+	 font-size: .3rem;
+	 color: #313340;
+	 font-weight: bold;
+   }
+  .font-color-33{
+	 color: 333333;
+   }
+ .m-cell:after{
+ 	border-bottom: none;
+ }
+ .m-cell{
+ 	margin-bottom: 0.1rem;
+ }
+/* .mytitle{
+    font-weight: bold;
+}*/
+.login_btn{
+   width: 100%;
+   height: 0.78rem;
+   line-height: 0.78rem;
+   border-radius: 4px;
+   background: #0493f0;
+   color: #6eb8f5;
+   margin-bottom: 0.48rem;
+   color: #fff;
+
+}
+   </style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell" style="margin-bottom: .2rem;">
+					<a class="cell-item" href="/html/my/my_information.html" style="height: 1.5rem;">
+						<div class="cell-left">
+							<div class="img_box"><img id="headImage" src="/static/images/appimg/default_boy.png"></div>
+							 <div><p class="font-size-head font-color-33 mytitle" id="nickname"></p></div>
+						</div>
+						<div class="cell-right cell-arrow">黄小米</div>
+					</a>
+				</div>
+				<div class="m-cell">
+					<a class="cell-item" href="/html/my/my_children.html" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">我的孩子</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/my/my_bind_status.html" style="height:0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">绑定状态</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/attendance/children_attendance.html" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">孩子考勤</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/my/my_order.html" style="height:0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">订单管理</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+				</div>
+				<div class="m-cell" style="">
+					<a class="cell-item" href="https://tsfamilydemo.ys100.com?aloneApp=2" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">家委会</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+				</div>
+				<div class="m-cell">
+					<div class="cell-item" style="height: 0.88rem;" id="switchId">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle" >切换身份</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</div>
+					<a class="cell-item" href="/html/medal/medal.html" style="height:0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">我的勋章</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/invited_member/invited.html" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">邀请家人</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/yun/yun_index.html" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">云空间</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+
+					<!-- 一期不做，隐藏入口 -->
+					<!--<a class="cell-item" href="javascript:;" style="height: 60px;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">邀请家人</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="javascript:;" style="height: 60px;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">我的勋章</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a> -->
+				</div>
+
+				<div class="m-cell" style="">
+					<a class="cell-item" href="/html/my/my_help.html" style="height:0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">反馈与帮助</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a class="cell-item" href="/html/my/set_up/set_upindex.html" style="height: 0.88rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">设置</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+				</div>
+				<div style="margin: 0 0.48rem;">
+					<button type="button" class="btn-block login_btn active" id="quitParent">退出家长端</button>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader(null, "我的");
+				addMainPageFooter(4);
+					
+//				$("#headImage").attr("src", getHeadImgUrl());
+				$("#nickname").html(getNickName());
+
+                setupWebViewJavascriptBridge(function(bridge) {
+					/*//oc或android掉js
+                    bridge.registerHandler('switchId', function(data, responseCallback) {
+                        if(data.errorCode == null  || data.errorCode == "")
+                            window.location.href = "refresh.html?result=success";
+                        else
+                            window.location.href = "refresh.html?result=fail";
+                    });*/
+
+                    //js掉原生
+					$('#switchId').off().on('click', function() {
+                        var data = "good hello";
+                        bridge.callHandler('switchId',data,function(resp){
+                            //document.getElementById("show").innerHTML = "payInterface" + resp;
+                        });
+                    });
+                    $('#quitParent').off().on('click', function() {
+                        var data = "good luck";
+                        bridge.callHandler('quitParent',data,function(resp){
+                            //document.getElementById("show").innerHTML = "payInterface" + resp;
+                        });
+                    });
+                });
+			});
+
+            <!-- 申明交互 这段代码固定必须有 -->
+            function setupWebViewJavascriptBridge(callback) {
+                //android使用
+                if (window.WebViewJavascriptBridge) {
+                    callback(window.WebViewJavascriptBridge)
+                } else {
+                    document.addEventListener(
+                        'WebViewJavascriptBridgeReady'
+                        , function() {
+                            callback(window.WebViewJavascriptBridge)
+                        },
+                        false
+                    );
+                }
+                //ios使用
+                if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+                if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+                window.WVJBCallbacks = [callback];
+                var WVJBIframe = document.createElement('iframe');
+                WVJBIframe.style.display = 'none';
+                WVJBIframe.src = 'https://__bridge_loaded__';
+                document.documentElement.appendChild(WVJBIframe);
+                setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+            }
+
+		</script>
+	</body>
+
+</html>

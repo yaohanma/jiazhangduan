@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--页面css-->
+        <link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		
+		<style>
+			.mytable .grids-item:after{
+				border:none;
+				border: 0;
+			}
+			.con-box{
+				background: #fff;
+				padding:0 0.3rem;
+			}
+			.con-box .title{
+				color: #0493F0;
+				font-size: 0.24rem;
+				padding: 0.2rem 0;
+			}
+			.attendance_status{
+				width: 100%;
+			}
+			
+			.attendance_status:after{
+				content:''; display:block; clear:both; visibility:hidden; height:0;
+			}
+			.attendance_status>div{
+				width:48% ;
+				height: 2rem;
+				display: inline-block;
+				float: left;
+				border-radius: 6px;
+				margin-bottom:0.3rem;
+				padding: 0.3rem;
+				color: #fff;
+				text-align: center;
+			}
+			.attendance_status>div:nth-child(2n){
+				float: right;
+			}
+			.attendance_status>div p{
+				padding-bottom: 0.2rem;
+				font-size: 0.28rem;
+				margin-bottom: 0.2rem;
+			}
+			.attendance_status>div div span{
+				font-size: 0.6rem;
+				font-weight: bold;
+			}
+			.attendance_status>div div i{
+				font-size: 0.24rem;
+			}
+			/*未签到*/
+			.not_sign_in{
+				background-image: -webkit-linear-gradient(0deg, #ff6576, #f4495c); 
+				background-image: -moz-linear-gradient(0deg, #ff6576, #f4495c); 
+				background-image: -o-linear-gradient(0deg, #ff6576, #f4495c); 
+				-moz-box-shadow:0px 5px 15px rgba(248, 82, 100, .7);
+				-webkit-box-shadow:0px 5px 15px rgba(248,82,100,.7);
+				box-shadow:0px 5px 15px rgba(248,82,100,.7);
+			}
+			.attendance_status>div.not_sign_in p{
+				border-bottom: 1px solid #fc8b99;
+			}
+			/*未签退*/
+			.not_sign_back{
+				background-image: -webkit-linear-gradient(0deg, #7d91b9, #5f769f);
+				background-image: -moz-linear-gradient(0deg, #7d91b9, #5f769f);
+				background-image: -o-linear-gradient(0deg, #7d91b9, #5f769f); 
+				-moz-box-shadow:0px 5px 15px rgba(102, 124, 166, .7);
+				-webkit-box-shadow:0px 5px 15px rgba(102, 124, 166, .7);
+				box-shadow:0px 5px 15px rgba(102, 124, 166, .7);
+			}
+			.attendance_status>div.not_sign_back p{
+				border-bottom: 1px solid #9babc7;
+			}
+			/*迟到*/
+			.late{
+				background-image: -webkit-linear-gradient(0deg, #ff995a, #f77f36); 
+				background-image: -moz-linear-gradient(0deg, #ff995a, #f77f36);
+				background-image: -o-linear-gradient(0deg, #ff995a, #f77f36);
+				-moz-box-shadow:0px 5px 15px rgba(247, 127, 54, .7);
+				-webkit-box-shadow:0px 5px 15px rgba(247, 127, 54, .7);
+				box-shadow:0px 5px 15px rgba(247, 127, 54, .7);
+			}
+			.attendance_status>div.late p{
+				border-bottom: 1px solid #fdaf80;
+			}
+			/*早退*/
+			.early_retreat{
+				background-image: -webkit-linear-gradient(0deg, #ae7aee, #9c64df); 
+				background-image: -moz-linear-gradient(0deg, #ae7aee, #9c64df); 
+				background-image: -o-linear-gradient(0deg, #ae7aee, #9c64df); 
+				-moz-box-shadow:0px 5px 15px rgba(157, 102, 224, .7);
+				-webkit-box-shadow:0px 5px 15px rgba(157, 102, 224, .7);
+				box-shadow:0px 5px 15px rgba(157, 102, 224, .7);
+			}
+			.attendance_status>div.early_retreat p{
+				border-bottom: 1px solid #c29df0;
+			}
+			/*正常*/
+			.normal{
+				background-image: -webkit-linear-gradient(0deg, #44d8cc, #32c2b6); 
+				background-image: -moz-linear-gradient(0deg, #44d8cc, #32c2b6); 
+				background-image: -o-linear-gradient(0deg, #44d8cc, #32c2b6); 
+				-moz-box-shadow:0px 5px 15px rgba(51,195, 183, .7);
+				-webkit-box-shadow:0px 5px 15px  rgba(51,195, 183, .7);
+				box-shadow:0px 5px 15px  rgba(51,195, 183, .7);
+			}
+			.attendance_status>div.normal p{
+				border-bottom: 1px solid #77dcd4;
+			}
+			.con-box>p{
+				font-size: 0.28rem;
+				color: #999;
+				margin-top:0.4rem;
+				padding-bottom: 0.2rem;
+			}
+			div.bg{
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			div.bg img{
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+			div.bg>div{
+				color: #999;
+				width: 100%;
+				
+			}
+			.g-scrollview{
+				background-color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview">
+			<div class="bg" hidden="hidden">
+				<div style="padding: 0 1rem; height: auto;">
+					<img src="/static/images/homework/img_msg.png" />
+				</div>
+				<div style="line-height:.5rem ;">暂无数据</div>
+			</div>
+			<div class="con-box" hidden="hidden">
+				<div class="title"><!--黄小米本周考勤统计--></div>
+				<div class="attendance_status">
+					<div class="not_sign_in">
+						<p>未签到</p>
+						<div>
+							<span id="notSignInCount"><!--3--></span>
+							<i>次</i>
+						</div>
+					</div>
+					<div class="not_sign_back">
+						<p>未签退</p>
+						<div>
+							<span id="notSignOutCount"><!--3--></span>
+							<i>次</i>
+						</div>
+					</div>
+					<div class="late">
+						<p>迟到</p>
+						<div>
+							<span id="beLateCount"><!--3--></span>
+							<i>次</i>
+						</div>
+					</div>
+					<div class="early_retreat">
+						<p>早退</p>
+						<div>
+							<span id="leaveEarlyCount"><!--3--></span>
+							<i>次</i>
+						</div>
+					</div>
+					<div class="normal">
+						<p>正常</p>
+						<div>
+							<span id="normalCount"><!--3--></span>
+							<i>次</i>
+						</div>
+					</div>
+				</div>
+				<p id="statisticsDate"><!--统计时间：2018-08-06~2018-08-11--></p>
+			</div>
+			
+
+		</section>
+	</section>
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+				// header
+				addMainPageHeader("/html/attendance/children_attendance.html?stuId="
+					+getUrlParam('stuId')
+					+'&type='+getUrlParam('type')
+					+'&data_index='+getUrlParam('data_index')
+					+'&flag='+getUrlParam('flag'), "考勤统计");
+				// footer
+				addMainPageFooter(5);
+				var stu_name = decodeURI(getUrlParam('stu_name'));
+				var type = getUrlParam('type');
+				if(type == '1'){
+					$('.title').html(stu_name + "今日考勤统计");
+				}else if(type == '2'){
+					$('.title').html(stu_name + "本周考勤统计");
+				}else{
+					$('.title').html(stu_name + "本月考勤统计");
+				}
+				$('.bg').hide(); // 暂无数据
+				if(getUrlParam('no_data') == 'true'){
+					$('.bg').show();
+					$('.con-box').hide();
+				}else{
+					attendanceStatistics();// 考勤统计
+				}
+				
+			});
+			// 考勤统计
+			function attendanceStatistics(){
+	    	ysAjax("/attendance/statistics", {
+	    		stu_id:getUrlParam('stuId'),
+			 	type:getUrlParam('type')
+	    	}, function(data) {
+				if(data.code == 'OK'){
+					if(data.data != undefined){
+                        $('.con-box').show();
+						var s = data.data;
+						if(s.statisticsDate != undefined){
+							if(getUrlParam('type') == '1'){
+								$('#statisticsDate').html('统计时间：'+s.statisticsDate.substring(0,s.statisticsDate.indexOf('~')));
+							}else{
+								$('#statisticsDate').html('统计时间：'+s.statisticsDate);
+							}
+						}else{
+							$('#statisticsDate').html('统计时间：');
+						}
+						if(s.notSignInCount != undefined){
+							$('#notSignInCount').html(s.notSignInCount);
+						}else{
+							$('#notSignInCount').html('0');
+						}
+						if(s.notSignOutCount != undefined){
+							$('#notSignOutCount').html(s.notSignOutCount);
+						}else{
+							$('#notSignOutCount').html('0');
+						}
+						if(s.beLateCount != undefined){
+							$('#beLateCount').html(s.beLateCount);
+						}else{
+							$('#beLateCount').html('0');
+						}
+						if(s.leaveEarlyCount != undefined){
+							$('#leaveEarlyCount').html(s.leaveEarlyCount);	
+						}else{
+							$('#leaveEarlyCount').html('0');
+						}
+						if(s.normalCount != undefined){
+							$('#normalCount').html(s.normalCount);
+						}else{
+							$('#normalCount').html('0');
+						}
+					}
+				}else{
+					showAlert('考勤服务器异常，请稍后重试');
+				}
+			}, function(err) {
+				showAlert('考勤服务器异常，请稍后重试');
+			});
+			
+	    }
+
+		</script>
+</body>
+
+</html>

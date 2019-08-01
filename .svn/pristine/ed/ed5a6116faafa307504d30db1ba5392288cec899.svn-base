@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			/*body{
+				overflow: hidden;
+			}*/
+			.font_color.mytitle{
+				color: #313340;
+			}
+			
+			.badge_box span.badge{
+				display: inline-block;
+				width: 0.12rem;
+				height: 0.12rem;
+				border-radius: 50%;
+				padding: 0;
+				position: absolute;
+			}
+			.foorter_btn{
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				background: #ff3a48;
+			}
+			.foorter_btn input{
+				width: 100%;
+				color: #fefefe;
+			}
+			/*弹框*/
+			.m-confirm{
+				border-radius: 10px;
+			}
+			.confirm-bd{
+				text-align: center;
+				font-size: 0.32rem;
+				color: #333;
+			}
+			.confirm-btn{
+				color: #333;
+				font-size: 0.32rem;
+			}
+			.confirm-btn.primary{
+				
+				color: #1b76ff;
+			}
+			
+			.my_layer .title{
+				font-size: 0.32rem;
+				color: #333333;
+				text-align: center;
+				padding-top: 1.06rem;
+			}
+			.my_layer .input_box{
+				display: flex;
+				border: 1px solid #e7e7e7;
+				margin: 0 0.5rem;
+				height: 0.7rem;
+				line-height: 0.7rem;
+				margin-top: 0.1rem;
+			}
+			.my_layer .input_box input{
+				position: relative;
+				border: 0;
+				height: 0.7rem;
+				text-indent: 0.2rem;
+				flex: 1;
+			}
+			.my_layer .input_box .img_box{
+				width: 0.53rem;
+				height: 0.7rem;
+				display: inline-block;
+				background: url("/static/images/appimg/icon_by.png") no-repeat center;
+				background-size: 100%;
+				margin-right: 0.16rem;
+			}
+			.my_layer .layui-layer-btn{
+				border-top: 1px solid #eaeef2;
+				padding: 0;
+				
+				
+			}
+			.my_layer .layui-layer-btn a{
+				margin: 0;
+				width: 50%;
+				border: 0;
+				background-color:#fff;
+				color: #333;
+				padding: 0;
+				text-align: center;
+				color: #1b76ff;
+				line-height: 0.86rem;
+				height: 0.86rem;
+				border-radius:10px  0 !important;
+			}
+			.my_layer .layui-layer-btn a:nth-child(1){
+				border-right: 1px solid #eaeef2;
+				color: #333;
+				border-radius:0 10px !important;
+			}
+			.layui-layer-iframe .layui-layer-btn, 
+			.layui-layer-page .layui-layer-btn{
+				padding-top:0 !important;
+			}
+			#set_password,
+			#sign_out{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+					<a class="cell-item" href="/html/my/set_up/account.html" style="height: 1.2rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle font_color">账号管理</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<!--<a class="cell-item" href="" style="height: 1.2rem;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle font_color badge_box">
+								<span>版本更新</span>
+								<span class="badge badge-danger"></span>
+							</p>
+						</div>
+						<div class="cell-right cell-arrow" style="font-size: 0.28rem;color: #888a97">当前版本V1.0</div>
+					</a>
+					<a class="cell-item" href="" style="height: 1.2rem;" id="clear_cache">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle font_color">清除缓存</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>-->
+				</div>
+				<div class="foorter_btn">
+					<input type="button" class="btn-block" value="退出登录" id="J_Confirm"/>
+				</div>
+				
+			</section>
+		</section>
+		
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/layer/layer.js"></script>
+		<script>
+			$(document).ready(function() {
+
+			addMainPageHeader("/html/my/my_home.html", "设置");
+			
+        	
+
+	        /* 非首次退出-*/
+//	       $("#J_Confirm").click(function(){
+//				layer.open({
+//				  type: 1 //Page层类型
+//				  ,area: ['6rem', '4rem']
+//				  ,title:false
+//				  ,closeBtn:0
+//				  ,shade: 0.6 //遮罩透明度
+//				  ,maxmin:false
+//				  ,anim: 1 //0-6的动画形式，-1不开启
+//				  ,skin:"my_layer"
+//				  ,btn: ['取消','确认']
+//				  ,content: $("#sign_out")
+//				}); 
+//			})
+	        
+	        //
+	        $("#J_Confirm").click(function(){
+				layer.open({
+				  type: 1 //Page层类型
+				  ,area: ['6rem', '4rem']
+				  ,title:false
+				  ,closeBtn:0
+				  ,shade: 0.6 //遮罩透明度
+				  ,maxmin:false
+				  ,anim: 1 //0-6的动画形式，-1不开启
+				  ,skin:"my_layer"
+				  ,btn: ['取消','设置并退出']
+				  ,content: $("#set_password")
+				}); 
+			})
+	     
+	   
+		
+		})
+	
+		</script>
+		
+	</body>
+	<div  id="set_password" class="my_layer">
+			<div class="title">给您的账号设置一个密码</div>
+			<div class="input_box">
+				<input type="password" />
+				<span class="img_box"></span>
+			</div>
+		</div>
+		<!--非首次退出-->
+		<div  id="sign_out" class="my_layer">
+			<div class="title">确定要退出登录吗？</div>
+		</div>
+</html>

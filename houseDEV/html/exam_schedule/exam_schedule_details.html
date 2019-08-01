@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+   .title_box{
+   	width: 100%;
+   	height:2rem;
+   	/*background: url(/static/images/study_img/img_schedule.png) no-repeat;*/
+   	background-color: #0493f0;
+   	/*background-size:100%;*/
+   	padding:0.4rem 0.3rem ;
+   	margin-bottom: 0.2rem;
+   }
+   .title_box p{
+   	 font-size: 0.36rem;
+   	 font-weight: bold;
+   	 color: #fff;
+   }
+   .title_box>div{
+   	font-size: 0.24rem;
+   	color: #a2dbff;
+   	margin-top: 0.1rem;
+   }
+   .m-celltitle:after{
+   	border-bottom: none;
+   }
+   .subject_box{
+   	width:100%;
+   	height:1.82rem;
+   	margin-top: 0.19rem;
+   	background: #fff;
+   	border-radius:6px;
+   }
+   .subject_box .title{
+   	height:1rem;
+   	line-height: 1rem;
+   	border-bottom: 1px solid #e5e5e5;
+   	padding:0 0.3rem;
+   	font-size: 0.32rem;
+   	color: #333;
+   	font-weight: bold;
+   }
+   .subject_box .title .pull-left i{
+   	display: inline-block;
+   	width:0.18rem ;
+   	height:0.18rem;
+   	border-radius: 50%;
+   	margin-right: 0.18rem;
+   }
+   .subject_box .title .pull-right{
+   	color: #999;
+   	font-size: 0.24rem;
+   	font-weight:normal ;
+   }
+   .subject_box .exam_room{
+   	padding: 0 0.3rem;
+   	font-size: 0.24rem;
+   	color: #666;
+   	line-height: 0.8rem;
+   }
+   /*学科 圆点颜色 css*/
+  .yu i{
+  	background:#ff4857;
+  }
+  .shu i{
+  	background:#44c672;
+  }
+  .hua i{
+  	background:#a16be3;
+  }
+  .wu i{
+  	background:#6a80a9;
+  }
+  .ying i{
+  	background:#ff8f4b;
+  }
+  .sheng i{
+  	background:#39c9bd;
+  }
+   .di i{
+  	background:#0493f0;
+  }
+  .zheng i{
+  	background:#ed71ba;
+  }
+  .li i{
+  	background:#7d5757;
+  }
+  .qita i{
+  	background:#909090;
+  }
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--考试日程标题 -->
+		<div class="title_box">
+			<p><!--2017~2018第二学期5月第一次周考--></p>
+			<div>请您协助孩子做好考前准备哦~</div>
+		</div>
+		<!--考试日程标题   end-->
+		<!--考试日程 -->
+		<div id="schedule" style="padding: 0 0.3rem;">
+			<div id="grade" class="m-celltitle demo-small-pitch" style="color: #999; font-size: 0.24rem; padding:0 "><!--八年级(05-07)--></div>
+			<!-- <div class="subject_box yu">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						语文
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			
+			<div class="subject_box shu">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						数学
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box ying">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						英语
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box wu">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						物理
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box hua">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						化学
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box sheng">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						生物
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box di">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						地理
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box zheng">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						政治
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+			<div class="subject_box li">
+				<div class="title">
+					<div class="pull-left">
+						<i></i>
+						历史
+					</div>
+					<div class="pull-right">
+						9:00~10:00
+						<span>|</span>
+						共1小时
+					</div>
+				</div>
+				<div class="exam_room">
+					考场：1栋/2楼/20
+				</div>
+			</div>
+		</div> -->
+		<!--考试日程 -->
+		
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var exam_type = decodeURI(getUrlParam('exam_type'));
+	// header
+    var flag = getUrlParam("flag");
+    // m:消息中心列表页 h:首页
+    if(flag && flag == 'm'){
+        addMainPageHeader("/html/notice_list/notice.html", "消息详情");
+    }else if(flag && flag == 'h'){
+        addMainPageHeader("/html/common/homepage.html", "消息详情");
+    }else{
+        if(getUrlParam('page_flag') == '0'){ // 返回首页
+            addMainPageHeader("/html/study/study_index.html",exam_type);
+        }else{ // 返回列表页
+            addMainPageHeader("/html/exam_schedule/exam_schedule.html",exam_type);
+        }
+    }
+	addMainPageFooter(4);
+	// 考试id
+	var exam_id = getUrlParam('exam_id');
+	// 开始日期
+	var start_time = getUrlParam('start_time');
+	// 考试详情
+	scheduleDetail(exam_id,start_time);
+});
+// 考试详情
+function scheduleDetail(exam_id,start_time){
+	ysAjax("/exam/schedule_detail", {
+		exam_id: exam_id
+	}, function(data) {
+		if(data.retCode == 'SUCCESS'){
+			// 标题
+			$('.title_box p').html(data.exam_name);
+			// 学段
+			if(data.grade_name != undefined){
+				$('#grade').html(''+data.grade_name+'&nbsp;&nbsp;'+data.class_name+'&nbsp;&nbsp;('+start_time+')');
+			}
+			// 各科目考试安排
+			var html = '';
+			for(var i=0; i<data.list.length; i++){
+				var item = data.list[i];
+				if(item.name == '语文'){
+					html = html + ' <div class="subject_box yu"> ';
+				}else if(item.name == '数学'){
+					html = html + ' <div class="subject_box shu"> ';
+				}else if(item.name == '化学'){
+					html = html + ' <div class="subject_box hua"> ';
+				}else if(item.name == '物理'){
+					html = html + ' <div class="subject_box wu"> ';
+				}else if(item.name == '英语'){
+					html = html + ' <div class="subject_box ying"> ';
+				}else if(item.name == '生物'){
+					html = html + ' <div class="subject_box sheng"> ';
+				}else if(item.name == '地理'){
+					html = html + ' <div class="subject_box di"> ';
+				}else if(item.name == '政治'){
+					html = html + ' <div class="subject_box zheng"> ';
+				}else if(item.name == '历史'){
+					html = html + ' <div class="subject_box li"> ';
+				}else{
+					html = html + ' <div class="subject_box qita"> ';
+				}
+				html = html + ' 		<div class="title"> ';
+				html = html + ' 			<div class="pull-left"> ';
+				html = html + ' 				<i></i> ';
+				html = html + ' 				'+item.name+' ';
+				html = html + ' 			</div> ';
+				html = html + ' 			<div class="pull-right"> ';
+				html = html + ' 				'+crtTimeFtt(item.start_time)+'~'+crtTimeFtt(item.end_time)+'';
+				html = html + ' 				<span>|</span> ';
+				html = html + ' 				共'+ intervalTime(item.start_time,item.end_time)+'';
+				html = html + ' 			</div> ';
+				html = html + ' 		</div> ';
+				html = html + ' 		<div class="exam_room"> ';
+				if(data.house_name != undefined && data.house_name != ''){
+					html = html + ' 			考场：'+data.house_name+'/'+data.floor_desc+'/'+data.location+' ';	
+				}else{
+					html = html + ' 			考场：请咨询老师获取~';
+				}
+				html = html + ' 		</div> ';
+				html = html + ' 	</div> ';
+			}
+			$('#schedule').append(html);
+		}else{
+			getDialog().alert('当前默认孩子没有考试日程发布!', function () {
+				window.location.href = '/html/study/study_index.html';
+            });
+		}
+	}, function(err) {
+		showAlert('服务器异常，请稍后重试');
+	});
+}
+// 时间间隔计算
+function intervalTime(d1,d2){
+	var date1 = new Date(d1)
+	var date2 = new Date(d2)
+	 
+	var s1 = date1.getTime(),
+	s2 = date2.getTime();
+	// 秒
+	var total = (s2 - s1)/1000; 
+	var day = parseInt(total / (24*60*60));//计算整数天数
+	var afterDay = total - day*24*60*60;//取得算出天数后剩余的秒数
+	var hour = parseInt(afterDay/(60*60));//计算整数小时数
+	var afterHour = total - day*24*60*60 - hour*60*60;//取得算出小时数后剩余的秒数
+	var min = parseInt(afterHour/60);//计算整数分
+	var afterMin = total - day*24*60*60 - hour*60*60 - min*60;//取得算出分后剩余的秒数
+	var interval = '';
+	if(hour != 0){
+		interval = hour + '小时';
+	}
+	if(hour != 0 && min != 0){
+		interval = hour + '小时' + min + '分钟';
+	}
+	if(hour == 0){
+		interval = min + '分钟';
+	}
+	return interval;
+}
+// 时间格式化
+function crtTimeFtt(value){
+    var crtTime = new Date(value);
+    return top.dateFtt("hh:mm",crtTime);
+}
+function dateFtt(fmt,date){ 
+  var o = {   
+    "M+" : date.getMonth()+1,                 //月份   
+    "d+" : date.getDate(),                    //日   
+    "h+" : date.getHours(),                   //小时   
+    "m+" : date.getMinutes(),                 //分   
+    "s+" : date.getSeconds(),                 //秒   
+    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
+    "S"  : date.getMilliseconds()             //毫秒   
+  };   
+  if(/(y+)/.test(fmt))   
+    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+  for(var k in o)   
+    if(new RegExp("("+ k +")").test(fmt))   
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+  return fmt;   
+}
+</script>
+</body>
+</html>

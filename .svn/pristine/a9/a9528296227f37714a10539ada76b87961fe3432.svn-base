@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--滑动模块css-->
+		<link rel="stylesheet" href="/static/css/study/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/js/layer/theme/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/homework.css"/>
+			<!--公式显示css-->
+		<link rel="stylesheet" type="text/css" href="/static/plugins/katex/katex.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/formula.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<script src="/static/js/swiper.min.js"></script>
+		<script src="/static/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 公式显示js -->
+		<script src="/static/plugins/katex/katex.js" type="text/javascript" charset="utf-8"></script>
+			<script> 
+			var DRAW_LINE_INDEX = 0;
+			var canvasObj = undefined;
+			var p = [];
+			var scaleW = 1; // 缩放比例x
+			var scaleH = 1; // 缩放比例y
+			var playing_canvas = undefined; // 当前正在播放的canvas_id
+			var thread = undefined;
+			
+			var ysCanvasV2 = function(canvasId, content, mode){
+//				debugger;
+			    if (content.indexOf("canvasHeight") == -1) {
+			        alert("数据出错");
+			        return;
+			    }
+			
+			    var canvas = document.getElementById(canvasId);
+			    var defaults = {
+			        speed : 800,
+			        mode : 1
+			    };
+			    var options = {};
+			    var line = json2Obj(content);
+			    var canvasHeight = json2Obj(line[0]).canvasHeight;
+			    var canvasWidth = json2Obj(line[0]).canvasWidth;
+			    var lines = [];
+			    for (var j = 0; j < line.length; j++) {
+			        var lineToObj = json2Obj(line[j]);
+			        var obj = {};
+			        obj.points = lineToObj.points;
+			        obj.size = lineToObj.size;
+			        obj.color = int2Color(lineToObj.color);
+			        obj.eraser = lineToObj.eraser;
+			        lines.push(obj);
+			    }
+			
+			    options.canvasHeight = canvasHeight;
+			    options.canvasWidth = canvasWidth;
+			    options.lines = lines;
+			    options.mode = mode;
+			    options = $.extend(defaults, options);
+			
+			    var context = canvas.getContext("2d");
+			    canvasObj = context;
+			    var canvasW = canvas.width; // canvas当前宽度
+			    var canvasH = canvas.height; // canvas当前高度
+			    scaleW = (canvasW / options.canvasWidth).toFixed(2);
+			    scaleH = (canvasH / options.canvasHeight).toFixed(2);
+			    var sizez = ((scaleW+scaleH)/2).toFixed(2);
+			    var lines = options.lines;
+			
+			    if (options.mode == 2) {
+			        if (playing_canvas != undefined) {
+			            // 有正在播放的，那么再点击的时候先清空队列
+			            //stopCanvas();
+			            //playing_canvas = undefined;
+			            //ysAlert("播放中，请等待播放结束...正在努力改善中！");
+			            return;
+			        }
+			
+			        var cxt = canvas.getContext("2d");
+			        cxt.clearRect(0,0,canvas.width,canvas.height);
+			        
+			        playing_canvas = canvas.id ;
+			        // 一笔一笔的画
+			        for (var i = 0; i < lines.length; i++) {
+			            if (lines[i] == undefined || lines[i] == null) {
+			                return false;
+			            }
+			            p.push(lines[i]);
+			            $(document).queue("q1",drawLine_);
+			        }
+			        thread = setInterval(function(){
+			            $(document).dequeue("q1");
+			            DRAW_LINE_INDEX++;
+			            if (DRAW_LINE_INDEX >= p.length) {
+			                window.clearInterval(thread);
+			                playing_canvas = undefined;
+			            }
+			        }, options.speed);
+			    } else {
+			        // 直接一次性画完
+			        for (var i = 0; i < lines.length; i++) {
+			            if (lines[i] == undefined || lines[i] == null) {
+			                return false;
+			            }
+			            var points = getPoint(scaleW, scaleH, lines[i]);
+			            context.lineWidth = lines[i].size/sizez;
+			            context.strokeStyle = lines[i].color;
+			            if (lines[i].eraser) {
+			                context.strokeStyle = "white";
+			            }
+			            drawLine(context, points);
+			        }
+			    }
+			}
+			 
+			function json2Obj(json){
+			    return $.parseJSON(json);
+			    
+			}
+			function object2Json(obj){
+			    return JSON.stringify(obj);
+			}
+			function int2Color(color){
+			    var a = (color >>> 24);
+			    var r = (color >>  16) & 0xFF;
+			    var g = (color >>   8) & 0xFF;
+			    var b = (color)        & 0xFF;
+			    r = prefixInteger(r.toString(16), 2);
+			    g = prefixInteger(g.toString(16), 2);
+			    b = prefixInteger(b.toString(16), 2);
+			    return "#" + r.toString(16) + g.toString(16) + b.toString(16);
+			}
+			
+			function prefixInteger(num, length) {
+			    return ( "0000000000000000" + num ).substr( -length );
+			}
+			
+			
+			function getPoint(scaleW, scaleH, line){
+			    var points = [];
+			    var point = line.points.split(";");
+			    for (var i = 0; i < point.length - 1; i++) {
+			        if (i % 2 == 0) {
+			            var point_ = {};
+			            point_.x = parseFloat(point[i]) * scaleW;
+			            point_.y = parseFloat(point[i+1]) * scaleH;
+			            points.push(point_);
+			        }
+			    }
+			    return points;
+			}
+			
+			/**
+			 * 一次性渲染
+			 * @param canvas
+			 * @param points
+			 */
+			function drawLine(canvas, points){
+			    //绘制2次贝塞尔曲线
+			    canvas.beginPath();
+			    for (var i = 0; i < points.length - 1; i++) {
+			        var start = points[i];
+			        var end = points[i + 1];
+			        var middle = {};
+			        middle.x = (start.x + end.x) / 2;
+			        middle.y = (start.y + end.y) / 2;
+			        canvas.moveTo(start.x , start.y);
+			        canvas.quadraticCurveTo(middle.x, middle.y, end.x, end.y);
+			        canvas.stroke();
+			    }
+			}
+
+
+		</script>
+		<style>
+			/*滑动处理*/
+			div[class*="swiper-container"]{
+				width: 100%;
+				height: 5.5rem;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.swiper-container-horizontal>.swiper-pagination-bullets,
+			.swiper-pagination-custom,
+			.swiper-pagination-fraction {
+				    right: 0.3rem;
+				    top: 0.5rem;
+				    height: 0.3rem;
+				    position: absolute;
+				    z-index: 1000;
+			}
+			div[class*="swiper-pagination"] {
+				text-align: right;
+				padding-right: 0.2rem;
+			}
+			/*.swiper-pagination {
+				text-align: right;
+			}*/
+			/*end*/ 
+			
+			.quick {
+				width: 100%;
+				/*height: 4rem;*/
+				background-color: #ffffff;
+				margin-top: 0.25rem;
+				padding: 0.3rem;
+				padding-bottom: 0;
+			}
+			
+			.quick .quick_title {
+				font-size: 0.36rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.quick .quick_sub {
+				color: #0493f0;
+				padding-top: 0.3rem;
+				font-size: 0.24rem;
+			}
+			
+			.question_content {
+				width: 100%;
+				height: auto;
+				background-color: #ffffff;
+				padding: .3rem;
+				padding-top: 0.59rem;
+				padding-bottom: 0.4rem;
+				min-height: 7.1rem;
+			}
+			
+			.question_content_title {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.btn-customer {
+				background-color: #0493F0;
+				color: #FFFFFF;
+			}
+			
+			.btn-hollow {
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer {
+				/*background-color: #FFF;*/
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer:after {
+				content: '';
+				width: 200%;
+				height: 143%;
+				position: absolute;
+				top: 0.15rem;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border-right: 2px solid #CCCCCC;
+				/*border-radius: 6px;*/
+			}
+			
+			.btn {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				height: 0.88rem;
+				line-height: 1rem;
+				display: inline-block;
+				padding: 0 .2rem;
+				border-radius: 10px 0 0 10px;
+				width: 0.88rem;
+				margin-top: .5rem;
+				font-size: 0.3rem;
+			}
+			
+			.btn-hollow:after {
+				content: '';
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border: 1px solid #cccccc;
+				border-radius: 10px;
+			}
+			
+			.quick_bottom {
+				width: 100%;
+				height: 1.43rem;
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				padding: 0.3rem;
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.quick_bottom2 {
+				width: 100%;
+				/*height: 1.43rem;*/
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+				/*padding: 0.3rem;*/
+				position: fixed;
+				bottom: 1rem;
+				z-index: 99;
+			}
+			
+			.btn-block {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 6.9rem;
+				display: block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				margin-top: 0;
+				border-radius: 10px;
+			}
+			
+			.btn-block-customer {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 3.3rem;
+				display: inline-block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				border-radius: 10px;
+			}
+			
+			.float_button {
+				position: fixed;
+				width: 2rem;
+				height: 0.7rem;
+				background-color: #4FB3F4;
+				right: -0.15rem;
+				bottom: 2.7rem;
+				border-radius: 10px;
+				color: #ffffff;
+				padding: 0.15rem;
+				font-size: 0.26rem;
+				z-index: 1000;
+			}
+			
+			.decided {
+				width: 3rem;
+				height: 0.88rem;
+				display: inline-block;
+				border: 1px solid #0493F0;
+				border-radius: 10px;
+				margin-top: .5rem;
+				border-left: none;
+			}
+			
+			.decide {
+				width: 3rem;
+				display: inline-block;
+				border: 1px solid #CCCCCC;
+				border-radius: 10px;
+				margin-top: .5rem;
+			}
+			
+			.input_frame {
+				width: 6.5rem;
+				border: 1px solid #0493F0;
+				height: 0.88rem;
+				border-radius: 4px;
+				background-color: #F2FAFF;
+				margin-top: .3rem;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				background-color: #fff;
+				height: .8rem;
+			}
+			
+			.option_btn .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 10%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 8px 0 0 8px;
+			}
+			
+			.option_btn .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 90%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+				padding-right: .2rem;
+				overflow-y: auto;
+			}
+			/*选项选中状态*/
+			
+			.option_btn.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			/*.option_btn.active.primary i{
+			
+		}*/
+			
+			.option_btn.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-repeat: no-repeat;
+				background-size: 0.3rem 0.3rem;
+				background-position-x: 6.58rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn.active.danger .option_text,
+			.option_btn.active.primary .option_text {
+				color: #333;
+			}
+			/*选择题选项样式*/
+			
+			.option_btn_customer {
+				position: relative;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background-color: #fff;
+				height: .8rem;
+				width: 3rem;
+				display: inline-block;
+				float: left;
+			}
+			
+			.option_btn_customer .btn-group-addon {
+				position: absolute;
+				left: 0;
+				width: 30%;
+				display: inline-block;
+				line-height: .8rem;
+				color: #555;
+				text-align: center;
+				font-size: .3rem;
+				color: #0493F0;
+				border-radius: 4px 0 0 4px;
+			}
+			
+			.option_btn_customer .option_text {
+				position: absolute;
+				right: 0;
+				z-index: 2;
+				display: inline-block;
+				width: 70%;
+				margin-bottom: 0;
+				line-height: .6rem;
+				height: .6rem;
+				margin-top: .1rem;
+				border-left: 1px solid #ccc;
+				padding-left: .2rem;
+			}
+			/*选项选中状态*/
+			
+			.option_btn_customer.active {
+				border-color: #0493F0;
+			}
+			
+			.option_btn_customer.active .btn-group-addon {
+				color: #fff;
+				background: #0493F0;
+			}
+			
+			.option_btn_customer.active .option_text {
+				/*border-left: 0;*/
+				color: #333333;
+			}
+			/*正确选项*/
+			
+			.option_btn_customer.active.primary {
+				border-color: #04BE02;
+			}
+			
+			.option_btn_customer.active.primary .btn-group-addon {
+				background: #fff;
+				position: relative;
+				color: #04BE02;
+				height: .7rem;
+			}
+			
+			.option_btn_customer.btn_true {
+				background-image: url(/static/images/study_img/msg_Correct.png);
+				background-size: 0.3rem 0.3rem;
+				background-repeat: no-repeat;
+				background-position-x: 2.7rem;
+				background-position-y: 0.45rem;
+			}
+			
+			.option_btn_customer.active.danger .option_text,
+			.option_btn_customer.active.primary .option_text {
+				color: #333;
+			}
+			
+			.question_stem {
+				margin-top: 0.29rem;
+				color: #333333;
+				font-size: 0.32rem;
+				margin-bottom: 0.4rem;
+				font-weight: bold;
+				word-wrap: break-word;
+			}
+			.choose_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.choose_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.choose_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			
+			.choose_answer a:nth-child(1)~span {
+				font-size: 0.26rem;
+				color: #0493F0;
+			}
+			
+			.choose_answer a:nth-child(4)~span {
+				font-size: 0.26rem;
+				color: #0DC77A;
+			}
+			
+			.analysis {
+				width: 5rem;
+				font-size: 0.28rem;
+				color: #0493F0;
+				margin-top: 0.6rem;
+			}
+			
+			.icon_down {
+				background: url(/static/images/homework/icon_eject@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_up {
+				background: url(/static/images/homework/icon_takeup@2x.png);
+				width: .4rem;
+			    height: .4rem;
+			    display: inline-block;
+			    background-repeat: no-repeat;
+			    background-position-x: 0.1rem;
+			    background-position-y: 0.25rem;
+			    cursor: pointer;
+			    background-size: 40%;
+			}
+			
+			.icon_content {
+				font-size: 0.28rem;
+				color: #666666;
+			}
+			
+			.decide_answer {
+				width: 100%;
+				height: auto;
+				padding-top: 1.2rem;
+			}
+			
+			.decide_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.decide_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.fill_answer a:not(:first-child) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}
+			
+			.fill_answer {
+				width: 100%;
+				height: auto;
+				margin-top: 0.3rem;
+			}
+			
+			/*.fill_answer a:nth-child(1) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #cde9fc;
+				font-size: 0.24rem;
+				color: #0493F0;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+			}
+			
+			.fill_answer a:nth-child(4) {
+				width: 1.07rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				display: inline-block;
+				background-color: #d5f1e3;
+				font-size: 0.24rem;
+				color: #0DC77A;
+				border-radius: 4px;
+				text-align: center;
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+			}*/
+			/*综合题*/
+			.child {
+				min-height: 13rem;
+				background-color: #FFFFFF;
+			}
+			
+			.multiple_img {
+				width: 100%;
+				height: 0.4rem;
+				background: url(/static/images/homework/multiple_2.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			
+			.multiple_content {
+				padding: 0.3rem;
+				background-color: #FFFFFF;
+				/*display: none;*/
+				/*height: 5.5rem;
+    			overflow-y: auto;*/
+			}
+			
+			.multiple_btn {
+				width: 100%;
+				padding: 0.3rem;
+			}
+			#jiayou_bg{
+				width: 100%;
+				height: 6.23rem;
+				background:url(/static/images/study_img/jiayou_gif3.gif) no-repeat center;
+				display: none;
+				position: fixed;
+			    bottom: 1rem;
+			    left: 3rem;
+			    background-size: 40%;
+			    z-index: 9999999;
+			}
+			.option_text img{
+				width:15%;
+			}
+			.answer_img {
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid #e5e5e5;
+				border-radius: 10px;
+				margin-top: 0.2rem;
+				padding: 0.1rem;
+				background-color: #f4f5f7;
+				display: inline-block;
+			}
+			.answer_img img {
+				width: 85px;
+    			height: 85px;
+    			display: inline-block;
+			}
+			.option_text img{
+				height: 100%;
+				display: inline-block;
+			}
+			.question_stem img{
+				width:6.9rem;
+    			display: inline-block;
+			}
+			.icon_content img{
+				width: 6.9rem;
+    			display: inline-block;
+			}
+			.fill_answer span img{
+				width: 6.9rem;
+    			display: inline-block;
+			}
+			.float_button{
+				display: none;
+			}
+			/* x xs */
+			@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+				.quick_bottom2,
+			    .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+			/* xr */
+			@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+			    .quick_bottom2,
+			    .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+			@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+			   .quick_bottom2,
+			   .quick_bottom{
+						z-index: 999;
+			    		bottom: 1.5rem;
+			    		display: block;
+					}
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview"  id="J_ProgressBox">
+				<div class="container_content">
+					
+				</div>
+				<div class="float_button">
+					<a href="javascript:;" id="backPageNm"></a>
+				</div>
+				<div class="jiayou_bg" id="jiayou_bg"></div>
+				<div class="dingdi" style="width: 100%; float: left; height: 1.2rem;"></div>
+				</section>
+			</section>
+			<script src="/static/plugins/ydui/js/ydui.js"></script>
+			<script src="/static/js/yswxcommon.js"></script>
+			<script type="text/javascript">
+			var text = '';
+			var m_flag = 0;
+			var array = new Array();
+			var type = "";
+			var source_id = "";
+			var paper_id  = "";
+			var source_type = "";
+			$(document).ready(function() {
+				var requestData = new Object();
+				requestData = GetRequest();
+				paper_id = requestData["paper_id"];
+				var classroom_id = requestData["classroom_id"];
+				type = requestData["type"];
+				source_id = classroom_id;
+				source_type = "3";
+				// type 1：考试详情 2：章节分析详情 3：错题详情 4：课堂详情
+				var backUrl = "";
+				var title = "";
+				if(type == "1") {
+				    backUrl = "/html/understand_more/daily_examination.html?paper_id=" + paper_id+"&classroom_id="+classroom_id;
+					$("#backPageNm").text("返回考试报告");
+					title = "查看详情";
+				} else if(type == "2") {
+					var section_id = requestData["section_id"];
+					var section_name=requestData["section_name"];
+					var subject_id = requestData["subject_id"];
+					var index = requestData["index"];
+					backUrl = encodeURI("/html/understand_more/analysis_report.html?section_id=" + section_id+"&section_name="+section_name+"&subject_id="+subject_id+"&index="+index);
+					$("#backPageNm").text("返回章节报告");
+					title = "章节得分详情";
+				} else if(type == "3") {
+					var question_id = requestData["question_id"];
+					var wrongbook_id = requestData["wrongbook_id"];
+					// 错题的时候错题本的ID作为source_id
+					source_id = wrongbook_id;
+					source_type = "4";
+					backUrl = "/html/understand_more/wrong_book.html?1=1";
+					$("#backPageNm").text("返回错题列表");
+					title = "错题详情";				
+				} else if (type == "4") {
+					source_type = "5";
+					backUrl = "/html/courseevent/courseEventListInfoExample.html?paper_id=" + paper_id+"&channel="+classroom_id+"&id="+getUrlParam("id");
+					$("#backPageNm").text("返回练习详情");
+					title = "练习详情";
+				}
+                if(getUrlParam("subject")){
+                    backUrl += "&subject="+getUrlParam("subject");
+                }
+                if(getUrlParam("tabType")){
+                    backUrl += "&tabType="+getUrlParam("tabType");
+                }
+                if(getUrlParam("orderByFlag")){
+                    backUrl += "&orderByFlag="+getUrlParam("orderByFlag");
+                }
+                if(getUrlParam("question_type")){
+                    backUrl += "&question_type="+getUrlParam("question_type");
+                }
+                if(getUrlParam("section_id")){
+                    backUrl += "&section_id="+getUrlParam("section_id");
+                }
+					addMainPageHeader(backUrl, title);
+					addMainPageFooter(4);
+					// 返回考试报告
+					$(".float_button").on("click",function(){
+						window.location.href=backUrl;
+					});
+					// 试题列表
+					question_list(paper_id,classroom_id,question_id,section_id);
+});// ready
+//习题填充
+var xuanze = ['A','B','C','D','E','F','G','H'];
+var canvas_id = 0;
+function question_list(paper_id,classroom_id,question_id,section_id){
+	if (type == "3") {
+		var actionUrl = "/study/getErrorBookExercises";
+	} else {
+		var actionUrl = "/study/getExerciseList";
+	}
+
+	ysAjax(actionUrl, {
+		paper_id : paper_id,
+		classroom_id : classroom_id,
+		question_id : question_id,
+		section_id : section_id
+	}, function(data) {
+		// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+		if (data.success) {
+			showLoadDialog();
+			for(var i=0; i < data.result.question_list.length; i++){
+				var html = '';
+				var q = data.result.question_list[i];
+				// 1单选
+		if(q.question_type == '1') {
+					html = html + '	<div class="child"> ';
+					html = html + '								<div class="question_content">  ';
+					html = html + '									<p class="question_content_title">第  ';
+					html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+					html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+					html = html + '										<span id="qustion_type">单选题</span>  ';
+					html = html + '									</p>  ';
+					html = html + '										<div class="question_describe">  ';
+					//																			<!-- 题干 -->  
+					html = html + '										<div class="question_stem">  ';
+					var c1 = latex2Html(q.question_context);
+					var c2 = makeMathJye(c1);
+					html = html + '											'+c2+'  ';
+					html = html + '										</div>  ';
+					html = html + '										<div id="choose_question">  ';
+					for(var j=0;j<q.answer_list.length;j++){ // 原答案
+						var a = q.answer_list[j];
+						var c1 = latex2Html(a.answer_context);
+						var c2 = makeMathJye(c1);
+						if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+							html = html + '						<div class="option_btn active btn_true">  ';
+							html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+							html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+							html = html + '						</div>  ';
+						}else if(a.right_flag == '1'){ // 正确答案
+							html = html + '						<div class="option_btn active primary btn_true">  ';
+							html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+							html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+							html = html + '					    </div>  ';
+						}else if(a.stu_choose_flag == '1'){ // 学生选择
+							html = html + '						<div class="option_btn active">  ';
+							html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+							html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+							html = html + '					    </div>  ';
+						}else{ // 
+							html = html + '						<div class="option_btn">  ';
+							html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+							html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+							html = html + '					    </div>  ';
+						}
+						if(j != q.answer_list.length - 1){
+							html = html + '								<br />  ';
+						}
+				}
+					html = html + '										    <div class="choose_answer">  ';
+					for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+						var st= q.stu_answer_list[0];
+						if(st.stu_answer_id <= 0 || st.stu_answer_id == null || st.stu_answer_id == ''){
+							html = html + '										<a>已选答案</a><span></span><br />';
+						}else{
+							html = html + '										<a>已选答案</a><span>'+xuanze[st.stu_answer_id - 1]+'</span><br />';
+						}
+					}
+					for(var x=0;x<q.answer_list.length;x++){
+						if(q.answer_list[x].right_flag == '1'){
+							html = html + '										<a>正确答案</a><span style="color:#0DC77A;">'+xuanze[q.answer_list[x].answer_id - 1]+'</span>  ';
+						}
+					}
+					html = html + '											</div>  ';
+					html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+					var c1 = latex2Html(q.question_desc);
+					var c2 = makeMathJye(c1);
+					html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+					html = html + '										</div>  ';
+					html = html + '									</div>  ';
+					html = html + '								</div>  ';
+				    html = html + '								<div class="quick_bottom">  ';
+				if(i == 0 && data.result.question_list.length > 1) {
+					html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+				} else if(data.result.question_list.length == 1){
+				//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+				//章节分析去掉加油打气	
+				if (type != "2") {
+					html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin: 0 auto;"></button>  ';
+					$("#jiayou_bg").css("left","1.5rem");
+				}
+				} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+					html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+					///html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+					if (type != "2") {
+					html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin: 0 auto;"></button>  ';
+					}
+				} else {
+					html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+					html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin: 0 auto;">下一题</button>  ';
+				}
+				html = html + '								</div>  ';
+				html = html + '	</div> ';
+			}
+				// 2多选
+      if(q.question_type == '2') {
+					html = html + '	<div class="child" > ';
+					html = html + '								<div class="question_content">  ';
+					html = html + '									<p class="question_content_title">第  ';
+					html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+					html = html + '										<span id="total">' + data.result.question_list.length + ' &nbsp;</span>题&nbsp;&nbsp;  ';
+					html = html + '										<span id="qustion_type">多选题</span>  ';
+					html = html + '									</p>  ';
+					html = html + '									<div class="question_describe">  ';
+					//																			<!-- 题干 -->  
+					html = html + '										<div class="question_stem">  ';
+					var c1 = latex2Html(q.question_context);
+					var c2 = makeMathJye(c1);
+					html = html + '											'+ c2 +' ';
+					html = html + '										</div>  ';
+					//						html = html + '										<!--单选题、多选题 active：选中,active primary btn_true：正确答案，btn_true：正确答案-->  ';
+					html = html + '										<div id="choose_question">  ';
+						for(var j=0;j<q.answer_list.length;j++){ // 原答案
+							var a = q.answer_list[j];
+							var c1 = latex2Html(a.answer_context);
+							var c2 = makeMathJye(c1);
+							if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+								html = html + '						<div class="option_btn active btn_true">  ';
+								html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+								html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+								html = html + '						</div>  ';
+							}else if(a.right_flag == '1'){ // 正确答案
+								html = html + '						<div class="option_btn active primary btn_true">  ';
+								html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+								html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+								html = html + '					    </div>  ';
+							}else if(a.stu_choose_flag == '1'){ // 学生选择
+								html = html + '						<div class="option_btn active">  ';
+								html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+								html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+								html = html + '					    </div>  ';
+							}else{ // 
+								html = html + '						<div class="option_btn">  ';
+								html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+								html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+								html = html + '					    </div>  ';
+							}
+							if(j != q.answer_list.length - 1){
+								html = html + '								<br />  ';
+							}
+						}
+						html = html + '										    <div class="choose_answer">  ';
+						html = html + '												<a>已选答案</a><span>';
+									for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+										var st= q.stu_answer_list[s];
+										if(st.stu_answer_id <= 0 || st.stu_answer_id == null || st.stu_answer_id == ''){
+											html = html + '											';
+										}else{
+											html = html + '											'+xuanze[st.stu_answer_id - 1]+'';
+										}
+									}
+									html = html + '												</span><br />';
+						html = html + '												<a>正确答案</a><span style="color:#0DC77A;">';
+						for(var x=0;x<q.answer_list.length;x++){
+							if(q.answer_list[x].right_flag == '1'){
+								html = html + '										'+xuanze[q.answer_list[x].answer_id - 1]+'';
+							}
+						}
+						html = html + '												</span>  ';
+						html = html + '											</div>  ';
+						html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+						var c1 = latex2Html(q.question_desc);
+						var c2 = makeMathJye(c1);
+						html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+						html = html + '										</div>  ';
+						html = html + '									</div>  ';
+						html = html + '								</div>  ';
+						html = html + '								<div class="quick_bottom">  ';
+						if(i == 0 && data.result.question_list.length > 1) {
+							html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+						} else if(data.result.question_list.length == 1){
+						//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+						if (type != "2") {	
+						  html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin:0 auto;"></button>  ';
+						  $("#jiayou_bg").css("left","1.5rem");
+						}
+						} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+							html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+						//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+						 if (type != "2") {	
+					     	html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin: 0 auto;"></button>  ';
+							}
+						} else {
+							html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+							html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin: 0 auto;">下一题</button>  ';
+						}
+						html = html + '								</div>  ';
+						html = html + '	</div> ';
+					}
+             	//4判断
+				if(q.question_type == '4') {
+					html = html + '	<div class="child" > ';
+					html = html + '								<div class="question_content">  ';
+					html = html + '									<p class="question_content_title">第  ';
+					html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+					html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+					html = html + '										<span id="qustion_type">判断题</span>  ';
+					html = html + '									</p>  ';
+					html = html + '									<div class="question_describe">  ';
+					//																			<!-- 题干 -->  
+					html = html + '										<div class="question_stem">  ';
+					var c1 = latex2Html(q.question_context);
+					var c2 = makeMathJye(c1);
+					html = html + '											'+ c2 +'';
+					html = html + '										</div>  ';
+					//						html = html + '									<!--判断题 btn-customer:选择，btn-hollow-customer:未被选择--->  ';
+					html = html + '										<div id="decide_question">  ';
+					for(var j=0;j<q.answer_list.length;j++){ // 原答案 
+							var a = q.answer_list[j];
+							var c1 = latex2Html(a.answer_context);
+							var c2 = makeMathJye(c1);
+							if(j == 0){
+								for(var e=0;e<q.stu_answer_list.length;e++){ // 学生答案
+									var st= q.stu_answer_list[e];
+									if(a.right_flag == '1'){
+										if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+											html = html + '							    <div class="option_btn_customer active btn_true">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}else{ // 正确的 非学生选择的
+											html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}
+									}else{ // 不正确的 学生选择
+										if(st.stu_answer_id == a.answer_id){ 
+											html = html + '							    <div class="option_btn_customer active">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}else{ // 不正确的 非学生选择的
+											html = html + '							    <div class="option_btn_customer">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}
+									}
+								}
+							}else{
+								for(var e=0;e<q.stu_answer_list.length;e++){ // 学生答案
+									var st= q.stu_answer_list[e];
+									if(a.right_flag == '1'){
+										if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+											html = html + '							    <div class="option_btn_customer active btn_true" style="margin-left:0.9rem;">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}else{ // 正确的 非学生选择的
+											html = html + '							    <div class="option_btn_customer active primary btn_true" style="margin-left:0.9rem;">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}
+									}else{ // 不正确的 学生选择
+										if(st.stu_answer_id == a.answer_id){ 
+											html = html + '							    <div class="option_btn_customer active" style="margin-left:0.9rem;">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}else{ // 不正确的 非学生选择的
+											html = html + '							    <div class="option_btn_customer" style="margin-left:0.9rem;">  ';
+											html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+											html = html + '							    </div>  ';
+										}
+									}
+								}
+							}
+					}
+					html = html + '										</div>  ';
+					html = html + '										<div class="decide_answer">  ';
+					for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+						if(q.stu_answer_list[0].stu_answer_id <=0 || q.stu_answer_list[0].stu_answer_id == null || q.stu_answer_list[0].stu_answer_id == ''){
+							html = html + '									<a>已选答案</a><span></span>  ';
+						}else{
+							if(q.stu_answer_list[0].stu_answer_id == '1'){
+								html = html + '									<a>已选答案</a><span>对</span>  ';	
+							}else{
+								html = html + '									<a>已选答案</a><span>错</span>  ';
+							}
+						}
+					}
+					html = html + '</br>';
+					for(var x=0;x<q.answer_list.length;x++){ // 原答案
+						if(q.answer_list[x].right_flag == '1'){
+								html = html + '									<a>正确答案</a><span>'+q.answer_list[x].answer_context+'</span>  ';
+						}
+					}
+					html = html + '										</div>  ';
+					html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+					var c1 = latex2Html(q.question_desc);
+					var c2 = makeMathJye(c1);
+					html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+					html = html + '									</div>  ';
+					html = html + '								</div>  ';
+					html = html + '								<div class="quick_bottom">  ';
+					if(i == 0 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+					} else if(data.result.question_list.length == 1){
+					//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+					 if (type != "2") {	
+						html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin: 0 auto;"></button>  ';
+						$("#jiayou_bg").css("left","1.5rem");
+					 }
+					} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+						//html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+					 if (type != "2") {	
+						html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin: 0 auto;"></button>  ';
+						}
+					} else {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+						html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin: 0 auto;">下一题</button>  ';
+					}
+					html = html + '								</div>  ';
+					html = html + '	</div> ';
+				}
+				//3填空
+				if(q.question_type == '3') {
+					html = html + '	<div class="child" > ';
+					html = html + '								<div class="question_content">  ';
+					html = html + '									<p class="question_content_title">第  ';
+					html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+					html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+					html = html + '										<span id="qustion_type">填空题</span>  ';
+					//						html = html + '										<span id="qustion_type">简答题</span>  ';
+					html = html + '									</p>  ';
+					html = html + '									<div class="question_describe">  ';
+					//																			<!-- 题干 -->  
+					html = html + '										<div class="question_stem">  ';
+					var c1 = latex2Html(q.question_context);
+					var c2 = makeMathJye(c1);
+					html = html + '											'+ c2 +'';
+					html = html + '										</div>  ';
+					//						html = html + '										<!--填空题 答案-->  ';
+					html = html + '										<div class="fill_answer">  ';
+					html = html + '											<a>已选答案</a><span>';
+					for(var s=0;s<q.stu_answer_list.length;s++){ // 学生答案
+						if(q.stu_answer_list[s].stu_answer_context != ''){
+							if(s == q.stu_answer_list.length -1 ){
+								html = html + ''+q.stu_answer_list[s].stu_answer_context+'';
+							}else{
+								html = html + ''+q.stu_answer_list[s].stu_answer_context+';';
+							}
+						}
+					}
+					html = html + 											'</span>';
+					html = html + '											<br />  ';
+					html = html + '											<a>正确答案</a><span>';
+					for(var j=0;j<q.answer_list.length;j++){
+						var c1 = latex2Html(q.answer_list[j].answer_context);
+						var c2 = makeMathJye(c1);
+						if(j == q.answer_list.length -1 ){
+							html = html + ''+c2+'';
+						}else{
+							html = html + ''+c2+';';
+						}
+					}
+					html = html + 											'</span>  ';
+					html = html + '										</div>  ';
+					html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+					var c1 = latex2Html(q.question_desc);
+					var c2 = makeMathJye(c1);
+					html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+					html = html + '									</div>  ';
+					html = html + '								</div>  ';
+					html = html + '								<div class="quick_bottom">  ';
+					if(i == 0 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+					} else if(data.result.question_list.length == 1){
+					//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+					  if (type != "2") {		
+					   html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin:0 auto;"></button>  ';
+						$("#jiayou_bg").css("left","1.5rem");
+					  }
+					} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+					//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+						if (type != "2") {		
+					    html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style=""></button>  ';
+						}
+				  } else {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+						html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="">下一题</button>  ';
+					}
+					html = html + '								</div>  ';
+					html = html + '	</div> ';
+				}
+				//5简答
+				if(q.question_type == '5') {
+					html = html + '	<div class="child" > ';
+					html = html + '								<div class="question_content">  ';
+					html = html + '									<p class="question_content_title">第  ';
+					html = html + '										<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+					html = html + '										<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+					html = html + '										<span id="qustion_type">简答题</span>  ';
+					html = html + '									</p>  ';
+					html = html + '									<div class="question_describe">  ';
+					//																			<!-- 题干 -->  
+					html = html + '										<div class="question_stem">  ';
+					var c1 = latex2Html(q.question_context);
+					var c2 = makeMathJye(c1);
+					html = html + '											'+ c2 +'';
+					html = html + '										</div>  ';
+					//						html = html + '										<!--简答题-->  ';
+					html = html + '										<div id="short_question">  ';
+					html = html + '											<div class="fill_answer">  ';
+					html = html + '												<a style="display:block;">已做答案</a><br/>';
+					for(var t=0;t<q.stu_answer_list.length;t++){ // 学生图片答案
+						var x = q.stu_answer_list[t];
+						if(x.stu_answer_context != ''){
+							html = html + '								<div class="answer_img">  ';
+							if(x.context_type == '64'){
+								html = html + '								<img src="'+x.stu_answer_context+'" />  ';	
+							}else{
+								html = html + ' <canvas id="w'+canvas_id+'" height="85" width="85"></canvas> ';
+								html = html + ' <input type="hidden" value=\''+x.stu_answer_context+'\'/>';
+								array.push('w'+canvas_id);
+								canvas_id++;
+							}
+							html = html + '								</div>  ';
+						}
+					}
+					html = html + '												<br />  ';
+					for(var x=0;x<q.answer_list.length;x++){
+						html = html + '										<a>正确答案</a><span style="color:  #0DC77A;">'+q.answer_list[0].answer_context+'</span>  ';
+					}
+					html = html + '											</div>  ';
+					html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+					var c1 = latex2Html(q.question_desc);
+					var c2 = makeMathJye(c1);
+					html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+					html = html + '											<div style="height: 0.2rem; width: 8rem; background-color: #F5F5F5; margin-top: 0.4rem; margin-left: -0.5rem;"></div>  ';
+					html = html + '											<div class="fill_answer">  ';
+					html = html + '												<a>老师打分</a><span>'+q.goal_score+'分</span>  ';
+					html = html + '												<br />  ';
+					html = html + '												<a style="background-color: #cde9fc;color: #0493F0;">评语</a><span>'+q.tch_comment+'</span>  ';
+					html = html + '											</div>  ';
+					html = html + '										</div>  ';
+					html = html + '									</div>  ';
+					html = html + '								</div>  ';
+					html = html + '								<div class="quick_bottom">  ';
+					if(i == 0 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+					} else if(data.result.question_list.length == 1){
+					//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+					if (type != "2") {		
+						html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;"></button>  ';
+						$("#jiayou_bg").css("left","1.5rem");
+					}
+					} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+					//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+					if (type != "2") {		
+						html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style=""></button>  ';
+					}
+					} else {
+						html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+						html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="">下一题</button>  ';
+					}
+					html = html + '								</div>  ';
+					html = html + '	</div> ';
+				}
+				//6综合
+		if(q.question_type == '6'){
+			            m_flag = m_flag + 1;
+						html = html + '	<div class="child">  ';
+						html = html + '		<div class="question_content" style="min-height:0;">  ';
+						html = html + '			<p class="question_content_title">第  ';
+						html = html + '				<span id="number" style="color: #333333;">&nbsp;' + (i + 1) + '</span><span>/</span>  ';
+						html = html + '				<span id="total">' + data.result.question_list.length + '&nbsp;</span>题&nbsp;&nbsp;  ';
+						html = html + '				<span id="qustion_type">综合题</span>  ';
+						html = html + '			</p>  ';
+						html = html + '			<div class="question_describe">  ';
+						// 综合题题干
+						var c1 = latex2Html(q.question_context);
+						var c2 = makeMathJye(c1);
+						html = html + '				<div class="question_stem"> '+c2+' </div>  ';
+						html = html + '			</div>  ';
+						html = html + '		</div>  ';
+						html = html + '		<div class="quick_bottom2">  ';
+						html = html + '			<div class="multiple_question">  ';
+						html = html + '				<div class="multiple_img" style=""></div>  ';
+						html = html + '				<div class="swiper-container'+m_flag+'">  ';
+						html = html + '					<div class="swiper-wrapper">  ';
+						// 题目类型：1单选、2多选、3填空、4判断、5解答、6综合
+						for(var z=0;z<q.compound.length;z++){ // 综合题小题列表
+							var c = q.compound[z]; // 每道小题
+							if(c.question_type == '1'){
+								html = html + '						<div class="swiper-slide">  ';
+								html = html + '							<div class="multiple_content">  ';
+								html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">单选题</span></p>  ';
+								html = html + '								<div class="question_stem">  ';
+								var c1 = latex2Html(c.question_context);
+								var c2 = makeMathJye(c1);
+								html = html + '									'+c2+'  ';
+								html = html + '								</div>  ';
+								html = html + '								<div id="choose_question">  ';
+								for(var j=0;j<c.answer_list.length;j++){ // 原答案
+										var a = c.answer_list[j];
+										var c1 = latex2Html(a.answer_context);
+										var c2 = makeMathJye(c1);
+										if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+											html = html + '						<div class="option_btn active btn_true">  ';
+											html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '						</div>  ';
+										}else if(a.right_flag == '1'){ // 正确答案
+											html = html + '						<div class="option_btn active primary btn_true">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}else if(a.stu_choose_flag == '1'){ // 学生选择
+											html = html + '						<div class="option_btn active">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}else{ // 
+											html = html + '						<div class="option_btn">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}
+										if(j != c.answer_list.length - 1){
+											html = html + '								<br />  ';
+										}
+								}
+								html = html + '										    <div class="choose_answer">  ';
+								for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+									var st= c.stu_answer_list[0];
+									if(st.stu_answer_id <= 0 || st.stu_answer_id == null || st.stu_answer_id == ''){
+										html = html + '										<a>已选答案</a><span></span><br />';
+									}else{
+										html = html + '										<a>已选答案</a><span>'+xuanze[st.stu_answer_id - 1]+'</span><br />';
+									}
+								}
+								for(var x=0;x<c.answer_list.length;x++){
+									if(c.answer_list[x].right_flag == '1'){
+										html = html + '										<a>正确答案</a><span style="color:#0DC77A;">'+xuanze[c.answer_list[x].answer_id - 1]+'</span>  ';
+									}
+								}
+								html = html + '											</div>  ';
+								html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+								var c1 = latex2Html(c.question_desc);
+								var c2 = makeMathJye(c1);
+								html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+								html = html + '								</div>  ';
+								html = html + '							</div>  ';
+								html = html + '						</div>  ';
+							}
+							if(c.question_type == '2'){
+								html = html + '						<div class="swiper-slide">  ';
+								html = html + '							<div class="multiple_content">  ';
+								html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">多选题</span></p>  ';
+								html = html + '								<div class="question_stem">  ';
+								var c1 = latex2Html(c.question_context);
+								var c2 = makeMathJye(c1);
+								html = html + '									'+c2+'  ';
+								html = html + '								</div>  ';
+								html = html + '								<div id="choose_question">  ';
+								for(var j=0;j<c.answer_list.length;j++){ // 原答案
+										var a = c.answer_list[j];
+										var c1 = latex2Html(a.answer_context);
+										var c2 = makeMathJye(c1);
+										if(a.right_flag == '1' && a.stu_choose_flag == '1'){ // 学生选择且正确
+											html = html + '						<div class="option_btn active btn_true">  ';
+											html = html + '							<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '							<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '						</div>  ';
+										}else if(a.right_flag == '1'){ // 正确答案
+											html = html + '						<div class="option_btn active primary btn_true">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}else if(a.stu_choose_flag == '1'){ // 学生选择
+											html = html + '						<div class="option_btn active">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}else{ // 
+											html = html + '						<div class="option_btn">  ';
+											html = html + '					      	<div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+											html = html + '					     	<div class="option_text"> '+ c2 +'<i></i></div>  ';
+											html = html + '					    </div>  ';
+										}
+										if(j != c.answer_list.length - 1){
+											html = html + '								<br />  ';
+										}
+								}
+								html = html + '										    <div class="choose_answer">  ';
+								html = html + '												<a>已选答案</a><span>';
+								for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+									var st= c.stu_answer_list[s];
+									if(st.stu_answer_id <= 0 || st.stu_answer_id == null || st.stu_answer_id == ''){
+										html = html + '											';
+									}else{
+										html = html + '											'+xuanze[st.stu_answer_id - 1]+'';
+									}
+								}
+								html = html + '												</span><br />';
+								html = html + '												<a>正确答案</a><span style="color:#0DC77A;">';
+								for(var x=0;x<c.answer_list.length;x++){
+									if(c.answer_list[x].right_flag == '1'){
+										html = html + '										'+xuanze[c.answer_list[x].answer_id - 1]+'';
+									}
+								}
+								html = html + '												</span>  ';
+								html = html + '											</div>  ';
+								html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+								var c1 = latex2Html(c.question_desc);
+								var c2 = makeMathJye(c1);
+								html = html + '											<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+								html = html + '									</div>  ';
+								html = html + '							</div>  ';
+								html = html + '						</div>  ';
+							}
+							if(c.question_type == '4'){
+								html = html + '						<div class="swiper-slide">  ';
+								html = html + '							<div class="multiple_content">  ';
+								html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">判断题</span></p>  ';
+								html = html + '								<div class="question_stem">  ';
+								var c1 = latex2Html(c.question_context);
+								var c2 = makeMathJye(c1);
+								html = html + '									'+c2+ '';
+								html = html + '								</div>  ';
+								html = html + '							<div id="decide_question" style="margin-bottom:2rem">  ';
+								for(var j=0;j<c.answer_list.length;j++){ // 原答案 
+									var a = c.answer_list[j];
+									var c1 = latex2Html(a.answer_context);
+									var c2 = makeMathJye(c1);
+									if(j == 0){
+										for(var e=0;e<c.stu_answer_list.length;e++){ // 学生答案
+											var st= c.stu_answer_list[e];
+											if(a.right_flag == '1'){
+												if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+													html = html + '							    <div class="option_btn_customer active btn_true">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else{ // 正确的 非学生选择的
+													html = html + '							    <div class="option_btn_customer active primary btn_true">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}
+											}else{ // 不正确的 学生选择
+												if(st.stu_answer_id == a.answer_id){ 
+													html = html + '							    <div class="option_btn_customer active">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else{ // 不正确的 非学生选择的
+													html = html + '							    <div class="option_btn_customer">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}
+											}
+										}
+									}else{
+										for(var e=0;e<c.stu_answer_list.length;e++){ // 学生答案
+											var st= c.stu_answer_list[e];
+											if(a.right_flag == '1'){
+												if(st.stu_answer_id == a.answer_id){ // 正确的学生选择的
+													html = html + '							    <div class="option_btn_customer active btn_true" style="margin-left:0.9rem;">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else{ // 正确的 非学生选择的
+													html = html + '							    <div class="option_btn_customer active primary btn_true" style="margin-left:0.9rem;">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}
+											}else{ // 不正确的 学生选择
+												if(st.stu_answer_id == a.answer_id){ 
+													html = html + '							    <div class="option_btn_customer active" style="margin-left:0.9rem;">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}else{ // 不正确的 非学生选择的
+													html = html + '							    <div class="option_btn_customer" style="margin-left:0.9rem;">  ';
+													html = html + '							      <div class="btn-group-addon">'+xuanze[a.answer_id - 1]+'</div>  ';
+													html = html + '							      <div class="option_text"> '+c2+'<i></i></div>  ';
+													html = html + '							    </div>  ';
+												}
+											}
+										}
+									}
+								}
+								html = html + '								</div>  ';
+								html = html + '								<div class="decide_answer" style="padding-top: 0rem;">  ';
+								for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+									if(c.stu_answer_list[0].stu_answer_id <=0 || c.stu_answer_list[0].stu_answer_id ==null || c.stu_answer_list[0].stu_answer_id == ''){
+										html = html + '									<a>已选答案</a><span></span>  ';	
+									}else{
+										if(c.stu_answer_list[0].stu_answer_id == '1'){
+											html = html + '									<a>已选答案</a><span>对</span>  ';	
+										}else{
+											html = html + '									<a>已选答案</a><span>错</span>  ';
+										}
+									}
+								}
+								html = html + '</br>';
+								for(var x=0;x<c.answer_list.length;x++){ // 原答案
+									if(c.answer_list[x].right_flag == '1'){
+											html = html + '									<a>正确答案</a><span>'+c.answer_list[x].answer_context+'</span>  ';
+									}
+								}								
+								html = html + '								</div>  ';
+								html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+								var c1 = latex2Html(c.question_desc);
+								var c2 = makeMathJye(c1);
+								html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+								html = html + '							</div>  ';
+								html = html + '						</div>  ';
+							}
+							if(c.question_type == '3'){
+								html = html + '						<div class="swiper-slide">  ';
+								html = html + '							<div class="multiple_content">  ';
+								html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">填空题</span></p>  ';
+								html = html + '								<div class="question_stem">  ';
+								var c1 = latex2Html(c.question_context);
+								var c2 = makeMathJye(c1);
+								html = html + '									'+c2+  '';
+								html = html + '								</div>  ';
+								html = html + '								<div class="fill_answer">  ';
+								html = html + '											<a>已选答案</a><span>';
+								for(var s=0;s<c.stu_answer_list.length;s++){ // 学生答案
+									if(c.stu_answer_list[s].stu_answer_context != ''){
+										if(s == c.stu_answer_list.length -1 ){
+											html = html + ''+c.stu_answer_list[s].stu_answer_context+'';
+										}else{
+											html = html + ''+c.stu_answer_list[s].stu_answer_context+';';
+										}
+									}
+								}
+								html = html + 											'</span>';
+								html = html + '											<br />  ';
+								html = html + '											<a>正确答案</a><span>';
+								for(var j=0;j<c.answer_list.length;j++){
+									var c1 = latex2Html(c.answer_list[j].answer_context);
+									var c2 = makeMathJye(c1);
+									if(j == c.answer_list.length -1 ){
+										html = html + ''+c2+'';
+									}else{
+										html = html + ''+c2+';';
+									}
+								}
+								html = html + 											'</span>  ';
+								html = html + '										<p class="analysis">解析<i class="icon_down"></i></p>  ';
+								var c1 = latex2Html(c.question_desc);
+								var c2 = makeMathJye(c1);
+								html = html + '										<div class="icon_content" style="display: none;"> '+c2+'</div>  ';
+								html = html + '								</div>  ';
+								html = html + '							</div>  ';
+								html = html + '						</div>  ';
+							}
+							if(c.question_type == '5'){
+								html = html + '						<div class="swiper-slide">  ';
+								html = html + '							<div class="multiple_content">  ';
+								html = html + '								<p class="question_content_title">('+ (z+1)+')<span style="margin-left: 0.2rem;">简答题</span></p>  ';
+								html = html + '								<div class="question_stem">  ';
+								var c1 = latex2Html(c.question_context);
+								var c2 = makeMathJye(c1);
+								html = html + '									'+c2+'  ';
+								html = html + '								</div>  ';
+								html = html + '								<div id="short_question">  ';
+								html = html + '											<div class="fill_answer">  ';
+								html = html + '												<a style="display:block;">已做答案</a><br/>';
+								for(var t=0;t<c.stu_answer_list.length;t++){ // 学生图片答案
+										var x = c.stu_answer_list[t];
+										if(x.stu_answer_context != ''){
+											html = html + '								<div class="answer_img">  ';
+											if(x.context_type == '64'){
+												html = html + '								<img src="'+x.stu_answer_context+'" />  ';	
+											}else{
+												html = html + ' <canvas id="n'+canvas_id+'" height="85" width="85"></canvas> ';
+												html = html + ' <input type="hidden" value=\''+x.stu_answer_context+'\'/>';
+												array.push('n'+canvas_id);
+												canvas_id++;
+											}
+											html = html + '								</div>  ';
+										}
+								}
+								html = html + '												<br />  ';
+								for(var x=0;x<c.answer_list.length;x++){
+									html = html + '										<a>正确答案</a><span style="color:  #0DC77A;">'+c.answer_list[0].answer_context+'</span>  ';
+								}
+								html = html + '											</div>  ';
+								html = html + '											<p class="analysis">解析<i class="icon_down"></i></p>  ';
+								var c1 = latex2Html(c.question_desc);
+								var c2 = makeMathJye(c1);
+								html = html + '											<div class="icon_content" style="display: none;">  '+c2+'</div>  ';
+								html = html + '											<div style="height: 0.2rem; width: 8rem; background-color: #F5F5F5; margin-top: 0.4rem; margin-left: -0.5rem;"></div>  ';
+								html = html + '											<div class="fill_answer">  ';
+								html = html + '												<a>老师打分</a><span>'+c.goal_score.substring(0,c.goal_score.indexOf('.'))+'分</span>  ';
+								html = html + '												<br />  ';
+								html = html + '												<a style="background-color: #cde9fc;color: #0493F0;">评语</a><span>'+c.tch_comment+'</span>  ';
+								html = html + '											</div>  ';
+								html = html + '								</div>  ';
+								html = html + '							</div>  ';
+								html = html + '						</div>  ';
+							}
+						}
+						html = html + '					</div>  ';
+						html = html + '					<div class="swiper-pagination'+m_flag+'"></div>  ';
+						html = html + '				</div>  ';
+						html = html + '			</div>  ';
+						html = html + '			<div class="multiple_btn">  ';
+						if(i == 0 && data.result.question_list.length > 1) {
+							html = html + '									<button type="button" class="btn-block btn-customer button-next">下一题</button>  ';
+						} else if(data.result.question_list.length == 1){
+						//	html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="width:6.9rem;margin-left: 0.19rem;">查看得分率</button>  ';
+						if (type != "2") {		
+							html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="width:6.9rem;margin: 0 auto;"></button>  ';
+							$("#jiayou_bg").css("left","1.5rem");
+						}
+						} else if(i == data.result.question_list.length - 1 && data.result.question_list.length > 1) {
+							html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+							//html = html + '									<button type="button" class="btn-block-customer btn-customer btn_score" style="margin-left: 0.19rem;">查看得分率</button>';
+							if (type != "2") {		
+							html = html + '									<button type="button" class="btn-block-customer btn-customer  jiayou_btn" style="margin: 0 auto;"></button>  ';
+							}
+						} else {
+							html = html + '									<button type="button" class="btn-block-customer button-prev" style="color:#0493F0;background-color: #ffffff;border:1px solid #0493F0">上一题</button>  ';
+							html = html + '									<button type="button" class="btn-block-customer btn-customer button-next" style="margin: 0 auto;">下一题</button>  ';
+						}
+						html = html + '			</div>  ';
+						html = html + '		</div>  ';
+						html = html + '	</div>  ';
+				}
+				$(".container_content").append(html);
+				// 左右滑动之后隐藏(1)
+			 	var swiper = new Swiper('.swiper-container'+m_flag, {
+			      pagination: {
+			        el: '.swiper-pagination'+m_flag,
+			      },
+				});
+				//(2)
+				$(".swiper-container"+m_flag).hide();
+				// 初始化显示第一题，隐藏其他试题
+			} // question循环
+			$(".container_content .child").hide();
+			$(".container_content .child").eq(0).show();
+			// 白板处理
+			for(var i=0;i<array.length;i++){
+			 	//alert($("#"+array[i]+"").next().val());
+			 	ysCanvasV2(array[i],$("#"+array[i]+"").next().val(),1);
+			 }
+			if (type != "2") {
+				// 加油打气判断
+				var approve_flag = ifApprove(source_id);
+				if(approve_flag){ // 已经加油打气
+					$(".jiayou_btn").attr("disabled","disabled").text('爱心已送达').css("color","#76B8F5"); 
+				}else{
+					$(".jiayou_btn").removeAttr("disabled").text('加油打气').css("color","#fff"); 
+				}
+				}
+			 	// 解析处理
+				$(".analysis").on("click", function() {
+					if($(this).find('i').hasClass("icon_down")) {
+						$(this).find('i').removeClass("icon_down").addClass("icon_up");
+						$(this).siblings(".icon_content").show();
+					} else {
+						$(this).find('i').removeClass("icon_up").addClass("icon_down");
+						$(this).siblings(".icon_content").hide();
+					}
+				});
+				// 综合题显示处理
+				$(".multiple_img").on("click",function(){
+					 $('div[class*="swiper-container"]').slideToggle("hide");
+				});
+				// 试题显示处理
+				$(".button-next").on("click", function() {
+					$(this).parents(".child").next().show().siblings().hide();
+					$('.g-scrollview').scrollTop(0);
+					// 隐藏当前解析内容
+					$(".analysis i").removeClass("icon_up").addClass("icon_down");
+					$(".icon_content").hide();
+					
+				});
+				$(".button-prev").on("click", function() {
+					$(this).parents(".child").prev().show().siblings().hide();
+					$('.g-scrollview').scrollTop(0);
+					// 隐藏当前解析内容
+					$(".analysis i").removeClass("icon_up").addClass("icon_down");
+					$(".icon_content").hide();
+				});
+				/*加油打气 */
+				$(".jiayou_btn").one("click",function(){
+					oneApprove(source_id,source_type,paper_id);
+					$(this).attr("disabled","disabled").text('爱心已送达').css("color","#76B8F5");
+					$("#jiayou_bg").show();
+					setTimeout(
+						function() {
+							$('#jiayou_bg').hide();
+						}, 2000);
+						// 2018-11-28 added by stt 埋点-6：温柔_1（为孩子加油打气1次）
+				 	ysAjax("/mob/medal/statistics_data",{
+							classify_flag: '6'
+						}, function(data) {
+						}, function(err) {
+							showAlert('服务器异常，请稍后重试');
+					});
+				});
+			// 关闭加载框
+			closeLoadDialog();
+		} else {
+			showNotify("没有相关数据");
+		}
+}, function(err) {
+	showAlert("服务器异常，请稍后重试");
+}
+);
+}//
+//获取前页面参数
+function GetRequest() {   
+		var url = location.search; 
+		var theRequest = new Object();
+		//获取url中"?"符后的字串   
+	 if (url.indexOf("?") != -1) {   
+		 var str = url.substr(1);   
+			strs = str.split("&");   
+			 for(var i = 0; i < strs.length; i ++) {   
+				 theRequest[strs[i].split("=")[0]]=unescape(decodeURI(strs[i].split("=")[1])); 
+				 }   
+			 }   
+			 return theRequest;   
+}   
+// 公式编辑器公式显示
+function latex2Html(str){
+  if (str == undefined || str == null || str == '') {
+      return '';
+  }
+  str = '<span class="temp">'+ str +'</span>';
+  var $str = $(str);
+  if ($str.find(".kfformula").length == 0) {
+      return $str.html();
+  }
+  $str.find(".kfformula").each(function(i, v){
+      var latex = $(v).attr("data-latex");
+		if (latex != undefined && latex != null && latex != '') {
+          latex = toSBC(latex);
+          try {
+              var katexHtml = katex.renderToString(latex, {displayMode: false});
+          } catch (e) {
+              return str;
+          }
+          $(v).after(katexHtml);
+          $(v).remove();
+      }
+  });
+  return $str.html();
+}
+// 转半角字符
+function toSBC(str){
+  var result = "";
+  var len = str.length;
+  for(var i=0;i<len;i++)
+  {
+      var cCode = str.charCodeAt(i);
+      //全角与半角相差（除空格外）：65248（十进制）
+      cCode = (cCode>=0xFF01 && cCode<=0xFF5E)?(cCode - 65248) : cCode;
+      //处理空格
+      cCode = (cCode==0x03000)?0x0020:cCode;
+      result += String.fromCharCode(cCode);
+  }
+  return result;
+}
+// 菁优网公式显示
+function makeMathJye(html){
+  html = '<span>'+ html +'</span>'
+  var $html = $(html);
+  var $tables = $html.find("table");
+  $.each($tables, function(i, v){
+      $(v).wrap("<span class='MathJye'></span>");
+  })
+  var result = $html.html();
+  return result;
+}
+// 进行一次加油打气
+function oneApprove(source_id,source_type,paper_id){
+	ysAjax("/mob/study/approve", {
+	source_id:source_id,
+	source_type:source_type,
+	paper_id:paper_id
+	}, function(data) {
+		if (!data.success) {
+			showNotify("加油打气失败，稍后再试");
+		}
+	}, function(err) {
+	});
+}
+//是否已经加油打气
+function ifApprove(source_id){
+	var af;
+	ysAjaxSynchro("/mob/study/getApprove", {
+		source_id:source_id
+	}, function(data) {
+		if (data.success) {
+			af = true;
+		} else {
+			af = false;
+		}
+	}, function(err) {
+		showNotify("发生异常，稍后重试");
+	});
+	return af;
+}
+</script>
+
+	</body>
+</html>

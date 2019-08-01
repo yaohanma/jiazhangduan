@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--页面css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+<!--滑动模块css-->
+<link rel="stylesheet" href="/static/css/study/swiper.min.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+
+<script type="text/javascript" src="/static/js/flexible.js"></script>
+<script type="text/javascript" src="/static/js/iscroll.js"></script>
+<script type="text/javascript" src="/static/js/navbarscroll.js"></script>
+<!--滑动模块 js-->
+<script src="/static/js/swiper.min.js"></script>
+<style>
+	ul,li{margin:0;padding:0;}
+	ul{list-style:none;}
+	a {text-decoration:none}
+	a:hover{text-decoration:none}
+
+	.clearfix:after{
+		content:".";
+		display:block;
+		height:0;
+		clear: both;
+		visibility:hidden;
+	
+	}
+	.clearfix{zoom:1;}
+	.wrapper03 {
+		position:fixed;
+		height: .9rem;
+		width: 100%;
+		z-index:1000;
+		overflow: hidden;
+		margin:0 auto;
+		background-color: #fff;
+		margin-top: 0.2rem;
+		border-bottom:1px solid #e5e5e5 ;
+	}
+	.wrapper03 .scroller {
+		position:absolute;
+		/*border-bottom:1px solid #B2B2B2;*/
+		background-color: #fff;
+		height: .8rem;
+		}
+	.wrapper03 .scroller li {
+		height: .9rem;
+		color:#666666;
+		float: left;
+		font-size: 0.28rem;
+		text-align: center;
+	}
+	.wrapper03 .scroller li a{
+		color:#666666;
+		display:block;
+		height:0.9rem;
+		line-height:1rem;
+		padding: 0 0.2rem;
+		margin: 0 0.2rem;
+	}
+	.wrapper03 .scroller li.cur a{
+		color:#0493f0;
+		border-bottom:3px solid #0493f0;
+		}
+	.progress{
+		background-color:#fafafa;
+		background-image:none;
+		height: 35px;
+		margin-bottom: -2px;
+		border-radius: 0px;
+		border-color: #daeffd;
+		-webkit-box-shadow: 0px 0px; 
+    	box-shadow: 0px 0px; 
+    	border-radius: 4px;
+    	position: relative;
+	}
+	.progress .progress-bar-success{
+		background-color: #daeffd;
+		background-image:none;
+		border:none;
+		-webkit-box-shadow: 0px 0px; 
+    	box-shadow: 0px 0px; 
+    	height:100%;
+    	border-radius: 4px;
+	}	
+	.progress_customer {
+	    height: 2px;
+	    margin-bottom: 15px;
+	    overflow: hidden;
+	    border-radius: 0px;
+	    -webkit-box-shadow: 0px 0px; 
+    	box-shadow: 0px 0px; 
+    	
+	}	
+	.progress_customer .progress-bar-info{
+		background-color: #0493f0;
+		background-image:none;
+		border:none;
+		-webkit-box-shadow: 0px 0px; 
+    	box-shadow: 0px 0px; 
+    	border-radius: 2px;
+	}
+.content {
+	width: 100%;
+	height: auto;
+	background: #FFFFFF;
+	position: relative;
+	z-index: 0;
+	margin-top: 1rem;
+	padding-bottom: .15rem;
+}
+
+#progressContent .progress  span{
+	position: absolute;
+	left:83%;
+	font-size:0.28rem;
+	color:#666666;
+	float:right;
+	margin-top: 10px;
+}
+#progressContent{
+	width:100%; 
+	padding: 0 .3rem;
+	padding-top:0.3rem;
+}
+
+div.bg{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		position: fixed;
+		top: 30%;
+		padding: 0 1rem;
+		font-size: 0.3rem;
+		color: #999;
+	}
+	div.bg img{
+		width: 100%;
+		margin-bottom: 0.4rem;
+	}
+	div.bg>div{
+		color: #999;
+		width: 100%;
+		
+	}
+	/*2019/4/23*/
+	.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+		border-right: 0;
+	}
+	.m-grids-3:before,
+	.grids-item:after,
+	.grids-item:after{
+		border-bottom:0;
+	}
+	body .m-cell:after,
+	 body .grids-item:after,
+	  body .cell-item:not(:last-child):after,
+	   body .tab-nav:after{
+	   	border-bottom:0;
+	   }
+	   #progressContent .progress span{
+	   	margin-top: 0;
+	   	top: 30%;
+	   }
+</style>	
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<div class="wrapper wrapper03" id="wrapper03" >
+			<div class="scroller" >
+				<ul class="clearfix"style="border-bottom:2px solid #0493f0;w" id="subject">
+					<li class="cur" ><a href="javascript:void(0)" onclick="showContent(1);" class="ui-link">语文</a></li>  
+					<li ><a href="javascript:void(0)" onclick="showContent(19);" class="ui-link">数学</a></li>  
+					<li ><a href="javascript:void(0)" onclick="showContent(2);" class="ui-link">英语</a></li>  
+					<li ><a href="javascript:void(0)" onclick="showContent(3);" class="ui-link">物理</a></li>  
+					<li ><a href="javascript:void(0)" onclick="showContent(5);" class="ui-link">地理</a></li>  
+					<li ><a href="javascript:void(0)" onclick="showContent(50);" class="ui-link">品德</a></li>   
+				</ul>
+			</div>
+		</div>
+
+        <!--<div id="content" class="content">
+        </div>-->
+		<div id="content2" class="content" style="">
+			<div id="overview0" style="width:100%;background: #FFFFFF;margin-left: 10px;padding-top: 20px;color:#313340;"> 
+				<font style="font-size: 0.3rem;font-weight: bold;">已学习章节 <font style="color:#0493f0;">5</font>个 ，完成 <font style="color:#0493f0;">
+				61</font>道习题 ，耗时<font style="color:#0493f0;">34.6</font>小时</font> 
+			</div> 
+			<div id="overview1" style="width:100%;background: #FFFFFF;padding: .3rem .2rem;height:1rem;">
+				<div style="width: 50%;float: left;"> 
+					<div style="width:12px;height:12px;background-color: #daeffd;display: inline-table;margin-right: 6px;"></div> 
+					<font style="font-size:14px;color:#666666;">班级平均得分率</font>
+				</div>
+				<div style="width: 50%;float: right;"> 
+					<div style="width:12px;height:12px;background-color: #0493f0;display: inline-table;margin-right: 6px;"></div> 
+					<font style="font-size:14px;color:#666666;text-align: left;">个人得分率</font>
+				</div> 
+			</div> 
+			<div class="danyuan" style="">
+				<ul class="m-grids-3">
+		            <li class="grids-item" style="">
+		                <div class="grids-txt" style="text-align: left;">第一单元</div>
+		            </li>
+		            <li class="grids-item">
+		                <div class="grids-txt">散文</div>
+		            </li>
+		            <li class="grids-item">
+		                <div class="grids-txt" style="text-align: right;">98%</div>
+		            </li>
+		        </ul>
+			</div>
+			<div id="progressContent" class="progressContent" style=""> 
+				<a href="#">
+					<div class="progress"> 
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:1%;"></div>
+						<span style="">1%</span>
+						
+					</div> 			
+					<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">17.雪地里的小画家</span> 
+					<div class="progress_customer"> 	
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"> 
+							<span class="sr-only">5%</span> 
+						</div> 	
+					</div> 
+				</a>
+				
+				
+				<a href="#">
+					<div class="progress"> 		
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:50%;"></div>
+						<span style="">60%</span>   	
+					</div> 			
+					<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">20.小熊住山洞</span> 	
+					<div class="progress_customer"> 		
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 3%;"> 			<span class="sr-only">3%</span></div> 	
+					</div> 	
+				</a>
+				
+				<a href="#">
+					<div class="progress"> 		
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;"></div> 	
+							<span style="">60%</span>   	
+					</div> 			
+					<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">封面</span> 	
+					<div class="progress_customer"> 	
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 12%;"> 	
+							<span class="sr-only">12%</span> 
+						</div> 	
+					</div> 	
+				</a>
+				<a href="#">
+					<div class="progress"> 		
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:30%;"></div> 		
+						<span style="">30%</span>  
+					</div> 			
+					<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">汉语拼音</span> 	
+					<div class="progress_customer"> 
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 17%;"> 	
+							<span class="sr-only">17%</span> 	
+						</div> 	
+					</div> 
+				</a>
+				<a href="#">
+					<div class="progress"> 	
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:80%;"> </div> 
+						<span style="">80%</span> 
+					</div> 			
+					<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">生字表（二）</span> 
+					<div class="progress_customer"> 	
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:40%;"> 		
+							<span class="sr-only">80%</span> 	
+						</div> 
+					</div> 
+				</a>
+			</div> 
+		</div>
+
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	addMainPageHeader("/html/understand_more/daily_learning.html", "章节分析");
+	addMainPageFooter(3);
+	 $('.wrapper').navbarscroll({});
+	
+//	var requestData = new Object();
+//	requestData = GetRequest();
+//	var subject_id = requestData["subject_id"];
+//	var index = requestData["index"];
+	//TODO APP
+	/*ysAjax("/statistics/get_section_analysis", {
+	}, function(data) {
+		if (data.success) {
+			$("#subject").empty();
+			$("#content").empty();
+			var html = '';
+			var datalist = data.result;
+			for(var i = 0; i < datalist.length; i++ ){
+				html =  html + ' <li ><a href="javascript:void(0)" onclick="selectSectionList(&quot;'+datalist[i].subject_id+'&quot;,&quot;'+i+'&quot;)" class="ui-link">'+datalist[i].name+'</a></li> ';
+			}
+			$("#subject").append(html);
+			if(subject_id != null && subject_id != '' && subject_id != "undefined") {
+				 selectSectionList(subject_id,index);
+					$('.wrapper').navbarscroll({ 
+							defaultSelect:index
+					});
+			} else {
+				$('.wrapper').navbarscroll();
+				selectSectionList(datalist[0].subject_id,0);
+			}
+			
+		} else {
+			$("#subject").empty();
+			$("#content").empty();
+			var html = '';
+			 html =  html + ' <div class="bg">';
+			 html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+			 html =  html + ' <img src="/static/images/study_img/img_knowledge.png" />';
+			 html =  html + ' </div>';
+			 html =  html + ' <div style="line-height:.5rem ;">暂无数据</div>';
+			 html =  html + ' </div>';
+
+			 $("#content").append(html);
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});*/
+});
+
+
+// 选择每单科章节分析
+//function selectSectionList(subject_id,index){
+//	ysAjax("/statistics/select_section_anysis", {
+//		subject_id : subject_id
+//	}, function(data) {
+//		if (data.success) {
+//			$("#content").empty();
+//			var html = '';
+//			if(data != null && data.result.section_list.length > 0){
+//				html =  html + ' <div id="overview0" style="width:100%;background: #FFFFFF;margin-left: 10px;padding-top: 20px;"> ';
+//				html =  html + ' <font style="font-size: 13px;">已学习章节 <font style="color:#0493f0;">'+ data.result.section_total +'</font>个';
+//				html =  html + ' ，完成 <font style="color:#0493f0;">'+ data.result.questionTotal +'</font>道习题';
+//				html =  html + ' ，耗时<font style="color:#0493f0;">'+ data.result.timeTotal +'</font>小时</font>';
+//				html =  html + ' </div>';
+//				html =  html + ' <div id="overview1" style="width:94%;background: #FFFFFF;margin-left: 10px;margin-top: 20px;margin-bottom: 15px;">';
+//				html =  html + ' <div id="overview1" style="width:100%;background: #FFFFFF;padding: .3rem .2rem;height:1rem;">';
+//				html =  html + ' <div style="width: 50%;float: left;"> ';
+//				html =  html + ' <div style="width:12px;height:12px;background-color: #daeffd;display: inline-table;border-radius: 4px;"></div>';
+//				html =  html + ' <font style="font-size:14px;color:#666666;margin-right: 6px;">和x%</font><font style="font-size:14px;color:#666666;">个人得分率</font>';
+//				html =  html + ' </div>';
+//				html =  html + ' <div style="width: 50%;float: right;"> ';
+//				html =  html + ' <div style="width:12px;height:12px;background-color: #0493f0;display: inline-table;margin-right: 6px; border-radius: 4px;"></div> ';
+//				html =  html + ' <font style="font-size:14px;color:#666666;text-align: left;">班级平均得分率</font>';
+//				html =  html + ' </div> ';
+//				html =  html + ' </div> ';
+//				html =  html + ' </div>';
+//				html =  html + ' <div id="progressContent" class="progressContent">';
+//				for(var i = 0; i < data.result.section_list.length; i++ ){
+//					var item = data.result.section_list[i];
+//					var url = encodeURI("/html/understand_more/analysis_report.html?subject_id="+subject_id+"&index="+index+"&section_id="+item.section_id+"&section_name="+item.section_name);
+//					html = html + '<a href='+url+'>';
+//					if(item.section_rate == '100'){ //#daeffd
+//						html =  html + ' 	<div class="progress" style="background-color:#daeffd;" >';
+//					}else{
+//						html =  html + ' 	<div class="progress">'; // #F0FBF7
+//					}
+//				html =  html + ' 		<div class="progress-bar progress-bar-success" role="progressbar"';
+//				html =  html + ' 			aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"';
+//				html =  html + ' 			style="width:'+ item.section_rate +'%;" >';
+//				html =  html + ' 		</div>';
+//				html =  html + ' 		<span style="position: absolute;left:83%;font-size:13px;color:#666666;float:right;margin-top: -23px;">'+ item.section_rate +'%</span>';
+//				html =  html + '   	</div>';
+//				html =  html + ' 			<span style="position: absolute;z-index: 100;font-size:13px;color:#333333;float:left;margin-left: 10px;margin-top: -23px;">'+ item.section_name +'</span>';
+//				html =  html + ' 	<div class="progress_customer">';
+//				html =  html + ' 		<div class="progress-bar progress-bar-info" role="progressbar"';
+//				html =  html + ' 			aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"';
+//				html =  html + ' 			style="width: '+ item.class_section_rate +'%;">';
+//				html =  html + ' 			<span class="sr-only">'+ item.class_section_rate +'%</span>';
+//				html =  html + ' 		</div>';
+//				html =  html + ' 	</div></a>';
+//				}
+//				html =  html + ' </div>';
+//				 $("#content").append(html);
+//			
+//			}else{
+//				 html =  html + ' <div class="bg">';
+//				 html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+//				 html =  html + ' <img src="/static/images/study_img/img_knowledge.png" />';
+//				 html =  html + ' </div>';
+//				 html =  html + ' <div style="line-height:.5rem ;">暂无数据</div>';
+//				 html =  html + ' </div>';
+//
+//				 $("#content").append(html);
+//			}
+//		} else {
+//			showNotify(data.errorMsg);
+//		}
+//		}, function(err) {
+//			showNotify("发生异常");
+//		});
+//	} 
+	
+//获取前页面参数
+//function GetRequest() {   
+//	   var url = location.search; 
+//	   var theRequest = new Object();
+//	   //获取url中"?"符后的字串   
+//	   if (url.indexOf("?") != -1) {   
+//	      var str = url.substr(1);   
+//	      strs = str.split("&");   
+//	      for(var i = 0; i < strs.length; i ++) {   
+//	         theRequest[strs[i].split("=")[0]]=unescape(decodeURI(strs[i].split("=")[1]));   
+//	      }   
+//	   }   
+//	   return theRequest;   
+//	}   
+</script>
+
+</body>
+</html>

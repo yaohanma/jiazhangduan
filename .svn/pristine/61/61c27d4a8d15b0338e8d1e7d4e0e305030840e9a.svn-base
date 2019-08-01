@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+<link rel="stylesheet" href="/static/css/study/study_index.css">
+<style>
+	.aligncenter {
+		clear: both;
+		display: block;
+		margin: auto;
+	}
+	/*通知样式*/
+	.navbar-item{
+		background-image: url(/static/images/study_img/icon_remind.png);
+	    background-repeat: no-repeat;
+	    background-position-y:center;
+	    background-position-x:1.2rem;
+	    background-size:25%;
+	    
+	}
+	/*有通知 样式*/
+	.navbar-item.on{
+		background-image: url(/static/images/study_img/icon_remind_msg.png);
+	    background-repeat: no-repeat;
+	    background-position-y:center;
+	    background-position-x:1.2rem;
+	    background-size:25%;
+	    
+	}
+	/*input*/
+	.div-bor{
+		width: 100%;
+		height: 0.58rem;
+		position: relative;
+		border: 1px solid #dcdcdc;
+		border-radius: 4px;
+	}
+	.div-bor i{
+		width:0.25rem ;
+		height:0.58rem;
+		display: inline-block;
+		background: url(/static/images/study_img/icon_search@2x.png) center no-repeat;
+		background-size: 100%;
+		position: absolute;
+		left: 0.15rem;
+	}
+	.div-bor input{
+		width: 90%;
+		position: absolute;
+		right: 0.15rem;
+		border: 0;
+		font-size: 0.12rem;
+		line-height: 0.58rem;
+		text-indent: 0.2rem;
+		color: #b2b2b2;
+	}
+	input::-webkit-input-placeholder {
+		color: #b2b2b2;
+      }
+      .input_box{
+      	width: 100%;
+      	height: 100%;
+      	background: rgba(225,225,225,.9);
+      	position: fixed;
+      	top: 0.9rem;
+      	z-index: 999;
+      	display: none;
+      }
+      .input_box .m-cell{
+      	margin-bottom: 0;
+      }
+	/*banner*/
+	.banner_box{
+		width: 100%;
+		height: 2.8rem;
+		margin-bottom: 0.2rem;
+	}
+	.banner_box .slider-pagination > .slider-pagination-item{
+		width: 0.17rem;
+		height: 0.17rem;
+	}
+	.banner_box .slider-pagination > .slider-pagination-item.slider-pagination-item-active{
+		background: rgb(4,147,240);
+	}
+	/*文章*/
+	.article_box{
+		padding:0 0.3rem;
+	}
+	.article_box div{
+		margin-top: 0.15rem;
+		font-size: 0.3rem;
+		color: #333;
+		padding-bottom: 0.4rem;
+	}
+	.article_box img{
+		border-radius: 10px;
+		height: 2.8rem;
+	}
+	/*新增消息推送 样式*/
+	.message_box{
+		width: 100%;
+		margin-bottom: 0.2rem;
+		background: #fff;
+	}
+	.null_box{
+		width: 100%;
+		height: 1.12rem;
+		line-height: 1.12rem;
+		color: #888a97;
+		font-size: 0.26rem;
+		text-align: center;
+		
+		display: none;
+		
+	}
+	/*.notice_title{
+		border-bottom: 1px solid #e5e5e5;
+	}*/
+	.notice_title span{
+		width: 2.1rem;
+		height: 0.42rem;
+		line-height: 0.42rem;
+		border-radius: 4px;
+		color: #fff;
+		font-size: 0.3rem;
+		text-align: center;
+		
+	}
+	.notice_title .notice{
+		background-color: #ff6a67;
+	}
+	.notice_title .Exa_rc{
+		background-color: #30b8fe;
+	}
+	.notice_title .Exa_cj{
+		background-color: #3ec7ba;
+	}
+	.notice_title .kaoqin{
+		background-color: #7489fe;
+	}
+	.notice_title .cell-right{
+		color: #a0a4b1;
+		font-size: 0.36rem;
+		font-weight: 100;
+	}
+	.notice_text{
+		padding: 0.2rem 0.42rem 0.55rem 0.42rem;
+		/*修改 */
+		padding-bottom: 0.2rem;
+	}
+	.notice_text p{
+		margin-bottom: 0.15rem;
+		color: #313340;
+		font-size: 0.28rem;
+	}
+	.notice_text p span{
+		margin-right: 0.15rem;
+	}
+}
+</style>
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview" id="J_List">
+			<!--<img src="/static/images/common/img_Construction@3x.png" class="aligncenter" style="width:50%; margin-top: 50%;">
+			<p align="center" style="margin-top: 4%;font-size:.33rem;color:#999999;">功能日夜建设中</p>
+			<p align="center" style="font-size:.3rem;color:#999999;">爱需要等待</P>-->
+				
+			<!--banner-->
+			<!--<div class="m-slider banner_box" id="J_Slider">
+				
+			</div>-->
+			<!--文章-->
+			<!--<div class="com_box">
+				<div class="m-cell">
+				    <div class="cell-item mytitle">
+				        <div class="cell-left"><i></i>所有文章</div>
+				        <div class="cell-right"></div>
+				    </div>
+				</div>
+				<div id="J_News">
+
+				</div>
+	  		</div>
+	  		<div class="input_box g-scrollview">
+	  			<div class="m-cell" id="search_div">
+					
+				</div>
+	  		</div>-->
+	  		
+	  		<!--banner-->
+			<div class="m-slider banner_box" id="J_Slider">
+			    <div class="slider-wrapper">
+			        <div class="slider-item">
+			            <a href="#">
+			                <img src="/static/images/study_img/img_banner@2x.png">
+			            </a>
+			        </div>
+			        <div class="slider-item">
+			            <a href="#">
+			                 <img src="/static/images/study_img/img_banner@2x.png">
+			            </a>
+			        </div>
+			        <div class="slider-item">
+			            <a href="#">
+			                 <img src="/static/images/study_img/img_banner@2x.png">
+			            </a>
+			        </div>
+			    </div>
+			    <div class="slider-pagination"></div><!-- 分页标识 -->
+			</div>
+			
+			<!--首页更改   新增消息推送-->
+			<div class="message_box">
+				<!--暂无更多通知信息  -->
+				<div class="null_box">暂无更多通知信息</div>
+				<!--有通知情况-->
+				<div class="notice">
+					<div>
+						<a href="/html/notice_list/notice_nei.html?flag=index">
+							<div class="cell-item notice_title">
+						        <div class="cell-left"><span class="notice">重要通知提醒</span></div>
+						        <div class="cell-right">05-01</div>
+						    </div>
+						    <div class="notice_text">
+						    	<p><span>主题：</span>本学期第二次家长会</p>
+								<p><span>时间：</span>5月4日19:00</p>
+								<p><span>地点：</span>学校舞蹈室</p>
+						    </div>
+						</a>
+						
+					</div>
+					<div>
+						<a href="/html/exam_schedule/exam_schedule_details.html?flag=index">
+							<div class="cell-item notice_title">
+						        <div class="cell-left"><span class="Exa_rc">考试日程提醒</span></div>
+						        <div class="cell-right">05-01</div>
+						    </div>
+						    <div class="notice_text">
+						    	<p><span>考试名称：</span>2017~2018第二学期一年级期中考试</p>
+								<p><span>考试时间：</span>5月4日、5月5日</p>
+								<p><span>考试类型</span>期中考</p>
+						    </div>
+					    </a>
+					</div>
+					<!--<div>
+						<div class="cell-item notice_title">
+					        <div class="cell-left"><span class="Exa_cj">考试成绩通知</span></div>
+					        <div class="cell-right">05-01</div>
+					    </div>
+					    <div class="notice_text">
+					    	<p><span>考试名称：</span>7~2018第二学期一年级第一次月考</p>
+							<p><span>考试类型：</span>月考</p>
+							<p><span>总得分</span>540分</p>
+					    </div>
+					</div>
+					<div>
+						<div class="cell-item notice_title">
+					        <div class="cell-left"><span class="kaoqin">考勤提醒</span></div>
+					        <div class="cell-right">05-01</div>
+					    </div>
+					    <div class="notice_text">
+					    	<p>迟到提醒</p>
+					    	<p><span>学生姓名：</span>黄晓明</p>
+							<p><span>时间：</span>2018-11-1 10:20:30</p>
+							<p><span>考勤状态</span>迟到</p>
+					    </div>
+					</div>-->
+				</div>
+			</div>
+			
+			
+			<!--文章-->
+			<div class="com_box">
+				<div class="m-cell" style="margin-bottom: 0.2rem;">
+				    <div class="cell-item mytitle_new">
+				    	
+				        <div class="cell-left">更多资讯</div>
+				        <div class="cell-right">
+				        	<a href="/html/information/information_list.html" class="fc_999">更多<i></i></a>
+				        </div>
+				    </div>
+				</div>
+				<div>
+				    <div  class="article_box" >
+				    	<a href="#">
+							<img src="/static/images/study_img/img_pic_1@2x.png" width="100%">
+							<div>从王者荣耀到吃鸡，孩子爱玩手机怎么办？ </div>
+						</a>
+				    </div>
+					<div  class="article_box" >
+				    	<a href="#">
+							<img src="/static/images/appimg/child-1260421@2x.png" width="100%" >
+							<div>从学什么到怎么学，切入底层能力的「杏壳思维」要让孩子会思考、善表达 </div>
+						</a>
+				    </div>
+				</div>
+	  		</div>
+	  		<div class="input_box g-scrollview">
+	  			<div class="m-cell">
+					<div class="cell-item">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">心理</p>
+						</div>
+						<div class="cell-right">
+						    <p class="font-size-content font-color-99" id="nickname"></p>
+						</div>
+					</div>
+					<div class="cell-item">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">心理</p>
+						</div>
+						<div class="cell-right">
+						    <p class="font-size-content font-color-99" id="nickname"></p>
+						</div>
+					</div>
+				</div>
+				<div class="m-cell">
+					<div class="cell-item">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">心理</p>
+						</div>
+						<div class="cell-right">
+						    <p class="font-size-content font-color-99" id="nickname"></p>
+						</div>
+					</div>
+					<div class="cell-item">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">心理</p>
+						</div>
+						<div class="cell-right">
+						    <p class="font-size-content font-color-99" id="nickname"></p>
+						</div>
+					</div>
+				</div>
+	  		</div>
+		</section>
+	</section>
+	<!--<script id="J_ListHtml" type="text/html">
+		<div class="slider-wrapper">
+			{{each list as item}}
+			<div class="slider-item">
+				<a href="#" onclick="jumpPage('{{item.url}}')">
+					{{if item.imgPath != null}}
+					<img src="/backstage/sys/household/download/{{item.imgPath}}">
+					{{else}}
+					<img src="/static/images/study_img/img_banner@2x.png">
+					{{/if}}
+				</a>
+			</div>
+			{{/each}}
+		</div>
+		<div class="slider-pagination"></div><!-- 分页标识 -->
+	<!--</script>-->
+	<!--<script id="News_ListHtml" type="text/html">
+		{{each list as item}}
+		<div  class="article_box" >
+			<a href="#" onclick="jumpPage('{{item.url}}')">
+				{{if item.type == '1'}}
+				<div class="video_box">
+					<div></div>
+					{{if item.imgPath != null}}
+					<img src="/backstage/sys/household/download/{{item.imgPath}}" width="100%">
+					{{else}}
+					<img src="/static/images/study_img/img_pic_1@2x.png" width="100%">
+					{{/if}}
+				</div>
+				{{else}}
+					{{if item.imgPath != null}}
+					<img src="/backstage/sys/household/download/{{item.imgPath}}" width="100%">
+					{{else}}
+					<img src="/static/images/study_img/img_pic_1@2x.png" width="100%">
+					{{/if}}
+				{{/if}}
+				<div class="text">{{item.title}}</div>
+			</a>
+		</div>
+		{{/each}}
+	</script>-->
+
+	<!--<script id="News_Search" type="text/html">
+		{{each list as item}}
+		<div class="cell-item" onclick="jumpPage('{{item.url}}')">
+			<div class="cell-left">
+				<p class="font-size-content font-color-33 mytitle">{{item.title}}</p>
+			</div>
+			<div class="cell-right">
+				<p class="font-size-content font-color-99"></p>
+			</div>
+		</div>
+		{{/each}}
+	</script>-->
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript" src="/static/plugins/art-template/template-web.js"></script>
+	<script type="text/javascript">
+$(document).ready(function() {
+	//2018-11-28 added by stt 埋点-8：学无止境_1（阅读1次文章）
+//	buriedPoint('8');
+	addMainPageFooter(1);
+	addMainPageHeader(null, "首页", {
+					hasIcon:true,
+					text:"",
+					action : function() {
+						
+						$("#ysYduiNavBarRightBtn").attr("href","/html/notice_list/notice.html"); 
+					}
+					
+	});
+})
+//	$(".navbar-title").html("<div class='div-bor'><i></i><input type='text' id='search_input' class='user'  placeholder='搜索感兴趣的文章'/></div>");
+
+//  $("#search_input").bind("input propertychang",function(event){
+//      if (event.type === "input" || event.orignalEvent.propertyName === "value") {
+//          var title = this.value;
+//          title = $.trim(title);
+//          if (title){
+//          	//TODO APP
+////              searchNews(title);
+//			}else {
+//              $('#search_div').html("");
+//			}
+//      }
+//  });
+
+//  $(".navbar-title input").focus(function(){
+//		$(".input_box").show();
+//	});
+//	/*$(".navbar-title input").blur(function(){
+//	  $(".input_box").hide();
+//	});*/
+//	$('.input_box').bind('click',function(){
+//     $(".input_box").hide();
+//  });
+//	$('#search_div').bind('click',function(){
+//		 $(".input_box").show();
+//      if(window.event){//IE下阻止冒泡
+//          event.cancelBubble  = true;
+//      }else{
+//          event.stopPropagation();
+//      }
+//
+//  });
+
+	//是否有未读通知
+	//TODO APP
+//	notifyList();
+//  initBanner();
+	//下拉刷新
+    /*$('#J_News').pullRefresh({
+        loadListFn: function () {
+            var def = $.Deferred();
+            page = 1;
+            loadMore(function (data) {
+                if(data.success){
+                    var html = template('News_ListHtml', {list: data.result});
+                    $('#J_News').html(html);//覆盖原来数据
+					page++;
+                }else{
+                    showAlert('服务器异常，请稍后重试');
+                }
+                def.resolve();
+            });
+
+            return def.promise();
+        }
+    });
+
+//  $('#J_List').infiniteScroll({
+//      binder: '#J_List',
+//      pageSize: pageSize,
+//      initLoad: true,
+//      loadingHtml: '<img src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>',
+//      loadListFn: function () {
+//          var def = $.Deferred();
+//          loadMore(function (data) {
+//              if (data.result.length > 0){
+//                  var html = template('News_ListHtml', {list: data.result});
+//                  $('#J_News').append(html).find('img').lazyLoad({binder: '#J_List'});//追加到原来数据
+//                  def.resolve(data.result);
+//                  ++page;
+//              } else {
+//                  def.resolve([""]);
+//              }
+//          });
+//
+//          return def.promise();
+//      }
+//  });
+
+
+//function jumpPage(url) {
+//  var fdStart = url.indexOf("http");
+//  if(fdStart == 0){
+//      buriedPoint('8');
+//      window.location.href = url;
+//  }
+//}
+//
+//function notifyList() {
+//	ysAjax("/notification/check",{},function(data) {
+//			if(data.retCode == 'SUCCESS'){
+//				if(data.no_read_num != 0 && data.no_read_num != undefined && data.no_read_num != null){
+//					$('#ysYduiNavBarRightBtn').addClass('on');
+//				}
+//			}else{
+//				showAlert('服务器异常，请稍后重试');
+//			}
+//	}, function(err) {
+//		showAlert('服务器异常，请稍后重试');
+//	});
+//}
+//
+//function initBanner() {
+//  ysAjax("/homepage/initBanner",{},function(data) {
+//      if(data.success){
+//          var html = template('J_ListHtml', {list: data.result});
+//          $('#J_Slider').html(html).find('img').lazyLoad({binder: '#J_List'});
+//          initSlider();
+//      }else{
+//          showAlert('服务器异常，请稍后重试');
+//      }
+//  }, function(err) {
+//      showAlert('服务器异常，请稍后重试');
+//  });
+//}
+//var page = 1, pageSize = 10;
+//var loadMore = function (callback) {
+//  ysAjax("/homepage/initNews",{page: page, pagesize: pageSize},
+//      function(data) {
+//          typeof callback == 'function' && callback(data);
+//      }, function(err) {
+//          showAlert('服务器异常，请稍后重试');
+//      });
+//};
+//
+//function searchNews(title) {
+//  ysAjax("/homepage/searchNews",{title: title},function(data) {
+//      if(data.success){
+//          var html = template('News_Search', {list: data.result});
+//          $('#search_div').html(html);
+//      }else{
+//          showAlert('服务器异常，请稍后重试');
+//      }
+//  }, function(err) {
+//      showAlert('服务器异常，请稍后重试');
+//  });
+//}
+
+/*banner*/
+ $('#J_Slider').slider({
+        speed: 200,
+        autoplay: 2000,
+        lazyLoad: true
+    });
+//function initSlider() {
+//  $('#J_Slider').slider({
+//      speed: 200,
+//      autoplay: 2000,
+//      lazyLoad: true
+//  });
+//}
+</script>
+</body>
+</html>

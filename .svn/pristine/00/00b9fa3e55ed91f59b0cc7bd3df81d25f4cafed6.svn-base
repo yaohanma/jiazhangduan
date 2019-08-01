@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+
+<style>
+	.aligncenter {
+		clear: both;
+		display: block;
+		margin: auto;
+	}
+</style>
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview">
+			<img src="/static/images/common/img_Construction@3x.png" class="aligncenter" style="width:50%; margin-top: 50%;">
+			<p align="center" style="margin-top: 4%;font-size:.33rem;color:#999999;">功能日夜建设中</p>
+			<p align="center" style="font-size:.3rem;color:#999999;">爱需要等待</P>
+		</section>
+	</section>
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript">
+$(document).ready(function() {
+	addMainPageHeader("/html/understand_more/understand_index.html",null);
+	addMainPageFooter(4);
+});
+</script>
+</body>
+</html>

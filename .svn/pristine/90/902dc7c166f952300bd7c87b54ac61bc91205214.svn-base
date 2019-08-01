@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+		#ysYduiNavBarRightBtn{
+		background-image: url(/static/images/study_img/icon_more.png);
+	    background-repeat: no-repeat;
+	    background-position-y:center;
+	    padding-right: 0.6rem;
+	    background-position-x:1.4rem;
+	    background-size:15%;
+	    
+	}
+	
+	.m-grids-2 .grids-item:not(:nth-child(2n)):before{
+		border-right: 0;
+	}
+	.m-grids-2:before{
+		border-bottom:0;
+	}
+ .wrong_numb{
+ 	margin-top: .7rem;
+ 	padding-bottom: 0.2rem;
+ 	text-align: center;
+ 	font-size: 0.24rem;
+ 	
+ }
+ .wrong_numb  .grids-txt span{
+ 	font-size: 0.48rem;
+ }
+ 
+ @media screen and (min-width:600px) {
+   #ysYduiNavBarRightBtn{
+    background-image: url(/static/images/study_img/icon_more.png);
+    background-repeat: no-repeat;
+    background-position-y: center;
+    padding-right: 0.6rem;
+    background-position-x:right;
+    background-size: 15%;
+     margin-right: 0.2rem;
+    }
+}
+/*考试日程*/
+.schedule{
+	width: 100%;
+	text-align: center;
+	height:1.8rem ;
+	margin: 0 auto;
+	background: url(/static/images/study_img/img_conduct@3x.png) no-repeat;
+	background-size: 100%;
+	padding: 00.3rem 0;
+}
+.schedule div{
+	font-size: 0.24rem;
+	color: #b8e4ff;
+}
+.schedule p{
+	margin-top: 0.2rem;
+    font-size: 0.24rem;
+    color: #fff;
+    padding: 0 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+}
+.home_work .tab-panel{
+ border-top:1px solid #e5e5e5;
+}
+
+.home_work .tab-nav:after{
+	border-bottom:none;
+}
+.tab-nav .tab-nav-item.tab-active:before{
+	border-bottom:2px solid #0493f0;
+}
+.stuuser_name div.img_box img{
+	width: 0.5rem;
+	height: 0.5rem;
+	margin: auto;
+	margin-right: 0.17rem;
+	
+}
+.stuuser_box p{
+	font-size: 0.18rem;
+	color: #313340;
+}
+.stuuser_box{
+	padding: 0 .18rem;
+    padding-top: 0rem; 
+    height: 1.07rem;
+    line-height: 1.07rem;
+}
+.comm_tab .tab-nav-item.tab-active a{
+	border-bottom:0;
+}
+.comm_tab .tab-nav-item.tab-active a span{
+	display: none;
+}
+.comm_tab .tab-nav-item.tab-active a span{
+	width: 0.6rem;
+	height: 0.04rem;
+	display: block;
+	background: #0493f0;
+	margin: 0 auto;
+	
+}
+/*沟通 css*/
+.communicate{
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	background: #0493f0;
+	position: fixed;
+	display: inline-block;
+	right: 0.26rem;
+	top: 80%;
+	z-index: 999;
+	box-shadow: 0px 8px 18px rgba(27, 118, 255, 0.3);
+
+	
+}
+.communicate a{
+	width: 100%;
+	height: 100%;
+	font-size: 0.24rem;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	line-height: 1rem;
+}
+.communicate .red{
+	width: 0.18rem;
+	height: 0.18rem;
+	display: inline-block;
+	background: #ff6a67;
+	border-radius: 50%;
+	position: absolute;
+	top: 0.05rem;
+	right: 0;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--学习首页-->
+		<div class="stuuser_box com_box">
+	  		<div class="stuuser_name" style="display:flex;">
+	  			<div class="img_box" style="flex:1;display:flex;">
+	  				<img id="stuHeadImg" src="/static/images/common/img_moren.png" style="" />
+	  				<p style="flex: 1;">
+	  					<span class="" style="max-width:65%;height:1rem;float:left;font-size:.32rem;margin-bottom: .18rem;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;" id="studentName"></span>
+	  					<span id="studentNameFlag"style="width:35%;font-size:.32rem;margin-bottom: .18rem;"></span>
+	  				</p>
+	  			</div>
+	  			<div class="name_box" style="width: 1.5rem;text-align: right;">
+	  				<a href="/html/study/switch_to_children.html">切换孩子</a>
+	  			</div>
+	  		</div>
+	  		<!--<div class="wrong_numb" style="">
+	  		
+	  			<div class="grids-txt">
+	  			 	<p class="fc_999" style="font-size:0.28rem">今日错题总数</p>
+	  			 	<span style="" id="wrongcnt"></span>
+	  			</div>
+	  		</div>-->
+	  	</div>
+	  	<!--最新考试日程-->
+	  	<!--<div class="schedule">-->
+	  		<!--<div>即将进行（05-20）</div>-->
+	  		<!--<p><第二学期第第二学期第二学期期期中考试期中考试考试</p>
+	  	</div>-->
+		<div class="home_work com_box">
+			<div class="m-cell">
+			    <div class="cell-item mytitle_new">
+			        <div class="cell-left"><i></i>作业</div>
+			        <div class="cell-right">
+			        	<a href="javascript:;" onclick="tohomeWorkList()" class="fc_999">更多<i></i></a>
+			        </div>
+			    </div>
+			</div>
+			
+			<!--<div class="m-cell no_marbotm mytitle_new">
+			    <div class="cell-item">
+			        <div class="cell-left"><i></i>作业</div>
+			        <div class="cell-right cell-arrow"><a class="fc_999" href="javascript:;" onclick="tohomeWorkList()" >查看全部</a></div>
+			    </div>
+			</div>-->
+			<div id="J_Tab" class="m-tab comm_tab">
+			    <ul class="tab-nav">
+			        <li class="tab-nav-item tab-active"><a href="javascript:;">
+			        	待完成作业
+			        	<span></span>
+			        </a></li>
+			        <li class="tab-nav-item"><a href="javascript:;">已完成作业
+			        <span></span></a></li>
+			    </ul>
+			    <div class="tab-panel">
+			        <div class="tab-panel-item tab-active dai_hw" id="nosubmit">
+			        	 <!--<div style="">
+			        		<a href="/html/homework/hw_list.html">
+				        		<p>
+				        			<span class="icon_class">语</span>语文作业
+				        		</p>
+				        		<div style="padding-left: 1.1rem;margin-top: -0.1rem;">
+				        			<span class="pull-left">今日#日常作业#</span>
+				        			<span  class="pull-right">已关闭</span>
+				        		</div>
+			        		</a>
+			        	</div>
+			        	<div class="closed">
+			        		<a href="/html/homework/hw_list.html">
+				        		<p>
+				        			<span class="icon_class">数</span>数学作业
+				        		</p>
+				        		<div style="padding-left: 1.1rem;margin-top: -0.1rem;">
+				        			<span class="pull-left">今日#日常作业#</span>
+				        			<span  class="pull-right">3天后关闭</span>
+				        		</div>
+			        		</a>
+			        	</div>-->
+			        </div> 
+			        <div class="tab-panel-item bg_hui" id="submitWork">
+			        	 <!--<div style="">
+			        		<a href="/html/homework/hw_list.html">
+			        		<span></span>
+			        		<p style="font-size: .3rem;font-weight: bold;">
+			        			关于亲情的作文
+			        		</p>
+			        		<div style="margin-top: .19rem;margin: 0 .2rem;">
+			        			<span class="pull-left"  style="color: #ced6ea">语文作业|日常作业</span>
+			        			<span  class="pull-right"  style="color: #ced6ea">2018-5-17</span>
+			        		</div>
+			        		</a>
+			        	</div>
+			        	<div style="">
+			        		<a href="/html/homework/hw_list.html">
+			        		<span></span>
+			        		<p style="font-size: .3rem;font-weight: bold;">
+			        			关于亲情的作文
+			        		</p>
+			        		<div style="margin-top: .19rem;margin: 0 .2rem;">
+			        			<span class="pull-left" style="color: #ced6ea">语文作业|日常作业</span>
+			        			<span  class="pull-right"  style="color: #ced6ea">2018-5-17</span>
+			        		</div>
+			        		</a>
+			        	</div>-->
+			        </div>
+			    </div>
+			   <div class="m-cell">
+				    <div class="cell-item mytitle_new">
+				        <div class="cell-left"><i></i>课堂</div>
+				        <div class="cell-right"></div>
+				    </div>
+				</div>
+				<div style="padding: 0 .2rem; padding-bottom: 0.9rem;">
+					<a href="/html/courseevent/courseEventList.html">
+					<!--<a href="/html/wx.html">-->
+						<img src="/static/images/study_img/img_huigu@2x.png"width="100%" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!--沟通-->
+		<div class="communicate" id="im">
+				<a href="javascript:void(0)">沟通</a>
+				<!--<span class="red"></span>-->
+		</div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	/*added by stt 埋点-4：认真负责_3day，（连续3天关注孩子学习）
+					坚定如你_7day，（连续7天关注孩子学习）
+					孜孜不倦_14day（连续14天关注孩子学习）*/
+	buriedPoint('4');
+	// header
+	addMainPageHeader(null, "学习", {
+					hasIcon:true,
+					text:"了解更多",
+					action : function() {
+						$("#ysYduiNavBarRightBtn").attr("href","/html/understand_more/understand_index.html"); 
+					}
+	});
+	addMainPageFooter(4);
+	//选项卡
+    var $tab = $('#J_Tab');
+    $tab.tab({
+        nav: '.tab-nav-item',
+        panel: '.tab-panel-item',
+        activeClass: 'tab-active'
+    });
+//  getSubmitList();
+    $tab.find('.tab-nav-item').on('click', function (e) {
+     	if($(".bg_hui").hasClass('tab-active')){ // tab导航
+     		if($(".bg_hui").find('div').length == 0) { // 内容域
+			    getSubmitList();//已完成作业
+     		}
+     	}
+     	if($(".dai_hw").hasClass('tab-active')){ 
+     		if($(".dai_hw").find('div').length == 0) {
+			   getNosubmitList(); //待完成作业
+     		}
+     	}
+    });
+
+//    ysAjax("/mob/student/getTeacherInfoByStudent", {
+//    }, function(data) {
+//        console.log(data);
+//    }, function(err) {
+//        showNotify("发生异常");
+//    });
+
+    //取得学习信息
+    ysAjax("/mob/study/getStudyInfo", {
+	}, function(data) {
+		if(data.result && data.result.studentName){
+            $("#studentName").html(data.result.studentName);
+            $("#studentNameFlag").html("(默认孩子)");
+        }else{
+            $("#studentName").html("暂无孩子");
+            $(".name_box a").text("添加孩子");
+            $(".name_box a").attr("href","/html/login/set_children.html");
+		}
+		$("#wrongcnt").text(data.result.errorQuestionCount);
+		if(data.result.headImage != null && data.result.headImage != ''){
+			$("#stuHeadImg").attr('src',data.result.headImage); 
+		}
+		getNosubmitList();
+//		$("#nosubmit").html(html);
+	}, function(err) {
+		showNotify("发生异常");
+	});
+	/*added by stt 最新考试日程提醒——start*/
+	// examSchedule();
+	/*added by stt 最新考试日程提醒——end*/
+
+    $("#im").off().on("click",debouce(jumpIm, 1000));
+
+});
+
+// 取得未完成作业
+function getNosubmitList() {
+	ysAjax("/study/getNosubmitHomeWork", {
+	}, function(data) {
+		var html="";
+		if (data.success) {
+		//	var mydate = new Date();
+		//	var today = mydate.toLocaleDateString().replace(new RegExp('/',"gm"),'-');//获取当前日期
+			var datalist = data.result.listNosubmit
+			for(var i = 0; i < datalist.length; i++ ){
+		//	var chaDate = DateDiff(datalist[i].deadline.substring(0,10),today);
+			if(datalist[i].daySub <= 0) {
+			    html+='<div class="closed">';
+			} else {
+				html+='<div class="">';
+			}
+			
+			if(datalist[i].purpose == '1'){ // 微课习题
+				html+='<a href="/html/homework/hw_micro.html?homework_id='+ datalist[i].homework_id +'&homework_type=1&section_id='+datalist[i].section_id+'&detail=1">';
+			}else if(datalist[i].purpose == '3'){ // 课后习题
+				html+='<a href="/html/homework/hw_exercises.html?homework_id='+ datalist[i].homework_id +'&homework_type=3&section_id='+datalist[i].section_id+'&detail=1">';
+			}			
+			html+='<p>';
+			html+='<span class="icon_class">'+ datalist[i].name.substring(0,1) +'</span>'+ datalist[i].name +'作业';
+			html+='</p>';
+			html+='<div style="padding-left: 1.1rem;margin-top:-0.1rem">';
+			if(datalist[i].purpose == '2'){
+				html+='<span class="pull-left">'+ datalist[i].create_time.substring(0,10) +'#快速出题作业#</span>';
+			}else if(datalist[i].purpose == '1'){
+				html+='<span class="pull-left">'+ datalist[i].create_time.substring(0,10) +'#微课作业#</span>';
+			}else{
+				html+='<span class="pull-left">'+ datalist[i].create_time.substring(0,10) +'#习题作业#</span>';
+			}
+			
+			if(datalist[i].daySub  <= 0) {
+				html+='<span  class="pull-right">已关闭</span>';
+			}else{
+				if(datalist[i].a_deadline == '9999-1-1 23:59') {
+					html+='<span  class="pull-right">永不关闭</span>';
+				} else {
+					html+='<span  class="pull-right">'+datalist[i].daySub+'天后关闭</span>';
+				}
+			}
+			html+='</div>';
+			html+='</a>';
+			html+='</div>';
+			}
+		} else {
+			html+='<div class="no_data">';
+			html+='<div></div>';
+			html+='<p>暂无数据</p>';
+			html+='</div>';
+		}
+		$("#nosubmit").html(html);
+	}, function(err) {
+		showNotify("发生异常");
+	});
+}
+
+//取得已完成作业
+function getSubmitList() {
+	ysAjax("/study/getSubmitHomeWork", {
+	}, function(data) {
+		var html="";
+		if (data.success) {
+			var datalist = data.result.listSubmit;
+			for(var i = 0; i < datalist.length; i++ ){
+			html+='<div style="">';
+			
+			if(datalist[i].purpose == '1'){ // 微课习题
+				html+='<a href="/html/homework/done/hw_micro_done.html?homework_id='+ datalist[i].homework_id +'&homework_type=1&section_id='+datalist[i].section_id+'&detail=1">';
+			}else if(datalist[i].purpose == '3'){ // 课后习题
+				html = html + '<a href="/html/homework/done/hw_exercises_done.html?homework_id='+ datalist[i].homework_id +'&homework_type=3&section_id='+datalist[i].section_id+'&detail=1">  ';
+			}
+			html+='<span class="icon_span"></span>';
+			html+='<p style="font-size: .3rem;font-weight: bold;">'+datalist[i].topic+'</p>';
+			html+='<div style="margin-top: .19rem;margin: 0 .2rem;">';
+			if(datalist[i].purpose == '2'){
+				html+='<span class="pull-left" style="color: #ced6ea">'+ datalist[i].name +'作业|快速出题作业</span>';
+			}else if(datalist[i].purpose == '1'){
+				html+='<span class="pull-left" style="color: #ced6ea">'+ datalist[i].name +'作业|微课作业</span>';
+			}else{
+				html+='<span class="pull-left" style="color: #ced6ea">'+ datalist[i].name +'作业|习题作业</span>';
+			}
+			html+='<span  class="pull-right" style="color: #ced6ea">'+ datalist[i].create_time.substring(0,10) +'</span>';
+			html+='</div>';
+			html+='</a>';
+			html+='</div>';
+			}
+		} else {
+			html+='<div class="no_data">';
+			html+='<div></div>';
+			html+='<p>暂无数据</p>';
+			html+='</div>';
+		}
+		$("#submitWork").html(html);
+	}, function(err) {
+		showNotify("发生异常");
+	});
+}
+
+//比较日期
+/*function DateDiff(d1,d2){
+    var day = 24 * 60 * 60 *1000;
+try{    
+    var dateArr = d1.split("-");
+   var checkDate = new Date();
+        checkDate.setFullYear(dateArr[0], dateArr[1]-1, dateArr[2]);
+   var checkTime = checkDate.getTime();
+  
+   var dateArr2 = d2.split("-");
+   var checkDate2 = new Date();
+        checkDate2.setFullYear(dateArr2[0], dateArr2[1]-1, dateArr2[2]);
+   var checkTime2 = checkDate2.getTime();
+    
+   var cha = (checkTime - checkTime2)/day;  
+        return cha;
+    }catch(e){
+   return false;
+}
+}*/
+
+//迁移到作业列表
+function tohomeWorkList(){
+	if($(".dai_hw").hasClass('tab-active')){ 
+		 window.location.href="/html/homework/hw_list.html?f_flag=0";
+	}else if($(".bg_hui").hasClass('tab-active')){ 
+		 window.location.href="/html/homework/hw_list.html?f_flag=1";
+	}
+}
+ /*2018-11-28 added by stt 最新考试日程提醒——start*/
+function examSchedule(){
+	ysAjax("/exam/schedule", {
+		}, function(data) {
+			if(data.retCode == 'SUCCESS'){
+				if(data.list != undefined && data.list.length > 0){
+					var array = new Array();
+					// 日期格式化处理
+					for(var i=0; i<data.list.length; i++){
+						if(data.list[i].start_time != undefined){
+							if(compareDate(data.list[i].start_time)){
+								array.push(i);
+//								console.log(compareDate(data.list[i].start_time)+"*******"+getNowFormatDate(data.list[i].start_time))
+							}
+						}
+					}
+//					console.log(array.toString()+"****array*****");
+					var item = data.list[array[array.length - 1]];
+					
+					var start_time = getNowFormatDate(item.start_time);
+					start_time = start_time.substring(5,start_time.length);
+					$('.schedule div').html('即将进行（'+start_time+'）');
+					$('.schedule p').html(item.exam_name); // 考试名称
+					
+					$('.schedule').on('click',function(){
+						window.location.href = '/html/exam_schedule/exam_schedule_details.html?exam_id='
+						+item.exam_id+'&start_time='+start_time
+						+'&exam_type='+encodeURI(item.exam_type)+'&page_flag=0';
+						
+					});
+				}else{ // 无考试日程
+					$('.schedule').hide();
+				}
+			}else{
+				showAlert('服务器异常，请稍后重试');
+			}
+		}, function(err) {
+			showAlert('服务器异常，请稍后重试');
+		});
+}
+
+// 比较日期大小
+function compareDate(start_time){
+	var curTime = new Date();
+	var startTime = new Date(start_time);
+	//进行比较
+	return (curTime < startTime);
+}
+// 时间格式化
+function getNowFormatDate(timeString) {
+        var date = new Date(timeString);
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+}
+/*added by stt 最新考试日程提醒——end*/
+
+function jumpIm() {
+    ysAjax("/mob/homepage/getParentInfo", {
+    }, function(data) {
+        if (data.success) {
+            var url = data.result.parentHeadImage;
+            if(!!url && url.indexOf("http://thirdwx.qlogo.cn") == -1){
+                url = 'https://tsdevhouse.ys100.com' + ysServerAddr + "/mob/homepage/download_file?url=" + url;
+            }
+            api.sendEvent({
+                name:'imToNative',
+                extra:{
+                    user_id:getUserId(),
+					user_name:data.result.parentName,
+					head_url:url,
+					childName:data.result.updateUser,
+					relationshipToChild:data.result.relationship
+                }
+            });
+        }
+    }, function(err) {
+        showNotify("发生异常");
+    });
+}
+function debouce(func,delay){
+    var timer = null;
+    return function(){
+        var context = this;
+        var args = arguments;
+        if(timer) clearTimeout(timer);
+        var doNow = !timer;
+        timer = setTimeout(function(){
+            timer = null;
+        },delay);
+        if(doNow){
+            func.apply(context,args);
+        }
+    }
+}
+</script>
+</body>
+</html>

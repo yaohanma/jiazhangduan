@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+  
+		<style>
+			* { touch-action: pan-y; } 
+			/*subjectPicker*/
+			.mask-black{
+				/*display: none;*/
+			}
+			/* #ysSubjectActionSheet{
+				margin-top:0.8rem;
+			} */
+			#ysYduiNavBarRightBtn{
+				background-image: url(/static/images/homework/popup_drop@2x.png);
+			    background-repeat: no-repeat;
+			    background-position-x: 2.2rem;
+			    background-position-y: 0.4rem;
+			    padding-right: 0.6rem;
+			     background-size:8%;
+			}
+			@media screen and (min-width: 600px) {
+			 		#ysYduiNavBarRightBtn{
+				background-image: url(/static/images/homework/popup_drop@2x.png);
+			    background-repeat: no-repeat;
+			    background-position-x: right;
+			    background-position-y: 0.35rem;
+			    padding-right: 0.6rem;
+			    margin-right: 0.2rem;
+			     background-size:8%;
+			}
+			 }
+			.grids-item{
+				height:0.8rem;
+			}
+			.m-grids-3{
+				padding-bottom:0.29rem;
+				background-color: #FAFAFA;
+			}
+			.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+				border-right:none;
+			}
+			.grids-item:after{
+				border-bottom:none;
+			}
+			.item{
+				width: 85%;
+			    border:1px solid #dedede;
+			    display: inline-block;
+			    border-radius: 29px;
+			    color: #999999;
+			    height: 0.5rem;
+			    padding: 0.05rem 0;
+			}
+			.selected{
+				width: 85%;
+			    background-color: #0493f0;
+			    display: inline-block;
+			    border-radius: 29px;
+			    color: #fff;
+			    height: 0.5rem;
+			    padding: 0.05rem 0;
+			}
+			.navbar-item{
+				min-width: 35%;
+			}
+		/*end*/
+			.tab-nav-item:not(:last-child):after{
+				border-right: 0px;
+			}
+			.tab-nav{
+				position: fixed;
+			    width: 100%;
+			    z-index: 100;
+			    top:.9rem;
+			}
+			.tab-nav-item a {
+				background-color: #FFFFFF;
+				/*margin-top: 0.25rem;*/
+			}
+			.tab-nav-item{
+				background-color: #F5F5F5;
+				color:#999999;
+				margin-top: 0.25rem;
+			}
+			.tab-nav-item.tab-active{
+				background-color: #F5F5F5;
+			}
+			.tab-panel{
+				   	margin-top: 10%;
+				    background: none;
+			}
+			.tab-panel .tab-panel-item{
+				padding: 0;
+				margin-bottom: 1.15rem;
+			}
+			.tab-nav-item.tab-active {
+			    color: #0493F0;
+			}
+			.tab-nav:after {
+			    content: '';
+			    position: absolute;
+			    z-index: 3;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 1px;
+			    border-bottom: 1px solid #e5e5e5;
+			    -webkit-transform: scaleY(0.5);
+			    transform: scaleY(0.5);
+			    -webkit-transform-origin: 0 100%;
+			    transform-origin: 0 100%;
+			 }
+			.subject_div{
+				display: inline-block;
+				float: left;
+			}
+			.subject_div img{
+				width: 1rem;
+    			height: 1rem;
+			}
+			.subject_div span{
+				position: absolute;
+			    top: 0.54rem;
+			    left: 0.58rem;
+			    font-size: 0.32rem;
+			    color: #fff;
+			    font-weight: bold;
+			}
+			#subject {
+			
+				position: relative;
+			    top: -0.45rem;
+			    left: -0.75rem;
+			    font-size: 18px;
+				color: rgb(255, 255, 255);
+				font-weight: bold;
+			}
+			
+			#subject_img {
+			
+				width: 1rem;
+			    height: 1rem;
+			    border-radius: 28px;
+			    text-align: center;
+			    display: inline-table;
+			    margin-top: 0.1rem;
+    			margin-bottom: 0.1rem;
+			}
+			.m-celltitle{
+				/*padding-top: 0.15rem;*/
+			}
+			.cell-arrow:after{
+				content: "";
+			}
+			.m-cell{
+				margin-bottom: 0.25rem;
+			}
+			.cell-item{
+				height: 1.49rem;
+			}
+			.work_content{
+				margin-left:0.23rem;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			}
+			.work_content p{
+				white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			}
+			.active_no_data{
+				width: 100%;
+				height: 3rem;
+				margin-top: 1.88rem;
+				background: url('/static/images/homework/img_defaultpage.png') no-repeat center;
+				background-size: 51%;
+				
+			    
+			}
+			.no_data {
+				width: 100%;
+				height: 3rem;
+				margin-top: 1.88rem;
+				background: url('/static/images/homework/img_msg.png') no-repeat center;
+				background-size: 51%;
+			}
+			.load{
+				width: 100%;
+			    height: 1.5rem;
+			    background: url(/static/images/homework/load.gif);
+			    color: #999999;
+			    background-repeat: no-repeat;
+			    text-align: center;
+			    background-position-x: 3.3rem;
+			    background-position-y: 0.4rem;
+			    background-size: 8%;
+			    padding-top: 1.2rem;
+			}
+			.hw_title{
+				font-size: 0.32rem;color: #333333;
+			}
+			.hw_type{
+				font-size: 0.24rem;color: #999999;margin-top: 0.2rem;
+			}
+			.cell-item:not(:last-child):after{
+				bottom:1px;
+			}
+		
+			.m-celltitle:after,
+			.m-cell:after{
+				border: none;
+			}	
+			.m-topsheet.topsheet-toggle .grids-item:after{
+				content:none;
+			}
+			.cell-left{
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div id="J_Tab" class="m-tab">
+					<ul class="tab-nav" style="background: #f5f5f5;">
+						<li class="tab-nav-item tab-active">
+							<a href="javascript:;">待完成作业</a>
+						</li>
+						<li class="tab-nav-item">
+							<a href="javascript:;">已完成作业</a>
+						</li>
+					</ul>
+					<div class="tab-panel" style="top: 0.2rem;">
+						<!--待完成作业-->
+						<div class="tab-panel-item tab-active" >
+							
+						</div>
+						<!-- 已完成作业-->
+						<div class="tab-panel-item">
+						
+						</div>
+					</div>
+				</div>
+				<!--<div class="mask-black-dialog"></div>-->
+				<input type="hidden" value="" id="subject_id"/>
+			</section>
+		</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	var subject_id = getUrlParam('subject_id');
+	var subject_name = getUrlParam('subjectName');
+	$('#subject_id').val(subject_id);
+	console.log('subject_name:'+subject_name);
+	$(document).ready(function() {
+				// header
+				addMainPageHeader("/html/study/study_index.html", "作业", {
+					hasIcon:true,
+					text:"全部科目",
+					action : function() {
+						if($("#ysSubjectTopSheet").css("display") == 'block'){
+							$("#ysSubjectTopSheet").topsheet('close');
+							$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+							$(".mask-black-dialog").hide();
+						}else{
+							showSubjectPicker(function(subjectId, subjectName) {
+								$("#ysYduiNavBarRightBtn").text(subjectName);
+								/* showAlert(subjectId + ":" + subjectName); */
+								subject_id = subjectId;
+								subject_name = subjectName;
+								$('#subject_id').val(subject_id);
+								if($("#J_Tab ul li").eq(0).hasClass('tab-active')){
+//									page = 1;
+//									homework_list(subjectId);
+									window.location.href='/html/homework/hw_list.html?f_flag=0&subject_id='+subjectId+'&subjectName='+subject_name;;
+								}
+								if($("#J_Tab ul li").eq(1).hasClass('tab-active')){
+//									c_page = 1;
+									complete_homework_list(subject_id);
+								}
+								$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+							});
+						}
+					}
+				});
+				//footer
+				addMainPageFooter(4);
+				if(subject_name != '' && subject_name != null && subject_name != 'undefined' && subject_name != 'null'){
+					$("#ysYduiNavBarRightBtn").text(subject_name);
+					$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+				}
+				// mask
+				$(".mask-black-dialog").hide();
+				// tab start
+				var $tab = $('#J_Tab');
+			    $tab.tab({
+			        nav: '.tab-nav-item',
+			        panel: '.tab-panel-item',
+			        activeClass: 'tab-active'
+			    });
+			    $tab.find('.tab-nav-item').on('click', function (e) {
+			     	if($("#J_Tab .tab-panel .tab-panel-item").eq(1).hasClass('tab-active')){ // tab导航
+//			     		if($("#J_Tab .tab-panel .tab-panel-item").eq(1).find('div').length == 0) { // 内容域
+//						   complete_homework_list(subject_id);// 已完成
+//						}
+						$("#J_Tab .tab-panel .tab-panel-item").eq(1).html('');
+//							c_page = 1;
+							complete_homework_list(subject_id);
+			     	}
+			     	if($("#J_Tab .tab-panel .tab-panel-item").eq(0).hasClass('tab-active')){ 
+//			     		if($("#J_Tab .tab-panel .tab-panel-item").eq(0).find('div').length == 0) {
+//						   homework_list(subject_id); // 待完成
+//						}
+						$("#J_Tab .tab-panel .tab-panel-item").eq(0).html('');
+//							page = 1;
+//							homework_list(subject_id);
+						window.location.href='/html/homework/hw_list.html?f_flag=0&subject_id='+subject_id+'&subjectName='+subject_name;;
+			     	}
+			    });
+			    // end
+			    // 作业分类返回指定选项卡
+			    var f_flag = getUrlParam("f_flag"); // 0:未完成 1:已完成
+			    if(f_flag == '1'){
+			    	$("#J_Tab ul li").eq(0).removeClass('tab-active');
+			    	$("#J_Tab ul li").eq(1).addClass('tab-active');
+			    	$("#J_Tab .tab-panel .tab-panel-item").eq(0).removeClass('tab-active');
+			    	$("#J_Tab .tab-panel .tab-panel-item").eq(1).addClass('tab-active');
+			    	complete_homework_list(subject_id);
+			    }else if(f_flag == '0'){
+			    	$("#J_Tab ul li").eq(1).removeClass('tab-active');
+			    	$("#J_Tab ul li").eq(0).addClass('tab-active');
+			    	$("#J_Tab .tab-panel .tab-panel-item").eq(1).removeClass('tab-active');
+			    	$("#J_Tab .tab-panel .tab-panel-item").eq(0).addClass('tab-active');
+//			    	homework_list(subject_id);
+					window.location.href='/html/homework/hw_list.html?f_flag=0&subject_id='+subject_id+'&subjectName='+subject_name;;
+			    }
+			    // end
+	}); // ready 
+	
+	// 作业列表
+//	function homework_list(subject_id){
+//		var gobal_date = '';
+//		var cell = 0;
+//		var cell_id = "";
+//		var page = 1;
+//		var loadMore = function(callback) {
+//			$('.pullrefresh-animation-timing').prevAll('.pullrefresh-dragtip').css({'transform': 'translate3d(0px, 0px, 0px) scale(0)'});
+//			ysAjax("/homework/noSubmit", {
+//				page: page,
+//				subject_id:$('#subject_id').val()
+//			}, function(data) {
+//				if(page == 1){ // 每次切换科目时清空之前数据
+//					$("#J_Tab .tab-panel .tab-panel-item").eq(0).html('')
+//				}
+//				typeof callback == 'function' && callback(data);
+//			}, function(err) {
+//				
+//			});
+//		};
+//		$("#J_Tab .tab-panel .tab-panel-item").eq(0).pullRefresh({
+//			loadListFn: function() {
+//				var def = $.Deferred();
+//
+//				loadMore(function(data) {
+//					if(data.result){
+//						for(var i=0; i<data.result.length; i++){
+//							var item = data.result[i];
+//							if(gobal_date == item.deadline){
+//								var html = '';
+////								if(item.purpose == '2'){
+////									html = html + '		<a href="/html/homework/hw_quick.html?homework_id='+ item.homework_id +'&homework_type=2&section_id='+item.section_id+'" class="cell-item">  ';
+////								}else if(item.purpose == '99'){// 微课
+////									html = html + '		<a href="/html/homework/hw_micro.html?homework_id='+ item.homework_id +'&homework_type=99&section_id='+item.section_id+'&flip_purpose='+item.flip_purpose+'" class="cell-item">  ';
+////								}else{
+////									html = html + '		<a href="/html/homework/hw_exercises.html?homework_id='+ item.homework_id +'&homework_type=0&section_id='+item.section_id+'" class="cell-item">  ';
+////								}
+//								if(item.purpose == '1'){ // 微课习题
+//									html = html + '		<a href="/html/homework/hw_micro.html?homework_id='+ item.homework_id +'&homework_type=1&section_id='+item.section_id+'" class="cell-item">  ';
+//								}else if(item.purpose == '3'){ // 课后习题
+//									html = html + '		<a href="/html/homework/hw_exercises.html?homework_id='+ item.homework_id +'&homework_type=3&section_id='+item.section_id+'" class="cell-item">  ';
+//								}
+//								html = html + '			<div class="cell-left">  ';
+//								html = html + '				<div class="subject_div">  ';
+//								if(item.subject_id == '1'){
+//									html = html + '					<img src="/static/images/homework/img_mathematics001.png" />  ';
+//								}else if(item.subject_id == '2'){
+//									html = html + '					<img src="/static/images/homework/img_Chinese001.png" />  ';
+//								}else if(item.subject_id == '3'){
+//									html = html + '					<img src="/static/images/homework/img_english001.png" />  ';
+//								}else if(item.subject_id == '4'){
+//									html = html + '					<img src="/static/images/homework/img_physics001.png" />  ';
+//								}else if(item.subject_id == '43'){
+//									html = html + '					<img src="/static/images/homework/img_biology001.png" />  ';
+//								}else if(item.subject_id == '5'){
+//									html = html + '					<img src="/static/images/homework/img_hemistry001.png" />  ';
+//								}else if(item.subject_id == '6'){
+//									html = html + '					<img src="/static/images/homework/img_geography001.png" />  ';
+//								}else if(item.subject_id == '7'){
+//									html = html + '					<img src="/static/images/homework/img_history001.png" />  ';
+//								}else if(item.subject_id == '8'){
+//									html = html + '					<img src="/static/images/homework/img_politics001.png" />  ';
+//								}else{
+//									html = html + '					<img src="/static/images/homework/img_tongyong.png" />  ';
+//									html = html + '					<span>'+ item.name.substring(0,1) +'<span>';
+//								}
+//								html = html + '				</div>  ';
+//								html = html + '				<div class="work_content">  ';
+//								html = html + '					<p style="font-size: 0.32rem;color: #333333;" >'+ item.topic+'</p>  ';
+//								html = html + '					<p style="font-size: 0.24rem;color: #999999;margin-top: 0.2rem;">';
+////								if(item.purpose == '2'){
+////									html = html + '						快速出题作业     ';	
+////								}else if(item.purpose == '99'){
+////									html = html + '						微课作业     ';
+////								}else{
+////									html = html + '						习题作业     ';
+////								}
+//								if(item.purpose == '1'){
+//									html = html + '						微课作业     ';
+//								}else if(item.purpose == '3'){
+//									html = html + '						习题作业     ';
+//								}
+//								if(item.a_deadline == '9999-01-01 23:59'){
+//									html = html + '						截止时间：不限</p>';
+//								}else{
+//									html = html + '						截止时间：'+ item.a_deadline +'</p>';
+//								}
+//								html = html + '				</div>  ';
+//								html = html + '			</div>  ';
+//								html = html + '			<div class="cell-right cell-arrow">  ';
+//								if(item.date_flag == '0'){
+//									html = html + '				<img src="/static/images/homework/img_overtime.png" style="width: 1rem; position: absolute;right: 0;top: 0;"/>  ';	
+//								}
+//								html = html + '			</div>  ';
+//								html = html + '		</a>  ';
+//								$('#' + cell_id).append(html);
+//							}else{
+//								var html = '';
+//								cell_id = 'content'+cell;
+//								gobal_date = item.deadline;
+//								
+//								if(item.deadline.substring(0,10) == '9999-01-01'){
+//									html = html + '	<div class="m-celltitle demo-small-pitch" style="margin-top:0.3rem">不限</div>  ';
+//								}else{
+//									html = html + '	<div class="m-celltitle demo-small-pitch" style="margin-top:0.3rem">'+ item.deadline.substring(0,10) +'</div>  ';
+//								}
+//								html = html + '	<div class="m-cell" id="'+cell_id+'">  ';
+////								if(item.purpose == '2'){
+////									html = html + '		<a href="/html/homework/hw_quick.html?homework_id='+ item.homework_id +'&homework_type=2&section_id='+item.section_id+'" class="cell-item">  ';
+////								}else if(item.purpose == '99'){
+////									html = html + '		<a href="/html/homework/hw_micro.html?homework_id='+ item.homework_id +'&homework_type=99&section_id='+item.section_id+'" class="cell-item">  ';
+////								}else{
+////									html = html + '		<a href="/html/homework/hw_exercises.html?homework_id='+ item.homework_id +'&homework_type=0&section_id='+item.section_id+'" class="cell-item">  ';
+////								}
+//								if(item.purpose == '1'){ // 微课习题
+//									html = html + '		<a href="/html/homework/hw_micro.html?homework_id='+ item.homework_id +'&homework_type=1&section_id='+item.section_id+'" class="cell-item">  ';
+//								}else if(item.purpose == '3'){ // 课后习题
+//									html = html + '		<a href="/html/homework/hw_exercises.html?homework_id='+ item.homework_id +'&homework_type=3&section_id='+item.section_id+'" class="cell-item">  ';
+//								}
+//								html = html + '			<div class="cell-left">  ';
+//								html = html + '				<div class="subject_div">  ';
+//								if(item.subject_id == '1'){
+//									html = html + '					<img src="/static/images/homework/img_mathematics001.png" />  ';
+//								}else if(item.subject_id == '2'){
+//									html = html + '					<img src="/static/images/homework/img_Chinese001.png" />  ';
+//								}else if(item.subject_id == '3'){
+//									html = html + '					<img src="/static/images/homework/img_english001.png" />  ';
+//								}else if(item.subject_id == '4'){
+//									html = html + '					<img src="/static/images/homework/img_physics001.png" />  ';
+//								}else if(item.subject_id == '43'){
+//									html = html + '					<img src="/static/images/homework/img_biology001.png" />  ';
+//								}else if(item.subject_id == '5'){
+//									html = html + '					<img src="/static/images/homework/img_hemistry001.png" />  ';
+//								}else if(item.subject_id == '6'){
+//									html = html + '					<img src="/static/images/homework/img_geography001.png" />  ';
+//								}else if(item.subject_id == '7'){
+//									html = html + '					<img src="/static/images/homework/img_history001.png" />  ';
+//								}else if(item.subject_id == '8'){
+//									html = html + '					<img src="/static/images/homework/img_politics001.png" />  ';
+//								}else{
+//									html = html + '					<img src="/static/images/homework/img_tongyong.png" />  ';
+//									html = html + '					<span>'+ item.name.substring(0,1) +'<span>';
+//								}
+//								html = html + '				</div>  ';
+//								html = html + '				<div class="work_content">  ';
+//								html = html + '					<p style="font-size: 0.32rem;color: #333333;" >'+ item.topic+'</p>  ';
+//								html = html + '					<p style="font-size: 0.24rem;color: #999999;margin-top: 0.2rem;">';
+////								if(item.purpose == '2'){
+////									html = html + '						快速出题作业     ';	
+////								}else if(item.purpose == '99'){
+////									html = html + '						微课作业     ';
+////								}else{
+////									html = html + '						习题作业     ';
+////								}
+//								if(item.purpose == '1'){
+//									html = html + '						微课作业     ';
+//								}else if(item.purpose == '3'){
+//									html = html + '						习题作业     ';
+//								}
+//								if(item.a_deadline == '9999-01-01 23:59'){
+//									html = html + '						截止时间：不限</p>';
+//								}else{
+//									html = html + '						截止时间：'+ item.a_deadline +'</p>';
+//								}
+//								html = html + '				</div>  ';
+//								html = html + '			</div>  ';
+//								html = html + '			<div class="cell-right cell-arrow">  ';
+//								if(item.date_flag == '0'){
+//									html = html + '				<img src="/static/images/homework/img_overtime.png" style="width: 1rem; position: absolute;right: 0;top: 0;"/>  ';	
+//								}
+//								html = html + '			</div>  ';
+//								html = html + '		</a>  ';
+//								html = html + '	</div>  ';
+//								
+//								cell++;
+//								$("#J_Tab .tab-panel .tab-panel-item").eq(0).append(html);
+//							}
+//						}
+//						def.resolve();
+////						var tipStr = data.result.length > 0 ? '为您更新了' + data.result.length + '条内容' : '已是最新内容';
+//						++page;
+//						var tipStr;
+//						if(data.result.length <= 0){
+//							tipStr = '已是最新内容';
+//							YDUI.dialog.toast(tipStr, 'none', 1000);
+//						}
+////						YDUI.dialog.toast(tipStr, 'none', 1000);
+//					console.log("page:"+page);
+//					}else{
+//						// 无作业数据
+//						var html = '';
+//						html = html + '	<div class="active_no_data">  ';
+//						html = html + '	</div>  ';
+//						html = html + '		<p class="no_data_text" style="margin-top: 0.58rem;text-align:center;">  ';
+//						html = html + '			<span style="font-size: 0.3rem;color: #999999;margin-top: 0.58rem;">已经完成所有作业</span><br /><br />  ';
+//						html = html + '			<span style="font-size: 0.24rem;color: #999999;">给努力的孩子一个大大的拥抱吧~</span>  ';
+//						html = html + '		</p>  ';
+//						$("#J_Tab .tab-panel .tab-panel-item").eq(0).append(html);
+//					}
+//				});
+//				return def.promise();
+//			}
+//		});
+//	}
+	
+	// 已完成作业列表
+	function complete_homework_list(subject_id){
+		var c_gobal_date = '';
+		var c_cell = 0;
+		var c_cell_id = "";
+		var c_page = 1;
+		var loadMore = function(callback) {
+			$('.pullrefresh-animation-timing').prevAll('.pullrefresh-dragtip').css({'transform': 'translate3d(0px, 0px, 0px) scale(0)'});
+			ysAjax("/homework/submitComplete", {
+				page: c_page,
+				subject_id:$('#subject_id').val(),
+				pageFlag:'1'
+			}, function(data) {
+				if(c_page == 1){ // 每次切换科目时清空之前数据
+					$("#J_Tab .tab-panel .tab-panel-item").eq(1).html('')
+				}
+				typeof callback == 'function' && callback(data);
+				
+			}, function(err) {
+				
+			});
+		};
+		$("#J_Tab .tab-panel .tab-panel-item").eq(1).pullRefresh({
+			loadListFn: function() {
+				var def = $.Deferred();
+
+				loadMore(function(data) {
+					if(data.result){
+						for(var i=0; i<data.result.length; i++){
+							var item = data.result[i];
+							if(c_gobal_date == item.submit_time){
+								var html = '';
+//								if(item.purpose == '2'){
+//									html = html + '		<a href="/html/homework/done/hw_quick_done.html?homework_id='+ item.homework_id +'&homework_type=2&section_id='+item.section_id+'" class="cell-item">  ';
+//								}else if(item.purpose == '99'){
+//									html = html + '		<a href="/html/homework/done/hw_micro_done.html?homework_id='+ item.homework_id +'&homework_type=99&section_id='+item.section_id+'&flip_purpose='+item.flip_purpose+'" class="cell-item">  ';
+//								}else{
+//									html = html + '		<a href="/html/homework/done/hw_exercises_done.html?homework_id='+ item.homework_id +'&homework_type=0&section_id='+item.section_id+'" class="cell-item">  ';
+//								}
+								if(item.purpose == '1'){ // 微课习题
+									html = html + '		<a href="/html/homework/done/hw_micro_done.html?homework_id='+ item.homework_id +'&homework_type=1&section_id='+item.section_id+'" class="cell-item">  ';
+								}else if(item.purpose == '3'){ // 课后习题
+									html = html + '		<a href="/html/homework/done/hw_exercises_done.html?homework_id='+ item.homework_id +'&homework_type=3&section_id='+item.section_id+'" class="cell-item">  ';
+								}
+								html = html + '			<div class="cell-left">  ';
+								html = html + '				<div class="subject_div">  ';
+								if(item.subject_id == '1'){
+									html = html + '					<img src="/static/images/homework/img_mathematics001.png" />  ';
+								}else if(item.subject_id == '2'){
+									html = html + '					<img src="/static/images/homework/img_Chinese001.png" />  ';
+								}else if(item.subject_id == '3'){
+									html = html + '					<img src="/static/images/homework/img_english001.png" />  ';
+								}else if(item.subject_id == '4'){
+									html = html + '					<img src="/static/images/homework/img_physics001.png" />  ';
+								}else if(item.subject_id == '43'){
+									html = html + '					<img src="/static/images/homework/img_biology001.png" />  ';
+								}else if(item.subject_id == '5'){
+									html = html + '					<img src="/static/images/homework/img_hemistry001.png" />  ';
+								}else if(item.subject_id == '6'){
+									html = html + '					<img src="/static/images/homework/img_geography001.png" />  ';
+								}else if(item.subject_id == '7'){
+									html = html + '					<img src="/static/images/homework/img_history001.png" />  ';
+								}else if(item.subject_id == '8'){
+									html = html + '					<img src="/static/images/homework/img_politics001.png" />  ';
+								}else{
+									html = html + '					<img src="/static/images/homework/img_tongyong.png" />  ';
+									html = html + '					<span>'+ item.name.substring(0,1) +'<span>';
+								}
+								html = html + '				</div>  ';
+								html = html + '				<div class="work_content">  ';
+								html = html + '					<p style="font-size: 0.32rem;color: #333333;" >'+ item.topic+'</p>  ';
+								html = html + '					<p style="font-size: 0.24rem;color: #999999;margin-top: 0.2rem;">';
+//								if(item.purpose == '2'){
+//									html = html + '						快速出题作业     ';	
+//								}else if(item.purpose == '99'){
+//									html = html + '						微课作业     ';
+//								}else{
+//									html = html + '						习题作业     ';
+//								}
+								if(item.purpose == '1'){
+									html = html + '						微课作业     ';
+								}else if(item.purpose == '3'){
+									html = html + '						习题作业     ';
+								}
+								html = html + '						完成时间：'+ item.a_sbumit_time +'</p>';
+								html = html + '				</div>  ';
+								html = html + '			</div>  ';
+								html = html + '			<div class="cell-right cell-arrow">  ';
+								html = html + '			</div>  ';
+								html = html + '		</a>  ';
+								$('#' + c_cell_id).append(html);
+							}else{
+								var html = '';
+								c_cell_id = 'c_content'+c_cell;
+								c_gobal_date = item.submit_time;
+								
+								html = html + '	<div class="m-celltitle demo-small-pitch" style="margin-top:0.3rem">'+ item.submit_time +'</div>  ';
+								html = html + '	<div class="m-cell" id="'+c_cell_id+'">  ';
+//								if(item.purpose == '2'){
+//									html = html + '		<a href="/html/homework/done/hw_quick_done.html?homework_id='+ item.homework_id +'&homework_type=2&section_id='+item.section_id+'" class="cell-item">  ';
+//								}else if(item.purpose == '99'){
+//									html = html + '		<a href="/html/homework/done/hw_micro_done.html?homework_id='+ item.homework_id +'&homework_type=99&section_id='+item.section_id+'" class="cell-item">  ';
+//								}else{
+//									html = html + '		<a href="/html/homework/done/hw_exercises_done.html?homework_id='+ item.homework_id +'&homework_type=0&section_id='+item.section_id+'" class="cell-item">  ';
+//								}
+								if(item.purpose == '1'){ // 微课习题
+									html = html + '		<a href="/html/homework/done/hw_micro_done.html?homework_id='+ item.homework_id +'&homework_type=1&section_id='+item.section_id+'" class="cell-item">  ';
+								}else if(item.purpose == '3'){ // 课后习题
+									html = html + '		<a href="/html/homework/done/hw_exercises_done.html?homework_id='+ item.homework_id +'&homework_type=3&section_id='+item.section_id+'" class="cell-item">  ';
+								}
+								html = html + '			<div class="cell-left">  ';
+								html = html + '				<div class="subject_div">  ';
+								if(item.subject_id == '1'){
+									html = html + '					<img src="/static/images/homework/img_mathematics001.png" />  ';
+								}else if(item.subject_id == '2'){
+									html = html + '					<img src="/static/images/homework/img_Chinese001.png" />  ';
+								}else if(item.subject_id == '3'){
+									html = html + '					<img src="/static/images/homework/img_english001.png" />  ';
+								}else if(item.subject_id == '4'){
+									html = html + '					<img src="/static/images/homework/img_physics001.png" />  ';
+								}else if(item.subject_id == '43'){
+									html = html + '					<img src="/static/images/homework/img_biology001.png" />  ';
+								}else if(item.subject_id == '5'){
+									html = html + '					<img src="/static/images/homework/img_hemistry001.png" />  ';
+								}else if(item.subject_id == '6'){
+									html = html + '					<img src="/static/images/homework/img_geography001.png" />  ';
+								}else if(item.subject_id == '7'){
+									html = html + '					<img src="/static/images/homework/img_history001.png" />  ';
+								}else if(item.subject_id == '8'){
+									html = html + '					<img src="/static/images/homework/img_politics001.png" />  ';
+								}else{
+									html = html + '					<img src="/static/images/homework/img_tongyong.png" />  ';
+									html = html + '					<span>'+ item.name.substring(0,1) +'<span>';
+								}
+								html = html + '				</div>  ';
+								html = html + '				<div class="work_content">  ';
+								html = html + '					<p style="font-size: 0.32rem;color: #333333;" >'+ item.topic+'</p>  ';
+								html = html + '					<p style="font-size: 0.24rem;color: #999999;margin-top: 0.2rem;">';
+//								if(item.purpose == '2'){
+//									html = html + '						快速出题作业     ';	
+//								}else if(item.purpose == '99'){
+//									html = html + '						微课作业     ';
+//								}else{
+//									html = html + '						习题作业     ';
+//								}
+								if(item.purpose == '1'){
+									html = html + '						微课作业     ';
+								}else if(item.purpose == '3'){
+									html = html + '						习题作业     ';
+								}
+								html = html + '						完成时间：'+ item.a_sbumit_time +'</p>';
+								html = html + '				</div>  ';
+								html = html + '			</div>  ';
+								html = html + '			<div class="cell-right cell-arrow">  ';
+								html = html + '			</div>  ';
+								html = html + '		</a>  ';
+								html = html + '	</div>  ';
+								
+								c_cell++;
+								$("#J_Tab .tab-panel .tab-panel-item").eq(1).append(html);
+							}
+						}
+						def.resolve();
+						
+						//var tipStr = data.result.length > 0 ? '为您更新了' + data.result.length + '条内容' : '已是最新内容';
+							++c_page;
+						var tipStr;
+						if(data.result.length <= 0){
+							tipStr = '已是最新内容';
+							YDUI.dialog.toast(tipStr, 'none', 1000);
+						}
+						console.log("c_page:"+c_page);
+					}else{
+						$('.g-scrollview').scrollTop(0);
+						// 无作业数据
+						var html = '';
+						html = html + '	<img src="/static/images/homework/img_msg.png" style="width: 4rem;margin:0  auto; padding-top: 30%;"/>  ';
+						html = html + '	<p class="no_data_text" style="text-align:center; margin-top: 0.58rem;">  			  ';
+						html = html + '		<span style="font-size: 0.3rem;color: #999999;margin-top: 0.58rem;">没什么大不了，撸起袖子仍是一条好汉</span><br />';
+						html = html + '		<span style="font-size: 0.24rem;color: #999999;">温馨提示孩子去待完成作业中加油吧~</span>  ';
+						html = html + '	</p>   ';
+						
+//						html = html + '	<div class="no_data">  ';
+//						html = html + '	</div>  ';
+//						html = html + '		<p class="no_data_text" style="margin-top: 0.58rem;text-align:center;">  ';
+//						html = html + '			<span style="font-size: 0.3rem;color: #999999;margin-top: 0.58rem;">没什么大不了，撸起袖子仍是一条好汉</span><br />';
+//						html = html + '			<span style="font-size: 0.24rem;color: #999999;">温馨提示孩子去待完成作业中加油吧~</span>  ';
+//						html = html + '		</p>  ';
+						$("#J_Tab .tab-panel .tab-panel-item").eq(1).append(html);
+					}
+				});
+				return def.promise();
+			}
+		});
+	}
+	
+</script>
+	</body>
+
+</html>

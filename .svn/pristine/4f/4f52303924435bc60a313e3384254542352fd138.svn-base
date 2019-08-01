@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--页面css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+		<!--滑动模块css-->
+		<link rel="stylesheet" href="/static/css/study/swiper.min.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<!--滑动模块 js-->
+		<script src="/static/js/swiper.min.js"></script>
+		<style>
+			/*读书笔记*/
+			body .book_box .cell-item:not(:last-child):after,
+			body .m-cell:after{
+			 content: none;
+			 }
+			.com_box,
+			.m-cell {
+				background: none;
+			}
+			
+			.book_box .cell-item {
+				/*margin: 0.2rem 0;*/
+			border-bottom: 1px solid #e5e5e5;
+			}
+			.book_box .cell-item:last-child{
+				border-bottom: 0;
+			}
+			.book_box>div {
+				width: 100%;
+				padding: .4rem .3rem;
+				height: 2.03rem;
+				background: #fff;
+				margin-bottom: 0.2rem;
+			}
+			
+			.book_box>div .up {
+				height: .4rem;
+				line-height: .4rem;
+				font-size: 0.32rem;
+				color: #333333;
+				margin-bottom: .2rem;
+			}
+			
+			.book_box>div .down {
+				width: 100%;
+				font-size-adjust: .3rem;
+				line-height: .4rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				font-size: 0.28rem;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+			}
+			
+			.book_box .cell-left {
+				display: block;
+				width: 100%;
+				overflow: hidden;
+				height: 1.5rem;
+			}
+			
+			.book_box .cell-left>div {
+				font-size: 0.32rem;
+				font-weight: bold;
+				color: #333;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.book_box .cell-left {
+				padding: 0.4rem 0;
+			}
+			
+			.book_box .cell-left p {
+				font-size: 0.24rem;
+				color: #999;
+				margin-top: 0.2rem;
+			}
+			
+			.book_box .cell-right {
+				font-size: 0.24rem;
+				color: #999;
+			}
+			
+			.no_bor .m-cell:after {
+				border-bottom: none;
+			}
+			
+			.cell-left div i {
+				display: inline-block;
+				width: 0.88rem;
+				height: 0.36rem;
+				line-height: 0.36rem;
+				background: none;
+				border-radius: 4px;
+				font-size: 0.24rem;
+				text-align: center;
+			}
+			
+			.book_box .cell-item:after {
+				border-bottom: none;
+			}
+			/*期中考*/
+			
+			.qzkao i {
+				color: #ff596b;
+				border: 1px solid #ff596b;
+			}
+			/*周考*/
+			
+			.zhouzkao i {
+				color: #0493f0;
+				border: 1px solid #0493f0;
+			}
+			/*日常考*/
+			
+			.rckao i {
+				color: #44C672;
+				border: 1px solid #44C672;
+			}
+			/*月考*/
+			
+			.yuezkao i {
+				color: #fd7302;
+				border: 1px solid #fd7302;
+			}
+			/*单元考*/
+			
+			.dyzkao i {
+				color: #6076a0;
+				border: 1px solid#6076a0;
+			}
+			/*模拟考*/
+			
+			.monikao i {
+				color: #7d5758;
+				border: 1px solid #7d5758;
+			}
+			/*模拟考*/
+			
+			.qimokao i {
+				color: #A16BE3;
+				border: 1px solid #A16BE3;
+			}
+			div.bg{
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			div.bg img{
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+			div.bg>div{
+				color: #999;
+				width: 100%;
+
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell book_box">
+					<!--<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left qzkao">
+							<div><i>期中考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left zhouzkao">
+							<div><i>周考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left rckao">
+							<div><i>日常考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left yuezkao">
+							<div><i>月考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left dyzkao">
+							<div><i>单元考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left monikao">
+							<div><i>模拟考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>
+					<a href="/html/exam_schedule/exam_results.html" class="cell-item">
+						<div class="cell-left qimokao">
+							<div><i>期末考</i>2018年第二学期摸底考试</div>
+							<p>2018-03-08~2018-03-09</p>
+						</div>
+						<div class="cell-right cell-arrow"></div>
+					</a>-->
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				addMainPageHeader("/html/understand_more/understand_index.html", "考试成绩", {
+					hasIcon: true,
+				});
+                addMainPageFooter(4);
+				// 考试列表
+				exam_list();
+			});
+			// 考试列表
+			function exam_list() {
+				var page = 1,
+					pageSize = 10;
+				var loadMore = function(callback) {
+					ysAjax("/exam/init", {
+						page: page,
+						pageSize: pageSize
+					}, function(data) {
+						typeof callback == 'function' && callback(data);
+					}, function(err) {
+						showAlert('服务器异常，请稍后重试');
+					});
+				};
+				$('.m-cell').pullRefresh({
+					loadListFn: function() {
+						var def = $.Deferred();
+						loadMore(function(data) {
+							var html = '';
+							if(data.retCode == 'SUCCESS') {
+								if(data.examList != undefined && data.examList != null && data.examList.length > 0) {
+									for(var i=0; i<data.examList.length; i++){
+										var item = data.examList[i];
+										html = html + ' <a href="/html/exam_schedule/exam_results.html?examId='+item.examId+'" class="cell-item"> ';
+										if(item.examCode == '103'){
+											html = html + ' 	<div class="cell-left zhouzkao"> ';
+										}else if(item.examCode == '104'){
+											html = html + ' 	<div class="cell-left yuezkao"> ';
+										}else if(item.examCode == '105'){
+											html = html + ' 	<div class="cell-left qzkao"> ';
+										}else if(item.examCode == '106'){
+											html = html + ' 	<div class="cell-left qimokao"> ';
+										}else if(item.examCode == '107'){
+											html = html + ' 	<div class="cell-left monikao"> ';
+										}else if(item.examCode == '108'){
+											html = html + ' 	<div class="cell-left rckao"> ';
+										}else{
+											html = html + ' 	<div class="cell-left dyzkao"> ';
+										}
+										html = html + ' 			<div><i>'+item.examCodeName+'</i>'+item.examName+'</div> ';
+										html = html + ' 			<p>'+item.startTime+'~'+item.endTime+'</p> ';
+										html = html + ' 	</div> ';
+										html = html + ' 	<div class="cell-right cell-arrow"></div> ';
+										html = html + ' </a> ';
+									}
+										$('.m-cell').append(html);
+								} else {
+									if(page == 1){
+//										window.location.href = '/html/exam_schedule/exam_null.html';
+										var html = '<div class="bg">' +
+                                            '<div style="padding: 0 1rem; height: auto;">' +
+                                            '<img src="/static/images/study_img/img_knowledge.png" />' +
+                                            '</div>' +
+                                            '<div style="line-height:.5rem ;">暂无考试数据</div>' +
+                                            '</div>';
+                                        $(".g-scrollview").html(html);
+									}
+								}
+								def.resolve();
+								++page;
+								var tipStr;
+								if(data.examList != undefined && data.examList != null && data.examList.length > 0) {
+									if(data.examList.length <= 0) {
+										tipStr = '已是最新内容';
+										YDUI.dialog.toast(tipStr, 'none', 1000);
+										$('.no_data').show(); // “没有更多了~”
+									}
+								}
+							} else {
+								showAlert('服务器异常，请稍后重试');
+							}
+						});
+						return def.promise();
+					}
+				});
+			}
+		</script>
+
+	</body>
+
+</html>

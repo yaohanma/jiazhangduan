@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.bgimg_box {
+				width: 100%;
+				height:4.5rem;
+				/*background:url(/static/images/appimg/wr9eyr1@3x.png) center;*/
+				background-size: 100%;
+				background-repeat: no-repeat;
+				position: relative;
+			}
+			.title_box{
+				height: 4rem;
+				position: relative;
+			}
+			.title_box img{
+				height: 4rem;
+			}
+			.title_box img,
+			.title_box div{
+				position: absolute;
+			}
+			.bgimg_box img {
+				width: 100%;
+			}
+			.bgimg_box .title{
+				width: 100%;
+				position: absolute;
+				font-size: 0.48rem;
+				color: #fff;
+				text-align: center;
+				z-index: 999;
+				margin-top: 8%;
+			}
+			.xz_img{
+				position: absolute;
+				top: 30%;
+				width: 100%;
+				height: 4.4rem;
+			}
+			.xz_img>div{
+				width: 4.4rem;
+				height: 4.4rem;
+				margin: 0 auto;
+				text-align: center;
+				background-color: #fff;
+				border-radius: 50%;
+				-webkit-box-shadow:0 0 10px rgba(0, 0, 0, .4);  
+			    -moz-box-shadow:0 0 10px rgba(0, 0, 0, .4);
+			    box-shadow:0 0 10px rgba(0, 0, 0, .4);
+				
+			}
+			.xz_img img{
+				margin: 0 auto;
+				margin-top: 0.42rem;
+				width: 1.4rem;
+				height: 1.83rem;
+			}
+			.xz_img p{
+				font-size: 0.3rem;
+				color: #333;
+				margin-top: 0.2rem;
+				font-weight: bold;
+			}
+			.xz_img>div{
+				font-size: 0.24rem;
+				color: #999;
+				margin-top: 0.2rem;
+				padding-top: 0.1rem;
+			}
+			.erweima_box{
+				margin-top: 3rem;
+				text-align: center;
+			}
+			.erweima_box img{
+				width: 2.89rem;
+				height: 2.89rem;
+				margin: 0 auto;
+			}
+			.erweima_box div{
+				font-size: 0.24rem;
+				color: #000;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: #fff;">
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="bgimg_box">
+					<div class="title_box">
+						<div  class="title">恭喜您!</div>
+						<img  src="/static/images/appimg/wr9eyr1@3x.png" />
+					</div>
+					<div class="xz_img">
+						<div>
+							<img src="/static/images/appimg/xz_img.png" />
+							<p>坚定如你</p>
+							<div>连续7天关注孩子学习</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="erweima_box">
+					<img src="/static/images/appimg/erweima.png"/>
+					<div>扫码关注孩子学习</div>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// header
+				addMainPageHeader("/html/medal/medal.html?scrollheight="+getUrlParam('scrollheight'), "勋章详情", {
+					hasIcon: true,
+					text: "",
+				});
+				addMainPageFooter(4);
+				// 勋章详情
+				medalDetail(getUrlParam('classify_flag'));
+			});
+			// 勋章详情
+			/*1：完美_1(完善全部个人信息)；
+			2：分享_1(邀请家人1次)；
+			3：积极配合_1(确认1次通知)；
+			4_1：(注孩子学习)认真负责_3day，4_2:坚定如你_7day，4_3:孜孜不倦_14day；
+			5：理智_1(查看1次作业中知识点)；
+			6：温柔_1(为孩子加油打气1次)；
+			7：关爱_2(累计查看课堂情况2天)；
+			8：学无止境_1(阅读1次文章)；
+			9：宏观分析_2(进入“学情分析”累计2次)；
+			10：全民发展_2(进入“鹰硕阅读”累计2次)；
+			11：查缺补漏_2(进入“错题本”累计2次)；*/
+//			function medalDetail(classify_flag) {
+//				if(classify_flag == '1') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_wm@2x1.png');
+//				} else if(classify_flag == '2') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_fx@2x1.png');
+//				} else if(classify_flag == '3') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_jj@2x1.png');
+//				} else if(classify_flag == '4_1') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_rz@2x1.png');
+//				} else if(classify_flag == '4_2') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_jd@2x1.png');
+//				}else if(classify_flag == '4_3') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_zz@2x1.png');
+//				}else if(classify_flag == '5') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_lz@2x1.png');
+//				} else if(classify_flag == '6') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_wr@2x1.png');
+//				} else if(classify_flag == '7') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_ga@2x1.png');
+//				} else if(classify_flag == '8') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_xw@2x1.png');
+//				} else if(classify_flag == '9') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_hg@2x1.png');
+//				} else if(classify_flag == '10') {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_qm@2x1.png');
+//				} else {
+//					$('#medal_detail_img').prop('src','/static/images/medal_img/img_cq@2x1.png');
+//				}
+//			}
+		</script>
+	</body>
+
+</html>

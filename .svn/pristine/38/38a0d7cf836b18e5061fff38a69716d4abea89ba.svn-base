@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+	.m-cell{
+		margin-top: 0.2rem;
+		color: #999;
+		padding-right: 0.24rem;
+	}
+	.m-cell:after{
+		border-bottom: none;
+	}
+	.m-cell a{
+		    display: flex;
+		    padding-top: 0.3rem;
+	}
+	.m-cell p{
+		font-size: 0.33rem;
+		font-weight: bold;
+		line-height: 0.5rem;
+		margin-top: 0.1rem;
+		color: #333;
+		margin-bottom: 0.19rem;
+		overflow:hidden; 
+		max-height: 1.5rem;
+		text-overflow:ellipsis;
+		display:-webkit-box; 
+		-webkit-box-orient:vertical;
+		-webkit-line-clamp:3; 
+	}
+	/*.m-cell p.active{
+		color:#999;
+	}*/
+	.cell-item div{
+		width: 100%;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    display: -webkit-box;
+	    font-size: 0.28rem;
+	    -webkit-box-orient: vertical;
+	    -webkit-line-clamp: 1;
+	    color: #999;
+	    margin-bottom: 0.3rem;
+	}
+	.m-cell img{
+		width:1.6rem; 
+		 height:1.2rem;
+		 border-radius: 0.1rem;
+	}
+	.no_data{
+		margin-top: 0.1rem;
+		color: #999;
+		text-align: center;
+		color: #b4b4b4;
+		font-size: 0.26rem;
+	}
+	.badge{
+		padding: 4px;
+		top: -0.1rem;
+		font-size: 0.4rem;
+	}
+	
+	/*暂无数据 css*/
+	div.bg {
+	    width: 100%;
+	    height: 100%;
+	    text-align: center;
+	    position: fixed;
+	    top: 30%;
+	    padding: 0 1rem;
+	    font-size: 0.3rem;
+	    color: #999;
+	}
+	div.bg img {
+	    width: 100%;
+	    margin-bottom: 0.4rem;
+	}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<!--暂无数据-->
+		<div class="bg">
+			<!--<div style="padding: 0 1rem; height: auto;">
+				<img src="/static/images/homework/img_msg.png">
+			</div>
+			<div style="line-height:.5rem ;">暂无数据</div>-->
+		</div>
+			<div class="m-cell">
+				<!-- TODO APP 假数据 -->
+	            <a href="/html/information/information_nei.html" class="cell-item">
+	            	<div style=" flex:1;">
+	            		<p class="active">从王者荣耀到吃鸡，孩子爱玩手机怎么办？</p>
+	              		<div>2018-05-4</div>
+	            	</div>
+	             	<div style="width: 1.6rem;">
+	             		<img src="/static/images/appimg/zixun1.png"/>
+	             	</div>
+	            </a>
+	            <a href="/html/information/information_nei.html" class="cell-item">
+	            	<div style=" flex:1;">
+	            		<p class="active">西红柿+螃蟹=砒霜？西瓜注水伤肝肾？这么多食物谣言，别再被坑了！</p>
+	              		<div>2018-05-4</div>
+	            	</div>
+	             	<div style="width: 1.6rem;">
+	             		<img src="/static/images/appimg/zixun2.png"/>
+	             	</div>
+	            </a>
+	            <a href="/html/information/information_nei.html" class="cell-item">
+	            	<div style=" flex:1;">
+	            		<p class="active">老师来家访，咋做才加分？过来人的这些经验，让你少走弯路</p>
+	              		<div>2018-05-4</div>
+	            	</div>
+	             	<div style="width: 1.6rem;">
+	             		<img src="/static/images/appimg/zixun3.png"/>
+	             	</div>
+	            </a>
+	            <a href="/html/information/information_nei.html" class="cell-item">
+	            	<div style=" flex:1;">
+	            		<p class="active">孩子做好这5件事 ，英语的底子就打好了！实用干货~</p>
+	              		<div>2018-05-4</div>
+	            	</div>
+	             	<div style="width: 1.6rem;">
+	             		<img src="/static/images/appimg/zixun4.png"/>
+	             	</div>
+	            </a>
+	        </div>
+	        <div class="no_data">没有更多了~</div>
+	</section>
+</section>
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	// header
+	addMainPageHeader("/html/common/homepage.html", "资讯列表");
+//	addMainPageFooter(1);
+	// “没有更多了~”
+	$('.no_data').hide();
+	// TODO APP 通知列表
+	//notice_list();
+});
+</script>
+</body>
+</html>

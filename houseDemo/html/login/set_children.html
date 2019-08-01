@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			body{
+				background: #fff;
+			}
+			.box>div{
+				width:2rem;
+				height:2rem;
+				border-radius: 50%;
+				border: 1px solid #ededed;
+				color: #313340;
+				font-size: 0.38rem;
+				text-align: center;
+				line-height: 2rem;
+				fontFamily: "PingFang-SC-Regular",;
+				margin: 0 auto;
+			}
+			.box>div a{
+				display: inline-block;
+			}
+			.box>p{
+				text-align: center;
+				color: #313340;
+				font-size: 0.2rem;
+				margin-top: 0.15rem;
+			}
+			.box.active>div{
+				background: #0493f0;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="box active" style="margin-top: 1.64rem;">
+					<div><a href="/html/login/setup_children.html">创建孩子</a></div>
+					<p>未有鹰硕教学平台学生账号，
+						<br/>创建乐学派学生账号</p>
+				</div>
+				<div class="box" style="margin-top: 1.34rem;">
+					<div><a href="/html/login/Bind_children.html">绑定孩子</a></div>
+					<p>有鹰硕教学平台学生账号，<br/>从教学平台获取邀请码</p>
+				</div>
+
+				
+				
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script>
+			$(document).ready(function() {
+				addMainPageHeader("/html/login/login_index.html", "", {
+					hasIcon:true,
+					text:"跳过此步骤",
+					action : function() {
+						$("#ysYduiNavBarRightBtn").attr("href",""); 
+					}
+				});
+				$("body .box").click(function(){
+					$(this).addClass("active").siblings().removeClass("active");
+				})
+			})
+		</script>
+	</body>
+</html>

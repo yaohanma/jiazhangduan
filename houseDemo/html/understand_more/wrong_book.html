@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+
+<style>
+	.m-grids-3:before{
+ 	 border-bottom:1px solid #E5E5E5;
+ 	}
+	/* header 全部科目样式 */
+	#ysYduiNavBarRightBtn{
+		background-image: url(/static/images/homework/popup_drop@2x.png);
+	    background-repeat: no-repeat;
+	    background-position-x: 2.2rem;
+	    background-position-y: 0.4rem;
+	    padding-right: 0.6rem;
+	    background-position-x:1.5rem;
+	    background-size: 12%;
+	}
+	
+	#ysSubjectTopSheet .item {
+    width: 85%;
+    border: 1px solid #dedede;
+    display: inline-block;
+    border-radius: 29px;
+    color: #999999;
+    height: 0.5rem;
+    padding: 0.05rem 0;
+	}
+	.selected {
+    width: 85%;
+    background-color: #0493f0;
+    display: inline-block;
+    border-radius: 29px;
+    color: #fff;
+    height: 0.5rem;
+    padding: 0.05rem 0;
+	}
+	/*最新 筛选 样式*/
+	.m-grids-3{
+		margin-top: .2rem;
+		height: 1.05rem;
+	}
+	.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+		border-right:0;
+	}
+	.m-grids-3 .grids-item.active div{
+		color: #0493F0;
+	}
+	.m-grids-3 .grids-item div i{
+		width:.25rem ;
+		height:.25rem ;
+		display: inline-block;
+		background-size: 60%;
+	}
+	/*最新图标 */
+	.m-grids-3 .grids-item:nth-child(1) div i{
+		background: url(/static/images/homework/popup_drop@2x.png) center center no-repeat;
+		background-size: 65%;
+		background-repeat: no-repeat;
+		background-position-y: center;
+	}
+	.m-grids-3 .grids-item.active:nth-child(1) div i{
+		background: url(/static/images/study_img/popup_drop_pressed.png) center center no-repeat;
+		background-size: 65%;
+	}
+	/*错误次数*/
+	.m-grids-3 .grids-item:nth-child(2) i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		display: inline-block;
+		background: url(/static/images/study_img/popup_hui.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item:nth-child(2).active.up  i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		background: url(/static/images/study_img/popup_up.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item:nth-child(2).active.down i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		background: url(/static/images/study_img/popup_down.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	/*筛选*/
+	.m-grids-3 .grids-item:nth-child(3) div i{
+		width:.3rem ;
+		height:.3rem ;
+		display: inline-block;
+		background: url(/static/images/study_img/screen.png) center .1rem no-repeat;
+		background-size: 60%;
+		margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item.active:nth-child(3) div i{
+		background: url(/static/images/study_img/screen_pressed.png) center .1rem no-repeat;
+		background-size: 60%;
+	}
+	/*最新 筛选 样式  end*/
+	/*装错题  div*/
+	
+	.wrong_box>div{
+		width: 100%;
+		padding: .4rem .3rem;
+		height: 2.03rem;
+		background: #fff;
+		margin-bottom: 0.2rem;
+	}
+	.wrong_box>div .up{
+		height: .4rem;
+		line-height: .4rem;
+		font-size: 0.32rem;
+		color: #333333;
+		margin-bottom: .2rem;
+	}
+	.wrong_box>div .down{
+		width: 100%;
+		font-size-adjust:.3rem;
+		line-height: .4rem;
+		
+		overflow: hidden;
+
+		text-overflow:ellipsis;
+
+		display:-webkit-box; 
+		font-size: 0.28rem;
+
+-webkit-box-orient:vertical;
+
+-webkit-line-clamp:2; 
+	}/*装错题  div   end*/
+	/*筛选*/
+	.m-actionsheet{
+		max-height: 11rem;
+		overflow-y: auto;
+		border: 1px solid #fff;
+		border-radius: 6px  6px 0 0;
+		top: inherit;
+		z-index: 99999;
+		bottom: 0;
+	}
+	.m-actionsheet .bg_box{
+		width:100%;
+		background: #fafafa;
+	}
+	.m-actionsheet .bg_box .title{
+		font-size: 0.32rem;
+		color: #333;
+		text-align: left;
+		font-weight: bold;
+		padding: .3rem ;
+	}
+	.m-actionsheet ul li{
+		width: 33%;
+		margin-bottom: .3rem;
+		height: .6rem;
+		line-height: .6rem;
+		color: #999;
+		display: inline-block;
+		text-align: center;
+		float: left;
+		
+	}
+	.m-actionsheet ul li div{
+		width: 80%;
+		border: 1px solid #dcdcdc;
+		border-radius: 29px;
+		margin: auto;
+	}
+	.m-actionsheet ul li.active div{
+		color: #fff;
+		background: #0493F0;
+		border-color: #0493F0;
+	}
+	.m-actionsheet ul {
+		width: 100%;
+		clear:both;
+		height:2.8rem;
+		clear: both;
+		
+	}
+	.m-actionsheet .m-cell{
+		max-height:6rem;
+		overflow-y: scroll;
+		margin-bottom: 0;
+	}
+	.m-actionsheet .btn {
+		width: 100%;
+		padding: 0;
+		/*position: fixed;*/
+		bottom:0rem;
+		left: 0;
+	}
+	.m-actionsheet .btn a{
+		float: left;
+		width: 50%;
+		display: inline-block;
+		margin: 0;
+	/*	height: 1.5rem;*/
+	/*	line-height: 1.3rem;*/
+		color: #0493F0;
+	}
+	.actionsheet-action{
+		line-height: 0.8rem;
+		height: 0.8rem;
+	}
+	.m-actionsheet .btn a.active{
+		background: #0493F0;
+		color: #fff;
+	}
+	#J_ActionSheet .m-cell .cell-item{
+		color: #333;
+	}
+	#J_ActionSheet .m-cell .cell-item.active .cell-left,
+	#J_ActionSheet .m-cell .cell-item.active .cell-right,
+	#J_ActionSheet .m-cell .cell-item.active{
+		color: #0493f0;
+	}
+	#J_ActionSheet .m-cell:after{
+		border: 0;
+	}
+	.m-actionsheet .btn a{
+		border-top: 1px solid #D9D9D9;
+	}
+	/*.m-actionsheet ul li:nth-child(0){
+		margin-left: 0;
+	}*/
+	/*筛选知识点 样式*/
+	.knowledge .title{
+		padding: 0.2rem .3rem;
+		text-align: left;
+		background:#fafafa ;
+	}
+	
+	#ysSubjectTopSheet .m-grids-3{
+		height: auto;
+	}
+	#ysSubjectTopSheet .m-grids-3 .grids-item:after{
+		border-bottom: 0;
+	}
+	#ysSubjectTopSheet .m-grids-3 .grids-item{
+		padding-bottom: 0;
+	}
+	#ysSubjectTopSheet .m-grids-3 {
+		padding-bottom:0.29rem
+	}
+	div.bg{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		position: fixed;
+		top: 30%;
+		padding: 0 1rem;
+		font-size: 0.3rem;
+		color: #999;
+	}
+	div.bg img{
+		width: 100%;
+		margin-bottom: 0.4rem;
+	}
+	div.bg>div{
+		color: #999;
+		width: 100%;
+		
+	}
+	/*新增 样式*/
+	.class_rightbtn{
+		height: 0.88rem;
+		border-bottom: 1px solid #dcdcdc;
+		background: #fff;
+		position: relative;
+	}
+	.class_rightbtn a{
+		height: 0.9rem;
+	    -webkit-box-flex: 0;
+	    -webkit-flex: 0 0 25%;
+	    -ms-flex: 0 0 25%;
+	    flex: 0 0 25%;
+	    padding: 0 0.2rem;
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-align: center;
+	    -webkit-align-items: center;
+	    -ms-flex-align: center;
+	    align-items: center;
+	    font-size: 0.3rem;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    color: #5C5C5C;
+		min-width:25% ;
+		background-image: url(/static/images/homework/popup_drop@2x.png);
+		background-size: 10%;
+	    background-repeat: no-repeat;
+	    background-position-y: 0.4rem;
+	    padding-right: 0.6rem;
+	    background-position-x: 1.5rem;
+	    float: right;
+	    
+	}
+	.mywrongBook a{
+		height: 2.2rem;
+		background: #fff;
+		display: block;
+		padding: 0.3rem;
+		border-bottom: 1px solid #e5e5e5;
+	}
+	.mywrongBook a .up{
+		display: flex;
+	}
+	.mywrongBook a .pull-left{
+		font-size: 0.32rem;
+		color: #313340;
+		flex:2;
+	}
+	.mywrongBook a .pull-right{
+		flex:1;
+	}
+	.mywrongBook a .down{
+		margin-top: 0.3rem;
+		color: #888a97;
+		line-height: 0.4rem;
+		height: 0.8rem;
+		overflow: hidden;
+	}
+	#ysSubjectTopSheet{
+	display: none;
+	position: fixed;
+	top:40px;
+}
+#ysSubjectTopSheet .m-grids-3{
+	position: inherit;
+}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		<ul class="m-grids-3 list_title">
+            <li class="grids-item active">
+                <div class="grids-txt"  id="new">最新
+                	<i></i></div>
+            </li>
+            <li class="grids-item wrong_num">
+                <div class="grids-txt">错误次数
+                	<i></i>
+                
+                </div>
+            </li>
+            <li class="grids-item">
+            	
+				<div class="m-button grids-txt" id="screen">
+					筛选<i></i>
+				</div>
+            </li>
+        </ul>
+        <div  id="wrongBook">
+        	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div>
+        	
+        	<!--每一个 错题-->
+        	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div>
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div>
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div>
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div>
+        	<!--每一个 错题  end-->
+        	
+        </div>
+        <!--筛选  div-->
+		<div class="m-actionsheet" id="J_ActionSheet" style="bottom: 0;">
+			<div class="bg_box">
+				<p class="title">全部题型</p>
+				<ul>
+					<li class="active"><div>全部题型</div></li>
+					<li><div>单选题</div></li>
+					<li><div>多选题</div></li>
+					<li><div>判断题</div></li>
+					<li><div>填空题</div></li>
+					<li><div>简答题</div></li>
+					<li><div>综合题</div></li>
+				</ul>
+			</div>
+			<!--知识点 div-->
+			<div id="bookSection">
+			<!--<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+				<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+	        	</div>
+			</div>
+			<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+				<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            
+	        	</div>
+			</div>-->
+				<!--<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+					<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            
+	        	</div>
+			</div>-->
+			</div>
+		 	<div class="btn">
+		 		<a href="javascript:;" class="actionsheet-action" id="btnReset">重置</a>
+		     <a href="javascript:;" class="actionsheet-action active" id="btnComplete">完成</a>
+		 	</div>
+		    <!--知识点 div-->
+		</div>
+				<!--筛选  div  end-->
+	</section>
+</section>
+<input type="hidden" id="subject_id" />
+<input type="hidden" id="section_id" />
+<input type="hidden" id="question_type" />
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	// 2018-11-28 added by stt 埋点-11：查缺补漏_2（进入“错题本”累计2次）
+	buriedPoint('11');
+	addMainPageHeader("/html/understand_more/understand_index.html", "错题本", {
+					hasIcon:true,
+					text:"语文",
+//					action : function() {
+//						if($("#ysSubjectTopSheet").css("display") == 'block'){
+//							$("#ysSubjectTopSheet").topsheet('close');
+//							$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+//							$(".mask-black-dialog").hide();
+//						}else{
+//							showSubjectPicker(function(subjectId, subjectName) {
+//								$("#subject_id").val(subjectId);
+//								$("#ysYduiNavBarRightBtn").text(subjectName);
+//								$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+//                              //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val(),'1');
+//                              //TODO APP loadSection();
+//							});
+//						}
+//					}
+				});
+	addMainPageFooter(3);
+	//假数据 
+	$("#ysYduiNavBarRightBtn").click(function(){
+		$("#ysSubjectTopSheet").toggle();
+	})
+	$("#ysSubjectTopSheet").click(function(){
+		$(this).hide();
+	})
+	//初期默认语文
+	$("#subject_id").val("2");
+
+    //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val(),'1');
+    //TODO APP loadSection();
+	/*最新 错误次数 筛选 点击 文字变蓝 */
+	$('.list_title .grids-item').on("click",function(){
+		$(this).addClass("active").siblings().removeClass("active");
+       if($(this).hasClass("wrong_num")){
+			if($(this).hasClass("down")){
+				$(this).removeClass("down").addClass("up");
+                //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val(),'3');
+			}else{
+				$(this).removeClass("up").addClass("down");
+                //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val(),'2');
+			}
+		}else{
+			$('.wrong_num').removeClass("down");
+			$('.wrong_num').removeClass("up");
+			
+			if($("#new").parent().hasClass("active")){
+                //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val(),'1');
+		    }
+		}
+	});
+	/*筛选 */
+	 var $as = $('#J_ActionSheet');
+    $('#screen').on('click', function () {
+        $as.actionSheet('open');
+    });
+    
+    //选择题型
+	$('.m-actionsheet ul li').on("click",function(){
+		if(!$(this).hasClass("active")) {
+		$(this).addClass("active").siblings().removeClass("active");
+		if($(this).text()=='单选题') {
+			$("#question_type").val('1');
+		}else if($(this).text()=='多选题'){
+			$("#question_type").val('2');
+		}else if($(this).text()=='判断题'){
+			$("#question_type").val('4');
+		}else if($(this).text()=='填空题'){
+			$("#question_type").val('3');
+		}else if($(this).text()=='简答题'){
+			$("#question_type").val('5');
+		}else if($(this).text()=='综合题'){
+			$("#question_type").val('6');
+		}else if($(this).text()=='全部题型'){
+			$("#question_type").val('');
+		}
+		}
+	});
+    
+    //完成
+    $('#btnComplete').on('click', function () {
+        $as.actionSheet('close');
+        //TODO APP loadWrongBook($("#subject_id").val(),$("#section_id").val(),$("#question_type").val());
+    });
+    
+    //重置
+    $('#btnReset').on('click', function () {
+    	$(this).addClass("active").siblings().removeClass("active");
+    	$('.m-actionsheet ul li').eq(0).addClass("active").siblings().removeClass("active");
+    	$('#J_ActionSheet .m-cell .cell-item').removeClass("active");
+    	$("#section_id").val('');
+    	$("#question_type").val('');
+    });
+});
+
+//错题本
+function loadWrongBook(subject_id,section_id,question_type,orderByFlag) {
+	ysAjax("/study/getWrongQuestionList", {
+		subject_id : subject_id,
+		section_id : section_id,
+	   question_type : question_type,
+	   orderByFlag : orderByFlag
+	}, function(data) {
+		$("#wrongBook").empty();
+		var html="";
+		if (data.success) {
+			var datalist = data.result;
+			html+='<div class="wrong_box">';
+			for(var i = 0; i < datalist.length; i++ ){
+				html+='<div>';
+				//html+='<a href="/html/understand_more/wrong_book_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + '">';
+				//调用共通页面
+				html+='<a href="/html/understand_more/daily_examination_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + "&type="+3+'">';
+				html+='<div class="up" style="">';
+				if (datalist[i].parent_id != null && datalist[i].parent_id != "") {
+					html+='<p class="pull-left" style="font-weight: bold;">(综合题)'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+				} else {
+					html+='<p class="pull-left" style="font-weight: bold;">'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+				}
+				html+='<p class="pull-right fc_999" style="font-size: 0.28rem;"> 做题时间: '+datalist[i].answertime+'</p>';
+				html+='</div>';
+				html+='<div class="down">';
+			    html+='<p style="color: #999;">请点击查看详情</p>';
+				html+='</div>';
+				html+='</a>';
+				html+='</div>';
+			}
+			html+='</div>';
+			 $("#wrongBook").append(html);
+		} else {
+			 html =  html + ' <div class="bg">';
+			 html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+			 html =  html + ' <img src="/static/images/study_img/img_xueba.png" />';
+			 html =  html + ' </div>';
+			 html =  html + ' <div style="line-height:.5rem ;">聪明的你，不是在通往学霸的路上就是已经成为学霸本人~</div>';
+			 html =  html + ' </div>';
+
+			 $("#wrongBook").append(html);
+			//window.location.href="/html/understand_more/wrong_book_null.html";
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+} 
+
+//知识点
+function loadSection() {
+	ysAjax("/study/getErrorExerciseEbook", {
+		subject_id : $("#subject_id").val()
+	}, function(data) {
+		$("#bookSection").empty();
+		if (data.success) {
+			var html="";
+			var datalist = data.result;
+			for(var i = 0; i < datalist.length; i++ ){
+			    html+='<div class="knowledge">';
+				html+='<!--书名-->';
+				if(datalist[i].ebook_name != "其他书籍") {
+				html+='<div class="title" style="">';
+				html+='<span style="width:80%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">'+datalist[i].ebook_name+'</span>';
+				//html+='<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;"></span>';
+				html+='</div>';
+				html+='<!--列表-->';
+				html+='<div class="m-cell">';
+				var lstSection = data.result[i].lstSection;
+				for(var j=0;j<lstSection.length; j++){
+				html+='<a class="cell-item">';
+				html+='<div class="cell-left">'+lstSection[j].section_name+'</div>';
+				html+='<div class="cell-right"></div>';
+				html+='<input type="hidden" value="'+lstSection[j].section_id+'" />';
+				html+='</a>';
+				}
+				html+='</div>';
+				html+='</div>';
+				}
+			   }
+			 $("#bookSection").append(html);
+			 $('#J_ActionSheet .m-cell .cell-item').on("click",function(){
+				 if(!$(this).hasClass("active")) {
+					   $(this).addClass("active").siblings().removeClass("active");
+						var section_id = '\''+ $(this).find("input").val() + '\','+$("#section_id").val();
+						$("#section_id").val(section_id);
+				 }
+				});
+		} else {
+			showNotify(data.errorMsg);
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+} 
+
+</script>
+<div class="m-topsheet topsheet-toggle" id="ysSubjectTopSheet" style="">
+	<ul class="m-grids-3"><li class="grids-item" data-code="9999"><div class="grids-txt"><a class="item">全部科目</a></div></li><li class="grids-item" data-code="1"><div class="grids-txt"><a class="item">数学</a></div></li><li class="grids-item" data-code="2"><div class="grids-txt"><a class="selected">语文</a></div></li><li class="grids-item" data-code="3"><div class="grids-txt"><a class="item">英语</a></div></li><li class="grids-item" data-code="4"><div class="grids-txt"><a class="item">物理</a></div></li><li class="grids-item" data-code="5"><div class="grids-txt"><a class="item">化学</a></div></li><li class="grids-item" data-code="6"><div class="grids-txt"><a class="item">地理</a></div></li><li class="grids-item" data-code="7"><div class="grids-txt"><a class="item">历史</a></div></li><li class="grids-item" data-code="43"><div class="grids-txt"><a class="item">生物</a></div></li><li class="grids-item" data-code="44"><div class="grids-txt"><a class="item">思想政治</a></div></li></ul></div>
+</body>
+</html>

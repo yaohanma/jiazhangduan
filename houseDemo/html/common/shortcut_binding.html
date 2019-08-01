@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+	/*input  placeholder 字体颜色*/
+	.m-cell:after{
+	 content:none;
+	}
+	  input::-webkit-input-placeholder{
+          color: #b2b2b2;
+          font-size: 0.3rem;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color: #b2b2b2;
+             font-size: 0.3rem;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+           color: #b2b2b2;
+            font-size: 0.3rem;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+           color: #b2b2b2;
+            font-size: 0.3rem;
+        }
+		.cell-item-customer {
+		    display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    position: relative;
+		    overflow: hidden;
+		 }
+		.btn-customer {
+			background-color: #0493f0;
+			margin-right:.24rem;
+			margin-left:.24rem;
+			color: #FFF;
+		}
+		.btn-block {
+		    text-align: center;
+		    position: relative;
+		    border: none;
+		    pointer-events: auto;
+		    width: 100%;
+		    display: block;
+		    font-size: 0.36rem;
+            height: 0.85rem;
+		    line-height: 0.85rem;
+		    margin-top: 0.5rem;
+		    border-radius: 10px;
+		}
+	 .btn {
+	    text-align: center;
+	    position: relative;
+	    border: none;
+	    pointer-events: auto;
+	    height: 0.58rem;
+	    line-height: 0.58rem;
+	    font-size: 0.26rem;
+	    display: inline-block;
+	    border-radius: 6px;
+    }
+    .m-cell:after{
+    	border-bottom: none;
+    }
+		</style>
+</head>
+<body>
+<section class="g-flexview">
+<div class="g-scrollview">
+	<div class="m-cell" style="margin-top: .2rem;margin-bottom: .2rem;">
+		<div class="cell-item" style="height: 50px">
+				<input type="number" id="telnum" class="cell-input" style="font-size:.3rem;color:#333333;" placeholder="请输入您的手机号码" autocomplete="off"/>
+		</div>
+		<div class="cell-item" style="height: 50px">
+			<div class="cell-left"  style="width:65%">
+				<input type="number" id="verificationCode" class="cell-input" style="font-size:.3rem;color:#333333;width:80%;" placeholder="请输入验证码" maxlength="6" autocomplete="off"/>
+			</div>
+			<div class="cell-right" style="width:35%">
+				<div href="javascript:;" class="btn btn-warning" id="J_GetCode" style="width:100%;font-size:.24rem;">
+					获取验证码
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cell-item-customer ">
+		<button class="btn-block btn-customer " id="btnNext">立刻绑定</button>
+	</div>
+</div>
+</section>
+<input type="hidden" id="checkInvoteCode" >
+<input type="hidden" id="checkVerificationCode" >
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		addMainPageHeader("/html/common/bind_student.html?type="+getUrlParam("type"), "绑定孩子");
+
+		//获取验证码
+		var dialog = YDUI.dialog;
+		var $getCode = $('#J_GetCode');
+
+		// 定义参数
+		$getCode.sendCode({
+			disClass: 'btn-disabled', // 禁用按钮样式【必填】
+			secs: 60, // 倒计时时长 [可选，默认：60秒]
+			run: false, // 是否初始化自动运行 [可选，默认：false]
+			runStr: '{%s}秒后重新获取', // 倒计时显示文本 [可选，默认：58秒后重新获取]
+			resetStr: '重新获取验证码' // 倒计时结束后按钮显示文本 [可选，默认：重新获取验证码]
+		});
+
+		//发送验证码
+		//TODO APP
+//		$getCode.on('click', function() {
+//			if(checkTel()){
+//			var $this = $(this);
+//			dialog.loading.open('发送中...');
+//			// ajax 成功发送验证码后调用【start】
+//			setTimeout(function() { //模拟ajax发送
+//				ysAjax("/homepage/sendVerificationCode", {
+//					telnum : $("#telnum").val(),
+//					type : "bind"
+//				}, function(data) {
+//					if (data.success) {
+//						dialog.loading.close();
+//						$this.sendCode('start');
+//						dialog.toast('已发送', 'success', 1500);
+//					} else {
+//						showNotify(data.errorMsg);
+//					}
+//				}, function(err) {
+//					showNotify("发生异常");
+//				});
+//			}, 800);
+//		}});
+
+		//下一步
+		$("#btnNext").on("click", function() {
+			if(checkRequired()) {
+			  if(checkTel()){
+			  	//TODO APP
+//				  checkVerificationCode();
+		    	}
+			}
+		});
+	});
+	
+	//画面项目入力checke
+	function checkRequired(){
+	 if($("#telnum").val()==null ||$("#telnum").val()=="") {
+			showAlert("请输入您的手机号码!");
+			return false;
+		}else if($("#verificationCode").val()==null ||$("#verificationCode").val()=="") {
+			showAlert("请输入验证码!");
+			return false;
+		} 
+		return true;
+	}
+	
+	//验证手机号
+	function checkTel() {
+		var telnum=$("#telnum").val();
+		var mobilevalid = /^1\d{10}$/;
+		if (!mobilevalid.test(telnum)) {
+			showNotify('请输入正确的手机号码');
+			return false;
+		}
+		return true;
+	}
+	
+	//验证短信验证码
+	function checkVerificationCode(){
+			ysAjax("/homepage/checkVerificationCode", {
+				telnum : $("#telnum").val(),
+				verificationCd : $("#verificationCode").val(),
+				type : "bind"
+			}, function(data) {
+				if (data.success) {
+					getDialog().alert('绑定成功！', function () {
+						window.location.href='/html/study/study_index.html';
+		            });
+				} else {
+					showNotify('请输入正确的验证码');
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+</script>
+</body>
+</html>

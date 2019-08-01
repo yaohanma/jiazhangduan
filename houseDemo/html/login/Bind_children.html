@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			
+			input::-webkit-input-placeholder {
+		         color: #a0a4b1;
+		    }
+			.login_btn {
+			    width: 100%;
+			    height: 0.78rem;
+			    line-height: 0.78rem;
+			    border-radius: 4px;
+			    background: #0493f0;
+			    color: #6eb8f5;
+			    margin-bottom: 0.48rem;
+			    color: #fff;
+			}
+			select{
+				appearance: none; /* 去掉默认图标 */
+				-moz-appearance: none; /* Firefox */
+				-webkit-appearance: none; /* Safari and Chrome */
+				padding:0 20px 0 5px;
+				background: url("/static/images/logo_img/xiangxia.png") no-repeat scroll right center transparent;/* 自己的图*/
+				}
+				
+			.cell-arrow:after{
+				content:"";
+			}
+			.my_layer{
+				text-align: center;
+				font-size: 0.32rem;
+				color: #333;
+			}
+			.my_layer .title{
+				margin: 0.45rem 0;
+			}
+			#tips{
+				padding: 0 0.73rem;
+				line-height: 0.55rem;
+			}
+			.my_layer .layui-layer-btn{
+				border-top: 1px solid #eaeef2;
+				padding: 0;
+				
+				
+			}
+			.my_layer .layui-layer-btn a{
+				margin: 0;
+				width: 50%;
+				border: 0;
+				background-color:#fff;
+				color: #333;
+				padding: 0;
+				text-align: center;
+				color: #1b76ff;
+				line-height: 0.86rem;
+				height: 0.86rem;
+				border-radius:10px  0 !important;
+			}
+			.my_layer .layui-layer-btn a:nth-child(1){
+				border-right: 1px solid #eaeef2;
+				color: #333;
+				border-radius:0 10px !important;
+			}
+			.layui-layer-iframe .layui-layer-btn, 
+			.layui-layer-page .layui-layer-btn{
+				padding-top:0 !important;
+			}
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+				    <div class="cell-item" id="tips_btn">
+				        <input type="" class="cell-input" placeholder="请输入邀请码/孩子账号" />
+				    </div>
+				    <div class="cell-item">
+				        <input type="" class="cell-input" placeholder="请输入您的真实姓名" />
+				    </div>
+				    <div class="cell-item">
+				        <label class="cell-right cell-arrow">
+				            <select class="cell-select">
+				                <option value="">妈妈</option>
+				                <option value="1">爸爸</option>
+				                <option value="2">爷爷</option>
+				                <option value="3">奶奶</option>
+				                <option value="4">外公</option>
+				                <option value="5">外婆</option>
+				                <option value="6">姑姑</option>
+				                <option value="7">舅舅</option>
+				            </select>
+				        </label>
+				    </div>
+				   
+				</div>
+
+				<div style="margin: 0 0.48rem;">
+					<button type="button" class="btn-block login_btn" >确定</button>
+				</div>
+				
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/layer/layer.js"></script>
+		<script>
+			$(document).ready(function() {
+				addMainPageHeader("/html/login/set_children.html", "绑定孩子");
+				
+	     		//提示
+		     $("#tips_btn").click(function(){
+		     	
+				layer.open({
+				  type: 1 //Page层类型
+				  , area: ['90%', '4rem']//宽高
+				  ,title:false
+				  ,closeBtn:0
+				  ,shade: 0.6 //遮罩透明度
+				  ,maxmin:false
+				  ,anim: 1 //0-6的动画形式，-1不开启
+				  ,skin:"my_layer"
+				  ,closeBtn: 0 //不显示关闭按钮
+				  ,shadeClose: true //开启遮罩关闭
+				  ,content: $("#tips")
+				   ,btn: ["取消",'确定'],
+				   
+				}); 
+			})
+			})
+		</script>
+	</body>
+	<div id="tips">
+		<div class="title">提示</div>
+		当前孩子已有教学平台账号，请输入邀请码进行绑定
+	</div>
+</html>

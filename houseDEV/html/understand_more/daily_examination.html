@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<!--页面css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+			.demo-progress-cricle {
+				width: 2rem;
+				height: 2rem;
+			}
+			
+			.demo-progressbar {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-justify-content: space-around;
+				-ms-flex-pack: distribute;
+				justify-content: space-around;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				-ms-flex-align: center;
+				align-items: center;
+				padding: 0 .24rem;
+				background: #FFFFFF;
+			}
+			
+			.demo-small-pitch {
+				margin-top: .35rem;
+			}
+			
+			.noborder:after {
+				border: 0px !important;
+			}
+			.noborder .cell-left{
+				    /*width: 100%;*/
+				    font-size: 0.32rem;
+				    color: #333333;
+				   /* border: 1px solid #333;*/
+}
+			}
+			.noborder .cell-right{
+				font-size: 0.32rem;
+				color: #0493F0;
+			}
+			.noborder .cell-right span{
+				font-size: 0.32rem;
+				color: #0493F0;
+			}
+			.txtdiv {
+				padding: 10px;
+				font-size: 16px;
+				font-weight: bold;
+				text-align: center;
+			}
+			.m-cell:after{
+				border: 0px !important;
+			}
+			.m-cell{
+				margin-bottom: 0px !important;
+			}
+			.title {
+				width: 100%;
+				font-size: 0.32rem;
+				color: #333333;
+			}
+			.m-grids-2:after{
+				border: 0px !important;
+			}
+				
+			.m-grids-2:before{
+				border: 0px !important;				
+			}
+		    .m-grids-2 .grids-item:after{
+			}
+				border: 0px !important;
+			.m-grids-2 .grids-item:before{
+				border: 0px !important;				
+			}
+			.m-grids-2 .grids-item:not(:nth-child(2n)):before {
+				border: 0px !important;
+			}
+			.grids-txt{
+				font-size: 0.28rem;
+				color: #999999;
+			}
+		 
+			.progress-bars > svg > path {
+				border-radius: 20px !important;
+				height: 6px !important;
+			} 
+			.progress-bars > svg {
+				border-radius: 20px;
+				height: 6px !important;
+			}
+			.p_tb30{
+				padding-bottom: 0.30rem;
+			}
+			.progressbar-content{
+				color: #0dc77a;
+				font-size: 0.6rem;
+				
+			}
+			.progressbar-content span{
+				color: #0dc77a;
+				font-size: 0.24rem;
+				
+			}
+			.cell-right{
+				font-size: 0.32rem;
+				color: #333333 !important;
+			}
+			.rcolor{
+				color:#0493F0;
+			}
+			.lan_btn{
+				background: #0493F0;
+				 color: #fff;
+				 margin-top: 0; 
+				 border-radius:10px ;
+			}
+		.dingdi {
+	    width: 100%;
+	    float: left;
+	    height: 2rem;
+	    /*background: #fff;*/
+	      }
+     .jdtw{
+		height: 6px;
+		width: 100%;
+		background: #DCDCDC;
+		border-radius: 5px;
+	}
+	.jdtn{
+	    background: #0493F0;
+	    height: 6px;
+		border-radius: 5px;
+	 }
+	.fwdiv{
+		height:0.3rem;
+		width: 100%;
+		background: #FFFFFF;
+	}
+	.jdtzy{
+		padding:0rem 0.3rem 0rem 0.3rem;
+	}
+	.btn-customer{
+		/*position: fixed;*/
+		bottom: 0;
+	}
+	.quick_bottom{
+			z-index: 999;
+    		bottom: 1.1rem;
+    		display: block;
+		}
+		/* x xs */
+		@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+		   .quick_bottom{
+					z-index: 999;
+		    		bottom: 1.5rem;
+		    		display: block;
+				}
+		}
+		/* xr */
+		@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+		    .quick_bottom{
+					z-index: 999;
+		    		bottom: 1.5rem;
+		    		display: block;
+				}
+		}
+		@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+		   .quick_bottom{
+					z-index: 999;
+		    		bottom: 1.5rem;
+		    		display: block;
+				}
+		}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<section class="g-scrollview" id="J_ProgressBox">
+				<div id="htmllist">
+				</div>
+					<!-- TODO APP 假数据 -->
+				 <!-- <div class="m-cell">
+					<div class="cell-item noborder">
+						<div class="cell-left" style=" font-weight: bold;">邹忌否齐王纳谏</div>
+						<div class="cell-right" style="color:#999">97<span style="color:#999">分</span></div>
+					</div>
+
+					<div class="demo-progressbar">
+						<div class="demo-progress-cricle">
+							<div class="progress-bar demo-progress-cricle"  id="J_Progresss" >
+								<div class="progressbar-content">100<span>%</span></div>
+							</div>
+						</div>
+						<div class="demo-progress-cricle">
+							<div class="progress-bar demo-progress-cricle" id="J_Progress">
+								<div class="progressbar-content">40<span>%</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="m-grids-2">
+					<li class="grids-item">
+
+						<div class="grids-txt">个人得分率</div>
+					</li>
+					<li class="grids-item">
+
+						<div class="grids-txt">班级得分率</div>
+					</li>
+				</ul>
+				<div class="m-cell" style="border-radius: 4px;">
+					<div class="cell-item txtdiv noborder">
+						<span class="title">选择题</span>
+					</div>
+					<div class="cell-item noborder">
+						<div class="cell-left">选择题完成<span class="rcolor">3</span><span>/4</span>个，得分：</div>
+						<div class="cell-right"><span class="rcolor">3</span>/4</div>
+					</div>
+					<div class="demo-progressbar p_tb30">
+						<div class="demo-progressbar-item">
+							<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="m-cell" style="border-radius: 4px;">
+					<div class="cell-item txtdiv noborder">
+						<span class="title">选择题</span>
+					</div>
+					<div class="cell-item noborder">
+						<div class="cell-left">选择题完成<span class="rcolor">3</span><span>/4</span>个，得分：</div>
+						<div class="cell-right"><span class="rcolor">3</span>/4</div>
+					</div>
+					<div class="demo-progressbar p_tb30">
+						<div class="demo-progressbar-item">
+							<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="m-cell" style="border-radius: 4px;">
+					<div class="cell-item txtdiv noborder">
+						<span class="title">选择题</span>
+					</div>
+					<div class="cell-item noborder">
+						<div class="cell-left">选择题完成<span class="rcolor">3</span><span>/4</span>个，得分：</div>
+						<div class="cell-right"><span class="rcolor">3</span>/4</div>
+					</div>
+					<div class="demo-progressbar p_tb30">
+						<div class="demo-progressbar-item">
+							<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="m-cell" style="border-radius: 4px;">
+					<div class="cell-item txtdiv noborder">
+						<span class="title">选择题</span>
+					</div>
+					<div class="cell-item noborder">
+						<div class="cell-left">选择题完成<span class="rcolor">3</span><span>/4</span>个，得分：</div>
+						<div class="cell-right"><span class="rcolor">3</span>/4</div>
+					</div>
+					<div class="demo-progressbar p_tb30">
+						<div class="demo-progressbar-item">
+							<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="m-cell" style="border-radius: 4px;">
+					<div class="cell-item txtdiv noborder">
+						<span class="title">选择题</span>
+					</div>
+					<div class="cell-item noborder">
+						<div class="cell-left">选择题完成<span class="rcolor">3</span><span>/4</span>个，得分：</div>
+						<div class="cell-right"><span class="rcolor">3</span>/4</div>
+					</div>
+					<div class="demo-progressbar p_tb30">
+						<div class="demo-progressbar-item">
+							<div class="progress-bar progress-bars demo-progress-line" data-ydui-progressbar="{type: 'line', strokeWidth: 4, progress: .4, trailColor: '#0493f0', binder: '#J_ProgressBox'}"></div>
+						</div>
+					</div>
+				</div>
+				</div> -->
+				<div class="dingdi"></div>
+			    <div class="quick_bottom fix_bottom"style="z-index: 999;background: #fff;">
+					<button type="button" class="btn-block btn-customer" style="">
+						<a href="javascript:;">查看详情</a>
+					</button>
+				</div>
+			</section>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				var requestData = new Object();
+				requestData = GetRequest();
+				var paper_id = requestData["paper_id"];
+				var classroom_id = requestData["classroom_id"];
+				var tabType = requestData["tabType"];
+				var subject = getUrlParam("subject");
+				var purpose = "";
+				
+				addMainPageHeader("/html/understand_more/daily_achievement.html?tabType="+tabType+"&subject="+subject, "日常考试报告");
+				addMainPageFooter(4);
+				ysAjax("/courseevent/getCoursesReviewExerciseInfo", {
+					paper_id : paper_id,
+					channel : classroom_id
+				}, function(data) {
+					$('#htmllist').empty();
+					if (data.success) {
+						var html ='';
+						html =  html + ' <div class="m-cell">';
+						html =  html + ' <div class="cell-item noborder">';
+						var paperName='';
+						if(data.resultOb.typeList != '' && data.resultOb.typeList[0].paper_name != undefined && data.resultOb.typeList[0].paper_name != null) {
+							paperName = data.resultOb.typeList[0].paper_name;
+						}
+						html =  html + ' <div class="cell-left" style=" font-weight: bold;">'+paperName+'</div>';
+						var mydf = 0;
+						if(data.resultOb.mydf != undefined) {
+							mydf = data.resultOb.mydf;
+						}
+						html =  html + ' <div class="cell-right" style="color:#999"><span style="color:#999;font-size: 0.4rem;">'+mydf+'</span>分</div>';
+						html =  html + ' </div>';
+						html =  html + ' <div class="demo-progressbar">';
+						html =  html + ' <div class="demo-progress-cricle">';
+						html =  html + ' <div class="progress-bar demo-progress-cricle"  id="J_Progresss" >';
+						var mydfl = 0;
+						if(data.resultOb.mydfl != undefined) {
+							mydfl = data.resultOb.mydfl;
+						}
+						html =  html + ' <div class="progressbar-content">'+mydfl+'<span>%</span></div>';
+						html =  html + ' </div>';
+						html =  html + ' </div>';
+						html =  html + ' <div class="demo-progress-cricle">';
+						html =  html + ' <div class="progress-bar demo-progress-cricle" id="J_Progress">';
+						var bjdfl = 0;
+						if(data.resultOb.bjdfl != undefined) {
+							bjdfl = data.resultOb.bjdfl;
+						}
+						html =  html + ' <div class="progressbar-content">'+bjdfl+'<span>%</span></div>';
+						html =  html + ' </div>';
+						html =  html + ' </div>';
+						html =  html + ' </div>';
+						html =  html + ' </div>';
+						html =  html + ' <ul class="m-grids-2">';
+						html =  html + ' <li class="grids-item">';
+						html =  html + ' <div class="grids-txt">个人得分率</div>';
+						html =  html + ' </li>';
+						html =  html + ' <li class="grids-item">';
+						html =  html + ' <div class="grids-txt">班级得分率</div>';
+						html =  html + ' </li>';
+						html =  html + ' </ul>';
+						 var resources = data.resultOb.typeList;
+						 for(var i=0;i<resources.length;i++){
+							 html =  html + ' <div class="m-cell" style="border-radius: 4px;margin: 10px;">';
+							 html =  html + ' <div class="cell-item txtdiv noborder">';
+							 html =  html + ' <span class="title">'+resources[i].type_name+'</span>';
+							 html =  html + ' </div>';
+							 html =  html + ' <div class="cell-item noborder">';
+							 html =  html + ' <div class="cell-left">'+resources[i].type_name+'完成<span class="rcolor">'+resources[i].wwc+'</span><span>/'+resources[i].countnum+'</span>个，得分：</div>';
+							 html =  html + ' <div class="cell-right"><span class="rcolor">'+resources[i].goal_score+'</span>/'+resources[i].question_score+'</div>';
+							 html =  html + ' </div>';
+							 html =  html +'<div class="jdtzy" >';
+							 html =  html +'<div class="jdtw"   >';
+							 var a = resources[i].goal_score/resources[i].question_score*100;
+							html =  html +'<div class="jdtn" style="width:'+a+'%;" >';
+							html =  html +'</div>';
+							html =  html +'</div>';
+							html =  html +'</div>';
+							html =  html +'<div class="fwdiv" ></div>';
+							html =  html +'</div>';
+							}
+						 $('#htmllist').append(html);
+						 purpose = data.resultOb.purpose;
+						 $('#J_Progress').progressBar({
+								type: 'circle',
+								strokeWidth: 5,
+								strokeColor: '#B2B2B2',
+								trailWidth: 5,
+								trailColor: '#0dc77a',
+								fill: '#FFF',
+								progress: data.resultOb.bjdfl/100,
+								binder: '#J_ProgressBox'
+							});
+							$('#J_Progresss').progressBar({
+								type: 'circle',
+								strokeWidth: 5,
+								strokeColor: '#B2B2B2',
+								trailWidth: 5,
+								trailColor: '#0dc77a',
+								fill: '#FFF',
+								progress: data.resultOb.mydfl/100,
+								binder: '#J_ProgressBox'
+							});
+					} else {
+						showNotify(data.errorMsg);
+					}
+				}, function(err) {
+					showNotify("发生异常");
+				});
+				//查看详情
+			    $('.btn-customer').on('click', function (e) {
+					var html = "";
+			    	// 快速出题
+			    	if(purpose == "2") {
+                        html="/html/understand_more/daily_examination_quicknei.html?paper_id=" + paper_id+"&classroom_id="+classroom_id+"&type=1";
+			    	} else{
+                        html="/html/understand_more/daily_examination_nei.html?paper_id=" + paper_id+"&classroom_id="+classroom_id+"&type=1";
+			    	}
+                    if(getUrlParam("subject")){
+                        html += "&subject="+getUrlParam("subject");
+                    }
+                    if(getUrlParam("tabType")){
+                        html += "&tabType="+getUrlParam("tabType");
+                    }
+			    	window.location.href = html;
+			     });
+			});
+			//获取前页面参数
+			function GetRequest() {   
+				   var url = location.search; 
+				   var theRequest = new Object();
+				   //获取url中"?"符后的字串   
+				   if (url.indexOf("?") != -1) {   
+				      var str = url.substr(1);   
+				      strs = str.split("&");   
+				      for(var i = 0; i < strs.length; i ++) {   
+				         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+				      }   
+				   }   
+				   return theRequest;   
+				}   
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>鹰硕家长</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+
+	<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+	<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+	<!--学习首页 css-->
+	<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+	<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+	<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+	<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+	<script src="/static/js/jquery-2.2.4.min.js"></script>
+	<script src="/static/js/ysaddr.js"></script>
+	<style>
+		.m-cell{
+			margin-top: 0.2rem;
+			color: #999;
+			padding-right: 0.24rem;
+		}
+		.m-cell:after{
+			border-bottom: none;
+		}
+		.m-cell a{
+			display: flex;
+			padding-top: 0.3rem;
+			padding-bottom: 0.3rem;
+		}
+		.m-cell p{
+			max-height: 1.5rem;
+			white-space: initial;
+			font-size: 0.33rem;
+			font-weight: bold;
+			margin-top: 0.1rem;
+			color: #333;
+			margin-bottom: 0.19rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 1;
+		}
+		/*.m-cell p.active{
+            color:#999;
+        }*/
+		.cell-item div{
+			/*width: 100%;*/
+			/*overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            font-size: 0.28rem;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;*/
+			color: #999;
+			/* margin-bottom: 0.3rem;*/
+		}
+		.m-cell img{
+			width:1.6rem;
+			height:1.2rem;
+			border-radius: 0.1rem;
+		}
+		.no_data{
+			margin-top: 0.1rem;
+			color: #999;
+			text-align: center;
+			color: #b4b4b4;
+			font-size: 0.26rem;
+		}
+		.badge{
+			padding: 4px;
+			top: -0.1rem;
+			font-size: 0.4rem;
+		}
+
+		/*暂无数据 css*/
+		div.bg {
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			position: fixed;
+			top: 30%;
+			padding: 0 1rem;
+			font-size: 0.3rem;
+			color: #999;
+		}
+		div.bg img {
+			width: 100%;
+			margin-bottom: 0.4rem;
+		}
+		/*.J_InfiniteScrollTag,
+		.list-loading,
+		.list-donetip{
+			display: none;
+		}*/
+		body .cell-item:not(:last-child):after,
+		body .m-cell:after, body .grids-item:after, body .cell-item:not(:last-child):after, body .tab-nav:after{
+			border-bottom:0;
+			background:#e5e5e5;
+			height: 1.2px;
+		}
+	</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview" id="J_List">
+		<!--暂无数据-->
+		<!--<div class="bg">-->
+		<!--&lt;!&ndash;<div style="padding: 0 1rem; height: auto;">-->
+		<!--<img src="/static/images/homework/img_msg.png">-->
+		<!--</div>-->
+		<!--<div style="line-height:.5rem ;">暂无数据</div>&ndash;&gt;-->
+		<!--</div>-->
+		<!--<div class="m-cell" id="J_ListContent">-->
+		<div class="m-cell" id="J_ListContent">
+			<!--<a href="#" class="cell-item J_Link" data-page="1" onclick="jumpPage('https://mp.weixin.qq.com/s/crRTJvNECI0jVUkywvt8cQ')">-->
+				<!--<div class="cell-left">-->
+					<!--<div>-->
+						<!--<p class="active">干货：幼儿园毕业班老师寄语大全！干货：幼儿园毕业班老师寄语大全！干货：幼儿园毕业班老师寄语大全！干货：幼儿园毕业班老师寄语大全！</p>-->
+						<!--<div>2019/06/13 11:34</div>-->
+					<!--</div>-->
+					<!--<div >-->
+						<!--<img src="/backstage/sys/household/download/1560396854564.jpg" style="width:1.6rem;height: 1.2rem;">-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cell-right" ></div>-->
+			<!--</a>-->
+			<!--<a href="#" class="cell-item J_Link" data-page="1" onclick="jumpPage('https://mp.weixin.qq.com/s/crRTJvNECI0jVUkywvt8cQ')">-->
+				<!--<div class="cell-left">-->
+					<!--<div>-->
+						<!--<p class="">干货：幼儿园毕业班老师寄语大全！</p>-->
+						<!--<div>2019/06/13 11:34</div>-->
+					<!--</div>-->
+					<!--<div >-->
+						<!--<img src="/backstage/sys/household/download/1560396854564.jpg" style="width:1.6rem;height: 1.2rem;">-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cell-right" ></div>-->
+			<!--</a>-->
+			<!--<a href="#" class="cell-item J_Link" data-page="1" onclick="jumpPage('https://mp.weixin.qq.com/s/crRTJvNECI0jVUkywvt8cQ')">-->
+				<!--<div class="cell-left">-->
+					<!--<div>-->
+						<!--<p class="">干货：幼儿园毕业班老师寄语大全！</p>-->
+						<!--<div>2019/06/13 11:34</div>-->
+					<!--</div>-->
+					<!--<div >-->
+						<!--<img src="/backstage/sys/household/download/1560396854564.jpg" style="width:1.6rem;height: 1.2rem;">-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cell-right" ></div>-->
+			<!--</a>-->
+			<!--<a href="#" class="cell-item J_Link" data-page="1" onclick="jumpPage('https://mp.weixin.qq.com/s/crRTJvNECI0jVUkywvt8cQ')">-->
+				<!--<div class="cell-left">-->
+					<!--<div>-->
+						<!--<p class="">干货：幼儿园毕业班老师寄语大全！</p>-->
+						<!--<div>2019/06/13 11:34</div>-->
+					<!--</div>-->
+					<!--<div >-->
+						<!--<img src="/backstage/sys/household/download/1560396854564.jpg" style="width:1.6rem;height: 1.2rem;">-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cell-right" ></div>-->
+			<!--</a>-->
+			<!--<a href="#" class="cell-item J_Link" data-page="1" onclick="jumpPage('https://mp.weixin.qq.com/s/crRTJvNECI0jVUkywvt8cQ')">-->
+				<!--<div class="cell-left">-->
+					<!--<div>-->
+						<!--<p class="">干货：幼儿园毕业班老师寄语大全！</p>-->
+						<!--<div>2019/06/13 11:34</div>-->
+					<!--</div>-->
+					<!--<div >-->
+						<!--<img src="/backstage/sys/household/download/1560396854564.jpg" style="width:1.6rem;height: 1.2rem;">-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cell-right" ></div>-->
+			<!--</a>-->
+
+		</div>
+		<!--</div>-->
+	</section>
+</section>
+
+<script id="News_ListHtml" type="text/html">
+	{{each list as item}}
+	<a href="#" class="cell-item J_Link" data-page="{{list.page}}" onclick="jumpPage('{{item.url}}')">
+		<div style=" flex:1;">
+			<p class="active">{{item.title}}</p>
+			<div>{{item.createTime}}</div>
+		</div>
+		<div style="width: 1.6rem;">
+			{{if item.imgPath != null}}
+			<img src="/backstage/sys/household/download/{{item.imgPath}}" />
+			{{else}}
+			<img src="/static/images/study_img/img_banner@2x.png">
+			{{/if}}
+		</div>
+	</a>
+	{{/each}}
+</script>
+
+
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript" src="/static/plugins/art-template/template-web.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        // header
+        addMainPageHeader("/html/common/homepage.html", "资讯列表");
+//	addMainPageFooter(1);
+        // “没有更多了~”
+        $('.no_data').hide();
+
+        $('#J_List').infiniteScroll({
+            binder: '#J_List',
+            pageSize: pageSize,
+            initLoad: true,
+            backposition: true,
+            jumpLink: '.J_Link',
+            loadListFn: function () {
+                var def = $.Deferred();
+                loadMore(function (data) {
+                    if (data.result.length > 0){
+                        data.result.page = page;
+                        var html = template('News_ListHtml', {list: data.result});
+                        $('#J_ListContent').append(html).find('img').lazyLoad({binder: '#J_List'});//追加到原来数据
+                        def.resolve(data.result, page);
+                        ++page;
+                    } else {
+                        def.resolve([""]);
+                    }
+                });
+
+                return def.promise();
+            },
+            /**
+             * 当前从详情页返回列表页时调用此方法
+             * @param listData 该次所需加载的数据集合
+             * @param retPage 该次加载的页码
+             */
+            loadStorageListFn: function (listData, retPage) {
+                var def = $.Deferred();
+
+                page = retPage;
+
+                var html = '';
+                listData.forEach(function (val) {
+                    var list = val.list;
+                    list.page = val.page;
+                    html += template('News_ListHtml', {list: list});
+                });
+                $('#J_ListContent').append(html);
+
+                def.resolve();
+                return def.promise();
+            }
+        });
+    });
+
+    var page = 1, pageSize = 10;
+    var loadMore = function (callback) {
+        ysAjax("/homepage/initNews",{page: page, pageSize: pageSize},
+            function(data) {
+                typeof callback == 'function' && callback(data);
+            }, function(err) {
+                showAlert('服务器异常，请稍后重试');
+            });
+    };
+
+    function jumpPage(url) {
+        var fdStart = url.indexOf("http");
+        if(fdStart == 0){
+            buriedPoint('8');
+            window.location.href = "/html/information/information_nei.html?flag=infoList&url="+url;
+        }
+    }
+
+</script>
+</body>
+</html>

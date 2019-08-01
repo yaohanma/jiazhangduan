@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style>
+		
+			/*logo*/
+			.logo_box{
+				margin-top: 2.04rem;
+				margin-bottom: 1.05rem;
+			}
+			.logo_box img{
+				margin: 0 auto;
+			}
+			.logo_form{
+				width: 100%;
+				padding: 0.5rem;
+			}
+			.m-cell{
+				margin-bottom: 0.52rem;
+				position: relative;
+			}
+			/*.cell-item input{
+				height: 1.28rem;
+				line-height: 1.28rem;
+				color: #313340;
+			}*/
+			.cell-item input{
+				margin-top: 0.3rem;
+				padding: 0.30rem 0;
+			}
+			.cell-item input{
+				-webkit-user-select: auto!important;
+				-khtml-user-select: auto!important;
+				-moz-user-select: auto!important;
+				-ms-user-select: auto!important;
+				-o-user-select: auto!important;user-select: auto!important;
+				
+				}
+
+
+			input::-webkit-input-placeholder {
+				/*font-size: 0.28rem;*/
+		         color: #a0a4b1;
+		    }
+		    .code_btn{
+		    	min-width: 1.5rem;
+		    	height: 0.68rem;
+		    	line-height: 0.68rem;
+		    	border-radius: 10px;
+		    	background-color: #f89629;
+		    	color: #fff;
+		    	font-size: 0.3rem;
+		    	text-align: center;
+		    	padding: 0 0.2rem;
+		    	/*display: none;*/
+		    }
+		    p{
+			    color: #a0a4b1;
+			    font-size: 0.18rem;
+			    margin-bottom: 0.64rem;
+		    }
+		    .login_btn{
+		    	width: 100%;
+		    	height: 0.78rem;
+		    	border-radius: 4px;
+		    	/*background: rgba(4,147,240);*/
+		    	background: #0493f0;
+   				color: #6eb8f5;
+		    	margin-bottom: 0.48rem;
+		    }
+		    /*登录按钮 点击*/
+		    .login_btn.active{
+		    	color: #fff;
+		    }
+		    .Account_box{
+		    	text-align: right;
+		    	font-size: 0.24rem;
+		    	color: #a0a4b1;
+		    }
+		    .icon-error{
+		    	font-size: 24px;
+		    	color: #a0a4b1;
+		    	right: 0;
+		    	top: 35%;
+		    	position: absolute;
+		    	
+		    }
+		   .icon-error{
+		   	color: #a0a4b1;
+		   }
+		   body .m-navbar:after{
+		   	border-bottom:0;
+		   }
+		   .m-navbar{
+		   	position: fixed;
+		   	top: 0;
+		   	width: 100%;height: 0.9rem;
+		   	z-index: 999;
+		   	background: #fff;
+		   }
+		   /*2019/4/22 */
+		   .logo_box img{
+		   	width: 1.84rem;
+    		height: 0.65rem;
+		   }
+		 
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<section class="g-flexview">
+			<header class="m-navbar" style="">
+			    <a id="backApp" class="navbar-item">
+			    	<i class="back-ico"></i>
+			    </a>
+			     <div class="navbar-center">
+			        <span class="navbar-title"></span>
+			    </div>
+			</header>
+			<section class="g-scrollview">
+				<div class="logo_box">
+					<img src="/static/images/logo_img/login_img.png"/>
+				</div>
+				<div class="logo_form">
+					<div class="m-cell">
+					    <!--<div class="cell-item">
+					    	<input  class="cell-input" placeholder="输入邀请码" />
+					    	 <i class="icon-error"></i>
+					    </div>-->
+					    <div class="cell-item" style="-webkit-user-select:text;">
+					    	<input type="number" class="cell-input" placeholder="输入手机号码手机号用于登录/注册" type='number' pattern="[0-9]*" 
+					    		oninput="if(value.length>11)value=value.slice(0,11)"/>
+					    	<i class="icon-error"></i>
+					    </div>
+    
+					    <div class="cell-item">
+
+					        <div class="cell-left"  style="-webkit-user-select:text;"><input  class="cell-input" placeholder="短信验证码" pattern="[0-9]*" type="number"/></div>
+
+					        <label class="cell-right" style="padding-right: 0.3rem;">
+					            <button type="button" class="btn  code_btn" id="J_GetCode">获取</button>
+					        </label>
+					    </div>
+					</div>
+					<p>温馨提示：未注册鹰硕家长的手机号，登录时将自动注册（初始密码为：123456）</p>
+					<button type="button" class="btn-block login_btn active" id="loginBtn">
+						<div style="width:100%;display: block;height: 0.78rem;text-align: center;" >登录</div>
+					</button>
+					<div class="Account_box">
+						<a href="/html/login/login2.html">密码登录</a>
+					</div>
+				</div>
+				
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script>
+//			addMainPageHeader(" ", "");
+			  var $getCode = $('#J_GetCode');
+
+    /* 定义参数 */
+    $getCode.sendCode({
+        disClass: 'btn-disabled',
+        secs: 60,
+        run: false,
+        runStr: '重新获取{%s}',
+        resetStr: '重新获取验证码'
+    });
+
+    $getCode.on('click', function () {
+        /* ajax 成功发送验证码后调用【start】 */
+        YDUI.dialog.loading.open('发送中');
+        setTimeout(function(){
+            
+            YDUI.dialog.loading.close();
+            
+            $getCode.sendCode('start');
+            YDUI.dialog.toast('已发送', 'success', 1500);
+            
+        }, 1500);
+    });
+$(document).ready(function() {
+	$('#loginBtn').off().on('click', function() {
+        setupWebViewJavascriptBridge(function(bridge) {
+			var data = "";
+			bridge.callHandler('loginParent',data,function(resp){
+				//document.getElementById("show").innerHTML = "payInterface" + resp;
+			});
+        });
+        window.location.href="/html/common/homepage.html";
+	});
+
+	$('#backApp').off().on('click', function() {
+        setupWebViewJavascriptBridge(function(bridge) {
+			var data = "";
+			bridge.callHandler('backTeacher',data,function(resp){
+				//document.getElementById("show").innerHTML = "payInterface" + resp;
+			});
+        });
+	});
+});
+	  <!-- 申明交互 这段代码固定必须有 Android和ios与原生进行交互-->
+	  function setupWebViewJavascriptBridge(callback) {
+		  //android使用
+		  if (window.WebViewJavascriptBridge) {
+			  callback(window.WebViewJavascriptBridge)
+		  } else {
+			  document.addEventListener(
+				  'WebViewJavascriptBridgeReady'
+				  , function() {
+					  callback(window.WebViewJavascriptBridge)
+				  },
+				  false
+			  );
+		  }
+		  //ios使用
+		  if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+		  if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+		  window.WVJBCallbacks = [callback];
+		  var WVJBIframe = document.createElement('iframe');
+		  WVJBIframe.style.display = 'none';
+		  WVJBIframe.src = 'https://__bridge_loaded__';
+		  document.documentElement.appendChild(WVJBIframe);
+		  setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+	  }
+
+		</script>
+	</body>
+</html>

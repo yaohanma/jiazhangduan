@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/plugins/ydui/js/ydui.citys.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/plugins/iosselect/iosSelect.js"></script>
+		<style>
+	    select {
+                direction: rtl;
+         }
+         select option {
+                direction: ltr;
+         }
+         div.img_box{
+			width: 1rem;
+			height: 1rem;
+			float: left;
+			margin-right: .2rem;
+	      }
+	      div.img_box img{
+		    width: 100%;
+	       }
+	     .font-size-content{
+	         font-size: .28rem;
+           }
+          .font-color-33{
+	         color: #333333;
+	         font-weight: bold;
+	         font-size: 0.3rem;
+          }
+          .font-color-99{
+	          color: #999999;
+          }
+       div.img_box{
+		width: 1rem;
+		height: 1rem;
+		float: left;
+		margin-right: .2rem;
+		border-radius: 50%;
+	}
+	   div.img_box img{
+		width: 100%;
+		height: 100%;
+	   border-radius: 50%;
+	}
+     .m-cell:after{
+ 	   border-bottom: none;
+     }
+    /* .mytitle{
+    font-weight: bold;
+}*/
+.cell-item{
+	height: 0.88rem;
+	line-height: 0.88rem;
+}
+
+.Photograph img{
+	width: 1.76rem;
+	height: 1.76rem;
+	margin: auto;
+}
+.Photograph  .m-grids-3{
+	padding-top: 0.9rem;
+}
+.m-grids-3:before{
+	border-bottom:0 ;
+}
+.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+	border-right:0 ;
+}
+.actionsheet-item{
+	color: #313340;
+	font-size: 0.32rem;
+}
+.actionsheet-action{
+	color: #0493f0;
+	font-size: 0.36rem;
+}
+	 </style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<div class="g-scrollview">
+				<div class="m-cell" >
+				<div class="cell-item" href="javascript:;" style="height: 1.5rem;" id="change_tx">
+					    <div class="cell-left">
+					    	<p class="font-size-content font-color-33 mytitle">头像</p>
+					    </div>
+						<div class="cell-right cell-arrow">
+							<div class="img_box"><img id="headImage"></div>
+						</div>
+					</div>
+					<a class="cell-item" href="javascript:void(0);" onclick="changeNickName()">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">昵称</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    <p class="font-size-content font-color-99"  id="nickname"></p>
+						</div>
+					</a>
+					<a class="cell-item" href="javascript:;" onclick ="changeName()" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">真实姓名</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    <p class="font-size-content font-color-99" id="name"></p>
+						</div>
+					</a>
+					<a class="cell-item" href="javascript:;" onclick="changeTelNumber()" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">手机号</p>
+						</div>
+					<div class="cell-right cell-arrow">
+						<p class="font-size-content font-color-99"  id="tel"></p>
+					</div>
+				</a>
+					<a class="cell-item" href="javascript:;" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">您与孩子的关系</p>
+						</div>
+						<div class="cell-right cell-arrow">
+							<input type="hidden" id="relashipCode" />
+        				    <label id="relashipName" class="cell-right font-size-content" style="color:#999999;padding-right:0"></label>
+					    </div>
+				    </a>
+					<a class="cell-item" href="javascript:;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">出生年份</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    	<label id="brithdayYear"  class="cell-right font-size-content"  style="color:#999999;padding-right:0"></label>
+						 </div>
+					</a>
+					<a class="cell-item" href="javascript:;" >
+					    <div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">所在城市</p>
+						</div>
+						<div class="cell-right cell-arrow">
+							<input type="text" class="cell-input font-size-content" style="color:#999999;text-align: right;" readonly id="J_Address2" />
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			addMainPageHeader("/html/my/my_home.html", "个人信息");
+//			//关系下拉列表
+//			initRelationshipSelect("relashipCode", "relashipName",updaterelationship);
+			//年份下拉列表
+			initBirthdayYearSelect("brithdayYear",updateYear);
+//			//取得头像和昵称
+//			$("#headImage").attr("src", getHeadImgUrl());
+//			$("#nickname").html(getNickName());
+			//取得家长信息
+			ysAjax("/mob/homepage/getParentInfo", {
+			}, function(data) {
+			    console.log(data);
+				if (data.success) {
+					if(data.result.parentName != null && data.result.parentName != '') {
+						$("#name").html(data.result.parentName);
+					}else{
+                        $("#name").html("家长001");
+                    }
+					// add by xjy 2019.04.19
+                    if(data.result.nickname != null && data.result.nickname != '') {
+                        $("#nickname").html(data.result.nickname);
+                    }else{
+                        $("#nickname").html("家长001");
+                    }
+                    if(data.result.parentHeadImage != null && data.result.parentHeadImage != '') {
+                        var str = data.result.parentHeadImage;
+                        if(str.indexOf("http://thirdwx.qlogo.cn") == -1){
+                            $("#headImage").attr("src", ysServerAddr + "/mob/homepage/download_file?url=" + str);
+                        }else{
+                            $("#headImage").attr("src", str);
+                        }
+                    }else{
+                        // 如果没有头像显示默认头像
+                        $("#headImage").attr("src", "/static/images/default_img/default_boy.png");
+                    }
+					if(data.result.parentMobile != null && data.result.parentMobile != '') {
+						$("#tel").html(data.result.parentMobile);
+					}
+					if(data.result.relationship != null && data.result.relationship != '') {
+						$("#relashipName").text(data.result.relationship);
+                        //关系下拉列表
+                        initRelationshipSelect("relashipCode", "relashipName",updaterelationship);
+					}
+					if(data.result.birthdayYear != null && data.result.birthdayYear != '') {
+						$("#brithdayYear").html(data.result.birthdayYear);
+					}
+					if(data.result.locateCity != null && data.result.locateCity != '') {
+						$("#J_Address2").val(data.result.locateCity);
+						var strcity = $("#J_Address2").val();
+						if(strcity != null && strcity != '') {
+							var strs = strcity.split(" ");
+							$('#J_Address2').citySelect({
+						     provance: strs[0],
+						     city: strs[1],
+						     area: strs[2]
+						  });
+						}
+					}
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+
+			$("#relashipName").on('click',function () {
+				if($("#relashipName").text()){
+
+				}else{
+                    showAlert('您还没有绑定孩子,请先绑定孩子');
+				}
+            })
+
+			var $target = $('#J_Address2');
+	        $target.on('click', function (event) {
+	            event.stopPropagation();
+	            $target.citySelect('open');
+	        });
+
+	        $target.on('done.ydui.cityselect', function (ret) {
+	            $(this).val(ret.provance + ' ' + ret.city +' ' + ret.area);
+	            //更新所在地址
+	            updateLocateCity($(this).val());
+	        });
+	        
+	        $(".select-area .select-value").each(function(){
+                if( $(this).next("select").find("option:selected").length != 0 ){
+                    $(this).text( $(this).next("select").find("option:selected").text() );
+                }
+            });
+            $(".select-area select").change(function(){
+                var value = $(this).find("option:selected").text();
+                $(this).parent(".select-area").find(".select-value").text(value);
+            });
+
+            //更换头像
+             $('#change_tx').on('click', function () {
+                 api.actionSheet({
+                     cancelTitle: '取消',
+                     buttons: ['拍照', '手机相册']
+                 }, function(ret, err) {
+                     if (ret) {
+                         // 调用拍照功能
+                         getPicture(ret.buttonIndex);
+                     }
+                 });
+		    });
+
+		});
+		
+		//修改家长姓名
+		function changeName(){
+		    var searchUrl =encodeURI("/html/my/my_change_name.html?name= " + $("#name").html())
+		    window.location.href=searchUrl;
+		}
+        //修改家长昵称
+		function changeNickName(){
+		    var searchUrl =encodeURI("/html/my/my_change_nickname.html?name= " + $("#nickname").text())
+		    window.location.href=searchUrl;
+		}
+
+		//修改手机号码
+		function changeTelNumber(){
+			    window.location.href="/html/my/my_change_telnumber.html?telNumber= " + $("#tel").html();
+		}
+		
+		//更新关系
+		function updaterelationship() {
+			ysAjax("/mob/homepage/updateRelationship", {
+				relationship : $("#relashipCode").val()
+			}, function(data) {
+				if (!data.success) {
+					showNotify("与孩子关系更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+		
+		//更新年
+		function updateYear(){
+			ysAjax("/mob/homepage/updateBirthdayYear", {
+				brthdayYear : $("#brithdayYear").text()
+			}, function(data) {
+				if (!data.success) {
+					showNotify("出生年分更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+		
+		//更改地区
+		function updateLocateCity(city){
+			ysAjax("/mob/homepage/updateLocateCity", {
+				locateCity : city
+			}, function(data) {
+				if (!data.success) {
+					showNotify("出生年分更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+		function getPicture(sourceType) {
+            if (sourceType == 1) { // 拍照
+                //获取一张图片
+                let FNPhotograph = api.require('FNPhotograph');
+                FNPhotograph.open({
+                    path: 'fs://savePath',
+                    album: false ,
+                    quality: 'high',
+                    qualityValue : 90
+                }, function(ret){
+                    if (!!ret && ret.eventType == 'takePhoto') {
+                        FNPhotograph.close();
+                        //alert(JSON.stringify(ret));
+                        saveImg(ret.imagePath);
+					}
+                });
+            } else if (sourceType == 2) { // 从相册中选择
+                // 从相册里选择图片
+                let UIMediaScanner = api.require('UIMediaScanner');
+                UIMediaScanner.open({
+                    type: 'picture',
+                    column: 4,
+                    classify: true,
+                    max: 1,
+                    sort: {
+                        key: 'time',
+                        order: 'desc'
+                    },
+                    texts: {
+                        stateText: '已选择*项',
+                        cancelText: '取消',
+                        finishText: '完成'
+                    },
+                    styles: {
+                        bg: '#fff',
+                        mark: {
+                            icon: '',
+                            position: 'bottom_left',
+                            size: 20
+                        },
+                        nav: {
+                            bg: '#eee',
+                            stateColor: '#000',
+                            stateSize: 18,
+                            cancelBg: 'rgba(0,0,0,0)',
+                            cancelColor: '#000',
+                            cancelSize: 18,
+                            finishBg: 'rgba(0,0,0,0)',
+                            finishColor: '#000',
+                            finishSize: 18
+                        }
+                    },
+                    /*scrollToBottom: {
+                        intervalTime: 3,
+                        anim: true
+                    },*/
+                    exchange: true,
+                    rotation: true
+                }, function (ret) {
+                    if (!!ret) {
+                        if (ret.list && ret.list.length > 0) {
+                            saveImg(ret.list[0].path);
+						}
+                    }
+                });
+            }
+        }
+        function saveImg(path) {
+            // 出现加载中
+            api.showProgress({
+                animationType: 'fade',
+                title: '上传图片中',
+                text: '',
+            });
+            // 上传图片
+            api.ajax({
+                method:"POST",
+                url: 'https://tsdevhouse.ys100.com' + ysServerAddr + '/mob/homepage/upload_file',
+                data:{
+                    files: {
+                        uploadFile:path
+                    }
+                },
+                headers : getHeaderParam(),
+                dataType:'json',
+                async:true
+            },function(ret,err){
+                if (!!ret && ret.success) {
+                    $("#headImage").attr("src", ysServerAddr + "/mob/homepage/download_file?url=" + ret.result);
+                    showNotify("上传头像成功");
+                } else {
+                    alert(JSON.stringify(err))
+                    showNotify("上传头像失败");
+				}
+                // 成功后删除加载中
+                api.hideProgress();
+            })
+        }
+	
+		</script>
+		<!--更换头像 弹框-->
+		<div class="m-actionsheet Photograph" id="J_ActionSheet">
+		   <div class="m-grids-3">
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt">
+			        	<img src="/static/images/appimg/Photograph@2x.png">
+			        </div>
+			    </a>
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt"><img src="/static/images/appimg/Avatarsample110@2x.png"></div>
+			    </a>
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt"><img src="/static/images/appimg/Avatarsample110@2x.png"></div>
+			    </a>
+			    
+			</div>
+
+		    <a href="#" class="actionsheet-item">相册选取</a>
+		    <a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
+		</div>
+	</body>
+
+</html>

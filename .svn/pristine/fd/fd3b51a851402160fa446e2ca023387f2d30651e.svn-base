@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		
+		<style>
+			body{
+				background: #fff;
+				
+			}
+			.no_data{
+				width: 3.24rem;
+				margin-left:35%;
+			}
+	  		.no_data img{
+	  			width: 3.24rem;
+	  			height: 3.04rem;
+	  			margin-top: 25%;
+	  		}
+	  		.no_data p{
+	  			padding-left: 0.2rem;
+	  			color: #888a97;
+	  			font-size: 0.24rem;
+	  			margin-top: 0.3rem;
+	  		}
+	  		.no_data_text{
+	  			display: inline-block;
+	  			color: #888a97;
+	  			font-size: 0.24rem;
+	  			margin-left:30%;
+	  			margin-top: 0.3rem;
+	  			
+	  		}
+	  		.no_data_text a{
+	  			color:#0493f0;
+	  		}
+		</style>
+	</head>
+
+<body>
+	<section class="g-flexview">
+		<section class="g-scrollview">
+			<div class="no_data">
+				<img src="/static/images/newAPPimg/no_data.png" />
+				<p>暂无孩子信息哦~</p>
+			</div>
+			<p class="no_data_text"><a href="/html/login/set_children.html?flag=1">添加孩子</a>可查看孩子信息</p>
+		</section>
+	</section>
+	<script src="/static/plugins/ydui/js/ydui.js"></script>
+	<script src="/static/js/yswxcommon.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("/html/my/my_home.html", "我的孩子");
+//				 $('.wrapper03').navbarscroll({});
+			});
+			
+		
+		</script>
+</body>
+
+</html>

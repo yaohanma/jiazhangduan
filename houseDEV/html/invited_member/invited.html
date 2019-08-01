@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<style>
+			.invited_box {
+				width: 100%;
+				height: 100%;
+				padding: 0.3rem .24rem;
+			}
+			
+			.invited_box .m-grids-2 {
+				background: none;
+				margin-bottom: 0.2rem;
+			}
+			
+			.invited_box .m-grids-2 a {
+				-moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02);
+				-webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02);
+				box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02);
+			}
+			
+			.invited_box .m-grids-2 .grids-item {
+				width: 48%;
+				height: 3.36rem;
+				background: #fff;
+				border-radius: 6px;
+			}
+			
+			.invited_box .m-grids-2 .grids-item:nth-child(2) {
+				float: right;
+			}
+			
+			.invited_box .m-grids-2 .grids-item:not(:nth-child(2n)):before,
+			.invited_box .m-grids-2:before,
+			.invited_box .grids-item:after {
+				content: none;
+			}
+			
+			.invited_box .img_box {
+				width: 1rem;
+				height: 1rem;
+				margin: 0 auto;
+				border-radius: 50%;
+				margin-top: 0.5rem;
+				margin-bottom: 0.2rem;
+			}
+			
+			.invited_box .img_box img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+			
+			.invited_box .grids-txt {
+				color: #333333;
+				font-size: 0.3rem;
+			}
+			
+			.invited_box p {
+				text-align: center;
+				font-size: 0.24rem;
+				color: #999999;
+				margin-top: 0.13rem;
+			}
+			
+			.zhezhao {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, .5);
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				display: none;
+			}
+			
+			.zhezhao>div {
+				width: 4.33rem;
+				height: 2.89rem;
+				float: right;
+				background: url(/static/images/invited/img_share@2x.png) center no-repeat;
+				background-size: 100%;
+				margin-right: 0.45rem;
+				margin-top: 0.9rem;
+			}
+			
+			.m-actionsheet img {
+				width: 0.94rem;
+				height: 0.94rem;
+				margin: 0 auto;
+			}
+			
+			.m-actionsheet p {
+				margin-top: 0.25rem;
+				font-size: 0.28rem;
+				color: #333;
+			}
+			
+			.m-actionsheet .m-grids-2 {
+				height: 2.18rem;
+			}
+			
+			.m-actionsheet .m-grids-2 .grids-item:not(:nth-child(2n)):before {
+				border-right: 0;
+			}
+			
+			.m-actionsheet .grids-item:after {
+				border-bottom: 0;
+			}
+			
+			.m-grids-2 .grids-item:not(:nth-child(2n)):before,
+			.m-grids-2:before,
+			{
+				border: 0;
+			}
+			
+			div.bgnone {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				position: fixed;
+				top: 30%;
+				padding: 0 1rem;
+				font-size: 0.3rem;
+				color: #999;
+			}
+			
+			div.bgnone img {
+				width: 100%;
+				margin-bottom: 0.4rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="m-actionsheet" id="J_ActionSheet">
+			<div class="m-grids-2">
+				<a tapmode onclick="shareWebpage('session')" class="grids-item">
+					<div class="grids-txt">
+						<img src="/static/images/appimg/weixin.png">
+						<p>微信好友</p>
+					</div>
+				</a>
+				<a tapmode onclick="shareWebpage('timeline')" class="grids-item">
+					<div class="grids-txt"><img src="/static/images/appimg/pengyouquan.png">
+						<p>朋友圈</p>
+					</div>
+				</a>
+			</div>
+			<a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
+		</div>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="invited_box">
+					<!--<div class="m-grids-2">
+						<a href="#" class="grids-item">
+							<div class="img_box">
+								<img src="/static/images/common/img_moren.png" />
+							</div>
+							<div class="grids-txt"><span>李白的妈妈</span></div>
+							<p>13956043516</p>
+						</a>
+						<a href="#" class="grids-item">
+							<div class="img_box">
+								<img src="/static/images/common/img_moren.png" />
+							</div>
+							<div class="grids-txt"><span>李白的妈妈</span></div>
+							<p>13956043516</p>
+						</a>
+					</div>
+					<div class="m-grids-2">
+						<a href="#" class="grids-item">
+							<div class="img_box">
+								<img src="/static/images/common/img_moren.png" />
+							</div>
+							<div class="grids-txt"><span>李白的妈妈</span></div>
+							<p>13956043516</p>
+						</a>
+						<a href="#" class="grids-item">
+							<div class="img_box invite_btn">
+								<img src="/static/images/invited/icon_add@2x.png" />
+							</div>
+							<div class="grids-txt"><span>邀请家人</span></div>
+						</a>
+					</div>-->
+				</div>
+				<div class="zhezhao">
+					<div class="bg">
+					</div>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			//			var wx;
+			//			apiready = function() {
+			//				wx = api.require('wx');
+			//			};
+
+			$(document).ready(function() {
+				// header
+				addMainPageHeader("/html/my/my_home.html", "邀请家人", {
+					hasIcon: true,
+					text: "",
+
+				});
+				//				addMainPageFooter(3);
+				// 家长列表
+				parentList();
+			}); // ready
+			var $as = $('#J_ActionSheet');
+
+			function parentList() {
+				ysAjax("/invitation/init", {}, function(data) {
+					if(data.success) {
+						var parents = data.result;
+						if(parents == undefined || parents == null || parents == '') {
+							var html = '<div class="bgnone"><div style="padding: 0 1rem; height: auto;">' +
+								'<img src="/static/images/homework/img_msg.png"></div>' +
+								'<div style="line-height:.5rem ;">请绑定孩子账号后，再邀请家人~</div></div>';
+							$(".invited_box").html(html);
+							return;
+						}
+						var html = '';
+						var default_text = '';
+						if(parents != null && parents != undefined && parents.length > 0) {
+							for(var i = 0; i < parents.length; i++) {
+								var item = parents[i];
+								if(i % 2 == 0) {
+									html = html + '<div class="m-grids-2"> ';
+								}
+								html = html + '	<a href="javascript:;" class="grids-item"> ';
+								html = html + '		<div class="img_box"> ';
+								if(item.parent_head_image == '') {
+									html = html + '		<img src="/static/images/invited/default@2x.png" />';
+								} else if(item.parent_head_image.indexOf("http://thirdwx.qlogo.cn") == -1) {
+									html = html + '		<img src="' + ysServerAddr + '/mob/homepage/download_file?url=' + item.parent_head_image + '" /> ';
+								} else {
+									html = html + '		<img src="' + item.parent_head_image + '" /> ';
+								}
+								html = html + '		</div> ';
+								html = html + '		<div class="grids-txt"><span>' + item.par_call + '</span></div> ';
+								html = html + '		<p>' + item.parent_mobile + '</p> ';
+								html = html + '	</a> ';
+								if((i + 1) % 2 == 0) {
+									html = html + '</div> ';
+								}
+							}
+							if(parents.length % 2 != 0) {
+								default_text = default_text + '	<a href="javascript:;" class="grids-item">';
+								default_text = default_text + '	<div class="img_box invite_btn">';
+								default_text = default_text + '	<img src="/static/images/invited/icon_add@2x.png" />';
+								default_text = default_text + '	</div>';
+								default_text = default_text + '	<div class="grids-txt"><span>邀请家人</span></div>';
+								default_text = default_text + '	</a> ';
+								$('.invited_box').html(html);
+								$("div[class='m-grids-2']:last").append(default_text)
+							} else {
+								default_text = default_text + '<div class="m-grids-2"> ';
+								default_text = default_text + '	 <a href="javascript:;" class="grids-item">';
+								default_text = default_text + '	 <div class="img_box invite_btn">';
+								default_text = default_text + '	   <img src="/static/images/invited/icon_add@2x.png" />';
+								default_text = default_text + '	 </div>';
+								default_text = default_text + '	 <div class="grids-txt"><span>邀请家人</span></div>';
+								default_text = default_text + '	 </a> ';
+								default_text = default_text + '</div> ';
+								html = html + default_text;
+								$('.invited_box').html(html);
+							}
+							/*邀请家人*/
+							//							$(".invite_btn").click(function() {
+							//								$(".zhezhao").show();
+							//							})
+							//							$(".zhezhao").click(function() {
+							//								$(".zhezhao").hide();
+							//							})
+
+							$('.invite_btn').on('click', function() {
+								$as.actionSheet('open');
+							});
+							$('#J_Cancel').on('click', function() {
+								$as.actionSheet('close');
+							});
+							$('a', $as).on('click', function() {
+								$as.actionSheet('close');
+							});
+						}
+					}
+				});
+			}
+			// APP中分享网页 added by stt 20190505
+			function shareWebpage(Vscene) {
+				// 邀请码
+				var invitate_code = '';
+				var domain = '';
+				var nickname = '';
+				var openid = getUserId(); // 手机号
+				var stu_id = '';
+				var app_id = 'share1225';
+				var auth_key = 'wx_share_qzedJ2JrpKeJIP6kGtQBdNeWuxNTvNIY';
+				let wx = api.require('wx');
+				ysAjax("/invitation/get_inviteCode", {}, function(data) {
+					if(data.success) {
+						$as.actionSheet('close'); // 关闭分享弹窗
+						var item = data.result;
+						stu_id = item.stu_id;
+						invitate_code = item.invitation_code;
+						domain = item.domain;
+						domain = 'https://tsdevhouse.ys100.com';
+						nickname = item.nickname;
+						if(item.nickname == '') {
+							nickname = '有人';
+						}
+						// apicloud
+						//						wx.isInstalled(function(ret, err) {
+						//							if(ret.installed) {
+						// alert("当前设备已安装微信客户端");
+						wx.shareWebpage({
+							apiKey: 'wx6d38404a28adb5e3',
+							scene: Vscene,
+							title: nickname + ' 邀请你加入鹰硕家校通',
+							description: '家校互联互通，用爱呵护孩子成长',
+							thumb: 'widget://res/iconfont-touxiang.png',
+							contentUrl: domain + '/html/invited_member/invited_code.html?invitate_code=' + invitate_code + "&stu_id=" + stu_id + "&openid=" + openid + "&app_id=" + app_id + "&auth_key=" + auth_key
+						}, function(ret, err) {
+							if(ret.status) {
+								//										alert(JSON.stringify(ret))
+							} else {
+								//										alert(JSON.stringify(err))
+								alert('发送失败！');
+							}
+						});
+						//							} else {
+						//								
+						//								alert(JSON.stringify());
+						//							}
+						//						});
+
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

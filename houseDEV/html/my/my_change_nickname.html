@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<link rel="stylesheet" href="/static/css/my/my.css"/>
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<style type="text/css">
+			body .m-cell:after, body .grids-item:after, body .cell-item:not(:last-child):after, body .tab-nav:after{
+				 content: none;
+				}
+		   .font-size-title{
+				font-size: .33rem;
+			}
+			.font-size-content{
+				font-size:  .33rem;
+			}
+			.font-color-33{
+				color: #333333;
+			}
+		/*2019/4/22 修改*/
+		.input_name {
+			width: 100%;
+			
+		}
+		.input_name input{
+			border: 0;
+			width: 100%;
+			margin-right: 0.24rem;
+		}
+		input::-webkit-input-placeholder {
+			font-weight: bold;
+			font-size: 0.3rem;
+		}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell"  style="margin-top: .3rem;margin-bottom: .6rem;">
+					<div class="cell-item" style="height: 80px;">
+						<div class="cell-left input_name">
+							<!--<p class="font-size-title font-color-33">黄小米</p>-->
+							<!--2019/4/22 修改-->
+							<input type="text" id="name" maxlength="20" placeholder="请输入昵称" >
+						</div>
+						<!-- 2019/4/22 修改<div class="cell-right">
+						    <input type="text" id="name" maxlength="20" class="cell-input font-size-content font-color-33" style="text-align:right;" autocomplete="off"/>
+						</div>-->
+					</div>
+				</div>
+				<div class="cell-item-customer">
+					<button class="btn-block btn-customer" id="btnNext">保存</button>
+				</div>
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				addMainPageHeader("my_information.html", "修改昵称");
+				var requestData = new Object();
+				requestData = GetRequest();
+				var name = requestData["name"];
+				if(name != null && name != '') {
+					$("#name").val(name);
+				}
+				$("#name").on('input',function(e){  
+					var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
+					var nameValue = $("#name").val();
+					var nameValueRe = nameValue.replace(regStr, '');
+					if(nameValue != nameValueRe) {
+						showNotify("不能输入表情符");
+						$("#name").val(nameValueRe);
+					}
+					}); 
+				$("#btnNext").on("click", function() {
+					ysAjax("/mob/homepage/updateNickName", {
+						name : $("#name").val()
+					}, function(data) {
+						if (data.success) {
+							window.location.href="/html/my/my_information.html";
+						} else {
+							showNotify("姓名更新失败");
+						}
+					}, function(err) {
+						showNotify("发生异常");
+					});
+				})
+			});
+			
+			//获取前页面参数
+			function GetRequest() {   
+				   var url = location.search; 
+				   var theRequest = new Object();
+				   //获取url中"?"符后的字串   
+				   if (url.indexOf("?") != -1) {   
+				      var str = url.substr(1);   
+				      strs = str.split("&");   
+				      for(var i = 0; i < strs.length; i ++) {   
+				         theRequest[strs[i].split("=")[0]]=unescape(decodeURI(strs[i].split("=")[1]));   
+				      }   
+				   }   
+				   return theRequest;   
+				}   
+		</script>
+	</body>
+
+</html>

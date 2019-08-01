@@ -1,0 +1,9 @@
+workIndex     --工作首页
+
+allActivitys   --全部活动
+activityDetail --活动详情
+createActivity --创建活动
+
+allResource    --全部资源
+resourceDetail --资源详情
+createResource --创建资源

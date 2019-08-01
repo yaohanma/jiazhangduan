@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+		<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+		<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+		<!--学习首页 css-->
+		<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+		
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/plugins/iosselect/iosSelect.js"></script>
+		<style>
+			input::-webkit-input-placeholder {
+		         color: #a0a4b1;
+		    }
+			.radio_box>div{
+				width: 100%;
+				text-align: left;
+			}
+			
+			.radio_box .advice{
+				display: inline-block;
+				width: 1.2rem;
+				height: 0.5rem;
+				border-radius: 2px;
+				border: 1px solid #a0a4b1;
+				text-align: center;
+				line-height: 0.5rem;
+				margin-left: 0.1rem;
+			}
+			.cell-right.radio_box input{
+				display: none;
+			}
+			.cell-right.radio_box input[type="radio"]:checked + .advice{
+				background: #0493f0;
+				color: #fff;
+				border:1px solid #0493f0;
+			}
+			.login_btn {
+			    width: 100%;
+			    height: 0.78rem;
+			    line-height: 0.78rem;
+			    border-radius: 4px;
+			    background: #0493f0;
+			    color: #6eb8f5;
+			    margin-bottom: 0.48rem;
+			    color: #fff;
+			}
+			.layui-layer.my_layer{
+				border-radius:0;
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+			.my_layer{
+				padding: 0.25rem 0.8rem;
+				border-radius: 0;
+			}
+			.my_layer .img_box img{
+				width: 1.12rem;
+				height: 1.12rem;
+				margin: 0 auto;
+			}
+			.my_layer .title{
+				color: #313340;
+				font-size: 0.36rem;
+				text-align: center;
+				font-weight: bold;
+				margin-top: 0.15rem;
+			}
+			.my_layer p{
+				font-size: 0.28rem;
+				margin-top:0.52rem ;
+				color: #313340;
+			}
+			.my_layer p span{
+				margin-right: 0.15rem;
+			}
+			.my_layer .layui-layer-btn{
+				text-align: center;
+			}
+			.my_layer .layui-layer-btn0{
+				width: 100%;
+				height: 0.78rem;
+				line-height: 0.78rem;
+				font-size: 0.28rem;
+				margin: 0 auto;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="m-cell">
+				    <div class="cell-item">
+				        <div class="cell-left">孩子姓名：</div>
+				        <div class="cell-right"><input type="" class="cell-input" placeholder="请输入您的真实姓名" /></div>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子性别：</div>
+				        <div class="cell-right radio_box">
+				        	<div>
+				        		<label>
+					                <input type="radio" name="type" id="adviceRadio1" value="1" checked hidden/>
+					                <label for="adviceRadio1" class="advice">男</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="type" id="adviceRadio2" value="2" hidden/>
+					                <label for="adviceRadio2" class="advice">女</label>
+					            </label>
+				        	</div>
+				        	
+					        
+					        
+				        </div>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子出生日期：</div>
+				        <label class="cell-right cell-arrow" id="selectDate" style="color:#a0a4b1">
+				           <div style="text-align:left;width: 100%;">2019年05月10日</div> 
+				        </label>
+				    </div>
+				    <div class="cell-item">
+				        <div class="cell-left">孩子学段：</div>
+				        <div class="cell-right radio_box">
+				        	<div>
+				        		<label>
+					                <input type="radio" name="learning" id="adviceRadio3"  checked hidden/>
+					                <label for="adviceRadio3" class="advice">幼儿园</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning" id="adviceRadio4" hidden/>
+					                <label for="adviceRadio4" class="advice">小学</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning" id="adviceRadio5"  hidden/>
+					                <label for="adviceRadio5" class="advice">初中</label>
+					            </label>
+					            <label>
+					                <input type="radio" name="learning"  id="adviceRadio6"  hidden/>
+					                <label for="adviceRadio6" class="advice">高中</label>
+					            </label>
+				        	</div>
+				        	
+					        
+					        
+				        </div>
+				    </div>
+				</div>
+
+				<div style="margin: 0 0.48rem;">
+					<button type="button" class="btn-block login_btn" >确定</button>
+				</div>
+				
+			</section>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script src="/static/js/layer/layer.js"></script>
+		<script>
+			$(document).ready(function() {
+				addMainPageHeader("/html/login/set_children.html", "创建孩子");
+				var selectDateDom = $('#selectDate');
+				var now = new Date();
+			    var nowYear = now.getFullYear();
+			    var nowMonth = now.getMonth() + 1;
+			    var nowDate = now.getDate();
+   
+			    // 数据初始化
+			    function formatYear (nowYear) {
+			        var arr = [];
+			        for (var i = nowYear - 5; i <= nowYear + 5; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i 
+			            });
+			        }
+			        return arr;
+			    }
+			    function formatMonth () {
+			        var arr = [];
+			        for (var i = 1; i <= 12; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i 
+			            });
+			        }
+			        return arr;
+			    }
+			    function formatDate (count) {
+			        var arr = [];
+			        for (var i = 1; i <= count; i++) {
+			            arr.push({
+			                id: i + '',
+			                value: i
+			            });
+			        }
+			        return arr;
+			    }
+		    var yearData = function(callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            callback(formatYear(nowYear))
+		        // }, 2000)
+		    }
+		    var monthData = function (year, callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            callback(formatMonth());
+		        // }, 2000);
+		    };
+		    var dateData = function (year, month, callback) {
+		        // settimeout只是模拟异步请求，真实情况可以去掉
+		        // setTimeout(function() {
+		            if (/^(1|3|5|7|8|10|12)$/.test(month)) {
+		                callback(formatDate(31));
+		            }
+		            else if (/^(4|6|9|11)$/.test(month)) {
+		                callback(formatDate(30));
+		            }
+		            else if (/^2$/.test(month)) {
+		                if (year % 4 === 0 && year % 100 !==0 || year % 400 === 0) {
+		                    callback(formatDate(29));
+		                }
+		                else {
+		                    callback(formatDate(28));
+		                }
+		            }
+		            else {
+		                throw new Error('month is illegal');
+		            }
+		        // }, 2000);
+		        // ajax请求可以这样写
+		        /*
+		        $.ajax({
+		            type: 'get',
+		            url: '/example',
+		            success: function(data) {
+		                callback(data);
+		            }
+		        });
+		        */
+		    };
+		    selectDateDom.bind('click', function () {
+		       
+		        var iosSelect = new IosSelect(3, 
+		            [yearData, monthData, dateData],
+		            {
+		                title: '孩子出生日期',
+		                itemHeight: 35,
+		                showLoading: true,
+		                
+		        });
+		    });
+		    
+		    //创建成功弹窗
+		     $(".login_btn").click(function(){
+				layer.open({
+				  type: 1 //Page层类型
+				  , area: ['90%', '9rem']//宽高
+				  ,title:false
+				  ,closeBtn:0
+				  ,shade: 0.6 //遮罩透明度
+				  ,maxmin:false
+				  ,anim: 1 //0-6的动画形式，-1不开启
+				  ,skin:"my_layer"
+				  ,closeBtn: 0 //不显示关闭按钮
+				  ,shadeClose: true //开启遮罩关闭
+				  ,content: $("#success_box")
+				   ,btn: ['确定并绑定孩子'],
+				   yes:function(index,layero){
+
+					//alert("点击确认按钮触发事件")
+					
+					layer.close(index); //关闭弹出框
+					 location.href="/html/login/choice_relation.html"
+					
+					}
+				}); 
+			})
+	     
+			})
+		</script>
+	</body>
+	<div  id="success_box" class="my_layer">
+		<div class="img_box">
+			<img src="/static/images/newAPPimg/chuangjian2x.png" />
+		</div>
+		<div class="title">创建成功</div>
+		<p>
+			<span>孩子姓名：</span>陈小清
+		</p>
+		<p>
+			<span>孩子性别：</span>女
+		</p>
+		<p>
+			<span>孩子出生日期：</span>2019年05月10日
+		</p>
+		<p>
+			<span>孩子学段：</span>幼儿园
+		</p>
+		<p style="color: #313340;font-weight: bold;">
+			<span>孩子账号：</span>xxxxxxxxxxxxxx
+		</p>
+		<p style="color: #313340;font-weight: bold;">
+			<span>孩子密码：</span>123456
+		</p>
+		
+		
+	</div>
+</html>

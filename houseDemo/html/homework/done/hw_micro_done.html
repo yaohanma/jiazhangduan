@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+		<link href="/static/plugins/videojs/video-js.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/static/js/layer/theme/default/layer.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/homework/homework.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.quick {
+				width: 100%;
+				/*height: 4rem;*/
+				background-color: #ffffff;
+				margin-top: 0.25rem;
+				padding: 0.3rem;
+				padding-bottom: 0;
+			}
+			
+			.quick .quick_title {
+				font-size: 0.36rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.quick .quick_sub {
+				color: #0493f0;
+				padding-top: 0.3rem;
+				font-size: 0.24rem;
+			}
+			
+			.question_content {
+				width: 100%;
+				height: auto;
+				background-color: #ffffff;
+				padding: .3rem;
+				padding-top: 0.59rem;
+				padding-bottom: 0.4rem;
+				/*min-height: 8.1rem;*/
+			}
+			
+			.question_content .question_content_title {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.btn-customer {
+				background-color: #0493F0;
+				color: #FFFFFF;
+			}
+			
+			.btn-hollow {
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer {
+				background-color: #FFF;
+				color: #0493F0;
+			}
+			
+			.btn-hollow-customer:after {
+				content: '';
+				width: 200%;
+				height: 143%;
+				position: absolute;
+				top: 0.15rem;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border-right: 2px solid #CCCCCC;
+				/* border-radius: 6px;*/
+			}
+			
+			.btn {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				height: 0.88rem;
+				line-height: 1rem;
+				display: inline-block;
+				padding: 0 .2rem;
+				border-radius: 10px 0 0 10px;
+				width: 0.88rem;
+				margin-top: .5rem;
+				font-size: 0.3rem;
+			}
+			
+			.btn-hollow:after {
+				content: '';
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				border: 1px solid #cccccc;
+				border-radius: 10px;
+			}
+			
+			.quick_bottom {
+				width: 100%;
+				height: 1.43rem;
+				background-color: #ffffff;
+				margin-top: 0.3rem;
+				padding: 0.3rem;
+				position: fixed;
+				bottom: 1.1rem;
+				z-index: 99;
+			}
+			
+			.btn-block {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 6.9rem;
+				display: block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				margin-top: 0;
+				border-radius: 10px;
+			}
+			
+			.btn-block-customer {
+				text-align: center;
+				position: relative;
+				border: none;
+				pointer-events: auto;
+				width: 3.3rem;
+				display: inline-block;
+				font-size: 0.36rem;
+				height: 0.85rem;
+				line-height: 0.85rem;
+				border-radius: 10px;
+			}
+			
+			.float_button {
+				position: fixed;
+				width: 2rem;
+				height: 0.7rem;
+				background-color: #4FB3F4;
+				right: -0.15rem;
+				bottom: 2.7rem;
+				border-radius: 10px;
+				color: #ffffff;
+				padding: 0.15rem;
+				font-size: 0.26rem;
+				z-index: 1000;
+			}
+			
+			.decided {
+				width: 3rem;
+				height: 0.88rem;
+				display: inline-block;
+				border: 1px solid #0493F0;
+				border-radius: 10px;
+				margin-top: .5rem;
+				border-left: none;
+			}
+			
+			.decide {
+				width: 3rem;
+				display: inline-block;
+				border: 1px solid #CCCCCC;
+				border-radius: 10px;
+				margin-top: .5rem;
+			}
+			
+			.input_frame {
+				width: 6.9rem;
+				/*border: 1px solid #0493F0;*/
+				height: 1.2rem;
+				border-radius: 10px;
+				margin-top: .3rem;
+				padding: 0.2rem;
+				box-shadow: 1px 1px 8px 4px #ebebeb;
+			}
+			
+			.input_frame.active {
+				border: 1px solid #0493F0;
+			}
+			
+			.input_frame img {
+				width: 0.8rem;
+				height: 0.8rem;
+				display: inline-block;
+			}
+			
+			.short_question {
+				width: 100%;
+				height: 3rem;
+				border-radius: 10px;
+				border: 1px solid #cccccc;
+				margin-top: 0.2rem;
+				padding: 0.31rem;
+				color: #b2b2b2;
+				font-size: 0.3rem;
+			}
+			
+			.question_stem {
+				margin-top: 0.29rem;
+				color: #999999;
+				font-size: 0.28rem;
+				margin-bottom: 0.4rem;
+				font-weight: bold;
+				word-wrap: break-word;
+			}
+			
+			.task {
+				margin-top: 0.4rem;
+				width: 100%;
+				height: auto;
+			}
+			
+			.task p {
+				font-size: 0.28rem;
+				color: #666666;
+			}
+			
+			.video-js {
+				width: 100%;
+			}
+			.ys_video-dimensions{
+				height:3.6rem;	
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+			<section class="g-scrollview">
+				<div class="quick">
+					<p class="quick_title">数学：空间几何体的体积与表面积</p>
+					<p class="quick_sub"><u class="layui-btn">回看知识点</u></p>
+				</div>
+				<div class="question_content">
+					<div class="question_describe">
+						<!-- 题干 -->
+						<p class="question_stem">
+							请同学们观看微课后，完成作业。
+						</p>
+						<!--  -->
+						<div id="fill_question">
+							<!--<video controls="controls" preload="auto" poster="">
+			                    <source src="/static/images/homework/Wildlife.wmv" type="video/wmv">
+			                </video>-->
+							<div class="video-play">
+								<video id="ys_video" style="z-index: 0;" class="video-js ys-video vjs-big-play-centered" controls preload="auto" poster="/" data-setup="{}"  value="transparent">
+									<p class="vjs-no-js">
+										您的浏览器不支持我，呜呜呜~~~~~~~~~~~~~
+										<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+									</p>
+									<source src="" type="video/mp4">
+									<source src="" type="video/x-flv">
+									<source src="" type="video/webm">
+								</video>
+								<div id="playFinish" class="play-finish ys-video pull-middle" hidden>
+									<span class="middle"></span>
+								</div>
+							</div>
+							<input type="hidden" value="" id="video_src" />
+						</div>
+					</div>
+				</div>
+				<div class="quick_bottom">   
+					<a type="button" class="btn-block btn-customer" onclick="micro_detail();">查看作业</a>
+				</div>
+				<div class="float_button">
+					<a href="/html/homework/hw_list.html?f_flag=1">返回作业列表</a>
+				</div>
+				<section/>
+			</section>
+			<script src="/static/plugins/ydui/js/ydui.js"></script>
+			<script src="/static/js/yswxcommon.js"></script>
+			<script src="/static/plugins/videojs/video.js"></script>
+			<script src="/static/plugins/videojs/html5media.min.js"></script>
+			<script type="text/javascript">
+				var text = '';
+				// 微课习题列表
+				function micro_detail() {
+					window.location.href = "/html/homework/done/hw_exercises_done.html?homework_id="+getUrlParam("homework_id")+
+					"&homework_type="+getUrlParam("homework_type")+"&section_id="+getUrlParam("section_id")+"&flip=1";
+				}
+				$(document).ready(function() {
+					addMainPageHeader("/html/homework/hw_list.html?f_flag=1", "微课作业");
+					addMainPageFooter(2);
+					// 加载视频
+//					micro_video(); TODO APP
+					// 知识点
+//					knowledge(); TODO APP
+					$(".layui-btn").click(function() {
+						$(".video-play").css("display","none");
+						layer.open({
+							type: 1,
+							title: '',
+							skin: '', //加上边框
+							area: ['5.99rem', '6.5rem'], //宽高
+							content: text
+						});
+						$(".layui-layer-content").css("height","auto");
+						$("a.layui-layer-ico.layui-layer-close.layui-layer-close2").click(function(){
+							$(".video-play").css("display","");
+						});
+						// 2018-11-28 added by stt 埋点-5：理智_1（查看1次作业中知识点）
+						buriedPoint('5');
+					});
+				}); // ready
+				// 微课视频
+				function micro_video(){
+					var html = '';
+					ysAjax("/homework/getFlipclassroomVideo", {
+						homework_id: getUrlParam("homework_id")
+						}, function(data) {
+							if(data.result != null){
+								$("#video_src").val(data.result.original_path);
+								//'/static/images/homework/flower.mp4';
+								var myPlayer = videojs('ys_video');
+							    myPlayer.src($("#video_src").val());
+							    myPlayer.play();
+							}else{
+								showAlert('暂无微课视频');
+							}
+						}, function(err) {
+							showAlert('服务器异常，请稍后重试');
+						}
+					);
+				}
+				// 知识点
+				function knowledge(){
+					ysAjax("/homework/getKnowledge", {
+							section_id : getUrlParam("section_id")
+						}, function(data) {
+							if(data.result != null && data.result.ebook_name != null && data.result.ebook_name != ''){
+								var r = data.result;
+								text = text + '	<div class="content">  ';
+								text = text + '		<div class="k_title">  ';
+								text = text + '			您可根据以下知识点指引查看孩子课本了解详情  ';
+								text = text + '		</div>  ';
+								text = text + '		<div class="k_bottom" style="  ">  ';
+								text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;年级&nbsp;&nbsp;一</span>  ';
+								text = text + '			<span class="k_b_content" >'+r.grade_name+'</span>  ';
+								text = text + '		</div>  ';
+								text = text + '		<div class="k_bottom">  ';
+								text = text + '		  <section class="g-scrollview">';
+								text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节位置&nbsp;&nbsp;一</span>  ';
+								text = text + '			<span class="k_b_content" style=" display: block; font-size: 0.3rem; ">'+r.ebook_name+''+r.unit_name+''+r.section_name+'</span>  ';
+								text = text + '		  </section>';
+								text = text + '		</div>  ';
+		//						text = text + '		<div class="k_bottom" style="margin-bottom:0.4rem;">  ';
+		//						text = text + '			<span class="k_b_title" >一&nbsp;&nbsp;章节内容&nbsp;&nbsp;一</span>  ';
+		//						text = text + '			<span class="k_b_content" >体积与面积</span>  ';
+		//						text = text + '		</div>  ';
+								text = text + '	</div>  ';
+							}else{
+								text = text + '	<div class="content">  ';
+								text = text + '		<div class="no_knowledge">  ';
+								text = text + '	    	<img src="/static/images/homework/img_knowledge.png">  ';
+								text = text + '	        <p class="no_desc1">此作业没有关联知识点</p>  ';
+								text = text + '			<p class="no_desc2"">前往课堂了解孩子近期学习情况吧~</p>  ';
+								text = text + '		</div>  ';
+								text = text + '	</div>  ';
+							}
+						}, function(err) {
+							showAlert('服务器异常，请稍后重试');
+						}
+				 	);
+				}
+	</script>
+ </body>
+
+</html>

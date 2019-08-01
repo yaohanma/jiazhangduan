@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" type="text/css" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" type="text/css" href="/static/plugins/iosselect/iosSelect.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/plugins/ydui/js/ydui.citys.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="/static/plugins/iosselect/iosSelect.js"></script>
+		<style>
+	    select {
+                direction: rtl;
+         }
+         select option {
+                direction: ltr;
+         }
+         div.img_box{
+			width: 1rem;
+			height: 1rem;
+			float: left;
+			margin-right: .2rem;
+	      }
+	      div.img_box img{
+		    width: 100%;
+	       }
+	     .font-size-content{
+	         font-size: .28rem;
+           }
+          .font-color-33{
+	         color: #333333;
+	         font-weight: bold;
+	         font-size: 0.3rem;
+          }
+          .font-color-99{
+	          color: #999999;
+          }
+       div.img_box{
+		width: 1rem;
+		height: 1rem;
+		float: left;
+		margin-right: .2rem;
+		border-radius: 50%;
+	}
+	   div.img_box img{
+		width: 100%;
+		height: 100%;
+	   border-radius: 50%;
+	}
+     .m-cell:after{
+ 	   border-bottom: none;
+     }
+    /* .mytitle{
+    font-weight: bold;
+}*/
+.cell-item{
+	height: 0.88rem;
+	line-height: 0.88rem;
+}
+
+.Photograph img{
+	width: 1.76rem;
+	height: 1.76rem;
+	margin: auto;
+}
+.Photograph  .m-grids-3{
+	padding-top: 0.9rem;
+}
+.m-grids-3:before{
+	border-bottom:0 ;
+}
+.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+	border-right:0 ;
+}
+.actionsheet-item{
+	color: #313340;
+	font-size: 0.32rem;
+}
+.actionsheet-action{
+	color: #0493f0;
+	font-size: 0.36rem;
+}
+.ysIosSelectContainer1,
+.ysIosSelectContainer{
+	display: none;
+}
+	 </style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<div class="g-scrollview">
+				<div class="m-cell" >
+				<div class="cell-item" href="javascript:;" style="height: 1.5rem;" id="change_tx">
+					    <div class="cell-left">
+					    	<p class="font-size-content font-color-33 mytitle">头像</p>
+					    </div>
+						<div class="cell-right cell-arrow">
+							<div class="img_box"><img id="headImage" src="/static/images/appimg/default_boy.png"></div>
+						</div>
+					</div>
+					<a class="cell-item" href="/html/my/my_change_nickname.html">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">昵称</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    <p class="font-size-content font-color-99"  id="nickname"></p>
+						</div>
+					</a>
+					<a class="cell-item" href="javascript:;" onclick ="changeName()" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">真实姓名</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    <p class="font-size-content font-color-99" id="name">黄小米</p>
+						</div>
+					</a>
+					<a class="cell-item" href="javascript:;" onclick="changeTelNumber()" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">手机号</p>
+						</div>
+					<div class="cell-right cell-arrow">
+						<p class="font-size-content font-color-99"  id="tel"></p>
+					</div>
+				</a>
+					<a class="cell-item" href="javascript:;" >
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">您与孩子的关系</p>
+						</div>
+						<div class="cell-right cell-arrow">
+							<input type="hidden" id="relashipCode" />
+        				    <label id="relashipName" class="cell-right" style="color:#999999;padding-right:0">妈妈</label>
+					    </div>
+				    </a>
+					<a class="cell-item" href="javascript:;">
+						<div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">出生年份</p>
+						</div>
+						<div class="cell-right cell-arrow">
+						    	<label id="brithdayYear"  class="cell-right"  style="color:#999999;padding-right:0"></label>
+						 </div>
+					</a>
+					<a class="cell-item" href="javascript:;" >
+					    <div class="cell-left">
+							<p class="font-size-content font-color-33 mytitle">所在城市</p>
+						</div>
+						<div class="cell-right cell-arrow">
+							<input type="text" class="cell-input" style="color:#999999;text-align: right;" readonly id="J_Address2" />
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			//假
+			$("#relashipName").click(function(){
+				$(".ysIosSelectContainer").toggle();
+			})
+			$(".sure").click(function(){
+				$(".ysIosSelectContainer").hide();
+			})
+			$(".close").click(function(){
+				$(".ysIosSelectContainer").hide();
+			})
+			$(".one-level-box").click(function(){
+				$(this).hide();
+			})
+			$("#brithdayYear").click(function(){
+				$(".ysIosSelectContainer1").toggle();
+			})
+			$(".sure1").click(function(){
+				$(".ysIosSelectContainer1").hide();
+			})
+			$(".close1").click(function(){
+				$(".ysIosSelectContainer1").hide();
+			})
+			addMainPageHeader("/html/my/my_home.html", "个人信息");
+			//关系下拉列表
+//			initRelationshipSelect("relashipCode", "relashipName",updaterelationship); TODO APP
+			//年份下拉列表
+//			initBirthdayYearSelect("brithdayYear",updateYear); TODO APP
+			//取得头像和昵称
+//			$("#headImage").attr("src", getHeadImgUrl());
+			$("#nickname").html(getNickName());
+			//取得家长信息
+//			ysAjax("/homepage/getParentInfo", { TODO APP\n
+//			}, function(data) {
+//				if (data.success) {
+//					if(data.result.parentName != null && data.result.parentName != '') {
+//						$("#name").html(data.result.parentName);
+//					}
+//					if(data.result.parentMobile != null && data.result.parentMobile != '') {
+//						$("#tel").html(data.result.parentMobile);
+//					}
+//					if(data.result.relationship != null && data.result.relationship != '') {
+//						$("#relashipName").text(data.result.relationship);
+//					}
+//					if(data.result.birthdayYear != null && data.result.birthdayYear != '') {
+//						$("#brithdayYear").html(data.result.birthdayYear);
+//					}
+//					if(data.result.locateCity != null && data.result.locateCity != '') {
+//						$("#J_Address2").val(data.result.locateCity);
+//						var strcity = $("#J_Address2").val();
+//						if(strcity != null && strcity != '') {
+//							var strs = strcity.split(" ");   
+//							$('#J_Address2').citySelect({
+//						     provance: strs[0],
+//						     city: strs[1],
+//						     area: strs[2]
+//						  });
+//						}
+//					}
+//				}
+//			}, function(err) {
+//				showNotify("发生异常");
+//			});
+			
+			var $target = $('#J_Address2');
+	        $target.on('click', function (event) {
+	            event.stopPropagation();
+	            $target.citySelect('open');
+	        });
+
+	        $target.on('done.ydui.cityselect', function (ret) {
+	            $(this).val(ret.provance + ' ' + ret.city +' ' + ret.area);
+	            //更新所在地址
+//	            updateLocateCity($(this).val()); TODO APP
+	        });
+	        
+	        $(".select-area .select-value").each(function(){
+                if( $(this).next("select").find("option:selected").length != 0 ){
+                    $(this).text( $(this).next("select").find("option:selected").text() );
+                }
+            });
+            $(".select-area select").change(function(){
+                var value = $(this).find("option:selected").text();
+                $(this).parent(".select-area").find(".select-value").text(value);
+            });
+            
+            
+            //更换头像
+            var $as = $('#J_ActionSheet');
+             $('#change_tx').on('click', function () {
+		        $as.actionSheet('open');
+		    });
+		     $('#J_Cancel').on('click', function () {
+			        $as.actionSheet('close');
+			    });
+		});
+		
+		//修改家长姓名
+		function changeName(){
+		    var searchUrl =encodeURI("/html/my/my_change_name.html?name= " + $("#name").html())
+		    window.location.href=searchUrl;
+		}
+		
+		//修改手机号码
+		function changeTelNumber(){
+			    window.location.href="/html/my/my_change_telnumber.html?telNumber= " + $("#tel").html();
+		}
+		
+		//更新关系
+		function updaterelationship() {
+			ysAjax("/homepage/updateRelationship", {
+				relationship : $("#relashipCode").val()
+			}, function(data) {
+				if (!data.success) {
+					showNotify("与孩子关系更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+		
+		//更新年
+		function updateYear(){
+			ysAjax("/homepage/updateBirthdayYear", {
+				brthdayYear : $("#brithdayYear").text()
+			}, function(data) {
+				if (!data.success) {
+					showNotify("出生年分更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+		
+		//更改地区
+		function updateLocateCity(city){
+			ysAjax("/homepage/updateLocateCity", {
+				locateCity : city
+			}, function(data) {
+				if (!data.success) {
+					showNotify("出生年分更新失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});
+		}
+	
+		</script>
+		<!--更换头像 弹框-->
+		<div class="m-actionsheet Photograph" id="J_ActionSheet">
+		   <div class="m-grids-3">
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt">
+			        	<img src="/static/images/appimg/Photograph@2x.png">
+			        </div>
+			    </a>
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt"><img src="/static/images/appimg/Avatarsample110@2x.png"></div>
+			    </a>
+			    <a href="#" class="grids-item">
+			        <div class="grids-txt"><img src="/static/images/appimg/Avatarsample110@2x.png"></div>
+			    </a>
+			    
+			</div>
+
+		    <a href="#" class="actionsheet-item">相册选取</a>
+		    <a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
+		</div>
+		<!--与孩子关系-->
+		<div class="ysIosSelectContainer"><div class="olay ios-select-widget-box one-level-box"><div class="layer" style="height: 294px;"><header style="height: 44px; line-height: 44px" class="iosselect-header">
+		<a style="height: 44px; line-height: 44px" href="javascript:void(0)" class="close">取消</a>
+		<a style="height: 44px; line-height: 44px" href="javascript:void(0)" class="sure">确定</a>
+		<h2 id="iosSelectTitle">选择关系</h2>
+		</header>
+		<section class="iosselect-box">
+		<div class="one-level-contain" id="oneLevelContain" style="height: 250px;">
+		<ul class="select-one-level" style="transform: translate(0px, 0px) translateZ(0px);"><li style="height: 50px; line-height: 50px"></li><li style="height: 50px; line-height: 50px" class="side1"></li><li style="height: 50px; line-height: 50px;" data-id="1" data-value="妈妈" class="at">妈妈</li><li style="height: 50px; line-height: 50px;" data-id="2" data-value="爸爸" class="side1">爸爸</li><li style="height: 50px; line-height: 50px;" data-id="3" data-value="爷爷">爷爷</li><li style="height: 50px; line-height: 50px;" data-id="4" data-value="奶奶">奶奶</li><li style="height: 50px; line-height: 50px;" data-id="5" data-value="外公">外公</li><li style="height: 50px; line-height: 50px;" data-id="6" data-value="外婆">外婆</li><li style="height: 50px; line-height: 50px;" data-id="7" data-value="姑姑">姑姑</li><li style="height: 50px; line-height: 50px;" data-id="8" data-value="舅舅">舅舅</li><li style="height: 50px; line-height: 50px"></li><li style="height: 50px; line-height: 50px"></li></ul>
+		</div>
+		<div class="two-level-contain" id="twoLevelContain">
+		<ul class="select-two-level">
+		</ul>
+		</div>
+		<div class="three-level-contain" id="threeLevelContain">
+		<ul class="select-three-level">
+		</ul>
+		</div>
+		<div class="four-level-contain" id="fourLevelContain">
+		<ul class="select-four-level">
+		</ul>
+		</div>
+		<div class="five-level-contain" id="fiveLevelContain">
+		<ul class="select-five-level">
+		</ul>
+		</div>
+		<div class="six-level-contain" id="sixLevelContain">
+		<ul class="select-six-level">
+		</ul>
+		</div>
+		</section>
+		<hr class="cover-area1" style="top: 144px;">
+		<hr class="cover-area2" style="top: 194px;">
+		<div class="ios-select-loading-box" id="iosSelectLoadingBox">
+		<div class="ios-select-loading"></div>
+		</div></div></div></div>
+		
+		
+		<div class="ysIosSelectContainer1"><div class="olay ios-select-widget-box one-level-box"><div class="layer" style="height: 294px;"><header style="height: 44px; line-height: 44px" class="iosselect-header">
+<a style="height: 44px; line-height: 44px" href="javascript:void(0)" class="close1 close">取消</a>
+<a style="height: 44px; line-height: 44px" href="javascript:void(0)" class="sure1 sure">确定</a>
+<h2 id="iosSelectTitle">选择出生年</h2>
+</header>
+<section class="iosselect-box">
+<div class="one-level-contain" id="oneLevelContain" style="height: 250px;">
+<ul class="select-one-level" style="transform: translate(0px, -2550px) translateZ(0px);"><li style="height: 50px; line-height: 50px"></li><li style="height: 50px; line-height: 50px"></li><li style="height: 50px; line-height: 50px;" data-id="1940" data-value="1940">1940</li><li style="height: 50px; line-height: 50px;" data-id="1941" data-value="1941">1941</li><li style="height: 50px; line-height: 50px;" data-id="1942" data-value="1942">1942</li><li style="height: 50px; line-height: 50px;" data-id="1943" data-value="1943">1943</li><li style="height: 50px; line-height: 50px;" data-id="1944" data-value="1944">1944</li><li style="height: 50px; line-height: 50px;" data-id="1945" data-value="1945">1945</li><li style="height: 50px; line-height: 50px;" data-id="1946" data-value="1946">1946</li><li style="height: 50px; line-height: 50px;" data-id="1947" data-value="1947">1947</li><li style="height: 50px; line-height: 50px;" data-id="1948" data-value="1948">1948</li><li style="height: 50px; line-height: 50px;" data-id="1949" data-value="1949">1949</li><li style="height: 50px; line-height: 50px;" data-id="1950" data-value="1950">1950</li><li style="height: 50px; line-height: 50px;" data-id="1951" data-value="1951">1951</li><li style="height: 50px; line-height: 50px;" data-id="1952" data-value="1952">1952</li><li style="height: 50px; line-height: 50px;" data-id="1953" data-value="1953">1953</li><li style="height: 50px; line-height: 50px;" data-id="1954" data-value="1954">1954</li><li style="height: 50px; line-height: 50px;" data-id="1955" data-value="1955">1955</li><li style="height: 50px; line-height: 50px;" data-id="1956" data-value="1956">1956</li><li style="height: 50px; line-height: 50px;" data-id="1957" data-value="1957">1957</li><li style="height: 50px; line-height: 50px;" data-id="1958" data-value="1958">1958</li><li style="height: 50px; line-height: 50px;" data-id="1959" data-value="1959">1959</li><li style="height: 50px; line-height: 50px;" data-id="1960" data-value="1960">1960</li><li style="height: 50px; line-height: 50px;" data-id="1961" data-value="1961">1961</li><li style="height: 50px; line-height: 50px;" data-id="1962" data-value="1962">1962</li><li style="height: 50px; line-height: 50px;" data-id="1963" data-value="1963">1963</li><li style="height: 50px; line-height: 50px;" data-id="1964" data-value="1964">1964</li><li style="height: 50px; line-height: 50px;" data-id="1965" data-value="1965">1965</li><li style="height: 50px; line-height: 50px;" data-id="1966" data-value="1966">1966</li><li style="height: 50px; line-height: 50px;" data-id="1967" data-value="1967">1967</li><li style="height: 50px; line-height: 50px;" data-id="1968" data-value="1968">1968</li><li style="height: 50px; line-height: 50px;" data-id="1969" data-value="1969">1969</li><li style="height: 50px; line-height: 50px;" data-id="1970" data-value="1970">1970</li><li style="height: 50px; line-height: 50px;" data-id="1971" data-value="1971">1971</li><li style="height: 50px; line-height: 50px;" data-id="1972" data-value="1972">1972</li><li style="height: 50px; line-height: 50px;" data-id="1973" data-value="1973">1973</li><li style="height: 50px; line-height: 50px;" data-id="1974" data-value="1974">1974</li><li style="height: 50px; line-height: 50px;" data-id="1975" data-value="1975">1975</li><li style="height: 50px; line-height: 50px;" data-id="1976" data-value="1976">1976</li><li style="height: 50px; line-height: 50px;" data-id="1977" data-value="1977">1977</li><li style="height: 50px; line-height: 50px;" data-id="1978" data-value="1978">1978</li><li style="height: 50px; line-height: 50px;" data-id="1979" data-value="1979">1979</li><li style="height: 50px; line-height: 50px;" data-id="1980" data-value="1980">1980</li><li style="height: 50px; line-height: 50px;" data-id="1981" data-value="1981">1981</li><li style="height: 50px; line-height: 50px;" data-id="1982" data-value="1982">1982</li><li style="height: 50px; line-height: 50px;" data-id="1983" data-value="1983">1983</li><li style="height: 50px; line-height: 50px;" data-id="1984" data-value="1984">1984</li><li style="height: 50px; line-height: 50px;" data-id="1985" data-value="1985">1985</li><li style="height: 50px; line-height: 50px;" data-id="1986" data-value="1986">1986</li><li style="height: 50px; line-height: 50px;" data-id="1987" data-value="1987">1987</li><li style="height: 50px; line-height: 50px;" data-id="1988" data-value="1988">1988</li><li style="height: 50px; line-height: 50px;" data-id="1989" data-value="1989">1989</li><li style="height: 50px; line-height: 50px;" data-id="1990" data-value="1990" class="side1">1990</li><li style="height: 50px; line-height: 50px;" data-id="1991" data-value="1991" class="at">1991</li><li style="height: 50px; line-height: 50px;" data-id="1992" data-value="1992" class="side1">1992</li><li style="height: 50px; line-height: 50px;" data-id="1993" data-value="1993" class="">1993</li><li style="height: 50px; line-height: 50px;" data-id="1994" data-value="1994" class="">1994</li><li style="height: 50px; line-height: 50px;" data-id="1995" data-value="1995" class="">1995</li><li style="height: 50px; line-height: 50px;" data-id="1996" data-value="1996" class="">1996</li><li style="height: 50px; line-height: 50px;" data-id="1997" data-value="1997" class="">1997</li><li style="height: 50px; line-height: 50px;" data-id="1998" data-value="1998" class="">1998</li><li style="height: 50px; line-height: 50px;" data-id="1999" data-value="1999" class="">1999</li><li style="height: 50px; line-height: 50px;" data-id="2000" data-value="2000" class="">2000</li><li style="height: 50px; line-height: 50px;" data-id="2001" data-value="2001" class="">2001</li><li style="height: 50px; line-height: 50px;" data-id="2002" data-value="2002" class="">2002</li><li style="height: 50px; line-height: 50px;" data-id="2003" data-value="2003" class="">2003</li><li style="height: 50px; line-height: 50px;" data-id="2004" data-value="2004" class="">2004</li><li style="height: 50px; line-height: 50px;" data-id="2005" data-value="2005" class="">2005</li><li style="height: 50px; line-height: 50px;" data-id="2006" data-value="2006" class="">2006</li><li style="height: 50px; line-height: 50px;" data-id="2007" data-value="2007" class="">2007</li><li style="height: 50px; line-height: 50px;" data-id="2008" data-value="2008" class="">2008</li><li style="height: 50px; line-height: 50px;" data-id="2009" data-value="2009" class="">2009</li><li style="height: 50px; line-height: 50px;" data-id="2010" data-value="2010" class="">2010</li><li style="height: 50px; line-height: 50px;" data-id="2011" data-value="2011" class="">2011</li><li style="height: 50px; line-height: 50px;" data-id="2012" data-value="2012" class="">2012</li><li style="height: 50px; line-height: 50px;" data-id="2013" data-value="2013" class="">2013</li><li style="height: 50px; line-height: 50px;" data-id="2014" data-value="2014" class="">2014</li><li style="height: 50px; line-height: 50px;" data-id="2015" data-value="2015" class="">2015</li><li style="height: 50px; line-height: 50px;" data-id="2016" data-value="2016" class="">2016</li><li style="height: 50px; line-height: 50px;" data-id="2017" data-value="2017" class="">2017</li><li style="height: 50px; line-height: 50px;" data-id="2018" data-value="2018" class="">2018</li><li style="height: 50px; line-height: 50px;" data-id="2019" data-value="2019" class="">2019</li><li style="height: 50px; line-height: 50px" class=""></li><li style="height: 50px; line-height: 50px"></li></ul>
+</div>
+<div class="two-level-contain" id="twoLevelContain">
+<ul class="select-two-level">
+</ul>
+</div>
+<div class="three-level-contain" id="threeLevelContain">
+<ul class="select-three-level">
+</ul>
+</div>
+<div class="four-level-contain" id="fourLevelContain">
+<ul class="select-four-level">
+</ul>
+</div>
+<div class="five-level-contain" id="fiveLevelContain">
+<ul class="select-five-level">
+</ul>
+</div>
+<div class="six-level-contain" id="sixLevelContain">
+<ul class="select-six-level">
+</ul>
+</div>
+</section>
+<hr class="cover-area1" style="top: 144px;">
+<hr class="cover-area2" style="top: 194px;">
+<div class="ios-select-loading-box" id="iosSelectLoadingBox">
+<div class="ios-select-loading"></div>
+</div></div></div></div>
+	</body>
+
+</html>

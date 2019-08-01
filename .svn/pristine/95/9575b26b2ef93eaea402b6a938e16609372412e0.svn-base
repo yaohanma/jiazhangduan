@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+
+<style>
+	/* header 全部科目样式 */
+	#ysYduiNavBarRightBtn{
+		background-image: url(/static/images/homework/popup_drop@2x.png);
+	    background-repeat: no-repeat;
+	    background-position-x: 2.2rem;
+	    background-position-y: 0.4rem;
+	    padding-right: 0.6rem;
+	    background-position-x:1.5rem;
+	    background-size: 12%;
+	}
+	
+	#ysSubjectTopSheet .item {
+    width: 85%;
+    border: 1px solid #dedede;
+    display: inline-block;
+    border-radius: 29px;
+    color: #999999;
+    height: 0.5rem;
+    padding: 0.05rem 0;
+	}
+	.selected {
+    width: 85%;
+    background-color: #0493f0;
+    display: inline-block;
+    border-radius: 29px;
+    color: #fff;
+    height: 0.5rem;
+    padding: 0.05rem 0;
+	}
+	/*最新 筛选 样式*/
+	.m-grids-3{
+		margin-top: .2rem;
+		height: 1.05rem;
+	}
+	.m-grids-3 .grids-item:not(:nth-child(3n)):before{
+		border-right:0;
+	}
+	.m-grids-3 .grids-item.active div{
+		color: #0493F0;
+	}
+	.m-grids-3 .grids-item div i{
+		width:.25rem ;
+		height:.25rem ;
+		display: inline-block;
+		background-size: 60%;
+	}
+	/*最新图标 */
+	.m-grids-3 .grids-item:nth-child(1) div i{
+		background: url(/static/images/homework/popup_drop@2x.png) center center no-repeat;
+		background-size: 65%;
+		background-repeat: no-repeat;
+		background-position-y: center;
+	}
+	.m-grids-3 .grids-item.active:nth-child(1) div i{
+		background: url(/static/images/study_img/popup_drop_pressed.png) center center no-repeat;
+		background-size: 65%;
+	}
+	/*错误次数*/
+	.m-grids-3 .grids-item:nth-child(2) i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		display: inline-block;
+		background: url(/static/images/study_img/popup_hui.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item:nth-child(2).active.up  i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		background: url(/static/images/study_img/popup_up.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item:nth-child(2).active.down i{
+		position: relative;
+		width:.3rem ;
+		height:.25rem ;
+		background: url(/static/images/study_img/popup_down.png) center center no-repeat;
+		background-size: 60%;
+    	margin-left: 0.1rem;
+	}
+	/*筛选*/
+	.m-grids-3 .grids-item:nth-child(3) div i{
+		width:.3rem ;
+		height:.3rem ;
+		display: inline-block;
+		background: url(/static/images/study_img/screen.png) center .1rem no-repeat;
+		background-size: 60%;
+		margin-left: 0.1rem;
+	}
+	.m-grids-3 .grids-item.active:nth-child(3) div i{
+		background: url(/static/images/study_img/screen_pressed.png) center .1rem no-repeat;
+		background-size: 60%;
+	}
+	/*最新 筛选 样式  end*/
+	/*装错题  div*/
+	
+	.wrong_box>div{
+		width: 100%;
+		padding: .4rem .3rem;
+		height: 2.03rem;
+		background: #fff;
+		margin-bottom: 0.2rem;
+	}
+	.wrong_box>div .up{
+		height: .4rem;
+		line-height: .4rem;
+		font-size: 0.32rem;
+		color: #333333;
+		margin-bottom: .2rem;
+	}
+	.wrong_box>div .down{
+		width: 100%;
+		font-size-adjust:.3rem;
+		line-height: .4rem;
+		
+		overflow: hidden;
+
+		text-overflow:ellipsis;
+
+		display:-webkit-box; 
+		font-size: 0.28rem;
+
+-webkit-box-orient:vertical;
+
+-webkit-line-clamp:2; 
+	}/*装错题  div   end*/
+	/*筛选*/
+	.m-actionsheet{
+		max-height: 11rem;
+		overflow-y: auto;
+		border: 1px solid #fff;
+		border-radius: 6px  6px 0 0;
+		top: inherit;
+		z-index: 99999;
+		bottom: 0;
+	}
+	.m-actionsheet .bg_box{
+		width:100%;
+		background: #fafafa;
+	}
+	.m-actionsheet .bg_box .title{
+		font-size: 0.32rem;
+		color: #333;
+		text-align: left;
+		font-weight: bold;
+		padding: .3rem ;
+	}
+	.m-actionsheet ul li{
+		width: 33%;
+		margin-bottom: .3rem;
+		height: .6rem;
+		line-height: .6rem;
+		color: #999;
+		display: inline-block;
+		text-align: center;
+		float: left;
+		
+	}
+	.m-actionsheet ul li div{
+		width: 80%;
+		border: 1px solid #dcdcdc;
+		border-radius: 29px;
+		margin: auto;
+	}
+	.m-actionsheet ul li.active div{
+		color: #fff;
+		background: #0493F0;
+		border-color: #0493F0;
+	}
+	.m-actionsheet ul {
+		width: 100%;
+		clear:both;
+		height:2.8rem;
+		clear: both;
+		
+	}
+	.m-actionsheet .m-cell{
+		max-height:6rem;
+		overflow-y: scroll;
+		margin-bottom: 0;
+	}
+	.m-actionsheet .btn {
+		width: 100%;
+		padding: 0;
+		/*position: fixed;*/
+		bottom:0rem;
+		left: 0;
+	}
+	.m-actionsheet .btn a{
+		float: left;
+		width: 50%;
+		display: inline-block;
+		margin: 0;
+	/*	height: 1.5rem;*/
+	/*	line-height: 1.3rem;*/
+		color: #0493F0;
+	}
+	.actionsheet-action{
+		line-height: 0.8rem;
+		height: 0.8rem;
+	}
+	.m-actionsheet .btn a.active{
+		background: #0493F0;
+		color: #fff;
+	}
+	#J_ActionSheet .m-cell .cell-item{
+		color: #333;
+	}
+	#J_ActionSheet .m-cell .cell-item.active .cell-left,
+	#J_ActionSheet .m-cell .cell-item.active .cell-right,
+	#J_ActionSheet .m-cell .cell-item.active{
+		color: #0493f0;
+	}
+	#J_ActionSheet .m-cell:after{
+		border: 0;
+	}
+	.m-actionsheet .btn a{
+		border-top: 1px solid #D9D9D9;
+	}
+	/*.m-actionsheet ul li:nth-child(0){
+		margin-left: 0;
+	}*/
+	/*筛选知识点 样式*/
+	.knowledge .title{
+		padding: 0.2rem .3rem;
+		text-align: left;
+		background:#fafafa ;
+	}
+	
+	#ysSubjectTopSheet .m-grids-3{
+		height: auto;
+	}
+	#ysSubjectTopSheet .m-grids-3 .grids-item:after{
+		border-bottom: 0;
+	}
+	#ysSubjectTopSheet .m-grids-3 .grids-item{
+		padding-bottom: 0;
+	}
+	#ysSubjectTopSheet .m-grids-3 {
+		padding-bottom:0.29rem
+	}
+	div.bg{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		position: fixed;
+		top: 30%;
+		padding: 0 1rem;
+		font-size: 0.3rem;
+		color: #999;
+	}
+	div.bg img{
+		width: 100%;
+		margin-bottom: 0.4rem;
+	}
+	div.bg>div{
+		color: #999;
+		width: 100%;
+		
+	}
+	/*新增 样式*/
+	.class_rightbtn{
+		height: 0.88rem;
+		border-bottom: 1px solid #dcdcdc;
+		background: #fff;
+		position: relative;
+	}
+	.class_rightbtn a{
+		height: 0.9rem;
+	    -webkit-box-flex: 0;
+	    -webkit-flex: 0 0 25%;
+	    -ms-flex: 0 0 25%;
+	    flex: 0 0 25%;
+	    padding: 0 0.2rem;
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-align: center;
+	    -webkit-align-items: center;
+	    -ms-flex-align: center;
+	    align-items: center;
+	    font-size: 0.3rem;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    color: #5C5C5C;
+		min-width:25% ;
+		background-image: url(/static/images/homework/popup_drop@2x.png);
+		background-size: 10%;
+	    background-repeat: no-repeat;
+	    background-position-y: 0.4rem;
+	    padding-right: 0.6rem;
+	    background-position-x: 1.5rem;
+	    float: right;
+	    
+	}
+	.mywrongBook a{
+		height: 2.2rem;
+		background: #fff;
+		display: block;
+		padding: 0.3rem;
+		border-bottom: 1px solid #e5e5e5;
+	}
+	.mywrongBook a .up{
+		display: flex;
+	}
+	.mywrongBook a .pull-left{
+		font-size: 0.32rem;
+		color: #313340;
+		flex:1.5;
+	}
+	.mywrongBook a .pull-right{
+		flex:1;
+	}
+	.mywrongBook a .down{
+		margin-top: 0.3rem;
+		color: #888a97;
+		line-height: 0.4rem;
+		height: 0.8rem;
+		overflow: hidden;
+	}
+	.show{
+		display: block;
+	}
+	.m-grids-3:before{
+		border-bottom:1px solid #e5e5e5;
+	}
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview" id="J_List">
+		<!--新增 -->
+		<!--<div class="class_rightbtn ">
+			<a class="" id="ysYduiNavBarRightBtn" >语文 (11)</a>
+		</div>-->
+		<ul class="m-grids-3 list_title">
+            <li class="grids-item newW">
+                <div class="grids-txt"  id="new">最新
+                	<i></i></div>
+            </li>
+            <li class="grids-item wrong_num">
+                <div class="grids-txt">错误次数
+                	<i></i>
+                
+                </div>
+            </li>
+            <li class="grids-item screenClass">
+            	
+				<div class="m-button grids-txt" id="screen">
+					筛选<i></i>
+				</div>
+            </li>
+        </ul>
+        <div  id="wrongBook">
+        	<!-- <div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div> -->
+        	
+        	<!--每一个 错题-->
+        <!-- 	<div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div> -->
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<!-- <div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div> -->
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<!-- <div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div> -->
+        	<!--每一个 错题  end-->
+        	<!--每一个 错题-->
+        	<!-- <div class="mywrongBook">
+        		<a href="/html/understand_more/wrong_book_nei.html" style="">
+	        		<div class="up">
+						<p class="pull-left" style="font-weight: bold;">单选题(错误2次)</p>
+						<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间4-28 16:58</p>
+					</div>
+	        		<div class="down">
+						将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）将一个圆锥体沿着它的高平均切成两块，切面一定是一个（）
+	        		</div>
+        		</a>
+        	</div> -->
+        	<!--每一个 错题  end-->
+        	
+        </div>
+        <!--筛选  div-->
+		<div class="m-actionsheet" id="J_ActionSheet" style="bottom: 0;">
+			<div class="bg_box">
+				<p class="title">全部题型</p>
+				<ul>
+					<li class="active"><div>全部题型</div></li>
+					<li><div>单选题</div></li>
+					<li><div>多选题</div></li>
+					<li><div>判断题</div></li>
+					<li><div>填空题</div></li>
+					<li><div>简答题</div></li>
+					<li><div>综合题</div></li>
+				</ul>
+			</div>
+			<!--知识点 div-->
+			<div id="bookSection">
+			<!--<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+				<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		             <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+	        	</div>
+			</div>
+			<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+				<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            
+	        	</div>
+			</div>-->
+				<!--<div class="knowledge">
+				<!--书名-->
+				<!--<div class="title" style="">
+					<span style="width:50%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">人教版七年级下</span>
+					<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;">100道</span>
+				</div>
+				<!--列表-->
+					<!--<div class="m-cell">
+		            <a class="cell-item">
+		                <div class="cell-left">反比例函数</div>
+		                <div class="cell-right" >17道题</div>
+		                <input type="hidden" id="section_id" value="123" />
+		            </a>
+		            
+	        	</div>
+			</div>-->
+			</div>
+		 	<div class="btn">
+		 		<a href="javascript:;" class="actionsheet-action" id="btnReset">重置</a>
+		     <a href="javascript:;" class="actionsheet-action active" id="btnComplete">完成</a>
+		 	</div>
+		    <!--知识点 div-->
+		</div>
+				<!--筛选  div  end-->
+	</section>
+</section>
+<input type="hidden" id="subject_id" />
+<input type="hidden" id="section_id" />
+<input type="hidden" id="question_type" />
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	// 2018-11-28 added by stt 埋点-11：查缺补漏_2（进入“错题本”累计2次）
+	buriedPoint('11');
+
+    var subject = getUrlParam("subject");
+    if(subject && subject != "null"){
+        var value = subject.split("_")[1];
+        subject = subject.split("_")[0];
+        $("#subject_id").val(value);
+    }else{
+        subject = getSubject();
+        // 默认语文
+        $("#subject_id").val("2");
+    }
+
+    if(getUrlParam("question_type") && getUrlParam("question_type")!= "null"){
+        $("#question_type").val(getUrlParam("question_type"));
+    }
+    if(getUrlParam("section_id") && getUrlParam("section_id")!= "null"){
+        $("#section_id").val(getUrlParam("section_id"));
+    }
+
+	addMainPageHeader("/html/understand_more/understand_index.html", "错题本", {
+					hasIcon:true,
+					text:subject,
+					action : function() {
+						if($("#ysSubjectTopSheet").css("display") == 'block'){
+							$("#ysSubjectTopSheet").topsheet('close');
+							$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+							$(".mask-black-dialog").hide();
+						}else{
+							showSubjectPicker(function(subjectId, subjectName) {
+								$("#subject_id").val(subjectId);
+								$("#ysYduiNavBarRightBtn").text(subjectName);
+								$("#ysYduiNavBarRightBtn").css({"background-image":"url(/static/images/homework/popup_drop@2x.png)"});
+                                cleanNoMore();
+                                loadSection();
+                                var subJName = subjectName + "_" + subjectId;
+                                var orderByFlag = getUrlParam("orderByFlag");
+                                if(!orderByFlag){
+                                    orderByFlag = "1";
+                                }
+                                var html = "/html/understand_more/wrong_book.html?orderByFlag="+orderByFlag+"&subject="+subJName;
+                                if(getUrlParam("question_type")){
+                                    html += "&question_type=" + getUrlParam("question_type")
+                                }
+                                if(getUrlParam("section_id")){
+                                    html += "&section_id=" + getUrlParam("section_id")
+                                }
+                                window.location.href = html;
+							});
+						}
+					}
+				});
+//	addMainPageFooter(4);
+
+    var orderByFlag = getUrlParam("orderByFlag");
+    if(orderByFlag){
+        if(orderByFlag == "1"){
+            // 最新
+            $(".list_title .grids-item").removeClass("active");
+            $('.newW').removeClass("down").addClass("up").addClass("active");
+		}else if(orderByFlag == "3"){
+            // 错误次数倒序
+            $(".list_title .grids-item").removeClass("active");
+            $('.wrong_num').removeClass("down").addClass("up").addClass("active");
+		}else if(orderByFlag == "2"){
+            // 错误次数正序
+            $(".list_title .grids-item").removeClass("active");
+            $('.wrong_num').removeClass("up").addClass("down").addClass("active");
+        }else{
+		    // 筛选
+            $(".list_title .grids-item").removeClass("active");
+            $('.screenClass').addClass("active");
+		}
+    }else{
+        // 最新
+        $(".list_title .grids-item").removeClass("active");
+        $('.newW').removeClass("down").addClass("up").addClass("active");
+	}
+
+    cleanNoMore();
+    init();
+    loadSection();
+	/*最新 错误次数 筛选 点击 文字变蓝 */
+	$('.list_title .grids-item').on("click",function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		var html = "";
+       if($(this).hasClass("wrong_num")){
+           //错误次数
+           sessionStorage.setItem("ifWrong_num","wrong_num");
+			if($(this).hasClass("down")){
+			    // up
+				$(this).removeClass("down").addClass("up");
+                cleanNoMore();
+                sessionStorage.setItem("ifUp","up");
+                var subjectName = $("#ysYduiNavBarRightBtn").text();
+                var subjectId = $("#subject_id").val();
+                var subJName = subjectName + "_" + subjectId;
+                html = "/html/understand_more/wrong_book.html?subject="+subJName+"&orderByFlag=3";
+			}else{
+			    // down
+                sessionStorage.setItem("ifUp","down");
+				$(this).removeClass("up").addClass("down");
+                cleanNoMore();
+                var subjectName = $("#ysYduiNavBarRightBtn").text();
+                var subjectId = $("#subject_id").val();
+                var subJName = subjectName + "_" + subjectId;
+                html = "/html/understand_more/wrong_book.html?subject="+subJName+"&orderByFlag=2";
+			}
+		}else{
+			$('.wrong_num').removeClass("down");
+			$('.wrong_num').removeClass("up");
+			
+			if($("#new").parent().hasClass("active")){
+                // 最新
+                cleanNoMore();
+                var subjectName = $("#ysYduiNavBarRightBtn").text();
+                var subjectId = $("#subject_id").val();
+                var subJName = subjectName + "_" + subjectId;
+                sessionStorage.setItem("ifWrong_num","newW");
+                html = "/html/understand_more/wrong_book.html?subject="+subJName+"&orderByFlag=1";
+		    }else if($("#screen").parent().hasClass("active")){
+                sessionStorage.setItem("ifWrong_num","screenClass");
+			}
+		}
+		if(html){
+            if(getUrlParam("question_type")){
+                html += "&question_type=" + getUrlParam("question_type")
+            }
+            if(getUrlParam("section_id")){
+                html += "&section_id=" + getUrlParam("section_id")
+            }
+            window.location.href = html;
+		}
+	});
+	/*筛选 */
+	 var $as = $('#J_ActionSheet');
+    $('#screen').on('click', function () {
+        $as.actionSheet('open');
+    });
+    
+    //选择题型
+	$('.m-actionsheet ul li').on("click",function(){
+		if(!$(this).hasClass("active")) {
+		$(this).addClass("active").siblings().removeClass("active");
+		if($(this).text()=='单选题') {
+			$("#question_type").val('1');
+		}else if($(this).text()=='多选题'){
+			$("#question_type").val('2');
+		}else if($(this).text()=='判断题'){
+			$("#question_type").val('4');
+		}else if($(this).text()=='填空题'){
+			$("#question_type").val('3');
+		}else if($(this).text()=='简答题'){
+			$("#question_type").val('5');
+		}else if($(this).text()=='综合题'){
+			$("#question_type").val('6');
+		}else if($(this).text()=='全部题型'){
+			$("#question_type").val('');
+		}
+		}
+	});
+    
+    //完成
+    $('#btnComplete').on('click', function () {
+        cleanNoMore();
+        $as.actionSheet('close');
+        var subjectName = $("#ysYduiNavBarRightBtn").text();
+        var subjectId = $("#subject_id").val();
+        var subJName = subjectName + "_" + subjectId;
+        var section_id = $("#section_id").val();
+        var question_type = $("#question_type").val();
+        // 999:筛选
+        window.location.href = "/html/understand_more/wrong_book.html?subject="+subJName+"&orderByFlag=999&section_id="+section_id+"&question_type="+question_type;
+    });
+    
+    //重置
+    $('#btnReset').on('click', function () {
+    	$(this).addClass("active").siblings().removeClass("active");
+    	$('.m-actionsheet ul li').eq(0).addClass("active").siblings().removeClass("active");
+    	$('#J_ActionSheet .m-cell .cell-item').removeClass("active");
+    	$("#section_id").val('');
+    	$("#question_type").val('');
+    });
+});
+
+
+function cleanNoMore(){
+    if($(".list-donetip").length>0){
+        $(".list-donetip").css("display","none");
+    }
+}
+
+var page = 1;
+var	pageSize = 5;
+var orderByFlag = '1';
+var loadMore = function(callback) {
+    if(getUrlParam("orderByFlag")  && getUrlParam("orderByFlag")!= "null"){
+        orderByFlag = getUrlParam("orderByFlag");
+	}
+    ysAjax("/mob/study/getWrongQuestionList", {
+        subject_id : $("#subject_id").val(),
+        section_id : $("#section_id").val(),
+        question_type : $("#question_type").val(),
+        orderByFlag : orderByFlag,
+        page: page,
+        pageSize: pageSize
+    }, function(data) {
+        if($(".list-donetip").length>1){
+            $(".list-donetip").css("display","none");
+            $(".list-donetip:first").removeAttr("style");
+        }
+        typeof callback == 'function' && callback(data);
+    }, function(err) {
+        showNotify("发生异常");
+    });
+};
+
+function init(){
+    $("#wrongBook").empty();
+    $('#J_List').infiniteScroll({
+        binder: '#J_List',
+        pageSize: pageSize,
+        initLoad: true,
+        backposition: true,
+        jumpLink: '.J_Link',
+        loadListFn: function () {
+            var def = $.Deferred();
+            loadMore(function(data) {
+                var html="";
+                console.log(data);
+                $(".list-loading").css("display","none");
+                $(".list-donetip").css("display","none");
+                if (data.success) {
+                    if(data.result !=undefined && data.result.length > 0){
+                        var datalist = data.result;
+                        data.result.page = page;
+                        for(var i = 0; i < datalist.length; i++ ){
+                            html+='<div class="mywrongBook">';
+                            //html+='<a href="/html/understand_more/wrong_book_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + '">';
+                            //调用共通页面
+                            html+='<a class="J_Link" data-page="'+page+'" href="/html/understand_more/daily_examination_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&subject=" + getUrlParam("subject") +"&orderByFlag=" + getUrlParam("orderByFlag") +"&question_type=" + getUrlParam("question_type") +"&section_id=" + getUrlParam("section_id") +"&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + "&type="+3+'">';
+                            html+='<div class="up">';
+                            if (datalist[i].parent_id != null && datalist[i].parent_id != "") {
+                                html+='<p class="pull-left" style="font-weight: bold;">(综合题)'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+                            } else {
+                                html+='<p class="pull-left" style="font-weight: bold;">'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+                            }
+                            html+='<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间: '+datalist[i].answertime+'</p>';
+                            html+='</div>';
+                            html+='<div class="down">';
+                            html+='请点击查看详情';
+                            html+='</div>';
+                            html+='</a>';
+                            html+='</div>';
+                        }
+                        $("#wrongBook").append(html);
+                        def.resolve(data.result,page);
+                        ++page;
+					}else{
+                        html =  html + ' <div class="bg">';
+                        html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+                        html =  html + ' <img src="/static/images/study_img/img_xueba.png" />';
+                        html =  html + ' </div>';
+                        html =  html + ' <div style="line-height:.5rem ;">聪明的你，不是在通往学霸的路上就是已经成为学霸本人~</div>';
+                        html =  html + ' </div>';
+
+                        $("#wrongBook").append(html);
+                        def.resolve([""]);
+					}
+                }else{
+                    if($("#wrongBook").find(".mywrongBook").length == 0){
+                        html =  html + ' <div class="bg">';
+                        html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+                        html =  html + ' <img src="/static/images/study_img/img_xueba.png" />';
+                        html =  html + ' </div>';
+                        html =  html + ' <div style="line-height:.5rem ;">聪明的你，不是在通往学霸的路上就是已经成为学霸本人~</div>';
+                        html =  html + ' </div>';
+
+                        $("#wrongBook").append(html);
+                        def.resolve([""]);
+						$(".list-donetip").css("display","none");
+					}else{
+                        if($(".list-donetip").length < 1){
+                            $("#J_List").append('<div class="list-donetip">没有更多数据了</div>');
+						}
+					}
+				}
+            });
+            return def.promise();
+        },
+        loadStorageListFn: function (listData, retPage) {
+            var def = $.Deferred();
+
+            page = retPage;
+            var html = '';
+            listData.forEach(function (val) {
+                var datalist = val.list;
+                datalist.page = val.page;
+                for(var i = 0; i < datalist.length; i++ ){
+                    html+='<div class="mywrongBook">';
+                    //调用共通页面
+                    html+='<a class="J_Link" data-page="'+datalist.page+'" href="/html/understand_more/daily_examination_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&subject=" + getUrlParam("subject") +"&orderByFlag=" + getUrlParam("orderByFlag") +"&question_type=" + getUrlParam("question_type") +"&section_id=" + getUrlParam("section_id") +"&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + "&type="+3+'">';
+                    html+='<div class="up">';
+                    if (datalist[i].parent_id != null && datalist[i].parent_id != "") {
+                        html+='<p class="pull-left" style="font-weight: bold;">(综合题)'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+                    } else {
+                        html+='<p class="pull-left" style="font-weight: bold;">'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+                    }
+                    html+='<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间: '+datalist[i].answertime+'</p>';
+                    html+='</div>';
+                    html+='<div class="down">';
+                    html+='请点击查看详情';
+                    html+='</div>';
+                    html+='</a>';
+                    html+='</div>';
+                }
+                $("#wrongBook").html(html);
+                var ifWrong = sessionStorage.getItem("ifWrong_num");
+                if(ifWrong && ifWrong == "wrong_num"){
+                    // 前一页为错误次数
+                    var ifUp = sessionStorage.getItem("ifUp");
+                    if(ifUp && ifUp == "up"){
+                        $(".list_title .grids-item").removeClass("active");
+                        $('.wrong_num').removeClass("down").addClass("up").addClass("active");
+                    }else if(ifUp && ifUp == "down"){
+                        $(".list_title .grids-item").removeClass("active");
+                        $('.wrong_num').removeClass("up").addClass("down").addClass("active");
+                    }
+                }else if (ifWrong && ifWrong == "screenClass"){
+                    $(".list_title .grids-item").removeClass("active");
+                    $('.screenClass').addClass("active");
+				}else{
+                    $(".list_title .grids-item").removeClass("active");
+                    $('.newW').addClass("active");
+                }
+            });
+            def.resolve();
+            return def.promise();
+        }
+    });
+}
+
+//错题本
+//function loadWrongBook(subject_id,section_id,question_type,orderByFlag) {
+//	ysAjax("/study/getWrongQuestionList", {
+//		subject_id : subject_id,
+//		section_id : section_id,
+//	    question_type : question_type,
+//	    orderByFlag : orderByFlag,
+//        page: page,
+//		pageSize: pageSize
+//	}, function(data) {
+//        var def = $.Deferred();
+//		$("#wrongBook").empty();
+//		var html="";
+//		if (data.success) {
+//			var datalist = data.result;
+//            data.result.page = page;
+//			for(var i = 0; i < datalist.length; i++ ){
+//				html+='<div class="mywrongBook">';
+//				//html+='<a href="/html/understand_more/wrong_book_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + '">';
+//				//调用共通页面
+//				html+='<a class="J_Link" data-page="'+page+'" href="/html/understand_more/daily_examination_nei.html?paper_id=' + datalist[i].paper_id + "&classroom_id=" + datalist[i].classroom_id + "&question_id=" + datalist[i].question_id + "&wrongbook_id=" + datalist[i].id + "&type="+3+'">';
+//				html+='<div class="up">';
+//				if (datalist[i].parent_id != null && datalist[i].parent_id != "") {
+//					html+='<p class="pull-left" style="font-weight: bold;">(综合题)'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+//				} else {
+//					html+='<p class="pull-left" style="font-weight: bold;">'+datalist[i].question_type_name+'(错误'+datalist[i].error_number+'次)</p>';
+//				}
+//				html+='<p class="pull-right fc_999" style="font-size: 0.24rem;"> 做题时间: '+datalist[i].answertime+'</p>';
+//				html+='</div>';
+//				html+='<div class="down">';
+//			    html+='请点击查看详情';
+//				html+='</div>';
+//				html+='</a>';
+//				html+='</div>';
+//			}
+//			 $("#wrongBook").append(html);
+//		} else {
+//			 html =  html + ' <div class="bg">';
+//			 html =  html + ' <div style="padding: 0 1rem; height: auto;">';
+//			 html =  html + ' <img src="/static/images/study_img/img_xueba.png" />';
+//			 html =  html + ' </div>';
+//			 html =  html + ' <div style="line-height:.5rem ;">聪明的你，不是在通往学霸的路上就是已经成为学霸本人~</div>';
+//			 html =  html + ' </div>';
+//
+//			 $("#wrongBook").append(html);
+//			//window.location.href="/html/understand_more/wrong_book_null.html";
+//		}
+//        def.resolve(data.result,page);
+//
+//        ++page;
+//	}, function(err) {
+//		showNotify("发生异常");
+//	});
+//}
+
+//知识点
+function loadSection() {
+	ysAjax("/study/getErrorExerciseEbook", {
+		subject_id : $("#subject_id").val()
+	}, function(data) {
+		$("#bookSection").empty();
+		if (data.success) {
+			var html="";
+			var datalist = data.result;
+			for(var i = 0; i < datalist.length; i++ ){
+			    html+='<div class="knowledge">';
+				html+='<!--书名-->';
+				if(datalist[i].ebook_name != "其他书籍") {
+				html+='<div class="title" style="">';
+				html+='<span style="width:80%;font-weight: bold;color: #333;font-size: 0.32rem;text-align: left;height: .2rem;display: inline-block;">'+datalist[i].ebook_name+'</span>';
+				//html+='<span class="fc_999" style="font-size: 0.28rem;width:50%;text-align:right;height: .2rem;display: inline-block;float: right;"></span>';
+				html+='</div>';
+				html+='<!--列表-->';
+				html+='<div class="m-cell">';
+				var lstSection = data.result[i].lstSection;
+				for(var j=0;j<lstSection.length; j++){
+				html+='<a class="cell-item">';
+				html+='<div class="cell-left">'+lstSection[j].section_name+'</div>';
+				html+='<div class="cell-right"></div>';
+				html+='<input type="hidden" value="'+lstSection[j].section_id+'" />';
+				html+='</a>';
+				}
+				html+='</div>';
+				html+='</div>';
+				}
+			   }
+			 $("#bookSection").append(html);
+			 $('#J_ActionSheet .m-cell .cell-item').on("click",function(){
+				 if(!$(this).hasClass("active")) {
+					   $(this).addClass("active");
+						var section_id = $(this).find("input").val() +","+$("#section_id").val();
+						$("#section_id").val(section_id);
+				 }else{
+                     $(this).removeClass("active");
+                     var section_id = $("#section_id").val();
+                     var section_val = "";
+                     var sectionList = section_id.split(",");
+                     for(var i = 0; i <sectionList.length; i++){
+                         if(sectionList[i] == $(this).find("input").val()){
+                             sectionList.splice($.inArray(i,sectionList),1);
+						 }else{
+                             section_val += sectionList[i]+",";
+						 }
+					 }
+                     $("#section_id").val(section_val);
+				 }
+				});
+
+			// 点亮已选择的筛选项
+            var section_id = $("#section_id").val();
+            var question_type = $("#question_type").val();
+            if(section_id){
+                var section_id = $("#section_id").val();
+                var sectionList = section_id.split(",");
+                for(var i = 0; i <sectionList.length; i++){
+                    for(var s = 0; s <$(".knowledge .m-cell").find("input").length; s++){
+                        if(sectionList[i] == $(".knowledge .m-cell").find("input")[s].value){
+                            $($(".knowledge .m-cell").find("input")[s].closest(".cell-item")).addClass("active");
+                        }
+                    }
+                }
+            }
+            if(question_type){
+                if(question_type == "1"){
+                    question_type = "单选题"
+                }else if(question_type == "2"){
+                    question_type = "多选题"
+                }else if(question_type == "4"){
+                    question_type = "判断题"
+                }else if(question_type == "3"){
+                    question_type = "填空题"
+                }else if(question_type == "5"){
+                    question_type = "简答题"
+                }else if(question_type == "6"){
+                    question_type = "综合题"
+                }else if(question_type == ""){
+                    question_type = "全部题型"
+                }
+                for(var i = 0; i <$(".bg_box ul li").length; i++){
+                    if(question_type == $(".bg_box ul li").find("div")[i].innerHTML){
+                        $($(".bg_box ul li").find("div")[i].closest("li")).addClass("active").siblings().removeClass("active");;
+                        break;
+                    }
+                }
+            }
+		} else {
+			showNotify(data.errorMsg);
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+} 
+
+</script>
+</body>
+</html>

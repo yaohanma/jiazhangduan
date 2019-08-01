@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鹰硕家长</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+
+		<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash" />
+		<link rel="stylesheet" href="/static/css/yswxstyle.css" />
+
+		<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+		<script src="/static/js/jquery-2.2.4.min.js"></script>
+		<script src="/static/js/ysaddr.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+		<style>
+			.bclor {
+				/*border: 1px solid red;
+*/
+				margin: 10px;
+				border-radius: 3px;
+				-webkit-box-shadow: #ebebeb 0px 0px 20px;
+				-moz-box-shadow: #ebebeb 0px 0px 20px;
+				box-shadow: #ebebeb 0px 0px 20px;
+				background: #FFFFFF;
+			}
+			
+			.nbb:after {
+				border: 0px;
+			}
+			
+			.tab-nav-item.tab-active {
+				color: #0493f0 !important;
+			}
+			
+			.tab-nav-item.tab-active:before {
+				background-color: #0493f0 !important;
+			}
+			
+			.tab-nav {
+				height: 0.87rem;
+			}
+			
+			.cell-icon img {
+				width: 0.8rem !important;
+				height: 0.8rem !important;
+				margin: 0.20rem 0.20rem 0.20rem 0rem !important;
+			}
+			
+			.cell-left {
+				font-size: 0.28rem;
+				color: #333333;
+			}
+			
+			.limg {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				border-radius: 50px;
+				width: 0.88rem !important;
+				height: 0.88rem!important;
+			}
+			
+			.rtext {
+				margin-left: 0.2rem;
+				line-height: 0.48rem;
+				height: 0.88rem;
+			}
+			
+			.xtitle {
+				font-size: 0.32rem;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			.xtime {
+				color: #999999;
+				font-size: 0.24rem;
+			}
+			
+			.fs {
+				font-size: 0.36rem !important;
+				color: #999999;
+			}
+			
+			.fs span {
+				font-size: 0.24rem !important;
+				color: #999999;
+			}
+			
+			.tab-panel {
+				background: #F5F5F5 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="g-flexview">
+
+			<div class="g-scrollview">
+				<div id="J_Tab" class="m-tab demo-pitch">
+					<ul class="tab-nav">
+						<li class="tab-nav-item tab-active">
+							<a href="javascript:;">课堂素材</a>
+						</li>
+						<li class="tab-nav-item">
+							<a href="javascript:;">课堂练习</a>
+						</li>
+					</ul>
+					<div class="tab-panel">
+						<div class="tab-panel-item tab-active">
+							<div class="m-cell nbb" id="resource" >
+								<!--<a class="cell-item bclor" href="'+href+'">
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img.png">
+										</span>伽马射线</div>
+								</a>-->
+								<a class="cell-item bclor" >
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_audio.png">
+										</span>kalimba</div>
+								</a>
+								<!--<a class="cell-item bclor" href="'+href+'">
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_default.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>-->
+								<!--<a class="cell-item bclor" href="'+href+'">
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_excel@2x.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>
+								<a class="cell-item bclor" href="'+href+'">
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_pdf.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>-->
+								<a class="cell-item bclor" >
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_ppt.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>
+								<a class="cell-item bclor" >
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_video.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>
+								<a class="cell-item bclor" >
+									<div class="cell-left">
+										<span class="cell-icon">
+											<img src="/static/images/homework/icon_img_word.png">
+										</span>邹忌讽齐王纳谏</div>
+								</a>
+							</div>
+						</div>
+						<div class="tab-panel-item" id="exercise"style="padding: 0px;" >
+							<div style="background: #fff;padding: 0px;margin-bottom: 0.12rem;">
+								<a  class="cell-item">
+									<div class="cell-left">
+									<img class="limg" src="/static/img/courseevent/lianxi.png" />
+									<ul class="rtext">
+									<li class="xtitle">11月21日习题1</li>
+									<li class="xtime">共5题</li>
+									</ul>
+									</div>
+									<div class="cell-right fs">2<span>分</span></div>
+								</a>
+							</div>
+							<div style="background: #fff;padding: 0px;margin-bottom: 0.12rem;">
+								<a class="cell-item">
+									<div class="cell-left">
+									<img class="limg" src="/static/img/courseevent/lianxi.png" />
+									<ul class="rtext">
+									<li class="xtitle">11月21日习题1</li>
+									<li class="xtime">共5题</li>
+									</ul>
+									</div>
+									<div class="cell-right fs">2<span>分</span></div>
+								</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</section>
+		<script src="/static/plugins/ydui/js/ydui.js"></script>
+		<script src="/static/js/yswxcommon.js"></script>
+		<script type="text/javascript">
+			function showimg(src){
+					            wx.previewImage({  
+                current:src,  
+                urls: [src]  
+            		});  
+				}
+			$(document).ready(function() {
+				/**
+				 * Javascript API调用Tab
+				 */
+				
+				
+			
+
+				var $tab = $('#J_Tab');
+
+				$tab.tab({
+					nav: '.tab-nav-item',
+					panel: '.tab-panel-item',
+					activeClass: 'tab-active'
+				});
+			 
+	 
+				addMainPageHeader("/html/courseevent/courseEventList.html", "课堂");
+				addMainPageFooter(3);
+			//TODO APP
+//			ysAjax("/courseevent/getCoursesReviewResource", {
+//							id: getUrlParam("id"),
+//							channel: getUrlParam("channel")
+//						}, function(data) {
+//								if(data.resultOb.exercise.length==0&&data.resultOb.resources.length==0){
+//									window.location.href="/html/courseevent/courseEventList_null.html";
+//									return false;
+//									
+//								}
+//							console.log(data.resultOb.exercise)
+//							 console.log(data.resultOb.resources)
+//							 var resources = data.resultOb.resources;
+//							 for(var i=0;i<resources.length;i++){
+//							  var  type ="";
+//							  var href = "";
+//							  //1:视频 2:音频 3:Word 4:PPT 5:图片 6:习题 7:白板 8:H5P 9:JSON 10:读本 11:资源包 12:flash）
+//							    if(resources[i].resource_type=="4"){
+//									type ="icon_img_ppt.png";
+//									href = "/html/courseevent/ppt.html?resourceId="+resources[i].resource_id+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else if(resources[i].resource_type=="8"){
+//									type ="icon_img_ppt.png";
+//									href = "/html/courseevent/ppt.html?resourceId="+resources[i].resource_id+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else if(resources[i].resource_type=="1"){
+//									type ="icon_img_video.png";
+//									href = "/html/courseevent/video.html?path="+resources[i].original_path+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else if(resources[i].resource_type=="3"){
+//									type ="icon_img_word.png";
+//									href = "/html/courseevent/word.html?resourceId="+resources[i].resource_id+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else if(resources[i].resource_type=="5"){
+//									type ="icon_img.png";
+//									href = "javascript:showimg('"+resources[i].original_path+"')";
+//								}else if(resources[i].resource_type=="14"){
+//									type ="icon_img.png";
+//									href = "javascript:showimg('"+resources[i].original_path+"')";
+//								}else if(resources[i].resource_type=="2"){
+//									type ="icon_img_audio.png";
+//									href = "/html/courseevent/sound.html?path="+resources[i].original_path+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else if(resources[i].resource_type=="13"){
+//									type ="icon_img_pdf.png";
+//									href = "/html/courseevent/pdf.html?resourceId="+resources[i].resource_id+"&backurl=/html/courseevent/courseEventListInfo.html?id="+getUrlParam('id')+"&channel="+getUrlParam('channel');
+//								}else{
+//									type ="icon_img_default.png";
+//									href ="javascript:showAlert('该资源暂无法预览或播放');";
+//								}
+//							var html = '<a class="cell-item bclor" href="'+href+'"><div class="cell-left"><span class="cell-icon"><img src="/static/images/homework/'+type+'"></span>'+resources[i].resource_name+'</div></a>';
+//							  $('#resource').append(html);
+//								 
+//							 }
+//							 var resources = data.resultOb.exercise;
+//							 for(var i=0;i<resources.length;i++){
+//					 
+//					 			var html ='<div class="m-cell nbb"  >';
+//									html+='<a href="/html/courseevent/courseEventListInfoExample.html?paper_id='+resources[i].resource_id+'&channel='+getUrlParam('channel')+'&id='+getUrlParam('id')+'" class="cell-item">';
+//									html+='<div class="cell-left">';
+//									html+='<img class="limg" src="/static/img/courseevent/lianxi.png" />';
+//									html+='<ul class="rtext">';
+//									html+='<li class="xtitle">'+resources[i].resource_name+'</li>';
+//									html+='<li class="xtime">共'+resources[i].questionCount+'题</li>';
+//									html+='</ul>';
+//									html+='</div>';
+//									html+='<div class="cell-right fs">'+resources[i].total_score+'<span>分</span></div>';
+//									html+='</a></div>';
+//
+//							  $('#exercise').append(html);
+//								 
+//							 }
+//							 
+//						}, function(err) {
+//							console.log(err)
+//						});
+				/*ysAjax("/wechatController/getUserToken", {
+					code: getUrlParam("code")
+				}, function(data) {
+					// SessionStorage 中保存Token和UserId
+					setUserId(data.result.wxUnionid);
+					setToken(data.result.token);
+
+					//			showAlert("Token:" + getToken());
+					//			showAlert("UserId:" + getUserId());
+				}, function(err) {
+
+				});*/
+
+			});
+		</script>
+	</body>
+
+</html>

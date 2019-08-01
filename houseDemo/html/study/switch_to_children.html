@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鹰硕家长</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+
+<link rel="stylesheet" href="/static/plugins/ydui/css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="/static/css/yswxstyle.css"/>
+<!--学习首页 css-->
+<link rel="stylesheet" href="/static/css/study/study_index.css"/>
+
+<script src="/static/plugins/ydui/js/ydui.flexible.js"></script>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/ysaddr.js"></script>
+<style>
+ #bindStudent .cell-item:last-child:after, 
+ #bindStudent .m-cell:after,
+ #bindStudent .cell-item:last-child .cell-right:after{
+ content:nont;}
+	.cell-item{
+		padding: .2rem 0;
+		padding-left:0.24rem;
+		margin-bottom: 0;
+	}
+	.m-cell:after{
+	 content:none;
+	} 
+	.cell-item p{
+		width: 100%;
+		display: block;
+		font-size: 0.3rem;
+		color: #333;
+		/*font-weight: bold;*/
+		line-height: .5rem;
+	}
+	.cell-item p:nth-child(2){
+		width: 100%;
+		display: block;
+		font-size: 0.24rem;
+		color: #999;
+		
+		margin-top: .1rem;
+	}
+	.cell-checkbox-icon{
+		margin-left: 0.1rem;
+	}
+	/*.active .cell-right input[type="radio"] + .cell-checkbox-icon:after,
+	.active  .cell-right input[type="checkbox"]:not(.m-switch) + .cell-checkbox-icon:after{
+	 	content:'\e601';
+	 	color: #0493F0;
+	 }
+	.active .cell-right input[type="radio"]:checked + .cell-checkbox-icon:after,
+	.active .cell-right input[type="checkbox"]:not(.m-switch):checked + .cell-checkbox-icon:after{
+		content:'\e601';
+	 	color: #0493F0;
+	 }	*/
+	.cell-right input[type="radio"]:checked + .cell-checkbox-icon:after,
+	.cell-right input[type="checkbox"]:not(.m-switch):checked + .cell-checkbox-icon:after{
+	 	color: #0493F0;
+	 }
+
+</style>
+</head>
+<body>
+<section class="g-flexview">
+	<section class="g-scrollview">
+		 <div>
+		 	<div class="m-cell" style="margin-bottom: 0;margin-top:0.2rem ; " id="bindStudent">
+				<!-- TODO APP 假数据 -->
+			   	<label class="cell-item">
+			        <div>
+			        	<p style="">黄小米</p>
+			        	<p style="">已绑定孩子</p>
+			        </div>
+			        <label class="cell-right" >
+			            <input  type="radio" name="radio" />
+			            		默认孩子
+			            <i class="cell-checkbox-icon"></i>
+			        </label>
+			    </label>
+			    <label class="cell-item">
+			        <div>
+			        	<p style="">黄小米</p>
+			        	<p style="">已绑定孩子</p>
+			        </div>
+			        <label class="cell-right" > 
+			            <input  type="radio" name="radio"/>
+			          		  设为默认
+			            <i class="cell-checkbox-icon"></i>
+			        </label>
+			    </label>
+			</div> 
+
+		 </div>
+		<div class="quick_bottom" style="background: none;margin-top: 0.2rem;">
+			<button type="button" class="btn-block btn-customer" id="btnCommit">提交</button>
+		</div>
+	</section>
+</section>
+<input type="hidden" id="DefaultStuId" />
+<input type="hidden" id="activiteStuId" />
+<script src="/static/plugins/ydui/js/ydui.js"></script>
+<script src="/static/js/yswxcommon.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	//选中状态
+	/*$("#bindStudent .cell-item").eq(0).addClass("active");
+	$("#bindStudent .cell-item").click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		
+	});*/
+	
+	addMainPageHeader("/html/study/study_index.html", "切换孩子");
+	addMainPageFooter(3);
+	//TODO APP loadPage();
+	$("#btnCommit").on("click", function() {
+		if($("#activiteStuId").val() == $("#DefaultStuId").val()) {
+			showAlert("请选择切换的孩子");
+			getDialog().alert('设为默认孩子成功', function () {
+				window.location.href="/html/study/study_index.html";
+            });
+		}else{
+		    //TODO APP
+			/*ysAjax("/homepage/updateActivite", {
+				studentId : $("#activiteStuId").val()
+			}, function(data) {
+				if (data.success) {
+					getDialog().alert('设为默认孩子成功', function () {
+						window.location.href="/html/study/study_index.html";
+		            });
+				} else {
+					showNotify("设为默认孩子失败");
+				}
+			}, function(err) {
+				showNotify("发生异常");
+			});*/
+		}
+	});
+});
+
+function loadPage() {
+	ysAjax("/student/bindStudents", {
+	}, function(data) {
+		if (data.success) {
+			var html="";
+			var datalist = data.result.studentList;
+			for(var i = 0; i < datalist.length; i++ ){
+				html+='<label class="cell-item">';
+				html+='<div>';
+				html+='<p style="">'+datalist[i].createUser+'</p>';
+				html+='<p style="">已绑定孩子</p>';
+				html+='</div>';
+				html+='<label class="cell-right">';
+				if(datalist[i].activiteStatus=='1'){
+				html+='<input  type="radio" name="radio" checked onclick="clickRadio(&quot;'+datalist[i].stuId+'&quot;)"/>';
+				html+='默认孩子';
+				$("#DefaultStuId").val(datalist[i].stuId);
+				$("#activiteStuId").val(datalist[i].stuId);
+				}else{
+				html+='<input  type="radio" name="radio" onclick="clickRadio(&quot;'+datalist[i].stuId+'&quot;)"/>';
+				html+='设为默认';
+				}
+				html+='<i class="cell-checkbox-icon"></i>';
+				html+='</label>';
+				html+='</label>';
+				}
+			
+			 $("#bindStudent").append(html);
+			 $("input[type='radio']:checked").parent(".cell-right").css("color","#0493F0");
+			
+		} else {
+			showNotify(data.errorMsg);
+		}
+	}, function(err) {
+		showNotify("发生异常");
+	});
+} 
+
+//点击Radiobutton
+function clickRadio(studentId){
+    $(".cell-right").css("color","#525252");
+	$("input[type='radio']:checked").parent(".cell-right").css("color","#0493F0");
+	$("#activiteStuId").val(studentId);
+}
+
+</script>
+</body>
+</html>
