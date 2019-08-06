@@ -97,6 +97,7 @@
 			}
 			
 			.Account_box {
+				display: flex;
 				font-size: 0.24rem;
 				color: #a0a4b1;
 			}
@@ -182,8 +183,8 @@
 					<p>温馨提示：未注册鹰硕家长的手机号，登录时将自动注册（初始密码为：123456）</p>
 					<button type="button" class="btn-block login_btn" onclick="register()">登录</button>
 					<div class="Account_box">
-						<a id="agreement" style="float:left">用户协议</a>
-						<a href="/html/login/login2.html" style="float:right">密码登录</a>
+						<a id="agreement" style="flex:1">用户协议</a>
+						<a href="/html/login/login2.html">密码登录</a>
 					</div>
 				</div>
 			</section>

@@ -96,6 +96,7 @@
         }
 
         .Account_box {
+          display: flex;
             font-size: 0.24rem;
             color: #a0a4b1;
         }
@@ -198,8 +199,8 @@
             </div>
             <button type="button" class="btn-block login_btn" onclick="login()">登录</button>
             <div class="Account_box">
-            	<a id="agreement" style="float: left;">用户协议</a>
-                <a href="/html/login/login_index.html"  style="float: right;">手机号登录/注册</a>
+            	<a id="agreement" style="flex:1">用户协议</a>
+                <a href="/html/login/login_index.html">手机号登录/注册</a>
             </div>
         </div>
     </section>
